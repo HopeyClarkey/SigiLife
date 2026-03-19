@@ -1,12 +1,13 @@
+// Import Express
 const express = require('express');
-
 const app = express();
-const PORT = 3000;
 
-app.listen(PORT, (error) => {
-  if (!error)
-    console.log(
-      'Server is Successfully Running, and App is listening on port ' + PORT,
-    );
-  else console.log("Error occurred, server can't start", error);
+// Define a route
+app.get('/', (req, res) => {
+    res.send('Hello SigiLife!');
+});
+
+// Start the server
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
 });
