@@ -1,6 +1,6 @@
 export default function DestroySigil(){
 
   return (
-    <div>This is your DestroySigil Component</div>
+    <h1>This is your DestroySigil Component</h1>
   )
 };

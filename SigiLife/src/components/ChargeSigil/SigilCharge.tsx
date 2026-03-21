@@ -1,6 +1,6 @@
 export default function ChargeSigil(){
 
   return (
-    <div>This is your ChargeSigil Component</div>
+    <h1>This is your ChargeSigil Component</h1>
   )
 };

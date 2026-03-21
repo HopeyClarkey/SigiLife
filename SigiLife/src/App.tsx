@@ -8,7 +8,7 @@ import UserSettings from './components/LogInAuth/UserSettings'
 
 // SigilRoomHome
 import HomeRoom from './components/SigilRoomHome/HomeRoom'
-import Grimoire from './components/SigilRoomHome/Grimore'
+import Grimoire from './components/SigilRoomHome/Grimoire'
 import ScryeMirror from './components/SigilRoomHome/ScryeMirror'
 
 // MakeSigil
