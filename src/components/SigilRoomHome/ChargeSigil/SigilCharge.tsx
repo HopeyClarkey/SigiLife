@@ -1,5 +1,7 @@
 import BackButton from '../../Parts/BackButton'
 import { Link } from 'react-router-dom'
+import SigilChargeEffect from './ChargeComponents/SigilChargeEffect'
+import ChargeEmotion from './ChargeComponents/ChargeEmotion'
 
 export default function ChargeSigil() {
 
@@ -7,6 +9,8 @@ export default function ChargeSigil() {
     <div>
       <br />
       <h1>ChargeSigil</h1>
+      <SigilChargeEffect />
+      <ChargeEmotion />
       <br />
       <Link to="/sigil-page">Save your Sigil!</Link>
       <br />
