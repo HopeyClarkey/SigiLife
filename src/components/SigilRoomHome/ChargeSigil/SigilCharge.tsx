@@ -1,6 +1,6 @@
 import BackButton from '../../Parts/BackButton'
 
-export default function ChargeSigil(){
+export default function ChargeSigil() {
 
   return (
     <div>

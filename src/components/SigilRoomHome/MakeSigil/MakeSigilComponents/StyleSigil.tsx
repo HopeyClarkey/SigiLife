@@ -6,7 +6,10 @@ export default function StyleSigil() {
     <div>
       <h1>Style Your Sigil</h1>
       <BackButton />
+                  <br />
       <NextButton to="/sigil-page" />
+            <br />
+
     </div>
   )
 }
