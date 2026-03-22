@@ -5,9 +5,10 @@ export default function SigilPage() {
 
   return (<div>
     <h1>This is the SigilPage</h1>
-    <BackButton />
+
     <Link to="/charge-sigil">Charge Sigil</Link>
     <br />
     <Link to="/destroy-sigil">Destroy Sigil</Link>
+    <BackButton />
   </div>)
 };
