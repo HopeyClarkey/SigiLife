@@ -114,15 +114,25 @@ grimoire,
 .grimoire {
   display: flex;
   flex-direction: column;
+
+}
+
+bookbox,
+.bookbox {
+  display: flex;
+  flex-direction: row;
+  background-color: #9ca3af;
+  justify-content: space-evenly;
 }
 
 rightpage,
-.right-page {
+.rightpage {
   display: flex;
   flex-direction: column;
 }
+
 leftpage,
-.left-page {
+.leftpage {
   display: flex;
   flex-direction: column;
 }
