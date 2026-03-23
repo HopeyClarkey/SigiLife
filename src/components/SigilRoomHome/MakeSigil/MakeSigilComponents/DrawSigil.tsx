@@ -1,5 +1,6 @@
 import BackButton from "../../../Parts/BackButton"
 import { useEffect, useRef, useState, useCallback } from 'react';
+import NextButton from "../../../Parts/NextButton";
 import * as fabric from 'fabric';
 
 export default function DrawSigil() {
@@ -311,6 +312,8 @@ export default function DrawSigil() {
         <button onClick={handleClear} style={{ background: '#6c757d', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}>
           Clear All
         </button>
+        <button onClick={handleClear}>Clear Sigil</button>
+              <NextButton to="/make-sigil/style"/>
       </div>
     </div>
   );
