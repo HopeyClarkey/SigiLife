@@ -114,7 +114,12 @@ grimoire,
 .grimoire {
   display: flex;
   flex-direction: column;
-
+  background-image: url('./assets/GrimioreNoir.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vw;
+  width: 100vw;
 }
 
 bookbox,
