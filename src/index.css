@@ -22,7 +22,7 @@ mainContainer,
   height: 100vh;
   overflow-x: scroll;
   width: 100vw;
-  scrollbar-color: #888 #f1f1f1;
+  scrollbar-color: #6915c9 #136d2a;
   scrollbar-width: thin;
 }
 
@@ -86,10 +86,25 @@ bookbox,
   font-size: large;
 }
 
+grimiorerightpage
+.grimiore-right-page{
+  display: flex;
+  flex-direction: column;
+}
+
 rightpage,
 .rightpage {
   display: flex;
   flex-direction: column;
+  background-image: url('./assets/RightPage.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  color: rgb(0, 0, 0);
 }
 
 sigilibrary,

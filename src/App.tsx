@@ -23,10 +23,13 @@ import WriteSigil from './components/SigilRoomHome/MakeSigil/MakeSigilComponents
 import StyleSigil from './components/SigilRoomHome/MakeSigil/MakeSigilComponents/StyleSigil'
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Grimoire
+
 import MapBox from './components/SigilRoomHome/Grimiore/LeftPage/Map/MapBox'
+import ScryeFriends from './components/SigilRoomHome/Grimiore/LeftPage/ScryeFriends/ScryeFriendsHome'
+import RightPage from './components/SigilRoomHome/Grimiore/RightPage/RightPage'
 import SigiLibrary from './components/SigilRoomHome/Grimiore/RightPage/SigiLibrary/SigiLibrary'
 import SigilPage from './components/SigilRoomHome/Grimiore/RightPage/SigiLibrary/SigilPage'
-import ScryeFriends from './components/SigilRoomHome/Grimiore/LeftPage/ScryeFriends/ScryeFriendsHome'
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Properties
 
@@ -65,6 +68,7 @@ function App() {
 
       <Route path="/map" element={<MapBox user={user}/>} />
       <Route path="/scrye-friends" element={<ScryeFriends user={user}/>} />
+      <Route path="/right-page" element={<RightPage user={user}/>}/>
       <Route path="/library" element={<SigiLibrary user={user}/>} />
       <Route path="/sigil-page" element={<SigilPage user={user}/>} />
 

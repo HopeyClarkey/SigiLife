@@ -22,10 +22,12 @@ export default function Grimoire({ user }: { user: any }) {
             <br />
           </div>
 
-          <div className={'rightpage'}>
-            <Link to="/library"> 📜 SigiLibrary </Link>
+          <div className={'grimiorerightpage'}>
             <br />
-            <Link to="/make-sigil"> 🪶 MakeSigil </Link>
+            <Link to="/right-page" > 📜 SigiLibrary </Link>
+            <br />
+            <br />
+            <Link to="/right-page"> 🪶 MakeSigil </Link>
           </div>
           <br />
           <br />
