@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { useState} from 'react'
+import { useState } from 'react'
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Landing Page & Log in
 import LandingPage from './components/LogInAuth/LandingPage'
@@ -27,7 +27,6 @@ import StyleSigil from './components/SigilRoomHome/MakeSigil/MakeSigilComponents
 import MapBox from './components/SigilRoomHome/Grimiore/LeftPage/Map/MapBox'
 import ScryeFriends from './components/SigilRoomHome/Grimiore/LeftPage/ScryeFriends/ScryeFriendsHome'
 import RightPage from './components/SigilRoomHome/Grimiore/RightPage/RightPage'
-import SigiLibrary from './components/SigilRoomHome/Grimiore/RightPage/SigiLibrary/SigiLibrary'
 import SigilPage from './components/SigilRoomHome/Grimiore/RightPage/SigiLibrary/SigilPage'
 
 
@@ -44,33 +43,32 @@ function App() {
     <Routes>
       {/* Auth flow */}
       <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<Login setUser={setUser}/>} />
+      <Route path="/login" element={<Login setUser={setUser} />} />
       <Route path="/make-profile" element={<MakeProfile />} />
 
       {/* User */}
-      <Route path="/settings" element={<UserSettings user={user}/>} />
-      <Route path="/profile" element={<UserProfile user={user}/>} />
+      <Route path="/settings" element={<UserSettings user={user} />} />
+      <Route path="/profile" element={<UserProfile user={user} />} />
 
       {/* Main Room Nav */}
-      <Route path="/destroy-sigil" element={<SigilDestroy user={user}/>} />
-      <Route path="/home" element={<HomeRoom user={user}/>} />
-      <Route path="/charge-sigil" element={<SigilCharge user={user}/>} />
-      <Route path="/grimoire" element={<Grimoire user={user}/>} />
-      <Route path="/make-sigil" element={<MakeSigil user={user}/>} />
+      <Route path="/destroy-sigil" element={<SigilDestroy user={user} />} />
+      <Route path="/home" element={<HomeRoom user={user} />} />
+      <Route path="/charge-sigil" element={<SigilCharge user={user} />} />
+      <Route path="/grimoire" element={<Grimoire user={user} />} />
+      <Route path="/make-sigil" element={<MakeSigil user={user} />} />
 
 
       {/* Make Sigil flow */}
-      <Route path="/make-sigil/draw" element={<DrawSigil user={user}/>} />
-      <Route path="/make-sigil/write" element={<WriteSigil user={user}/>} />
-      <Route path="/make-sigil/style" element={<StyleSigil user={user}/>} />
+      <Route path="/make-sigil/draw" element={<DrawSigil user={user} />} />
+      <Route path="/make-sigil/write" element={<WriteSigil user={user} />} />
+      <Route path="/make-sigil/style" element={<StyleSigil user={user} />} />
 
       {/* Grimoire flow */}
 
-      <Route path="/map" element={<MapBox user={user}/>} />
-      <Route path="/scrye-friends" element={<ScryeFriends user={user}/>} />
-      <Route path="/right-page" element={<RightPage user={user}/>}/>
-      <Route path="/library" element={<SigiLibrary user={user}/>} />
-      <Route path="/sigil-page" element={<SigilPage user={user}/>} />
+      <Route path="/map" element={<MapBox user={user} />} />
+      <Route path="/scrye-friends" element={<ScryeFriends user={user} />} />
+      <Route path="/right-page" element={<RightPage user={user} />} />
+      <Route path="/sigil-page" element={<SigilPage user={user} />} />
 
     </Routes>
   )

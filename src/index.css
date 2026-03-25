@@ -13,7 +13,7 @@ navbutton,
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 12px;
 }
-
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Main Container*/
 mainContainer,
 .maincontainer {
   display: flex;
@@ -25,17 +25,24 @@ mainContainer,
   scrollbar-width: thin;
 }
 
+maincontainer::-webkit-scrollbar,
 .maincontainer::-webkit-scrollbar {
   height: 12px;
 }
+
+maincontainer::-webkit-scrollbar-track,
 .maincontainer::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
+
+maincontainer::-webkit-scrollbar-thumb,
 .maincontainer::-webkit-scrollbar-thumb {
   background: #2b0681;
   border-radius: 10px;
 }
+
+maincontainer::-webkit-scrollbar-thumb:hover,
 .maincontainer::-webkit-scrollbar-thumb:hover {
   background: #7f64be;
 }
@@ -110,8 +117,8 @@ rightpage,
 
 sigilibrary,
 .sigilibrary {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 leftpage,
