@@ -2,21 +2,19 @@ import 'dotenv/config';
 import opentype from 'opentype.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import prisma from './prisma.client.js';
 
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function seed() {
   try {
     const count = await prisma.svgVector.count();
-      if (count > 0){
-        console.log('SVG data exists, do not need to seed');
-        return;
-      }
-    console.log('seeding table with svgVectors!')
+    if (count > 0) {
+      console.log('SVG data exists, do not need to seed');
+      return;
+    }
+    console.log('seeding table with svgVectors!');
 
     const fontPath = path.join(
       __dirname,

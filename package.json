@@ -9,12 +9,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seed": "node prisma/seed-opentype"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
+    "@prisma/adapter-mariadb": "^7.5.0",
     "@prisma/client": "^7.5.0",
     "@tailwindcss/vite": "^4.2.2",
     "axios": "^1.13.6",
