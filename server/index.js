@@ -5,20 +5,20 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import compression from 'compression';
-import { fileUrlToPath } from 'url';
+import { fileURLToPath } from 'url';
 import prisma from '../prisma/prisma.client.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const __filename = fileUrlToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(compression);
+app.use(compression());
 
 app.use('/api', apiRouter);
 app.use(express.static(path.join(__dirname, '../dist')));
