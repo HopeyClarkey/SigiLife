@@ -4,7 +4,8 @@ import NextButton from "../../../Parts/NextButton";
 import * as fabric from 'fabric';
 import axios from 'axios';
 
-export default function DrawSigil() {
+export default function DrawSigil({ user }: { user: any }) {
+  console.log(user)
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<fabric.Canvas | null>(null);
@@ -23,13 +24,10 @@ export default function DrawSigil() {
   // Re-render to update button disabled states
   const [, forceRender] = useState({});
 
-  const saveHistory = useCallback((): void => {
-    const canvas = fabricCanvasRef.current;
-    if (isRestoringHistory.current || !canvas) {
-      return;
-    }
+  const saveHistory = useCallback(() => {
+    if (isRestoringHistory.current || !fabricCanvasRef.current) return;
 
-    const json = JSON.stringify(canvas.toJSON());
+    const json = JSON.stringify(fabricCanvasRef.current.toJSON());
     const currentHistory = historyRef.current;
 
     if (historyIndexRef.current < currentHistory.length - 1) {
@@ -195,13 +193,12 @@ export default function DrawSigil() {
     if (historyIndexRef.current > 0 && fabricCanvasRef.current) {
       isRestoringHistory.current = true;
       historyIndexRef.current -= 1;
-      const jsonStr = historyRef.current[historyIndexRef.current];
-      if (jsonStr) {
-        fabricCanvasRef.current.loadFromJSON(JSON.parse(jsonStr));
-        fabricCanvasRef.current.renderAll();
-      }
+      const jsonStr = historyRef.current[historyIndexRef.current]!;
+        await fabricCanvasRef.current.loadFromJSON(JSON.parse(jsonStr));
+      fabricCanvasRef.current.renderAll();
       isRestoringHistory.current = false;
-      forceRender({});
+        forceRender({});
+        return;
     }
   };
 
@@ -209,13 +206,12 @@ export default function DrawSigil() {
     if (historyIndexRef.current < historyRef.current.length - 1 && fabricCanvasRef.current) {
       isRestoringHistory.current = true;
       historyIndexRef.current += 1;
-      const jsonStr = historyRef.current[historyIndexRef.current];
-      if (jsonStr) {
-        fabricCanvasRef.current.loadFromJSON(JSON.parse(jsonStr));
-        fabricCanvasRef.current.renderAll();
-      }
+      const jsonStr = historyRef.current[historyIndexRef.current]!;
+        await fabricCanvasRef.current.loadFromJSON(JSON.parse(jsonStr));
+      fabricCanvasRef.current.renderAll();
       isRestoringHistory.current = false;
-      forceRender({});
+        forceRender({});
+        return;
     }
   };
 
@@ -293,9 +289,10 @@ export default function DrawSigil() {
   const canRedo = historyIndexRef.current < historyRef.current.length - 1;
 
   return (
+    <div className='maincontainer'>
     <div className="draw-sigil-container" style={{ paddingBottom: '2rem' }}>
       <h2>Draw Your Sigil</h2>
-      <BackButton />
+      <BackButton name={"MakeSigil"}/>
 
       {/* Main Control Panel */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center', marginTop: '1rem' }}>
@@ -328,12 +325,8 @@ export default function DrawSigil() {
           <input type="file" accept=".svg" style={{ display: 'none' }} onChange={handleSVGUpload} />
         </label>
 
-        <button
-          onClick={handleSave}
-          disabled={isSaving}
-          style={{ background: '#28a745', color: '#fff', padding: '8px 16px', borderRadius: '4px', border: 'none', cursor: isSaving ? 'not-allowed' : 'pointer' }}
-        >
-          {isSaving ? "Saving..." : "💾 Save to Library"}
+        <button onClick={handleExport} style={{ background: '#28a745', color: '#fff', padding: '8px 16px', borderRadius: '4px', border: 'none', cursor: 'pointer' }}>
+          💾 Save Image
         </button>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
@@ -396,8 +389,10 @@ export default function DrawSigil() {
         <button onClick={handleClear} style={{ background: '#6c757d', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}>
           Clear All
         </button>
+        <button onClick={handleClear}>Clear Sigil</button>
         <NextButton to="/make-sigil/style" />
       </div>
+    </div>
     </div>
   );
 }

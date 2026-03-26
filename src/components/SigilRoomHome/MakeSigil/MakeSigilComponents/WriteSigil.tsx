@@ -2,32 +2,12 @@ import BackButton from "../../../Parts/BackButton"
 import NextButton from "../../../Parts/NextButton"
 import { useState } from 'react';
 
-export default function WriteSigil() {
-  const [intention, setIntention] = useState('');
-
-  const getUniqueChars = (text: string): string => {
-    // Remove vowels, non-alphabetic characters, and duplicate characters
-    const nonAlphaOrVowels = /[^a-zA-Z]|[aeiouAEIOU]/g;
-    const cleanText = text.replace(nonAlphaOrVowels, '').toUpperCase();
-    const seen = new Set<string>();
-    const uniqueChars = cleanText.split('').filter(char => {
-      if (seen.has(char)) return false;
-      seen.add(char);
-      return true;
-    });
-    return uniqueChars.join('');
-  };
-
-  const handleNext = () => {
-    const uniqueChars = getUniqueChars(intention);
-    // Store in localStorage for the next page
-    localStorage.setItem('sigilIntention', intention);
-    localStorage.setItem('sigilUniqueChars', uniqueChars);
-  };
-
+export default function WriteSigil({ user }: { user: any }) {
+  console.log(user)
   return (
-    <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
-      <BackButton />
+    <div className='maincontainer'>
+    <div>
+      <BackButton name={'Go Back'}/>
       <h1>Write Your Sigil</h1>
       <p style={{ color: '#666', marginBottom: '1rem' }}>
         Enter your intention.
@@ -53,6 +33,7 @@ export default function WriteSigil() {
         </span>
         <NextButton to="/make-sigil/draw" onClick={handleNext} />
       </div>
+    </div>
     </div>
   )
 }
