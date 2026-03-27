@@ -13,8 +13,12 @@ dist
 dist-ssr
 *.local
 
+prisma/generated/
+/prisma/generated/
+prisma/generated
 # Editor directories and files
 .vscode/*
+/.vscode/
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -24,8 +28,10 @@ dist-ssr
 *.sln
 *.sw?
 
-
+nope.md
 vitereadme.md
+
 .env
 
 src/assets/HomeRoomClickables
+/src/generated/prisma
