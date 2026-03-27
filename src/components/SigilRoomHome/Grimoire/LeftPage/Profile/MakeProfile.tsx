@@ -2,7 +2,10 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import { useFormStatus } from "react-dom";
 
-
+const avatarChoices = [
+  {id: '1', avatar: 'Avatar One', emoji: "🕵️‍♂️" },
+  {id: '2', avatar: 'Avatar Two', emoji: "🕵️‍♀️" }
+]
 
 
 export default function MakeProfile() {
