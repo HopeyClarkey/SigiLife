@@ -10,7 +10,7 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 router.post('/google', async (req, res) => {
   try {
-    const { credential } = req.body;
+    const { credential, username, homeLatitude, homeLongitude } = req.body;
 
     const ticket = await client.verifyIdToken({
       idToken: credential,
@@ -33,11 +33,15 @@ router.post('/google', async (req, res) => {
     const user = await prisma.user.upsert({
       where: { googleId },
       update: { name, picture },
-      create: { email, name, picture, googleId },
+      create: { email, name, picture, googleId,
+        username,
+        homeLatitude: homeLatitude ? parseFloat(homeLatitude) :  null,
+        homeLongitude: homeLongitude ? parseFloat(homeLongitude) : null,
+       },
     });
 
     req.session.userId = user.id;
-    
+
     res.json({
       success: true,
       user: {
