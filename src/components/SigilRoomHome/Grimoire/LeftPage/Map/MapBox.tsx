@@ -6,11 +6,11 @@ import BackButton from "../../../../Parts/BackButton"
 import MapSearchBox from "./MapSearchBox"
 import PlaceSigil from "./PlaceSigil"
 
-const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || ''; 
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
 export default function MapBox({ user }: { user: any }) {
   console.log(user)
-  
+
 
   const [viewState, setViewState] = useState({
     longitude: -95.7129, // Default center over US
@@ -22,7 +22,7 @@ export default function MapBox({ user }: { user: any }) {
     <div className="flex flex-col items-center w-full">
       <br />
       <h1>This is the MapBox</h1>
-      
+
 
       <div className="relative w-full max-w-4xl h-[400px] rounded-lg overflow-hidden my-4 border-2 border-purple-500 shadow-xl">
         <Map
@@ -32,12 +32,12 @@ export default function MapBox({ user }: { user: any }) {
           mapboxAccessToken={MAPBOX_TOKEN}
           style={{ width: '100%', height: '100%' }}
         >
-        
+
           <NavigationControl position="bottom-right" />
         </Map>
       </div>
 
-      <MapSearchBox 
+      <MapSearchBox
         accessToken={MAPBOX_TOKEN}
         onRetrieve={(res) => {
           if (res.features && res.features.length > 0) {
@@ -56,7 +56,7 @@ export default function MapBox({ user }: { user: any }) {
       <br />
       <br />
 
-      <BackButton name={"Grimoire"}/>
+      <BackButton name={"Grimoire"} />
     </div>
   )
 };
