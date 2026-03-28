@@ -58,18 +58,34 @@ router.post('/google', async (req, res) => {
             parseFloat(homeLongitude) :
             null,
       },
-  
+
       create: {
         email, name, picture, googleId,
         username,
         homeLatitude: homeLatitude ? parseFloat(homeLatitude) : null,
         homeLongitude: homeLongitude ? parseFloat(homeLongitude) : null,
       },
+
+
     });
+
+    const sigilCount = await prisma.sigil.count({
+      where: { userId: user.id }
+    });
+
+    if (!user.username && sigilCount === 0) {
+      await prisma.sigil.createMany({
+        data: Array.from({ length: 12 }, (_, i) => ({
+          name: `sigil-${user.id}-${i + 1}`,
+          userId: user.id,
+        })),
+      });
+    }
+
 
     req.session.userId = user.id;
 
-    if (!user.username ) {
+    if (!user.username) {
       res.json({ success: true, needsProfile: true, user });
       return;
     }
