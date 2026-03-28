@@ -3,6 +3,8 @@ import prisma from '../../prisma/prisma.client';
 
 const router = Router();
 
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Gets User info from DB
 router.get('/:id', async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: parseInt(req.params.id) },
@@ -15,19 +17,24 @@ router.get('/:id', async (req, res) => {
   res.json(user);
 });
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Updates User info from DB
 router.patch('/:id', async (req, res) => {
-  const {username, avatar, theme, homeLatitude, homeLongitude} = req.body;
-  const user = await prisma.user.update({
-    where: {id: parseInt(req.params.id)},
-    data: {
-      username,
-      avatar: avatar != null ? parseInt(avatar) : undefined,
-      theme: theme != null ? parseInt(theme): undefined,
-      homeLatitude: homeLatitude != null ? parseInt(homeLongitude) : undefined,
-      homeLongitude: homeLongitude != null ? parseInt(homeLongitude) : undefined,
-    },
-  });
-  res.json(user)
+  try {
+    const { username, avatar, theme, homeLatitude, homeLongitude } = req.body;
+    const user = await prisma.user.update({
+      where: { id: parseInt(req.params.id) },
+      data: {
+        username,
+        avatar: avatar != null ? parseInt(avatar) : undefined,
+        theme: theme != null ? parseInt(theme) : undefined,
+        homeLatitude: homeLatitude != null ? parseInt(homeLongitude) : undefined,
+        homeLongitude: homeLongitude != null ? parseInt(homeLongitude) : undefined,
+      },
+    });
+    res.json(user)
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message })
+  }
 });
 
 export default router;

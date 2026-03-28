@@ -3,7 +3,7 @@ import  prisma  from '../../prisma/prisma.client'
 
 const router = Router();
 
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Get All Sigils
 router.get('/', async (req, res) => {
   try {
 
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: (error as Error).message });
   }
 });
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Save Sigil
 router.post('/', async (req, res) => {
   try {
     const { name, userId, intention, canvasData, imageData } = req.body;
@@ -42,6 +42,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Charge Sigil
 router.patch('/:id/charge', async (req, res) => {
   try {
 
@@ -56,6 +57,7 @@ router.patch('/:id/charge', async (req, res) => {
   }
 });
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Delete Sigil
 router.delete('/:id', async (req, res) => {
   try {
 

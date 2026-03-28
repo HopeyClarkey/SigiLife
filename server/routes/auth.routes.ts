@@ -6,7 +6,7 @@ import 'express-session';
 const router = Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Real Auth Route w Google
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Checks if User
 
 router.get('/me', async (req, res) => {
   if (!req.session.userId) {
@@ -19,6 +19,7 @@ router.get('/me', async (req, res) => {
   res.json({ user });
 });
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sends to Google/ Returns token
 router.post('/google', async (req, res) => {
   try {
     const { credential, username, homeLatitude, homeLongitude } = req.body;
@@ -34,6 +35,7 @@ router.post('/google', async (req, res) => {
       res.status(401).json({ error: 'invalid token' });
       return;
     }
+
     const { email, name, picture, sub: googleId } = payload;
 
     if (!email || !googleId) {
@@ -56,6 +58,7 @@ router.post('/google', async (req, res) => {
             parseFloat(homeLongitude) :
             null,
       },
+  
       create: {
         email, name, picture, googleId,
         username,
