@@ -27,7 +27,7 @@ router.patch('/:id', async (req, res) => {
         username,
         avatar: avatar != null ? parseInt(avatar) : undefined,
         theme: theme != null ? parseInt(theme) : undefined,
-        homeLatitude: homeLatitude != null ? parseInt(homeLongitude) : undefined,
+        homeLatitude: homeLatitude != null ? parseInt(homeLatitude) : undefined,
         homeLongitude: homeLongitude != null ? parseInt(homeLongitude) : undefined,
       },
     });

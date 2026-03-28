@@ -16,13 +16,21 @@ router.get('/me', async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: req.session.userId },
   });
-  res.json({ user });
+  if (!user) {
+    res.json({ user: null });
+    return;
+  }
+  const needsProfile = !user.username || user.avatar === null || user.theme === null;
+  console.log('🔍 /me check:', { userId: req.session.userId, username: user.username, avatar: user.avatar, theme: user.theme, needsProfile });
+
+  res.json({ user, needsProfile });
 });
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sends to Google/ Returns token
 router.post('/google', async (req, res) => {
   try {
-    const { credential, username, homeLatitude, homeLongitude } = req.body;
+    const { credential, username, avatar, theme, homeLatitude, homeLongitude } = req.body;
+    console.log('📨 received:', { username, avatar, theme, homeLatitude, homeLongitude });
 
     const ticket = await client.verifyIdToken({
       idToken: credential,
@@ -42,42 +50,24 @@ router.post('/google', async (req, res) => {
       res.status(401).json({ error: 'Missing requirements email or gid' });
       return;
     }
+    let user = await prisma.user.findUnique({ where: { googleId } });
 
-    const user = await prisma.user.upsert({
-      where: { googleId },
-      update: {
-        name,
-        picture,
-        username,
-        homeLatitude:
-          homeLatitude ?
-            parseFloat(homeLatitude) :
-            null,
-        homeLongitude:
-          homeLongitude ?
-            parseFloat(homeLongitude) :
-            null,
-      },
+    if (!user) {
+      user = await prisma.user.create({
+        data: {
+          email, name, picture, googleId,
+          username,
+          ...(avatar != null && { avatar: parseInt(avatar) }),
+          ...(theme != null && { theme: parseInt(theme) }),
+          homeLatitude: homeLatitude ? parseFloat(homeLatitude) : null,
+          homeLongitude: homeLongitude ? parseFloat(homeLongitude) : null,
+        },
 
-      create: {
-        email, name, picture, googleId,
-        username,
-        homeLatitude: homeLatitude ? parseFloat(homeLatitude) : null,
-        homeLongitude: homeLongitude ? parseFloat(homeLongitude) : null,
-      },
-
-
-    });
-
-    const sigilCount = await prisma.sigil.count({
-      where: { userId: user.id }
-    });
-
-    if (!user.username && sigilCount === 0) {
+      });
       await prisma.sigil.createMany({
         data: Array.from({ length: 12 }, (_, i) => ({
-          name: `sigil-${user.id}-${i + 1}`,
-          userId: user.id,
+          name: `sigil-${user!.id}-${i + 1}`,
+          userId: user!.id,
         })),
       });
     }
@@ -85,12 +75,17 @@ router.post('/google', async (req, res) => {
 
     req.session.userId = user.id;
 
-    if (!user.username) {
-      res.json({ success: true, needsProfile: true, user });
-      return;
-    }
+    await new Promise<void>((resolve, reject) => {
+      req.session.save((err) => {
+        if (err) { reject(err); }
+        else { resolve(); }
+      });
+    });
 
-    res.json({ success: true, needsProfile: false, user });
+    const needsProfile = !user.username || user.avatar === null || user.theme === null
+    console.log('👤 saved user:', { username: user.username, avatar: user.avatar, theme: user.theme });
+    console.log('🔮 needsProfile:', needsProfile);
+    res.json({ success: true, needsProfile, user });
 
   } catch (error) {
     console.error('Google Auth error: ', error);
