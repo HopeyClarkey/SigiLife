@@ -5,6 +5,7 @@ import { useState } from 'react'
 import ProtectedRoute from './components/LogInAuth/ProtectedRoute'
 import LandingPage from './components/LogInAuth/LandingPage'
 
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ User
 import UserProfile from './components/SigilRoomHome/Grimoire/LeftPage/Profile/UserProfile'
 import UserSettings from './components/SigilRoomHome/Grimoire/LeftPage/Profile/UserSettings'
@@ -41,7 +42,8 @@ function App() {
   return (
     <Routes>
       {/* Auth flow */}
-      <Route path="/" element={<LandingPage setUser={setUser} />} />
+      <Route path="/" element={<LandingPage setUser={setUser}/>} />
+
 
       {/* User */}
       <Route path="/settings" element={<UserSettings user={user} />} />

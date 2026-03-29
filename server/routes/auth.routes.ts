@@ -20,8 +20,8 @@ router.get('/me', async (req, res) => {
     res.json({ user: null });
     return;
   }
-  const needsProfile = !user.username || user.avatar === null || user.theme === null;
-  console.log('🔍 /me check:', { userId: req.session.userId, username: user.username, avatar: user.avatar, theme: user.theme, needsProfile });
+const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation;
+
 
   res.json({ user, needsProfile });
 });
@@ -29,8 +29,7 @@ router.get('/me', async (req, res) => {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sends to Google/ Returns token
 router.post('/google', async (req, res) => {
   try {
-    const { credential, username, avatar, theme, homeLatitude, homeLongitude } = req.body;
-    console.log('📨 received:', { username, avatar, theme, homeLatitude, homeLongitude });
+const { credential, username, avatar, theme, homeLocation } = req.body;
 
     const ticket = await client.verifyIdToken({
       idToken: credential,
@@ -59,8 +58,8 @@ router.post('/google', async (req, res) => {
           username,
           ...(avatar != null && { avatar: parseInt(avatar) }),
           ...(theme != null && { theme: parseInt(theme) }),
-          homeLatitude: homeLatitude ? parseFloat(homeLatitude) : null,
-          homeLongitude: homeLongitude ? parseFloat(homeLongitude) : null,
+          homeLocation: homeLocation || null,
+
         },
 
       });
@@ -83,8 +82,7 @@ router.post('/google', async (req, res) => {
     });
 
     const needsProfile = !user.username || user.avatar === null || user.theme === null
-    console.log('👤 saved user:', { username: user.username, avatar: user.avatar, theme: user.theme });
-    console.log('🔮 needsProfile:', needsProfile);
+
     res.json({ success: true, needsProfile, user });
 
   } catch (error) {

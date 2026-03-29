@@ -20,15 +20,14 @@ router.get('/:id', async (req, res) => {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Updates User info from DB
 router.patch('/:id', async (req, res) => {
   try {
-    const { username, avatar, theme, homeLatitude, homeLongitude } = req.body;
+    const { username, avatar, theme, homeLocation } = req.body;
     const user = await prisma.user.update({
       where: { id: parseInt(req.params.id) },
       data: {
         username,
         avatar: avatar != null ? parseInt(avatar) : undefined,
         theme: theme != null ? parseInt(theme) : undefined,
-        homeLatitude: homeLatitude != null ? parseInt(homeLatitude) : undefined,
-        homeLongitude: homeLongitude != null ? parseInt(homeLongitude) : undefined,
+        homeLocation: homeLocation || null,
       },
     });
     res.json(user)
@@ -38,13 +37,13 @@ router.patch('/:id', async (req, res) => {
 });
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Deletes User info from DB
-router.delete('/:id', async (req, res) =>  {
-  try{
-    await prisma.user.delete({ where: {id: parseInt(req.params.id)}});
-    res.json({message:'user profile has been deleted'})
-  } catch (error){
+router.delete('/:id', async (req, res) => {
+  try {
+    await prisma.user.delete({ where: { id: parseInt(req.params.id) } });
+    res.json({ message: 'user profile has been deleted' })
+  } catch (error) {
     console.error(error);
-    res.status(500).json({error: (error as Error).message});
+    res.status(500).json({ error: (error as Error).message });
   }
 });
 
