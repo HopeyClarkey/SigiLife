@@ -34,7 +34,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     )
   } if (status === "needs-profile") {
     return (
-      <Navigate to="/make-profile" replace />
+      <Navigate to="/login" replace />
     )
   }
   return <>{children}</>;
