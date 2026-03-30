@@ -140,7 +140,7 @@ chargesigil,
   align-items: center;
   color: rgb(0, 0, 0);
   background-size: cover;
-  min-width: 1524px;
+  min-width: 1024px;
   height: 100vh;
   position: relative;
 }
@@ -151,13 +151,13 @@ destroysigil,
 .destroysigil {
   display: flex;
   flex-direction: column;
-  background-image: url('./assets/Pyre.png');
   background-size: cover;
   align-items: center;
   height: 100vh;
-  min-width: 1524px;
+  min-width: 1024px;
   color: rgb(0, 0, 0);
   position: relative;
+  background-image: url('./assets/Pyre.png')
 }
 .evileye {
   width: 100%;
@@ -316,8 +316,8 @@ makeprofile,
 
 avatarchoice,
 .avatarchoice {
-display: flex;
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 avatar,
@@ -328,7 +328,61 @@ avatar,
 landingpage,
 .landingpage {
   display: flex;
+}
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Flame Animation*/
+.flameshow {
+  position: relative;
+  width: 200px; 
+  height: 200px;
+  overflow: hidden;
+}
+
+.flameshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  animation: flamecycle 0.7s steps(1) infinite;
+}
+
+.flameshow img:nth-child(1) {
+  animation-delay: 0s;
+}
+.flameshow img:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.flameshow img:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.flameshow img:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.flameshow img:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.flameshow img:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.flameshow img:nth-child(7) {
+  animation-delay: 0.6s;
+}
+
+@keyframes flamecycle {
+  0% {
+    opacity: 1;
+  }
+  14.28% {
+    opacity: 1;
+  }
+  14.29% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Themes*/

@@ -1,13 +1,14 @@
 import BackButton from '../../Parts/BackButton'
-import { useLocation,  } from "react-router-dom"
+import { useLocation, } from "react-router-dom"
 //import SigilDestroyEffect from './DestroyComponents/SigilDestroyEffect'
 import ChangeEmotion from '../ChargeSigil/ChargeComponents/ChangeEmotion'
 import { useEffect } from 'react';
+import  DestroyEmotion  from './DestroyComponents/DestroyEmotion'
 
 export default function DestroySigil() {
   const { state } = useLocation();
   const { sigilData } = state;
- // const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   console.log(sigilData)
 
@@ -33,7 +34,7 @@ export default function DestroySigil() {
       <div className='destroysigil'>
         <h1> DestroySigil </h1>
         <ChangeEmotion />
-
+        <DestroyEmotion />
 
         <button className="navbutton" >
           Destroy Sigil
