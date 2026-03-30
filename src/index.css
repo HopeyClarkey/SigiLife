@@ -1,8 +1,7 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/roboto";
-
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/roboto';
 
 .nav-button,
 .navbutton {
@@ -62,13 +61,13 @@ usertitle,
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 12px;
   font-family: 'Poller One', sans-serif;
+  font-size: larger;
 }
 
 grimoire,
 .grimoire {
   display: flex;
-  flex-direction: column;
-  background-image: url('./assets/GrimioreNoir.png');
+  background-image: url('./assets/GrimoireNoir.png');
   background-size: cover;
   position: fixed;
   background-repeat: no-repeat;
@@ -78,6 +77,20 @@ grimoire,
   height: 100vh;
   width: 100vw;
   color: rgb(0, 0, 0);
+}
+footer,
+.footer {
+  display: flex;
+  min-height: fit-content;
+  justify-content: center;
+  position: fixed;
+  bottom: 0%;
+  font-size: x-large;
+  size: fit-content;
+  color: rgb(199, 14, 255);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  font-family: 'Poller One', sans-serif;
 }
 
 bookbox,
@@ -90,13 +103,25 @@ bookbox,
   min-height: fit-content;
   width: 95%;
   height: 25%;
+  top: -15%;
   font-size: x-large;
   font-family: 'New Rocker', system-ui;
 }
 
-grimiorerightpage .grimiore-right-page {
+grimoirerightpage,
+ .grimoire-right-page {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+grimoireleftpage,
+.grimoire-left-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 rightpage,
@@ -121,7 +146,6 @@ sigilibrary,
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 75vh;
-
 }
 sigilthumb,
 .sigilthumb {
@@ -132,11 +156,11 @@ sigilthumb,
   cursor: pointer;
   border-radius: 12px;
   font-family: 'New Rocker', system-ui;
-  color:black;
+  color: black;
   min-height: 10%0;
 }
 sigilthumb:hover,
-.sigilthumb:hover{
+.sigilthumb:hover {
   transform: scale(1.05);
   filter: drop-shadow(0 0 6px gold);
 }
@@ -159,16 +183,19 @@ sigilpage,
 }
 
 sigilbox,
-.sigilbox{
+.sigilbox {
   height: 50%;
   display: flex;
   position: relative;
 }
 
+
+
 leftpage,
 .leftpage {
   display: flex;
   flex-direction: column;
+   background-image: url('./assets/LeftPage.png');
 }
 
 homeroom,
@@ -186,39 +213,31 @@ homeroom,
 
 destroybutton,
 .destroybutton {
-  position: absolute;
-  top: 380px;
-  left: 100px;
+  position: relative;
 }
 
 chargebutton,
 .chargebutton {
-  position: absolute;
-  top: 42.75%;
-  left: 37%;
+  position: relative;
 }
 
-grimiorebutton,
-.grimiorebutton {
-  position: absolute;
-  top: 31%;
-  right: 12%;
+grimoirebutton,
+.grimoirebutton {
+  position: relative;
 }
 
 makesigilbutton,
 .makesigilbutton {
-  position: absolute;
-  bottom: 33%;
-  right: 23%;
+  position: relative;
 }
 
 destroybutton,
 chargebutton,
-grimiorebutton,
+grimoirebutton,
 makesigilbutton,
 .destroybutton,
 .chargebutton,
-.grimiorebutton,
+.grimoirebutton,
 .makesigilbutton {
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -228,7 +247,7 @@ makesigilbutton,
 
 .destroybutton:hover,
 .chargebutton:hover,
-.grimiorebutton:hover,
+.grimoirebutton:hover,
 .makesigilbutton:hover {
   transform: scale(1.1);
   filter: drop-shadow(0 0 6px gold) drop-shadow(0 0 126px gold)
