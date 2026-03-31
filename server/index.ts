@@ -18,18 +18,18 @@ import prisma from '../prisma/prisma.client';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// const router = express.Router();
+const router = express.Router();
 
-//import path from 'path';
-//import { fileURLToPath } from 'url';
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// app.use('/api', router);
-// app.use(express.static(path.join(__dirname, '../dist')));
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use('/api', router);
+app.use(express.static(path.join(__dirname, '../dist')));
 
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../dist/index.html'));
-// });
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Middleware
 app.use(cors({
   origin: 'http://localhost:5173',
