@@ -2,7 +2,6 @@ import BackButton from "../../../Parts/BackButton"
 import { useEffect, useRef, useState, useCallback } from 'react';
 import NextButton from "../../../Parts/NextButton";
 import * as fabric from 'fabric';
-import axios from 'axios';
 
 export default function DrawSigil({ user }: { user: any }) {
   console.log(user)
@@ -69,37 +68,34 @@ export default function DrawSigil({ user }: { user: any }) {
         if (!isRestoringHistory.current) saveHistory();
       });
 
-      // Load character vectors from backend
-      const loadVectors = async () => {
-        const uniqueChars = localStorage.getItem('sigilUniqueChars');
-        if (uniqueChars) {
+      // Load character vectors directly from localStorage
+      const loadVectors = () => {
+        const storedVectors = localStorage.getItem('sigilVectors');
+        if (storedVectors) {
           try {
-            const response = await axios.post('http://localhost:3000/api/character-vectors', { chars: uniqueChars });
-            const vectors = response.data;
+            const vectors = JSON.parse(storedVectors);
 
             for (const charData of vectors) {
-              console.log("Loading char vector:", charData.char_name);
-              const svgWrapper = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">${charData.vector_data}</svg>`;
-              const { objects, options } = await fabric.loadSVGFromString(svgWrapper);
-              console.log("Parsed objects:", objects?.length);
-              if (objects && objects.length > 0) {
-                const validObjects = objects.filter((o): o is fabric.FabricObject => o !== null);
-                const obj = fabric.util.groupSVGElements(validObjects, options) as fabric.Group;
+              console.log("Loading char vector:", charData.char);
+              
+              // Create a Fabric path object from the stored path data
+              const path = new fabric.Path(charData.pathData, {
+                fill: 'transparent',
+                stroke: 'black',
+                strokeWidth: 2,
+                left: canvas.width ? (canvas.width / 2) + (Math.random() * 50 - 25) : 250,
+                top: canvas.height ? (canvas.height / 2) + (Math.random() * 50 - 25) : 250,
+                originX: 'center',
+                originY: 'center',
+                selectable: true,
+              });
 
-                obj.set({
-                  left: canvas.width ? (canvas.width / 2) + (Math.random() * 50 - 25) : 250,
-                  top: canvas.height ? (canvas.height / 2) + (Math.random() * 50 - 25) : 250,
-                  originX: 'center',
-                  originY: 'center',
-                  selectable: true,
-                });
-
-                if (obj.width && canvas.width && obj.width > canvas.width * 0.4) {
-                  obj.scaleToWidth(canvas.width * 0.4);
-                }
-
-                canvas.add(obj);
+              // Scale down paths if they are too large
+              if (path.width && canvas.width && path.width > canvas.width * 0.4) {
+                path.scaleToWidth(canvas.width * 0.4);
               }
+
+              canvas.add(path);
             }
             if (vectors.length > 0) {
               canvas.renderAll();
@@ -226,34 +222,6 @@ export default function DrawSigil({ user }: { user: any }) {
     link.href = dataURL;
     link.click();
   };
-
-  // const handleSave = async () => {
-  //   if (!fabricCanvasRef.current) return;
-  //   setIsSaving(true);
-  //   try {
-  //     const canvas = fabricCanvasRef.current;
-  //     const canvas_data = JSON.stringify(canvas.toJSON());
-  //     const image_data = canvas.toDataURL({
-  //       format: 'png',
-  //       multiplier: 2
-  //     });
-  //     const intention = localStorage.getItem('sigilIntention') || '';
-
-  //     await axios.post('http://localhost:3000/api/sigils', {
-  //       name: sigilName,
-  //       intention,
-  //       canvas_data,
-  //       image_data
-  //     });
-
-  //     alert('Sigil saved successfully!');
-  //   } catch (error) {
-  //     console.error("Error saving sigil:", error);
-  //     alert('Failed to save sigil.');
-  //   } finally {
-  //     setIsSaving(false);
-  //   }
-  // };
 
   const handleSVGUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
