@@ -2,13 +2,18 @@ module.exports = {
   apps: [
     {
       name: 'sigilife',
-      script: './node_modules/.bin/tsx',
-      args: 'server/index.ts',
+      script: 'dist/server/index.js',
       cwd: '/home/ec2-user/SigiLife',
       env: {
-        NODE_ENV: 'production',
+        NODE_ENV: 'development',
         PORT: 3000,
       },
-    },
-  ],
+      env_production: {
+        NODE_ENV: 'production',
+        PORT: 3000,
+        PROD_DATABASE_URL: 'mysql://root:tuple12!#@your-rds-endpoint:3306/sigilife_prod',
+        SESSION_SECRET: '6133ae4665471824739d603404026ce263db3af3805d0530e44d10ea8eabe5d0',
+      }
+    }
+  ]
 };

@@ -6,33 +6,27 @@ import cors from 'cors';
 import compression from 'compression';
 
 
-import authRouter from './routes/auth.routes.ts';
-import sigilRouter from './routes/sigil.routes.ts';
-import userRouter from './routes/user.routes.ts';
+import authRouter from './routes/auth.routes';
+import sigilRouter from './routes/sigil.routes';
+import userRouter from './routes/user.routes';
 
 import 'express-session';
 import session from 'express-session';
 import { sessionStore } from './sessionStore';
-import prisma from '../prisma/prisma.client';
+import prisma from './prisma/prisma.client';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const router = express.Router();
 
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 import path from 'path';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-app.use('/api', router);
-app.use(express.static(path.join(__dirname, '../dist')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: process.env.NODE_ENV === 'production'
+    ? 'http://18.223.34.170'
+    : 'http://localhost:5173',
   credentials: true
 }));
 
@@ -57,6 +51,13 @@ app.use('/api/auth', authRouter);
 app.use('/api/sigils', sigilRouter);
 app.use('/api/users', userRouter)
 
+const distPath = path.join(__dirname, '../../dist');
+
+app.use(express.static(distPath));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Routes
@@ -98,6 +99,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).json({ error: err.message });
 });
+
 const server = app.listen(PORT, (err) => {
   if (err) {
     console.error('Failed to start server:', err);

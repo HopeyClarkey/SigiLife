@@ -29,11 +29,13 @@ prisma/generated
 *.sw?
 
 nope.md
-vitereadme.md
+/vitereadme.md
 
 .env
 /.env
 
+/.ecosystem.config
+.ecosystem.config
 
 src/assets/HomeRoomClickables
 /src/generated/prisma
