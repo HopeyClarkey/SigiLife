@@ -6,20 +6,35 @@ import cors from 'cors';
 import compression from 'compression';
 
 
-import authRouter from './routes/auth.routes';
-import sigilRouter from './routes/sigil.routes';
-import userRouter from './routes/user.routes';
+import authRouter from './routes/auth.routes.js';
+import sigilRouter from './routes/sigil.routes.js';
+import userRouter from './routes/user.routes.js';
 
 import 'express-session';
 import session from 'express-session';
-import { sessionStore } from './sessionStore';
-import prisma from './prisma/prisma.client';
+import { sessionStore } from './sessionStore.js';
+import prisma from './prisma/prisma.client.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+app.use(compression());
+app.use('/api/auth', authRouter);
+app.use('/api/sigils', sigilRouter);
+app.use('/api/users', userRouter)
+
+const distPath = path.join(process.cwd(), 'dist');
+
+app.use(express.static(distPath));
+
+app.get('/{*path}', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 import path from 'path';
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Middleware
@@ -43,21 +58,7 @@ app.use(session({
 }));
 
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use(compression());
-app.use('/api/auth', authRouter);
-app.use('/api/sigils', sigilRouter);
-app.use('/api/users', userRouter)
-
-const distPath = path.join(__dirname, '../../dist');
-
-app.use(express.static(distPath));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(distPath, 'index.html'));
-});
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Routes

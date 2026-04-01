@@ -11,7 +11,7 @@ module.exports = {
       env_production: {
         NODE_ENV: 'production',
         PORT: 3000,
-        PROD_DATABASE_URL: 'mysql://root:tuple12!#@your-rds-endpoint:3306/sigilife_prod',
+        DATABASE_URL: 'mysql://root:root:tuple12%21%23@sigilife.cpoei0kow51s.us-east-2.rds.amazonaws.com:3306/sigilife_prod',
         SESSION_SECRET: '6133ae4665471824739d603404026ce263db3af3805d0530e44d10ea8eabe5d0',
       }
     }
