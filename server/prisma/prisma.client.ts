@@ -2,11 +2,12 @@ import 'dotenv/config';
 import { PrismaClient } from '../prisma/generated/client.js';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 
+const dbUrl = process.env.DATABASE_URL || process.env.DEV_DATABASE_URL || process.env.PROD_DATABASE_URL;
 
-if (!process.env.DATABASE_URL){
+if (!dbUrl){
   throw new Error ('No db url in env!')
 }
-const url = new URL(process.env.DATABASE_URL)
+const url = new URL(dbUrl)
 
 const adapter = new PrismaMariaDb({
   host: url.hostname,
