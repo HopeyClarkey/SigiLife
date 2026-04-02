@@ -17,21 +17,50 @@ import prisma from './prisma/prisma.client.js';
 
 
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Middleware
-
+// Trust proxy for secure cookies behind ELB/Nginx
+app.set('trust proxy', 1);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Middleware
+app.use((req, res, next) => {
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? process.env.CLIENT_URL
-    : 'http://localhost:5173',
-  credentials: true
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'http://18.223.34.170',
+      'http://ec2-18-223-34-170.us-east-2.compute.amazonaws.com',
+    ];
+    
+    const devOrigins = [
+      /^http:\/\/localhost:\d+$/,
+      /^http:\/\/127\.0\.0\.1:\d+$/
+    ];
+
+    if (!origin) return callback(null, true);
+
+    const isAllowed = allowedOrigins.includes(origin) || 
+                     (process.env.NODE_ENV !== 'production' && devOrigins.some(regex => regex.test(origin)));
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS blocked for origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
 
 app.use(session({
@@ -39,21 +68,27 @@ app.use(session({
   store: sessionStore,
   resave: false,
   saveUninitialized: false,
+  proxy: true,
   cookie: {
-    secure: false,
+    // Only set secure to true if we are in production AND actually on HTTPS
+    secure: process.env.NODE_ENV === 'production' && process.env.ENABLE_HTTPS === 'true',
     httpOnly: true,
+    sameSite: 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000,
   },
 }));
-
-
-
 
 app.use('/api/auth', authRouter);
 app.use('/api/sigils', sigilRouter);
 app.use('/api/users', userRouter)
 
+const distPath = path.join(process.cwd(), 'dist');
 
+app.use(express.static(distPath));
+
+app.get('/{*path}', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Routes
 app.post('/api/character-vectors', async (req, res) => {
@@ -79,7 +114,6 @@ app.post('/api/character-vectors', async (req, res) => {
   }
 });
 
-const distPath = path.join(process.cwd(), 'dist');
 
 app.use(express.static(distPath));
 

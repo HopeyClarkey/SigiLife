@@ -13,6 +13,7 @@ dist
 dist-ssr
 *.local
 /src/generated/prisma
+server/prisma/generated/
 prisma/generated/
 /prisma/generated/
 prisma/generated
