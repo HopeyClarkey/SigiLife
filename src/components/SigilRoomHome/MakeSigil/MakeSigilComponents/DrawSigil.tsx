@@ -4,7 +4,7 @@ import NextButton from "../../../Parts/NextButton";
 import * as fabric from 'fabric';
 
 export default function DrawSigil({ user }: { user: any }) {
-  console.log(user)
+  // console.log(user)
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<fabric.Canvas | null>(null);

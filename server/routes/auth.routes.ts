@@ -69,6 +69,16 @@ const { credential, username, avatar, theme, homeLocation } = req.body;
           userId: user!.id,
         })),
       });
+    } else if (username || homeLocation) {
+      user = await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          username: username || user.username,
+          ...(avatar != null && { avatar: parseInt(avatar) }),
+          ...(theme != null && { theme: parseInt(theme) }),
+          homeLocation: homeLocation || user.homeLocation,
+        }
+      });
     }
 
 
