@@ -26,16 +26,16 @@ export default function UserSettings() {
   const [avatarId, setAvatarId] = useState(String(user?.avatar ?? 0))
 
 
-  const handleThemeChange = async (checked: boolean) => {
+  const handleThemeChange = (checked: boolean) => {
     setIsDark(checked)
     document.documentElement.classList.toggle("dark", checked)
-    const res = await fetch(`/api/users/${user!.id}`, {
+    fetch(`/api/users/${user!.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ theme: checked ? 1 : 0 })
     })
-    const updated = await res.json()
-    setUser(updated)
+      .then(res => res.json())
+      .then(updated => setUser(updated))
   }
 
   const handleAvatarChange = async (id: string) => {
@@ -82,7 +82,7 @@ export default function UserSettings() {
         <br />
         This is where you can delete your account
         <br />
-        <Link to= "/profile">Go to Profile </Link>
+        <Link to="/profile">Go to Profile </Link>
         <BackButton name={"Go Back"} />
       </div>
     </div>
