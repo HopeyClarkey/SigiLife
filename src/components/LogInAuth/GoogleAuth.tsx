@@ -24,13 +24,13 @@ export default function GoogleAuth({ setUser, formData }: { setUser: (user: any)
     const handleSuccess = async (response: any) => {
       console.log('[GoogleAuth] Callback hit! Received credential from Google');
       try {
-        const payload = { 
-          credential: response.credential, 
-          ...formDataRef.current 
+        const payload = {
+          credential: response.credential,
+          ...formDataRef.current
         };
-        
+
         console.log('[GoogleAuth] Sending login data to backend:', { ...payload, credential: 'HIDDEN' });
-        
+
         const res = await fetch('/api/auth/google', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -44,7 +44,7 @@ export default function GoogleAuth({ setUser, formData }: { setUser: (user: any)
 
         const data = await res.json();
         console.log('[GoogleAuth] Backend response successful:', data.success);
-        
+
         setUser(data.user);
         if (data.needsProfile) {
           navigate('/login');
@@ -58,9 +58,9 @@ export default function GoogleAuth({ setUser, formData }: { setUser: (user: any)
 
     const initializeGoogle = () => {
       if (initialized.current) return;
-      
+
       console.log('[GoogleAuth] Found window.google. Initializing...');
-      
+
       try {
         window.google.accounts.id.initialize({
           client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
@@ -74,7 +74,7 @@ export default function GoogleAuth({ setUser, formData }: { setUser: (user: any)
           document.getElementById('google-signin-button'),
           { theme: 'outline', size: 'large', shape: 'pill' }
         );
-        
+
         initialized.current = true;
       } catch (err) {
         console.error('[GoogleAuth] Initialization error:', err);

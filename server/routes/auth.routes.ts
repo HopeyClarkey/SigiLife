@@ -20,7 +20,7 @@ router.get('/me', async (req, res) => {
     res.json({ user: null });
     return;
   }
-const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation;
+const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation
 
 
   res.json({ user, needsProfile });
@@ -91,7 +91,7 @@ const { credential, username, avatar, theme, homeLocation } = req.body;
       });
     });
 
-    const needsProfile = !user.username || user.avatar === null || user.theme === null
+    const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation
 
     res.json({ success: true, needsProfile, user });
 

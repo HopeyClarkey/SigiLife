@@ -327,6 +327,7 @@ avatarchoice,
 avatar,
 .avatar {
   height: 150px;
+
   object-fit: cover;
 }
 
