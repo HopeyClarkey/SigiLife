@@ -9,6 +9,8 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Checks if User
 
 router.get('/me', async (req, res) => {
+    console.log('[/me] session:', req.session)
+  console.log('[/me] userId:', req.session.userId)
   if (!req.session.userId) {
     res.json({ user: null });
     return;
@@ -20,7 +22,7 @@ router.get('/me', async (req, res) => {
     res.json({ user: null });
     return;
   }
-const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation;
+const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation
 
 
   res.json({ user, needsProfile });
@@ -91,7 +93,7 @@ const { credential, username, avatar, theme, homeLocation } = req.body;
       });
     });
 
-    const needsProfile = !user.username || user.avatar === null || user.theme === null
+    const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation
 
     res.json({ success: true, needsProfile, user });
 

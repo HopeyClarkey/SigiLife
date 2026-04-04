@@ -4,17 +4,19 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import compression from 'compression';
-
+import path from 'path';
+import session from 'express-session';
+import 'express-session';
+import { Request, Response, NextFunction } from 'express';
 
 import authRouter from './routes/auth.routes.js';
 import sigilRouter from './routes/sigil.routes.js';
 import userRouter from './routes/user.routes.js';
-
-import 'express-session';
-import session from 'express-session';
 import { sessionStore } from './sessionStore.js';
 import prisma from './prisma/prisma.client.js';
-import path from 'path';
+
+
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,31 +38,37 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      'http://18.223.34.170',
-      'http://ec2-18-223-34-170.us-east-2.compute.amazonaws.com',
-    ];
-    
-    const devOrigins = [
-      /^http:\/\/localhost:\d+$/,
-      /^http:\/\/127\.0\.0\.1:\d+$/
-    ];
-
-    if (!origin) return callback(null, true);
-
-    const isAllowed = allowedOrigins.includes(origin) || 
-                     (process.env.NODE_ENV !== 'production' && devOrigins.some(regex => regex.test(origin)));
-
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      console.warn(`CORS blocked for origin: ${origin}`);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true,
   credentials: true,
 }));
+
+
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     const allowedOrigins = [
+//       'http://18.223.34.170',
+//       'http://ec2-18-223-34-170.us-east-2.compute.amazonaws.com',
+//     ];
+    
+//     const devOrigins = [
+//       /^http:\/\/localhost:\d+$/,
+//       /^http:\/\/127\.0\.0\.1:\d+$/
+//     ];
+
+//     if (!origin) return callback(null, true);
+
+//     const isAllowed = allowedOrigins.includes(origin) || 
+//                      (process.env.NODE_ENV !== 'production' && devOrigins.some(regex => regex.test(origin)));
+
+//     if (isAllowed) {
+//       callback(null, true);
+//     } else {
+//       console.warn(`CORS blocked for origin: ${origin}`);
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+// }));
 
 app.use(session({
   secret: process.env.SESSION_SECRET as string,
@@ -114,6 +122,16 @@ app.post('/api/character-vectors', async (req, res) => {
 });
 
 
+app.use(express.static(distPath));
+
+app.get('/{*path}', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello SigiLife!');
@@ -121,7 +139,7 @@ app.get('/', (req, res) => {
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Error handler
-import { Request, Response, NextFunction } from 'express';
+
 
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -129,7 +147,9 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ error: err.message });
 });
 
-const server = app.listen(PORT, (err) => {
+
+
+app.listen(PORT, (err) => {
   if (err) {
     console.error('Failed to start server:', err);
     process.exit(1);

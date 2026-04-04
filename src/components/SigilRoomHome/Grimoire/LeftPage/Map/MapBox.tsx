@@ -6,10 +6,13 @@ import axios from 'axios';
 import BackButton from "../../../../Parts/BackButton"
 import MapSearchBox from "./MapSearchBox"
 import PlaceSigil from "./PlaceSigil"
+import {useUser} from "@/context/UserContext"
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
-export default function MapBox({ user }: { user: any }) {
+export default function MapBox() {
+  const { user } = useUser()
+if (!user) { return null }
   console.log(user)
   const [sigils, setSigils] = useState<any[]>([]);
   const [popupInfo, setPopupInfo] = useState<any | null>(null);
