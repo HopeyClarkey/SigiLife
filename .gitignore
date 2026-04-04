@@ -33,11 +33,14 @@ prisma/generated
 nope.md
 /vitereadme.md
 
-.env
-/.env
+.env  
+/.env  
 
+/.ecosystem.config.cjs
+.ecosystem.config.cjs
 /.ecosystem.config
 .ecosystem.config
 ecosystem.config.cjs
 
 src/assets/HomeRoomClickables
+src/assets/Flame  
