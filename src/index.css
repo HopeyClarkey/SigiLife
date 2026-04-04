@@ -253,6 +253,31 @@ rightpage,
   color: rgb(0, 0, 0);
   font-family: 'New Rocker', system-ui;
 }
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Profile*/
+profilepage,
+.profilepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  color: rgb(0, 0, 0);
+  font-family: 'New Rocker', system-ui;
+}
+avatar,
+.avatar {
+  height: 150px;
+  object-fit: cover;
+}
+
+avatarface,
+.avatarface {
+  height: 50px;
+  object-fit: cover;
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Library*/
 sigilibrary,
 .sigilibrary {
@@ -311,25 +336,9 @@ leftpage,
   background-image: url('./assets/LeftPage.png');
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Landing Page*/
-makeprofile,
-.makeprofile {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
-avatarchoice,
-.avatarchoice {
-  display: flex;
-  flex-direction: row;
-}
 
-avatar,
-.avatar {
-  height: 150px;
 
-  object-fit: cover;
-}
 
 landingpage,
 .landingpage {

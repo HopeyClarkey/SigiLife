@@ -5,6 +5,7 @@ import { useUser } from '@/context/UserContext'
 
 export default function Grimoire() {
   const { user } = useUser()
+    if (!user) { return null }
  console.log(user)
   return (
     <div className='maincontainer'>
