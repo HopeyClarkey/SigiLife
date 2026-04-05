@@ -167,21 +167,37 @@ chargesigil,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Destroy Sigil*/
 
-destroysigil,
 .destroysigil {
   display: flex;
   flex-direction: column;
-  background-size: cover;
   align-items: center;
   height: 100vh;
   min-width: 1024px;
   color: rgb(0, 0, 0);
   position: relative;
-  background-image: url('./assets/Pyre.png')
 }
+
+.destroysigil::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/Pyre.png');
+  background-size: cover;
+  z-index: 0;
+}
+
 .evileye {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+.destroysigil > *:not(.evileye) {
+  position: relative;
+  z-index: 2;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Grimoire*/
