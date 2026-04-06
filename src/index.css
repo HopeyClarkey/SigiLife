@@ -112,21 +112,30 @@ homeroom,
 destroybutton,
 .destroybutton {
   position: relative;
+  left: 100px;
+  top: 355px;
 }
 
 chargebutton,
 .chargebutton {
   position: relative;
+  left: 290px;
+  top: 260px;
+
 }
 
 grimoirebutton,
 .grimoirebutton {
   position: relative;
+  left: 670px;
+  top: 185px;
 }
 
 makesigilbutton,
 .makesigilbutton {
   position: relative;
+  left: 480px;
+  top: 405px;
 }
 
 destroybutton,
