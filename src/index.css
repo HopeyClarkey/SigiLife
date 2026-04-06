@@ -84,6 +84,13 @@ footer,
   font-family: 'Poller One', sans-serif;
 }
 
+scrollcontainer,
+.scrollcontainer {
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  width: 100vw;
+  height: 100vh;
+}
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  HomeRoom*/
 homeroom,
 .homeroom {
@@ -193,11 +200,6 @@ chargesigil,
   height: 100%;
   z-index: 1;
   opacity: 0.3;
-}
-
-.destroysigil > *:not(.evileye) {
-  position: relative;
-  z-index: 2;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Grimoire*/

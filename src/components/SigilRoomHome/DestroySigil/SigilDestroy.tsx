@@ -60,9 +60,11 @@ export default function DestroySigil() {
         {isDestroying && (
           <Link className="navbutton" to='/home'>Go Home</Link>
         )}
-        <div className='footer'>
-          <BackButton name={"Go Back"} />
-        </div>
+        {!isDestroying && (
+          <div className='footer'>
+            <BackButton name={"Go Back"} />
+          </div>
+        )}
       </div>
     </div>
   )
