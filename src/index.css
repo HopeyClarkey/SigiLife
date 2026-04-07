@@ -222,6 +222,20 @@ chargesigil,
   opacity: 0.3;
 }
 
+.ghost-cursor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ghost-cursor > canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Grimoire*/
 usertitle,
 .usertitle {

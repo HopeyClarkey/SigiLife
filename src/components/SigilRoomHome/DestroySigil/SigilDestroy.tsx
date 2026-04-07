@@ -4,6 +4,7 @@ import { useLocation, Link } from "react-router-dom"
 import ChangeEmotion from '../ChargeSigil/ChargeComponents/ChangeEmotion'
 import EvilEye from './DestroyComponents/EvilEye'
 import { useUser } from '@/context/UserContext'
+import GhostCursor from './DestroyComponents/GhostCursor.tsx'
 
 export default function DestroySigil() {
   const { state } = useLocation();
@@ -44,19 +45,43 @@ export default function DestroySigil() {
       <div ref={scrollRef} className='scrollcontainer'>
         <div className='destroysigil'>
           {isDestroying && (
-            <div className='evileye' style={{ pointerEvents: 'none' }}>
-              <EvilEye
-                eyeColor="#2e0fa9"
-                intensity={3.1}
-                pupilSize={0.75}
-                irisWidth={0.25}
-                glowIntensity={0.65}
-                scale={0.5}
-                noiseScale={1}
-                pupilFollow={1.6}
-                flameSpeed={2.5}
-                backgroundColor="#06000f"
-              />
+            <div>
+              <div className='evileye' style={{ pointerEvents: 'none' }}>
+                <EvilEye
+                  eyeColor="#2e0fa9"
+                  intensity={3.1}
+                  pupilSize={0.75}
+                  irisWidth={0.25}
+                  glowIntensity={0.65}
+                  scale={0.5}
+                  noiseScale={1}
+                  pupilFollow={1.6}
+                  flameSpeed={2.5}
+                  backgroundColor="#06000f"
+                />
+              </div>
+
+              <div style={{ height: 600, position: 'relative' }}>
+                <GhostCursor
+                  // Visuals
+                  color="#bc103b"
+                  brightness={4.4}
+                  edgeIntensity={0}
+
+                  // Trail and motion
+                  trailLength={20}
+                  inertia={0.61}
+
+                  // Post-processing
+                  grainIntensity={0.24}
+                  bloomStrength={2.7}
+                  bloomRadius={0.1}
+                  bloomThreshold={0.14}
+
+                  // Fade-out behavior
+                  fadeDelayMs={1000}
+                  fadeDurationMs={1500}
+                /></div>
             </div>
           )}
           <h1>Destroy Sigil</h1>
