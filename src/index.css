@@ -21,7 +21,10 @@
 
 textinput,
 .textinput {
-  background-color: "#e0e0e0";
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  border-color:#2b0681;
+  border-width: 1px;
 }
 
 
@@ -116,7 +119,7 @@ landingpage,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 logo,
@@ -130,7 +133,8 @@ makeprofile,
 .makeprofile {
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  justify-content: center;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  HomeRoom*/
@@ -412,20 +416,18 @@ makesigil,
 .makesigil {
   display: flex;
   flex-direction: column;
-  background-image: url('./assets/WritingNoir.png');
   background-size: cover;
   align-items: center;
-  justify-content: center;
+
   min-width: 1024px;
-  height: 100vh;
   position: relative;
+  height: 100vh;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Write Sigil*/
 writesigil,
 .writesigil {
   display: flex;
   flex-direction: column;
-  background-image: url('./assets/WritingNoir.png');
   background-size: cover;
   align-items: center;
   justify-content: space-evenly;
@@ -440,6 +442,8 @@ writesigilbox,
   position: relative;
   width: 25%;
 }
+
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Draw Sigil*/
 drawsigilcontainer,
 .drawsigilcontainer {

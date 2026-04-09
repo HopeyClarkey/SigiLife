@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import BackButton from '../../Parts/BackButton'
 import { useUser } from '@/context/UserContext'
@@ -47,11 +47,21 @@ export default function MakeSigil() {
       alert('You have reached the maximum limit of 12 sigils.\n\nPlease destroy an existing sigil before creating a new one.')
     }
   }
+const scrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) {
+      return;
+    }
+    el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+  }, []);
+
 
   if (!user) return null
 
   return (
     <div className='maincontainer'>
+       <div ref={scrollRef} className='scrollcontainer'>
       <div className='makesigil'>
         <h1>Make a Sigil</h1>
         <div className="sigil-info">
@@ -61,7 +71,7 @@ export default function MakeSigil() {
           )}
           {error && <p className="info-text error">{error}</p>}
         </div>
-        
+
         <button 
           className="navbutton primary" 
           onClick={handleCreateSigil}
@@ -75,6 +85,7 @@ export default function MakeSigil() {
 
         <BackButton name={"Go Back"} />
       </div>
+    </div>
     </div>
   )
 }
