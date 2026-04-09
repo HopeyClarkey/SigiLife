@@ -22,6 +22,7 @@ export default function MakeSigil() {
       checkSigilCount()
     }
   }, [user])
+  if (!user) return null
 
   const checkSigilCount = async () => {
     try {
@@ -47,7 +48,8 @@ export default function MakeSigil() {
       alert('You have reached the maximum limit of 12 sigils.\n\nPlease destroy an existing sigil before creating a new one.')
     }
   }
-const scrollRef = useRef<HTMLDivElement>(null);
+  
+  const scrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) {
@@ -57,35 +59,34 @@ const scrollRef = useRef<HTMLDivElement>(null);
   }, []);
 
 
-  if (!user) return null
 
   return (
     <div className='maincontainer'>
-       <div ref={scrollRef} className='scrollcontainer'>
-      <div className='makesigil'>
-        <h1>Make a Sigil</h1>
-        <div className="sigil-info">
-          <p className="info-text">Current Sigils: {sigilCount}/{MAX_SIGILS}</p>
-          {remainingSlots < 3 && (
-            <p className="info-text warning">⚠️ {remainingSlots} slot(s) remaining</p>
-          )}
-          {error && <p className="info-text error">{error}</p>}
+      <div ref={scrollRef} className='scrollcontainer'>
+        <div className='makesigil'>
+          <h1>Make a Sigil</h1>
+          <div className="sigil-info">
+            <p className="info-text">Current Sigils: {sigilCount}/{MAX_SIGILS}</p>
+            {remainingSlots < 3 && (
+              <p className="info-text warning">⚠️ {remainingSlots} slot(s) remaining</p>
+            )}
+            {error && <p className="info-text error">{error}</p>}
+          </div>
+
+          <button
+            className="navbutton primary"
+            onClick={handleCreateSigil}
+            disabled={loading || !canCreateMore}
+          >
+            {loading ? 'Loading...' : canCreateMore ? 'Create New Sigil' : 'Max Limit Reached'}
+          </button>
+
+          <Link className="navbutton secondary" to="/make-sigil/write">Write It</Link>
+          <Link className="navbutton secondary" to="/library">Sigil Library</Link>
+
+          <BackButton name={"Go Back"} />
         </div>
-
-        <button 
-          className="navbutton primary" 
-          onClick={handleCreateSigil}
-          disabled={loading || !canCreateMore}
-        >
-          {loading ? 'Loading...' : canCreateMore ? 'Create New Sigil' : 'Max Limit Reached'}
-        </button>
-
-        <Link className="navbutton secondary" to="/make-sigil/write">Write It</Link>
-        <Link className="navbutton secondary" to="/library">Sigil Library</Link>
-
-        <BackButton name={"Go Back"} />
       </div>
-    </div>
     </div>
   )
 }
