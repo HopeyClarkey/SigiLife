@@ -36,9 +36,9 @@ export default function DestroySigil() {
 
   const handleDestroy = async () => {
     console.log('destroy clicked, sigilData.id:', sigilData.id)
-    if(isSubmitting) {
+    if (isSubmitting) {
       return;
-    } 
+    }
     try {
       const res = await fetch(`/api/sigils/${sigilData.id}`, { method: 'DELETE' });
       console.log('response status:', res.status)
@@ -60,37 +60,45 @@ export default function DestroySigil() {
           {isDestroying && (
             <>
 
-            <div className='evileye'>
-              <EvilEye
-                eyeColor="#2e0fa9"
-                intensity={3.1}
-                pupilSize={0.75}
-                irisWidth={0.25}
-                glowIntensity={0.65}
-                scale={0.5}
-                noiseScale={1}
-                pupilFollow={1.6}
-                flameSpeed={2.5}
-                backgroundColor="#06000f"
-                externalMouse={mousePos}
+              <div className='evileye'>
+                <EvilEye
+                  eyeColor="#2e0fa9"
+                  intensity={3.1}
+                  pupilSize={0.75}
+                  irisWidth={0.25}
+                  glowIntensity={0.65}
+                  scale={0.5}
+                  noiseScale={1}
+                  pupilFollow={1.6}
+                  flameSpeed={2.5}
+                  backgroundColor="#06000f"
+                  externalMouse={mousePos}
+                />
+              </div>
+              <GhostCursor
+                // Visuals
+                zIndex={1} 
+                color="#e74040"
+                brightness={2}
+                edgeIntensity={0}
+
+                // Trail and motion
+                trailLength={50}
+                inertia={0.5}
+
+                // Post-processing
+                grainIntensity={0.05}
+                bloomStrength={0.1}
+                bloomRadius={1}
+                bloomThreshold={0.025}
+
+                // Fade-out behavior
+                fadeDelayMs={1000}
+                fadeDurationMs={1500}
               />
-            </div>
-        <GhostCursor
-              color="#bc103b"
-              brightness={4.4}
-              edgeIntensity={0}
-              trailLength={20}
-              inertia={0.61}
-              grainIntensity={0.24}
-              bloomStrength={2.7}
-              bloomRadius={0.1}
-              bloomThreshold={0.14}
-              fadeDelayMs={1000}
-              fadeDurationMs={1500}
-            />
-          </>
-        )
-        }
+            </>
+          )
+          }
 
           <h1>Destroy Sigil</h1>
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />

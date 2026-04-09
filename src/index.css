@@ -226,7 +226,7 @@ chargesigil,
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 31;
+  z-index: 1;
 }
 
 
