@@ -32,6 +32,12 @@ jobs:
           npx prisma generate --schema=server/prisma/schema.prisma
           npm run build
 
+      - name: Validate Secrets
+        run: |
+          if [ -z "${{ secrets.REMOTE_HOST }}" ]; then echo "Error: REMOTE_HOST secret is missing"; exit 1; fi
+          if [ -z "${{ secrets.REMOTE_USER }}" ]; then echo "Error: REMOTE_USER secret is missing"; exit 1; fi
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then echo "Error: SSH_PRIVATE_KEY secret is missing"; exit 1; fi
+
       - name: Deploy via rsync
         env:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
