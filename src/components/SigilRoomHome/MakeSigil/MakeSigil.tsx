@@ -25,6 +25,7 @@ export default function MakeSigil() {
 
 
 const checkSigilCount = async () => {
+  if (!user) return null;
     try {
       setLoading(true)
       setError(null)

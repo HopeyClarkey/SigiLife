@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export default function SigilThumb({ sigilData }: {  sigilData: any }) {
   return (
     <Link className="sigilthumb" to="/sigil-page" state={{ sigilData }}>
-      <div>
+      <div className='sigilthumbox'>
         <p>{sigilData.name}</p>
         {sigilData.imageData ? (
           <img src={sigilData.imageData} alt={sigilData.name} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
