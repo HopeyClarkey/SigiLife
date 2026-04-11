@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import BackButton from '../../Parts/BackButton'
 import { useUser } from '@/context/UserContext'
 import Menu from '../../Parts/Menu'
 
@@ -88,7 +87,6 @@ export default function MakeSigil() {
 
           <Link className="navbutton" to="/library">Sigil Library</Link>
 
-          <BackButton name={"Go Back"} />
         </div>
       </div>
     </div>

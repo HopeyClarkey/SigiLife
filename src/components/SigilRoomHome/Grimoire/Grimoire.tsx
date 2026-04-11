@@ -1,4 +1,4 @@
-import BackButton from "../../Parts/BackButton"
+
 import { Link } from 'react-router-dom'
 import { useUser } from '@/context/UserContext'
 import { useEffect, useRef } from 'react';
@@ -45,8 +45,6 @@ export default function Grimoire() {
             </div>
 
           </div>
-          <div className="footer">
-            <BackButton name={"Sigil Home Room"} /></div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import BackButton from "../../../Parts/BackButton"
+
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/context/UserContext'
@@ -87,7 +87,6 @@ export default function WriteSigil() {
               </button>
             </div>
         </div>
-        <BackButton name={'Go Back'} />
       </div>
     </div>
   )

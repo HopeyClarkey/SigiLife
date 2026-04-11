@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from 'react'
-import BackButton from '../../Parts/BackButton'
-import { useLocation, Link } from "react-router-dom"
+import Menu from '../../Parts/Menu'
+import { useSearchParams, Link } from "react-router-dom"
 import ChangeEmotion from '../ChargeSigil/ChargeComponents/ChangeEmotion'
 import EvilEye from './DestroyComponents/EvilEye'
 import { useUser } from '@/context/UserContext'
 import GhostCursor from './DestroyComponents/GhostCursor.tsx'
 
 export default function DestroySigil() {
-  const { state } = useLocation();
-  const { sigilData } = state;
+  const [searchParams] = useSearchParams()
+  const sigilId = searchParams.get('sigilId')
   const { user } = useUser()
+  const [sigilData, setSigilData] = useState<any>(null)
   const [emotion, setEmotion] = useState("")
   const [isDestroying, setIsDestroying] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
@@ -23,6 +24,14 @@ export default function DestroySigil() {
     if (!el) return;
     el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
   }, []);
+
+  useEffect(() => {
+    if (!sigilId) { return }
+    fetch(`/api/sigils/${sigilId}`)
+      .then(res => res.json())
+      .then(data => setSigilData(data))
+      .catch(err => console.error(err))
+  }, [sigilId])
 
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -50,7 +59,7 @@ export default function DestroySigil() {
     }
   };
 
-  if (!user) { return null }
+  if (!user) { return null }if (!sigilData) { return <p>Loading sigil...</p> }
 
   return (
     <div className='maincontainer'>
@@ -77,7 +86,7 @@ export default function DestroySigil() {
               </div>
               <GhostCursor
                 // Visuals
-                zIndex={1} 
+                zIndex={1}
                 color="#e74040"
                 brightness={2}
                 edgeIntensity={0}
@@ -99,7 +108,7 @@ export default function DestroySigil() {
             </>
           )
           }
-
+  <Menu/>
           <h1>Destroy Sigil</h1>
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
           {sigilData.imageData ? (
@@ -114,11 +123,6 @@ export default function DestroySigil() {
           )}
           {isDestroying && (
             <Link className="navbutton" to='/home'>Go Home</Link>
-          )}
-          {!isDestroying && (
-            <div className='footer'>
-              <BackButton name={"Go Back"} />
-            </div>
           )}
         </div>
       </div>

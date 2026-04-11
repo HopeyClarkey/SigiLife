@@ -1,15 +1,26 @@
 
-import { Link, useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import MapSearchBox from '../../LeftPage/Map/MapSearchBox'
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
 export default function SigilPage() {
-  const { state } = useLocation();
-  const [sigilData, setSigilData] = useState(state?.sigilData);
+  const [searchParams] = useSearchParams()
+  const sigilId = searchParams.get('sigilId')
+  const [sigilData, setSigilData] = useState<any>(null);
   const [isSavingLocation, setIsSavingLocation] = useState(false);
+
+  useEffect(()=> {
+    if(!sigilId){return}
+    fetch(`/api/sigils/${sigilId}`)
+    .then(res => res.json())
+    .then(data => setSigilData(data))
+    .catch(err => console.error(err))
+  }, [sigilId])
+if (!sigilData) { return <p>Loading sigil...</p> }
+
 
   const handleLocationRetrieve = async (res: any) => {
     if (res.features && res.features.length > 0) {
@@ -38,8 +49,7 @@ export default function SigilPage() {
   return (
     <div className="maincontainer">
       <div className="sigilpage">
-        <div className='header'></div>
-        <h1>This is the SigilPage for 
+        <h1>This is the SigilPage for
           <br/>{sigilData.name}</h1>
         <br />
 

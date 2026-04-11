@@ -1,6 +1,6 @@
-import BackButton from '../../Parts/BackButton'
+import Menu from '../../Parts/Menu'
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
-import SigilChargeEffect from './ChargeComponents/SigilChargeEffect'
+
 import ChangeEmotion from './ChargeComponents/ChangeEmotion'
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext'
@@ -64,10 +64,10 @@ export default function ChargeSigil() {
           />
         )}
         <div className='chargesigil'>
+          <Menu/>
           <h1>ChargeSigil</h1>
 
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
-          <SigilChargeEffect />
 
           {sigilData.imageData ? (
             <img className="sigilbox" src={sigilData.imageData} alt={sigilData.name} />
@@ -96,11 +96,6 @@ export default function ChargeSigil() {
             </Link>
           )}
 
-          {!isCharging && (
-            <div className='footer'>
-              <BackButton name={"Go Back"} />
-            </div>
-          )}
         </div>
       </div>
     </div>

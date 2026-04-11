@@ -1,4 +1,4 @@
-import BackButton from "../../../Parts/BackButton"
+
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '@/context/UserContext'
@@ -21,7 +21,7 @@ export default function StyleSigil() {
   }
 };
 
- 
+
   useEffect(() => {
     // Load data from localStorage
     const name = localStorage.getItem('sigilName') || 'My New Sigil';
@@ -156,8 +156,6 @@ export default function StyleSigil() {
           </div>
 
           {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            <BackButton name={"Go Back"} />
             <button
               className="navbutton"
               onClick={handleSave}

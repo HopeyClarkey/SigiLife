@@ -13,7 +13,7 @@ export default function SigiLibrary({ items, }: { items: any[], user: any }) {
     if (action === 'charge'){
       navigate(`/charge-sigil?sigilId=${sigil.id}`)
     } else if (action === 'destroy'){
-      navigate(`destroy-sigil?sigilId=${sigil.id}`)
+      navigate(`/destroy-sigil?sigilId=${sigil.id}`)
     } else {
       navigate(`/sigil-page?sigilId=?${sigil.id}`)
     }

@@ -4,7 +4,7 @@ import Map, { NavigationControl, Marker, Popup } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from 'axios';
 
-import BackButton from "../../../../Parts/BackButton"
+
 import MapSearchBox from "./MapSearchBox"
 
 import { useUser } from "@/context/UserContext"
@@ -52,7 +52,7 @@ export default function MapBox() {
       <div ref={scrollRef} className='scrollcontainer'>
         <div className=" mapbox">
           <h1>This is the MapBox</h1>
-          <Menu/>
+          <Menu />
           <div className="rowbox">
             <button
               onClick={() => setFilterMode("all")}
@@ -151,9 +151,7 @@ export default function MapBox() {
               }
             }}
           />
-
-
-          <BackButton name={"Grimoire"} />
-        </div></div>
+        </div>
+      </div>
     </div>)
 };
