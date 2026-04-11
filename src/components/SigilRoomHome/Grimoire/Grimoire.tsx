@@ -13,7 +13,7 @@ export default function Grimoire() {
     if (!el) {
       return;
     }
-    el.scrollLeft = (el.scrollWidth - el.clientWidth) /2;
+    el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
   }, []);
 
   if (!user) { return null; }
@@ -24,7 +24,7 @@ export default function Grimoire() {
 
       <div ref={scrollRef} className='scrollcontainer'>
         <div className={'grimoire'}>
-    <Menu/>
+          <Menu />
           <div className={'usertitle'}>
             {user!.username}'s
             <br />Grimoire
