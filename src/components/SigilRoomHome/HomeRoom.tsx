@@ -28,8 +28,8 @@ export default function HomeRoom() {
           <Menu />
 
           <nav>
-            <Link className='destroybutton' to="/library">Destroy Sigil</Link>
-            <Link className='chargebutton' to="/library">Charge Sigil</Link>
+            <Link className='destroybutton' to="/library?action=destroy">Destroy Sigil</Link>
+            <Link className='chargebutton' to="/library?action=charge">Charge Sigil</Link>
             <Link className='grimoirebutton' to="/grimoire" >Grimoire</Link>
             <Link className='makesigilbutton' to="/make-sigil">Make Sigil</Link>
           </nav>

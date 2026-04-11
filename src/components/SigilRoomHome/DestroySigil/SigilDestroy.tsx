@@ -20,10 +20,11 @@ export default function DestroySigil() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!sigilData) { return }
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el) { return; }
     el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-  }, []);
+  }, [sigilData])
 
   useEffect(() => {
     if (!sigilId) { return }
@@ -59,13 +60,14 @@ export default function DestroySigil() {
     }
   };
 
-  if (!user) { return null }if (!sigilData) { return <p>Loading sigil...</p> }
+  if (!user) { return null } if (!sigilData) { return <p>Loading sigil...</p> }
 
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className={`scrollcontainer ${isDestroying ? 'noscroll' : ''}`}>
-
+          <Menu />
         <div className='destroysigil' onMouseMove={isDestroying ? handleMouseMove : undefined}>
+
           {isDestroying && (
             <>
 
@@ -108,7 +110,7 @@ export default function DestroySigil() {
             </>
           )
           }
-  <Menu/>
+
           <h1>Destroy Sigil</h1>
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
           {sigilData.imageData ? (

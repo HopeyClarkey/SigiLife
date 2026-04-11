@@ -17,23 +17,22 @@ export default function ChargeSigil() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!sigilData) { return }
     const el = scrollRef.current;
-    if (!el) {
-      return;
-    }
+    if (!el) { return; }
     el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-  }, []);
+  }, [sigilData])
 
-  useEffect(()=> {
-    if(!sigilId){return}
+  useEffect(() => {
+    if (!sigilId) { return }
     fetch(`/api/sigils/${sigilId}`)
-    .then(res => res.json())
-    .then(data => setSigilData(data))
-    .catch(err => console.error(err))
+      .then(res => res.json())
+      .then(data => setSigilData(data))
+      .catch(err => console.error(err))
   }, [sigilId])
 
   if (!user) { return null }
-  if (!sigilData){
+  if (!sigilData) {
     return (
       <p>Loading Sigil!</p>
     )
@@ -44,7 +43,7 @@ export default function ChargeSigil() {
       const res = await fetch(`/api/sigils/${sigilData.id}/charge`, { method: 'PATCH' });
       if (!res.ok) { throw new Error('Failed to charge sigil'); }
       const updatedSigil = await res.json();
-      navigate('/sigil-page', { state: { sigilData: updatedSigil } });
+      navigate(`/sigil-page?sigilId=${updatedSigil.id}`)
     } catch (error) {
       console.error(error);
     }
@@ -52,6 +51,7 @@ export default function ChargeSigil() {
 
   return (
     <div className='maincontainer'>
+                <Menu />
       <div ref={scrollRef} className={`scrollcontainer ${isCharging ? 'noscroll' : ''}`}>
         {isCharging && (
           <SplashCursor
@@ -64,7 +64,7 @@ export default function ChargeSigil() {
           />
         )}
         <div className='chargesigil'>
-          <Menu/>
+          <Menu />
           <h1>ChargeSigil</h1>
 
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />

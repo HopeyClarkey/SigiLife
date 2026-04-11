@@ -15,7 +15,7 @@ export default function SigiLibrary({ items, }: { items: any[], user: any }) {
     } else if (action === 'destroy'){
       navigate(`/destroy-sigil?sigilId=${sigil.id}`)
     } else {
-      navigate(`/sigil-page?sigilId=?${sigil.id}`)
+      navigate(`/sigil-page?sigilId=${sigil.id}`)
     }
   }
 
