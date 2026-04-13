@@ -53,7 +53,7 @@ export default function SigilPage() {
         <Menu />
 
         <div className="sigildetails">
-          Sigil Name : <br />
+          <br />
           {sigilData.name}
           <br />
           was created on :
