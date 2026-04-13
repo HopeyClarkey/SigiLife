@@ -172,7 +172,6 @@ logo,
   width: 85vw;
   background-color: #e0e0e0;
   border-radius: 12px;
-
 }
 makeprofile,
 .makeprofile {
@@ -234,11 +233,10 @@ makeprofile,
 
 avatarchoicebox,
 .avatarchoicebox {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-self: center;
   align-items: center;
-
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  HomeRoom*/
@@ -248,7 +246,7 @@ homeroom,
   flex-direction: column;
   background-image: url('./assets/InsideLino.svg');
   background-size: cover;
-  min-width: 1024px;
+  width: 1024px;
   height: 100vh;
   position: relative;
   background-color: var(--theme-bg-1);
@@ -256,31 +254,35 @@ homeroom,
 }
 
 destroybutton,
-.destroybutton {
-  position: relative;
-  left: 100px;
-  top: 355px;
+.destroybutton img {
+  position: absolute;
+  top: 18px;
+  left: 6px;
+  height: 475px;
 }
 
 chargebutton,
-.chargebutton {
-  position: relative;
-  left: 290px;
-  top: 260px;
+.chargebutton img {
+  position: absolute;
+  left: 393px;
+  top: 254px;
+  height: 169px;
 }
 
 grimoirebutton,
-.grimoirebutton {
-  position: relative;
-  left: 670px;
-  top: 185px;
+.grimoirebutton img {
+  position: absolute;
+  right: -105px;
+  top: 0px;
+  height: 409px;
 }
 
 makesigilbutton,
-.makesigilbutton {
-  position: relative;
-  left: 480px;
-  top: 405px;
+.makesigilbutton img {
+  position: absolute;
+  left: 552px;
+  top: 372px;
+  height: 318px;
 }
 
 destroybutton,

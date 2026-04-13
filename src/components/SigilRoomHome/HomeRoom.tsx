@@ -6,7 +6,8 @@ import { useEffect, useRef } from 'react';
 import Menu from '../Parts/Menu'
 import destroyButton from '../../assets/DestroyButton.svg'
 import chargeButton from '../../assets/AltarButton.svg'
-
+import grimoireButton from '../../assets/GrimoireButton.svg'
+import makesigilButton from '../../assets/WritingButton.svg'
 
 export default function HomeRoom() {
   const { user } = useUser();
@@ -33,9 +34,11 @@ export default function HomeRoom() {
             <Link className='destroybutton' to="/library?action=destroy">
             <img src={destroyButton} alt="Destroy Sigil" /></Link>
             <Link className='chargebutton' to="/library?action=charge">
-            <img src="chargebutton.png" alt="Charge Sigil" /></Link>
-            <Link className='grimoirebutton' to="/grimoire" >Grimoire</Link>
-            <Link className='makesigilbutton' to="/make-sigil">Make Sigil</Link>
+            <img src={chargeButton} alt="Charge Sigil" /></Link>
+            <Link className='grimoirebutton' to="/grimoire"> 
+            <img src={grimoireButton} alt="Grimoire" /></Link>
+            <Link className='makesigilbutton' to="/make-sigil">
+            <img src={makesigilButton} alt="Write Sigil" /></Link>
           </nav>
 
           <div className='footer'>
