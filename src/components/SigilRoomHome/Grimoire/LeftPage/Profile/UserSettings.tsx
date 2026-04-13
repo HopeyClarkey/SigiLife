@@ -127,11 +127,8 @@ export default function UserSettings() {
           </button>
         </div>
 
-        <br />
-        <br />
-        This is where you can delete your account
-        <br />
-        <Link to="/profile">Go to Profile </Link>
+
+        <Link className="navbutton" to="/profile">Go to Profile </Link>
 
       </div>
     </div>

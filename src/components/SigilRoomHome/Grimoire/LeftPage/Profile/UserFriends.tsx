@@ -108,7 +108,7 @@ export default function UserFriends() {
         )}
       </div>
 
-      <div className='profileboxcontainer'>
+      <div className='friendcontainer'>
         <div className="profilebox">
           <h3>Followers</h3>
           {onlyFollowers.length === 0

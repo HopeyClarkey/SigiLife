@@ -481,10 +481,13 @@ sigilibrary,
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   background-image: url('./assets/SigilWallLino.svg');
-  height: 80vh;
-  width: 75vw;
-  align-self: center;
+  overflow: visible;
+  min-width: 1024px;
+  height: 85vh;
   position: relative;
+  background-color: var(--theme-bg-1);
+  transition: background-color 0.6s ease;
+  background-size: 1024px 100vh;
 }
 sigilthumb,
 .sigilthumb {
@@ -702,6 +705,14 @@ mapbox,
   background-position: center;
   align-items: center;
   position: relative;
+  overflow: visible;
+  min-width: 1024px;
+  height: 100vh;
+  position: relative;
+  background-image: url('./assets/MapbookLino.svg');
+  background-color: var(--theme-bg-1);
+  transition: background-color 0.6s ease;
+  background-size: 1024px 100vh;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Profile*/
@@ -709,12 +720,30 @@ profilepage,
 .profilepage {
   display: flex;
   flex-direction: column;
+  background-position: center;
   align-items: center;
-  min-height: 100vh;
-  width: 100vw;
-  color: rgb(0, 0, 0);
-  font-family: 'New Rocker', system-ui;
+  position: relative;
+  justify-content: space around;
+  overflow: visible;
+  min-width: 1024px;
+  height: 100vh;
+  position: relative;
+  background-image: url('./assets/WritingLino.svg');
+  background-color: var(--theme-bg-1);
+  transition: background-color 0.6s ease;
+  background-size: 1024px 100vh;
 }
+
+profilepagename,
+.profilepagename {
+  display: flex;
+  flex-direction: row;
+  margin: 50px;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  position: relative;
+}
+
 avatar,
 .avatar {
   height: 150px;
@@ -734,6 +763,7 @@ userfriends,
   justify-content: space-evenly;
   align-items: center;
 }
+
 userfriendsbox,
 .userfriendsbox {
   display: flex;
@@ -741,11 +771,25 @@ userfriendsbox,
   justify-content: space-evenly;
   align-items: center;
 }
-profileboxcontainer,
-.profileboxcontainer {
+
+friendcontainer,
+.friendcontainer {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+avatarandtheme,
+.avatarandtheme {
+    display: flex;
+  flex-direction: row;
+   align-items: center;
+  position:absolute;
+  width: 35.7%;
+  padding: 5px;
+  bottom: 15px;
+  background-color: #e0e0e0;
+  border-radius: 12px;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sigil Art */
@@ -757,7 +801,7 @@ profileboxcontainer,
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Themes */
-/*---break---*/
+
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -879,7 +923,7 @@ profileboxcontainer,
   /* Cyber dark theme colors */
   --theme-bg-1: #0a0f2e;
   --theme-bg-2: #0d1a4a;
-  --theme-accent: #4d9fff;
+  --theme-accent: #0077ff;
   --theme-glow: #00d4ff;
 }
 
@@ -891,7 +935,7 @@ profileboxcontainer,
 }
 
 .theme-foliage.dark {
-  --theme-bg-1: #0a1f0d;
+  --theme-bg-1: #07380f;
   --theme-bg-2: #122b14;
   --theme-accent: #66bb6a;
   --theme-glow: #a5d6a7;
