@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const UserCard = ({ user, action, actionLabel }: { user: any, action?: () => void, actionLabel?: string }) => {
   return (
-    <div className="flex items-center gap-3 p-2">
+    <div className="usercard">
       <img src={`Avatar${parseInt(user.avatar) + 1}face.png`} className="avatar" style={{width: "20px", height: "20px", borderRadius: "12px"}}/>
       <span>{user.username}</span>
       {action && (
