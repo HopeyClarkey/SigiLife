@@ -19,8 +19,7 @@
   border-radius: 12px;
 }
 
-textinput,
-.textinput {
+textinput .textinput {
   background-color: #e0e0e0;
   border-radius: 12px;
   border-color: #2b0681;
@@ -68,7 +67,6 @@ mainContainer,
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   text-align: center;
-  
 }
 
 maincontainer::-webkit-scrollbar,
@@ -127,10 +125,10 @@ footer,
 scrollcontainer,
 .scrollcontainer {
   overflow-x: scroll;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   width: 100vw;
   height: 100vh;
-
 }
 
 noscroll,
@@ -242,86 +240,93 @@ avatarchoicebox,
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  HomeRoom*/
-homeroom,
 .homeroom {
   display: flex;
   flex-direction: column;
   background-image: url('./assets/InsideLino.svg');
-  background-size: cover;
+  overflow: visible;
   min-width: 1024px;
   height: 100vh;
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  background-size: 1024px 100vh
+  background-size: 1024px 100vh;
 }
 
-destroybutton,
-.destroybutton img {
+.homeroom nav {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  overflow: visible;
+}
+
+.destroybutton {
   position: absolute;
   top: 59px;
   left: 6px;
-  height: 412px;
+  z-index: 10; 
 }
 
-chargebutton,
-.chargebutton img {
+.destroybutton img {
+  height: 412px;
+  display: block;
+}
+
+.chargebutton {
   position: absolute;
   left: 340px;
   top: 264px;
-  height: 148px;
+  z-index: 10; 
 }
 
-grimoirebutton,
-.grimoirebutton img {
+.chargebutton img {
+  height: 148px;
+  display: block;
+}
+
+.grimoirebutton {
   position: absolute;
   right: 51px;
   top: 48px;
- height: 351px
+  z-index: 10;
 }
 
-makesigilbutton,
-.makesigilbutton img {
+.grimoirebutton img {
+  height: 351px;
+  display: block;
+}
+
+.makesigilbutton {
   position: absolute;
   left: 475px;
   top: 367px;
+  z-index: 10;
+}
+
+.makesigilbutton img {
   height: 275px;
+  display: block;
 }
 
-destroybutton,
-chargebutton,
-grimoirebutton,
-makesigilbutton,
-.destroybutton,
-.chargebutton,
-.grimoirebutton,
-.makesigilbutton {
+.destroybutton img,
+.chargebutton img,
+.grimoirebutton img,
+.makesigilbutton img {
   cursor: pointer;
-  transition: transform 0.2s ease;
-  display: inline-block;
-  text-decoration: none;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  display: block;
 }
 
-.destroybutton:hover,
-.chargebutton:hover,
-.grimoirebutton:hover,
-.makesigilbutton:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 6px gold) drop-shadow(0 0 126px gold)
-    drop-shadow(0 0 20px goldenrod);
-  animation: sparkle 0.6s infinite alternate;
+.destroybutton:hover img, .destroybutton.touched img,
+.chargebutton:hover img, .chargebutton.touched img,
+.grimoirebutton:hover img, .grimoirebutton.touched img,
+.makesigilbutton:hover img, .makesigilbutton.touched img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 20px goldenrod);
 }
 
-@keyframes sparkle {
-  0% {
-    filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 10px gold)
-      drop-shadow(0 0 18px goldenrod);
-  }
-  100% {
-    filter: drop-shadow(0 0 8px white) drop-shadow(0 0 10px gold)
-      drop-shadow(0 0 18px goldenrod);
-  }
-}
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Charge Sigil*/
 chargesigil,
 .chargesigil {
@@ -391,86 +396,71 @@ chargesigil,
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Grimoire*/
-usertitle,
-.usertitle {
-  display: flex;
-  min-height: fit-content;
-  justify-content: center;
-  position: absolute;
-  top: 0%;
-  font-size: x-large;
-  size: fit-content;
-  color: rgb(199, 14, 255);
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
-  font-family: 'Poller One', sans-serif;
-  font-size: larger;
-}
-userpicture,
-.userpicture {
-  height: 40px;
-  width: 40px;
-}
 
-grimoire,
+
 .grimoire {
   display: flex;
-  background-image: url('./assets/GrimoireLino.svg');
-  background-size: cover;
-  background-position: center;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-image: url('./assets/Bookshelf.svg');
+  overflow: visible;
   min-width: 1024px;
+  height: 85vh;
   position: relative;
   background-color: var(--theme-bg-1);
-  background-image: linear-gradient(
-    160deg,
-    var(--theme-bg-1),
-    var(--theme-bg-2)
-  );
   transition: background-color 0.6s ease;
+  background-size: 1024px 100vh;
 }
 
-bookbox,
-.bookbox {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  position: relative;
-  top: -10%;
-  width: 35vw;
-  min-height: fit-content;
-  font-size: x-large;
-  font-family: 'New Rocker', system-ui;
+.grimoiremaplink {
+  position: absolute;
+  top: 236px;
+  left: 249px;
+  z-index: 10;
 }
 
-grimoirerightpage,
-.grimoire-right-page {
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: space-evenly;
+.grimoiremaplink img {
+  height: 151px;
+  display: block;
 }
 
-grimoire-left-page,
-.grimoire-left-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
+.grimoireprofilelink {
+  position: absolute;
+  top: 241px;
+  left: 498px;
+  z-index: 10;
 }
 
-grimoire-right-page,
-.grimoire-right-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
+.grimoireprofilelink img {
+  height: 239px;
+  display: block;
 }
+
+.grimoireliblink {
+  position: absolute;
+  top: 381px;
+  left: 265px;
+  z-index: 10;
+}
+
+.grimoireliblink img {
+  height: 225px;
+  display: block;
+}
+
+.grimoiremaplink img,
+.grimoireprofilelink img,
+.grimoireliblink img {
+  cursor: pointer;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  display: block;
+}
+
+.grimoiremaplink:hover img, .grimoiremaplink.touched img,
+.grimoireprofilelink:hover img, .grimoireprofilelink.touched img,
+.grimoireliblink:hover img, .grimoireliblink.touched img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 20px goldenrod);
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Right Page*/
 rightpage,
 .rightpage {

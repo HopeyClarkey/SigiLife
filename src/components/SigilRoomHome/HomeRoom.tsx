@@ -40,14 +40,38 @@ export default function HomeRoom() {
           <Menu />
 
           <nav>
-            <Link className='destroybutton' to="/library?action=destroy">
-            <img src={destroyButton} alt="Destroy Sigil" /></Link>
-            <Link className='chargebutton' to="/library?action=charge">
-            <img src={chargeButton} alt="Charge Sigil" /></Link>
-            <Link className='grimoirebutton' to="/grimoire"> 
-            <img src={grimoireButton} alt="Grimoire" /></Link>
-            <Link className='makesigilbutton' to="/make-sigil">
-            <img src={makesigilButton} alt="Write Sigil" /></Link>
+            <Link
+              className='destroybutton'
+              to="/library?action=destroy"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={destroyButton} alt="Destroy Sigil" />
+            </Link>
+            <Link
+              className='chargebutton'
+              to="/library?action=charge"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={chargeButton} alt="Charge Sigil" />
+            </Link>
+            <Link
+              className='grimoirebutton'
+              to="/grimoire"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={grimoireButton} alt="Grimoire" />
+            </Link>
+            <Link
+              className='makesigilbutton'
+              to="/make-sigil"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={makesigilButton} alt="Write Sigil" />
+            </Link>
           </nav>
 
           <div className='footer'>

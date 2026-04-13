@@ -1,8 +1,10 @@
-
 import { Link } from 'react-router-dom'
 import { useUser } from '@/context/UserContext'
 import { useEffect, useRef } from 'react';
 import Menu from "@/components/Parts/Menu";
+import mapButton from '../../../assets/MapButton.svg'
+import profileButton from '../../../assets/ProfileButton.svg'
+import sigilbookButton from '../../../assets/SigilBook.svg'
 
 export default function Grimoire() {
   const { user } = useUser();
@@ -10,40 +12,43 @@ export default function Grimoire() {
 
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el) {
-      return;
-    }
+    if (!el) return;
     el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
   }, []);
 
   if (!user) { return null; }
-  console.log(user)
 
   return (
     <div className='maincontainer'>
-
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className={'grimoire'}>
+        <div className='grimoire'>
           <Menu />
-          <div className={'usertitle'}>
-            {user!.username}'s
-            <br />Grimoire
-          </div>
-
-          <div className={'bookbox'}>
-            <div className="grimoire-left-page">
-              <Link to="/map"> 🗺️ Map </Link>
-              <br />
-              <Link to="/profile" > 👤 Profile </Link>
-            </div>
-          </div>
-          <div className="bookbox">
-            <div className="grimoire-right-page">
-              <Link to="/right-page" > 📜 SigiLibrary </Link>
-
-            </div>
-
-          </div>
+          <nav>
+            <Link
+              className="grimoiremaplink"
+              to="/map"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={mapButton} alt="Map Book" />
+            </Link>
+            <Link
+              className="grimoireprofilelink"
+              to="/profile"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={profileButton} alt="Profile Book" />
+            </Link>
+            <Link
+              className="grimoireliblink"
+              to="/right-page"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={sigilbookButton} alt="Sigil Book" />
+            </Link>
+          </nav>
         </div>
       </div>
     </div>
