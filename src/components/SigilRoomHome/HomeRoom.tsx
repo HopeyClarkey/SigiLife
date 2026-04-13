@@ -7,7 +7,8 @@ import Menu from '../Parts/Menu'
 import destroyButton from '../../assets/DestroyButton.svg'
 import chargeButton from '../../assets/AltarButton.svg'
 import grimoireButton from '../../assets/GrimoireButton.svg'
-import makesigilButton from '../../assets/WritingButton.svg'import TutorialOverlay from '../ui/TutorialOverlay'
+import makesigilButton from '../../assets/WritingButton.svg'
+import TutorialOverlay from '../ui/TutorialOverlay'
 
 
 export default function HomeRoom() {
