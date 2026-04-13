@@ -2,16 +2,18 @@
 
 import { Link } from 'react-router-dom'
 import { useUser } from '@/context/UserContext'
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Menu from '../Parts/Menu'
 import destroyButton from '../../assets/DestroyButton.svg'
 import chargeButton from '../../assets/AltarButton.svg'
 import grimoireButton from '../../assets/GrimoireButton.svg'
-import makesigilButton from '../../assets/WritingButton.svg'
+import makesigilButton from '../../assets/WritingButton.svg'import TutorialOverlay from '../ui/TutorialOverlay'
+
 
 export default function HomeRoom() {
   const { user } = useUser();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -20,6 +22,12 @@ export default function HomeRoom() {
     }
     el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
   }, []);
+
+  useEffect(() => {
+    if (user && !user.hasCompletedTutorial) {
+      setShowTutorial(true);
+    }
+  }, [user]);
 
   if (!user) { return null; }
   console.log(user)
@@ -45,6 +53,7 @@ export default function HomeRoom() {
           </div>
         </div>
       </div>
+      {showTutorial && <TutorialOverlay onComplete={() => setShowTutorial(false)} />}
     </div>
   )
 
