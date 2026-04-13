@@ -58,13 +58,14 @@ export default function WriteSigil() {
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="writesigil">
-            <h1>Write Your Sigil</h1>
+            <h1 style={{fontSize: 32}}>Write Your Sigil</h1>
     <Menu/>
             <p >
               Enter your intention.
             </p>
             <textarea
               className="textinput"
+              style={{width:"35%", height: "25%", backgroundColor: "#e0e0e0", borderRadius: "12px", padding: "15px"}}
               value={intention}
               onChange={(e) => setIntention(e.target.value)}
               placeholder="e.g., I am healthy and strong"

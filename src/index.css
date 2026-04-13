@@ -10,13 +10,12 @@
 
 .nav-button,
 .navbutton {
-  font-family: 'Poller One', sans-serif;
   font-size: medium;
   width: fit-content;
   height: fit-content;
-  color: rgb(199, 14, 255);
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 12px;
+  padding: 5px;
 }
 
 textinput .textinput {
@@ -33,7 +32,7 @@ menu,
   flex-direction: column;
   height: fit-content;
   width: fit-content;
-  background-color: beige;
+  background-color: #6d8b00;
   border-radius: 12px;
 }
 
@@ -62,7 +61,7 @@ mainContainer,
   overflow-x: hidden;
   scrollbar-color: #6915c9 #136d2a;
   scrollbar-width: thick;
-  color: rgb(0, 0, 0);
+
   font-family: 'New Rocker', system-ui;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
@@ -266,7 +265,7 @@ avatarchoicebox,
   position: absolute;
   top: 59px;
   left: 6px;
-  z-index: 10; 
+  z-index: 10;
 }
 
 .destroybutton img {
@@ -278,7 +277,7 @@ avatarchoicebox,
   position: absolute;
   left: 340px;
   top: 264px;
-  z-index: 10; 
+  z-index: 10;
 }
 
 .chargebutton img {
@@ -315,35 +314,45 @@ avatarchoicebox,
 .grimoirebutton img,
 .makesigilbutton img {
   cursor: pointer;
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition:
+    filter 0.3s ease,
+    transform 0.3s ease;
   display: block;
 }
 
-.destroybutton:hover img, .destroybutton.touched img,
-.chargebutton:hover img, .chargebutton.touched img,
-.grimoirebutton:hover img, .grimoirebutton.touched img,
-.makesigilbutton:hover img, .makesigilbutton.touched img {
+.destroybutton:hover img,
+.destroybutton.touched img,
+.chargebutton:hover img,
+.chargebutton.touched img,
+.grimoirebutton:hover img,
+.grimoirebutton.touched img,
+.makesigilbutton:hover img,
+.makesigilbutton.touched img {
   transform: scale(1.05);
   filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 20px goldenrod);
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Charge Sigil*/
-chargesigil,
+
 .chargesigil {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
+  justify-content: space-evenly;
+  background-image: url('./assets/AltarLino.svg');
   min-width: 1024px;
+  height: 100vh;
   position: relative;
   background-color: var(--theme-bg-1);
-  background-image: linear-gradient(
-    160deg,
-    var(--theme-bg-1),
-    var(--theme-bg-2)
-  );
   transition: background-color 0.6s ease;
+  background-size: 1024px 100vh;
+  overflow: hidden;
+}
+.chargesigil .sigilbox {
+  width: 60vw;
+  max-width: 600px;
+  height: auto;
+  object-fit: contain;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Destroy Sigil*/
@@ -352,19 +361,17 @@ chargesigil,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  height: 100vh;
-  min-width: 1024px;
+  justify-content: space-evenly;
   background-image: url('./assets/PyreLino.svg');
+  overflow: visible;
+  min-width: 1024px;
+  height: 100vh;
   position: relative;
   background-color: var(--theme-bg-1);
-  background-image: linear-gradient(
-    160deg,
-    var(--theme-bg-1),
-    var(--theme-bg-2)
-  );
   transition: background-color 0.6s ease;
+  background-size: 1024px 100vh;
 }
+
 .destroysigil > *:not(.evileye):not(.ghost-cursor) {
   position: relative;
   z-index: 3;
@@ -374,7 +381,6 @@ chargesigil,
   content: '';
   position: absolute;
   inset: 0;
-
   background-size: cover;
   z-index: 0;
 }
@@ -395,8 +401,13 @@ chargesigil,
   z-index: 1;
 }
 
+.sigilbox {
+  width: 60vw;
+  max-width: 600px;
+  height: auto;
+  object-fit: contain;
+}
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Grimoire*/
-
 
 .grimoire {
   display: flex;
@@ -450,13 +461,18 @@ chargesigil,
 .grimoireprofilelink img,
 .grimoireliblink img {
   cursor: pointer;
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition:
+    filter 0.3s ease,
+    transform 0.3s ease;
   display: block;
 }
 
-.grimoiremaplink:hover img, .grimoiremaplink.touched img,
-.grimoireprofilelink:hover img, .grimoireprofilelink.touched img,
-.grimoireliblink:hover img, .grimoireliblink.touched img {
+.grimoiremaplink:hover img,
+.grimoiremaplink.touched img,
+.grimoireprofilelink:hover img,
+.grimoireprofilelink.touched img,
+.grimoireliblink:hover img,
+.grimoireliblink.touched img {
   transform: scale(1.05);
   filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 20px goldenrod);
 }
@@ -477,7 +493,6 @@ chargesigil,
   overflow: visible;
 }
 
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Library*/
 .sigilibrary {
   display: grid;
@@ -497,13 +512,21 @@ chargesigil,
   cursor: pointer;
   border-radius: 12px;
   font-family: 'New Rocker', system-ui;
-  color: black;
   padding: 15px;
 }
 
 .sigilthumb:hover {
   transform: scale(1.05);
   filter: drop-shadow(0 0 6px gold);
+}
+
+.sigilthumb.charged {
+  filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 12px gold);
+}
+
+.sigilthumb.charged:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 10px gold) drop-shadow(0 0 18px gold);
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Sigil Page*/
@@ -523,14 +546,23 @@ sigilpage,
   overflow: visible;
   color: rgb(0, 0, 0);
   font-family: 'New Rocker', system-ui;
+  justify-content: flex-start;
+  padding-top: 20px;
 }
 
-sigildetails,
 .sigildetails {
-  display: flex;
-  flex-direction: column;
   width: 90vw;
   align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.sigilbuttonstack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 sigildetailslocation,
@@ -565,20 +597,20 @@ leftpage,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  MakeSigil*/
 makesigil,
 .makesigil {
-  background-image: url('./assets/WritingLino.svg');
+  background-image:
+    url('/src/assets/WritingLino.svg'),
+    linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-size:
+    1024px 100vh,
+    cover;
   display: flex;
   flex-direction: column;
-  background-size: cover;
   align-items: center;
+  justify-content: center;
   min-width: 1024px;
   position: relative;
   height: 100vh;
   background-color: var(--theme-bg-1);
-  background-image: linear-gradient(
-    160deg,
-    var(--theme-bg-1),
-    var(--theme-bg-2)
-  );
   transition: background-color 0.6s ease;
 }
 
@@ -586,45 +618,60 @@ sigilinfo,
 .sigilinfo {
   display: flex;
   flex-direction: column;
+  width: 25%;
+  height: 30%;
+  justify-content: center;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Write Sigil*/
 writesigil,
 .writesigil {
+  background-image:
+    url('/src/assets/WritingLino.svg'),
+    linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-size:
+    1024px 100vh,
+    cover;
   display: flex;
   flex-direction: column;
-  background-size: cover;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   min-width: 1024px;
-  height: 100vh;
   position: relative;
+  height: 100vh;
   background-color: var(--theme-bg-1);
-  background-image: linear-gradient(
-    160deg,
-    var(--theme-bg-1),
-    var(--theme-bg-2)
-  );
   transition: background-color 0.6s ease;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Draw Sigil*/
 drawsigilcontainer,
 .drawsigilcontainer {
+  background-image:
+    url('/src/assets/WritingLino.svg'),
+    linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-size:
+    1024px 100vh,
+    cover;
   display: flex;
   flex-direction: column;
-  background-size: cover;
   align-items: center;
+  justify-content: center;
   min-width: 1024px;
-  height: 100vh;
   position: relative;
+  height: 100vh;
+  background-color: var(--theme-bg-1);
+  transition: background-color 0.6s ease;
 }
 drawsigilcontainerbox,
 .drawsigilbox {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 10%;
+  width: 35%;
+  padding: 5px;
+  align-items: center;
+  background-color: #e0e0e0;
+  border-radius: 12px;
 }
 
 drawsigilmenu,
@@ -665,37 +712,44 @@ drawsigilmenutoobox2,
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Style Sigil*/
-stylesigilcontainer,
 .stylesigilcontainer {
+  background-image:
+    url('/src/assets/WritingLino.svg'),
+    linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-size:
+    1024px 100vh,
+    cover;
   display: flex;
   flex-direction: column;
-  background-size: cover;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   min-width: 1024px;
-  height: 100vh;
   position: relative;
+  height: 100vh;
+  background-color: var(--theme-bg-1);
+  transition: background-color 0.6s ease;
+  overflow-y: auto;
 }
-stylesigilcontainerbox,
+
 .stylesigilcontainerbox {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   width: 30%;
-  top: 10%;
-  overflow-x: hidden;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  padding: 15px;
 }
 
-sharebox,
-.sharebox {
-  position: relative;
-}
-
-sharebox,
 .sharebox {
   display: flex;
   flex-direction: column;
+  padding: 25px;
+  position: relative;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  width: 275px;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  MapBox*/
@@ -783,10 +837,10 @@ friendcontainer,
 
 avatarandtheme,
 .avatarandtheme {
-    display: flex;
+  display: flex;
   flex-direction: row;
-   align-items: center;
-  position:absolute;
+  align-items: center;
+  position: absolute;
   width: 35.7%;
   padding: 5px;
   bottom: 15px;
@@ -803,7 +857,6 @@ avatarandtheme,
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Themes */
-
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -849,105 +902,138 @@ avatarandtheme,
 }
 
 :root {
-  --background: transparent;
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* LIGHT (default) — soft neutral */
+  --background: #f7f7fb;
+  --foreground: #1a1a1a;
 
-  /* Cyber light theme colors */
-  --theme-bg-1: #c8d8f0;
-  --theme-bg-2: #a0bcee;
-  --theme-accent: #1a4fc4;
-  --theme-glow: #4d9fff;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+
+  --primary: #6b7280;
+  --primary-foreground: #ffffff;
+
+  --accent: #e5e7eb;
+  --accent-foreground: #1a1a1a;
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #9ca3af;
+
+  /* Theme identity */
+  --theme-bg-1: #e9edf5;
+  --theme-bg-2: #d8e0ef;
+  --theme-accent: #4b5563;
+  --theme-glow: rgba(120, 120, 120, 0.25);
 }
 
+/* DARK — true contrast */
 .dark {
-  --background: transparent;
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(47.971% 0.02098 17.766);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #0f1117;
+  --foreground: #f5f5f5;
 
-  /* Cyber dark theme colors */
-  --theme-bg-1: #0a0f2e;
-  --theme-bg-2: #0d1a4a;
-  --theme-accent: #0077ff;
-  --theme-glow: #00d4ff;
+  --card: #1a1d26;
+  --card-foreground: #f5f5f5;
+
+  --primary: #d1d5db;
+  --primary-foreground: #111827;
+
+  --accent: #2a2f3a;
+  --accent-foreground: #f5f5f5;
+
+  --border: #2a2f3a;
+  --input: #2a2f3a;
+  --ring: #6b7280;
+
+  /* subtle glow, not themed */
+  --theme-bg-1: #0f1117;
+  --theme-bg-2: #1a1d26;
+  --theme-accent: #9ca3af;
+  --theme-glow: rgba(255, 255, 255, 0.08);
 }
 
+/* CYBER — neon blue, high contrast */
+.theme-cyber {
+  --background: #060912;
+  --foreground: #dbeafe;
+
+  --card: #0b1220;
+  --card-foreground: #dbeafe;
+
+  --primary: #00d4ff;
+  --primary-foreground: #001018;
+
+  --accent: #0a1a2f;
+  --accent-foreground: #dbeafe;
+
+  --border: #0a2540;
+  --input: #0a2540;
+  --ring: #00d4ff;
+
+  --theme-bg-1: #050816;
+  --theme-bg-2: #0a1a3a;
+  --theme-accent: #00d4ff;
+  --theme-glow: rgba(0, 212, 255, 0.6);
+}
+
+.theme-cyber.dark {
+  --theme-bg-1: #02040a;
+  --theme-bg-2: #07122b;
+  --theme-glow: rgba(0, 212, 255, 0.8);
+}
+
+/* FOLIAGE — sage / moss, soft and grounded */
 .theme-foliage {
-  --theme-bg-1: #d4ebd0;
-  --theme-bg-2: #b2d9a8;
-  --theme-accent: #2d7a3a;
-  --theme-glow: #66bb6a;
+  --background: #f4f7f2;
+  --foreground: #1f2a1f;
+
+  --card: #e6efe3;
+  --card-foreground: #1f2a1f;
+
+  --primary: #5f7c5f;
+  --primary-foreground: #ffffff;
+
+  --accent: #d6e4d2;
+  --accent-foreground: #1f2a1f;
+
+  --border: #c8d8c4;
+  --input: #c8d8c4;
+  --ring: #7fa37f;
+
+  --theme-bg-1: #e4efe0;
+  --theme-bg-2: #cfe3c8;
+  --theme-accent: #4f6f52;
+  --theme-glow: rgba(120, 160, 120, 0.35);
 }
 
 .theme-foliage.dark {
-  --theme-bg-1: #07380f;
-  --theme-bg-2: #122b14;
+  --background: #0c1a0f;
+  --foreground: #d8f3dc;
+
+  --card: #122417;
+  --card-foreground: #d8f3dc;
+
+  --primary: #66bb6a;
+  --primary-foreground: #081c0c;
+
+  --accent: #1b2f1f;
+  --accent-foreground: #d8f3dc;
+
+  --border: #1b2f1f;
+  --input: #1b2f1f;
+  --ring: #66bb6a;
+
+  --theme-bg-1: #081c0c;
+  --theme-bg-2: #0f2a14;
   --theme-accent: #66bb6a;
-  --theme-glow: #a5d6a7;
+  --theme-glow: rgba(102, 187, 106, 0.5);
 }
 
 /*---break---*/
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--border);
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
   }
   body {
     @apply bg-background text-foreground;

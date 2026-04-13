@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import Menu from '../../Parts/Menu'
-import { useSearchParams, Link } from "react-router-dom"
+import { useSearchParams,  useNavigate } from "react-router-dom"
 import ChangeEmotion from '../ChargeSigil/ChargeComponents/ChangeEmotion'
 import EvilEye from './DestroyComponents/EvilEye'
 import { useUser } from '@/context/UserContext'
 import GhostCursor from './DestroyComponents/GhostCursor.tsx'
+
 
 export default function DestroySigil() {
   const [searchParams] = useSearchParams()
@@ -16,6 +17,7 @@ export default function DestroySigil() {
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
   const eyeContainerRef = useRef<HTMLDivElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const navigate = useNavigate();
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +67,7 @@ export default function DestroySigil() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className={`scrollcontainer ${isDestroying ? 'noscroll' : ''}`}>
-          <Menu />
+        <Menu />
         <div className='destroysigil' onMouseMove={isDestroying ? handleMouseMove : undefined}>
 
           {isDestroying && (
@@ -113,20 +115,27 @@ export default function DestroySigil() {
 
           <h1>Destroy Sigil</h1>
 
-          {sigilData.imageData ? (
+          {sigilData.imageData && (
             <img className="sigilbox" src={sigilData.imageData} alt={sigilData.name} />
-          ) : (
-            <img className="sigilbox" src="src/assets/dummySigil.svg" alt="Dummy Sigil" />
           )}
-                    <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
+          <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
           {!isDestroying && (
             <button className="navbutton" onClick={handleDestroy} disabled={!emotion || isSubmitting}>
               Destroy Sigil
             </button>
           )}
-          {isDestroying && (
-            <Link className="navbutton" to='/home'>Go Home</Link>
-          )}
+{isDestroying && (
+  <button
+    className="navbutton"
+    style={{ position: 'relative', zIndex: 20 }}
+    onClick={() => {
+      setIsDestroying(false)
+      setTimeout(() => navigate('/home'), 200)
+    }}
+  >
+    Go Home
+  </button>
+)}
         </div>
       </div>
     </div>

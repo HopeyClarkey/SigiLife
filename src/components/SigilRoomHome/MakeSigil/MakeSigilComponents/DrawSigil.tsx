@@ -75,15 +75,19 @@ export default function DrawSigil() {
     });
 
     const loadCharacters = async () => {
+      console.log('intention:', localStorage.getItem('sigilIntention'));
+      console.log('uniqueChars:', localStorage.getItem('sigilUniqueChars'));
       const uniqueChars = localStorage.getItem('sigilUniqueChars');
+      console.log('uniqueChars from localStorage:', uniqueChars);
       if (uniqueChars && fabricCanvasRef.current) {
         const canvas = fabricCanvasRef.current;
         try {
           console.log("Fetching vectors for unique chars:", uniqueChars);
-          
+
           const response = await axios.post('/api/vectors/character-vectors', { chars: uniqueChars });
           const vectors = response.data;
-          
+          console.log('vectors response:', vectors);
+
           if (!vectors || vectors.length === 0) {
             console.warn("No vectors found for these characters.");
             return;
@@ -92,11 +96,13 @@ export default function DrawSigil() {
           for (const vector of vectors) {
             console.log("Loading path for char:", vector.filename);
 
-            const { objects } = await fabric.loadSVGFromString(vector.vectorData);
-            
+            const { objects } = await fabric.loadSVGFromString(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">${vector.vectorData}</svg>`
+);
+
             if (objects && objects.length > 0) {
               const pathObj = objects[0] as fabric.FabricObject;
-              
+
               pathObj.set({
                 fill: 'transparent',
                 stroke: 'black',
@@ -115,11 +121,11 @@ export default function DrawSigil() {
               canvas.add(pathObj);
             }
           }
-          
+
           canvas.renderAll();
           setIsDrawingMode(false);
           saveHistory();
-          
+
         } catch (error) {
           console.error("Error loading character vectors:", error);
         }
@@ -355,164 +361,164 @@ export default function DrawSigil() {
 
   const canUndo = historyIndexRef.current > 0;
   const canRedo = historyIndexRef.current < historyRef.current.length - 1;
-  
-useEffect(() => {
-  const el = scrollRef.current;
-  if (!el) return;
-  setTimeout(() => {
-    el.scrollLeft = 0;
-    el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-  },);
-}, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setTimeout(() => {
+      el.scrollLeft = 0;
+      el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+    },);
+  }, []);
 
 
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="drawsigilcontainer">
+          <div className='drawsigilbox'>
+            <h1 style={{fontSize: 32}}>Draw Your Sigil</h1>
+            <Menu />
+            {/* Main Control Panel */}
+            <div className="drawsigilmenu">
+              {step === 'draw' ? (
+                <>
 
-          <h2 >Draw Your Sigil</h2>
-                    <Menu />
-          {/* Main Control Panel */}
-          <div className="drawsigilmenu">
-            {step === 'draw' ? (
-              <>
+                  <button
+                    className="navbutton"
+                    onClick={() => setIsDrawingMode(!isDrawingMode)}
+                    style={{
+                      color: isDrawingMode ? '#000' : '#fff',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {isDrawingMode ? "✍️ Draw Mode" : "🖐 Manipulate Mode"}
+                  </button>
 
-                <button
-                  className="navbutton"
-                  onClick={() => setIsDrawingMode(!isDrawingMode)}
-                  style={{
-                    color: isDrawingMode ? '#000' : '#fff',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {isDrawingMode ? "✍️ Draw Mode" : "🖐 Manipulate Mode"}
-                </button>
+                  {user.isAdmin === true &&
+                    <label>
+                      📂 Import SVG
+                      <input type="file" accept=".svg" style={{ display: 'none' }} onChange={handleSVGUpload} />
+                    </label>}
+                </>
+              ) : (<div className='drawsigilmenutoobox'>
+                <div className='clmnbox'>
+                  <label htmlFor="sigilName">Name:</label>
+                  <input
+                    type="text"
+                    className='textinput'
+                    width={"60px"}
+                    id="sigilName"
+                    value={sigilName}
+                    onChange={(e) => setSigilName(e.target.value)}
+                  />
+                </div>
 
-                {user.isAdmin === true &&
-                  <label>
-                    📂 Import SVG
-                    <input type="file" accept=".svg" style={{ display: 'none' }} onChange={handleSVGUpload} />
-                  </label>}
-              </>
-            ) : (<div className='drawsigilmenutoobox'>
-              <div className='clmnbox'>
-                <label htmlFor="sigilName">Name:</label>
-                <input
-                  type="text"
-                  className='textinput'
+                <div className='drawsigilmenutoo' >
 
-                  id="sigilName"
-                  value={sigilName}
-                  onChange={(e) => setSigilName(e.target.value)}
-                />
-              </div>
-
-              <div className='drawsigilmenutoo' >
-                <div className='drawsigilmenutoobox1' >
                   <label >Style Color:</label>
                   <input type="color" value={styleColor} onChange={(e) => setStyleColor(e.target.value)} style={{ cursor: 'pointer', width: '30px', height: '30px' }} /><br />
                   <button className="navbutton" onClick={handleChangeColor} >🎨 Apply Color</button>
-                  <br /></div>
-                <div className='drawsigilmenutoobox2' >
-                  <button className="navbutton" onClick={handleAddRing}>⭕ Add Ring</button><br /><br /><br />
+                  <button className="navbutton" onClick={handleAddRing}>⭕ Add Ring</button>
                   <button className="navbutton" onClick={handleAddGlow}>✨ Add Glow</button>
-                </div></div>
+                </div>
+              </div>
+              )}
+
+
+              {user.isAdmin === true &&
+                <button className="navbutton" onClick={handleExport}>
+                  💾 Save Image
+                </button>
+              }
+
+
+
             </div>
+
+            {/* Brush Controls (Only relevant in Drawing Mode) */}
+            {step === 'draw' && isDrawingMode && (
+              <div>
+                <div >
+                  <label htmlFor="brushColor">Color:</label>
+                  <input
+                    type="color"
+                    id="brushColor"
+                    value={brushColor}
+                    onChange={(e) => setBrushColor(e.target.value)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
+                <div >
+                  <label htmlFor="brushWidth">Thickness ({brushWidth}px):</label>
+                  <input
+                    type="range"
+                    id="brushWidth"
+                    min="1"
+                    max="50"
+                    value={brushWidth}
+                    onChange={(e) => setBrushWidth(parseInt(e.target.value))}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
+              </div>
             )}
 
-
-            {user.isAdmin === true &&
-              <button className="navbutton" onClick={handleExport}>
-                💾 Save Image
+            <div
+              ref={wrapperRef}
+              style={{
+                width: '100%',
+                maxWidth: 'calc(100vh - 350px)',
+                margin: '0 auto',
+                aspectRatio: '1 / 1',
+                border: '2px solid #ccc',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                marginTop: '1rem'
+              }}
+            >
+              <canvas ref={canvasRef} />
+            </div>
+            {!isDrawingMode && (
+              <div className='rowbox'>
+              <button className="navbutton" onClick={handleDeleteSelected} >
+                🗑️ Delete Selected
               </button>
-            }
-
-
-
-          </div>
-
-          {/* Brush Controls (Only relevant in Drawing Mode) */}
-          {step === 'draw' && isDrawingMode && (
-            <div>
+            
+            {/* Undo/Redo */}
+            <div className='rowbox'>
+              <button className="navbutton" onClick={undo} disabled={!canUndo} style={{ opacity: canUndo ? 1 : 0.5 }}>↶ Undo</button>
+              <button className="navbutton" onClick={redo} disabled={!canRedo} style={{ opacity: canRedo ? 1 : 0.5 }}>↷ Redo</button>
+            </div></div>
+            )}
+            {step === 'draw' ? (
               <div >
-                <label htmlFor="brushColor">Color:</label>
-                <input
-                  type="color"
-                  id="brushColor"
-                  value={brushColor}
-                  onChange={(e) => setBrushColor(e.target.value)}
-                  style={{ cursor: 'pointer' }}
-                />
+                <button className="navbutton" onClick={handleClear} >
+                  Clear All
+                </button>
+
+                <button
+                  className="navbutton"
+                  onClick={() => { setStep('style'); setIsDrawingMode(false); }}
+                >
+                  Next: Style Sigil
+                </button>
               </div>
-              <div >
-                <label htmlFor="brushWidth">Thickness ({brushWidth}px):</label>
-                <input
-                  type="range"
-                  id="brushWidth"
-                  min="1"
-                  max="50"
-                  value={brushWidth}
-                  onChange={(e) => setBrushWidth(parseInt(e.target.value))}
-                  style={{ cursor: 'pointer' }}
-                />
+            ) : (
+              <div style={{ marginTop: '1rem', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <button className="navbutton" onClick={() => setStep('draw')} style={{ background: '#6c757d', color: '#fff', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', border: 'none' }}>
+                  ⬅ Back to Draw
+                </button>
+                <button
+                  className="navbutton"
+                  onClick={handleNextToStyle}
+                  style={{ backgroundColor: "#9e38fd", color: 'white', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', border: 'none' }}
+                >
+                  Review & Save
+                </button>
               </div>
-            </div>
-          )}
-
-          <div
-            ref={wrapperRef}
-            style={{
-              width: '100%',
-              maxWidth: 'calc(100vh - 350px)',
-              margin: '0 auto',
-              aspectRatio: '1 / 1',
-              border: '2px solid #ccc',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              marginTop: '1rem'
-            }}
-          >
-            <canvas ref={canvasRef} />
+            )}
           </div>
-          {!isDrawingMode && (
-            <button className="navbutton" onClick={handleDeleteSelected} >
-              🗑️ Delete Selected
-            </button>
-          )}
-          {/* Undo/Redo */}
-          <div >
-            <button className="navbutton" onClick={undo} disabled={!canUndo} style={{ opacity: canUndo ? 1 : 0.5 }}>↶ Undo</button>
-            <button className="navbutton" onClick={redo} disabled={!canRedo} style={{ opacity: canRedo ? 1 : 0.5 }}>↷ Redo</button>
-          </div>
-
-          {step === 'draw' ? (
-            <div >
-              <button className="navbutton" onClick={handleClear} >
-                Clear All
-              </button>
-
-              <button
-                className="navbutton"
-                onClick={() => { setStep('style'); setIsDrawingMode(false); }}
-              >
-                Next: Style Sigil
-              </button>
-            </div>
-          ) : (
-            <div style={{ marginTop: '1rem', display: 'flex', gap: '10px', alignItems: 'center' }}>
-              <button className="navbutton" onClick={() => setStep('draw')} style={{ background: '#6c757d', color: '#fff', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', border: 'none' }}>
-                ⬅ Back to Draw
-              </button>
-              <button
-                className="navbutton"
-                onClick={handleNextToStyle}
-                style={{ backgroundColor: "#9e38fd", color: 'white', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', border: 'none' }}
-              >
-                Review & Save
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>

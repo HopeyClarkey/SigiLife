@@ -40,41 +40,41 @@ function App() {
   // const [user, setUser] = useState(null);
   // const [authStatus, setAuthStatus]= useState<"loading"|"done">("loading");
 
-// useEffect(()=> {
-//   fetch("/api/auth/me", { credentials: "include" })
-//   .then(res => res.json())
-//   .then(data => {
-//     if(data.user){
-//       setUser(data.user);
-//     }
-//     setAuthStatus("done");
-//   })
-//   .catch(()=> setAuthStatus("done"));
-// }, []);
+  // useEffect(()=> {
+  //   fetch("/api/auth/me", { credentials: "include" })
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     if(data.user){
+  //       setUser(data.user);
+  //     }
+  //     setAuthStatus("done");
+  //   })
+  //   .catch(()=> setAuthStatus("done"));
+  // }, []);
 
-// if (authStatus === "loading"){
-//   return <div> Loading Auth... </div>
-// }
+  // if (authStatus === "loading"){
+  //   return <div> Loading Auth... </div>
+  // }
   const { isLoading } = useUser()
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div className='maincontainer'></div>
   }
 
-
+console.log('App render - isLoading:', isLoading, 'path:', window.location.pathname)
   return (
     <Routes>
       {/* Auth flow */}
-      <Route path="/login" element={<LandingPage/>} />
-      <Route path="/" element={<LandingPage/>} />
+      <Route path="/login" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage />} />
 
       {/* User */}
-      <Route path="/settings" element={<ProtectedRoute><UserSettings/></ProtectedRoute>} />
-      <Route path="/profile" element={<ProtectedRoute><UserProfile/></ProtectedRoute>} />
+      <Route path="/settings" element={<ProtectedRoute><UserSettings /></ProtectedRoute>} />
+      <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
 
       {/* Main Room Nav */}
-      <Route path="/destroy-sigil" element={<ProtectedRoute><SigilDestroy/></ProtectedRoute>}/>
-      <Route path="/home" element={<ProtectedRoute><HomeRoom/></ProtectedRoute>} />
+      <Route path="/destroy-sigil" element={<ProtectedRoute><SigilDestroy /></ProtectedRoute>} />
+      <Route path="/home" element={<ProtectedRoute><HomeRoom /></ProtectedRoute>} />
       <Route path="/charge-sigil" element={<ProtectedRoute><SigilCharge /></ProtectedRoute>} />
       <Route path="/grimoire" element={<ProtectedRoute><Grimoire /></ProtectedRoute>} />
       <Route path="/make-sigil" element={<ProtectedRoute><MakeSigil /></ProtectedRoute>} />

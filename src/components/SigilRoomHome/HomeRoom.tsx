@@ -12,7 +12,7 @@ import TutorialOverlay from '../ui/TutorialOverlay'
 
 
 export default function HomeRoom() {
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showTutorial, setShowTutorial] = useState(false);
 
@@ -29,9 +29,8 @@ export default function HomeRoom() {
       setTimeout(() => setShowTutorial(true), 0);
     }
   }, [user]);
-
+  if (isLoading) return <div className='maincontainer'></div> 
   if (!user) { return null; }
-  console.log(user)
 
   return (
     <div className='maincontainer'>

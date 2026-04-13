@@ -266,7 +266,6 @@ const GhostCursor = ({
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
     const geom = new THREE.PlaneGeometry(2, 2);
 
     const maxTrail = Math.max(1, Math.floor(trailLength));
@@ -343,10 +342,15 @@ const GhostCursor = ({
 
       const wpx = Math.max(1, Math.floor(cssW * pixelRatio));
       const hpx = Math.max(1, Math.floor(cssH * pixelRatio));
-      material.uniforms.iResolution.value.set(wpx, hpx, 1);
-      material.uniforms.iScale.value = calculateScale(host);
-      bloomPass.setSize(wpx, hpx);
 
+      if (material.uniforms['iResolution']) {
+        (material.uniforms['iResolution'].value as THREE.Vector3).set(wpx, hpx, 1);
+      }
+      if (material.uniforms['iScale']) {
+        material.uniforms['iScale'].value = calculateScale(host);
+      }
+
+      bloomPass.setSize(wpx, hpx);
       hasValidSizeRef.current = true;
     };
 
@@ -368,20 +372,21 @@ const GhostCursor = ({
       const now = performance.now();
       const t = (now - start) / 1000;
 
-      const mat = materialRef.current!;
-      const comp = composerRef.current!;
+      const mat = materialRef.current;
+      const comp = composerRef.current;
+      if (!mat || !comp) return;
 
       if (pointerActiveRef.current) {
         velocityRef.current.set(
-          currentMouseRef.current.x - mat.uniforms.iMouse.value.x,
-          currentMouseRef.current.y - mat.uniforms.iMouse.value.y
+          currentMouseRef.current.x - (mat.uniforms['iMouse'].value as THREE.Vector2).x,
+          currentMouseRef.current.y - (mat.uniforms['iMouse'].value as THREE.Vector2).y
         );
-        mat.uniforms.iMouse.value.copy(currentMouseRef.current);
+        (mat.uniforms['iMouse'].value as THREE.Vector2).copy(currentMouseRef.current);
         fadeOpacityRef.current = 1.0;
       } else {
         velocityRef.current.multiplyScalar(inertia);
         if (velocityRef.current.lengthSq() > 1e-6) {
-          mat.uniforms.iMouse.value.add(velocityRef.current);
+          (mat.uniforms['iMouse'].value as THREE.Vector2).add(velocityRef.current);
         }
         const dt = now - lastMoveTimeRef.current;
         if (dt > fadeDelay) {
@@ -392,18 +397,18 @@ const GhostCursor = ({
 
       const N = trailBufRef.current.length;
       headRef.current = (headRef.current + 1) % N;
-      trailBufRef.current[headRef.current].copy(mat.uniforms.iMouse.value);
-      const arr = mat.uniforms.iPrevMouse.value;
+      trailBufRef.current[headRef.current].copy(mat.uniforms['iMouse'].value as THREE.Vector2);
+      const arr = mat.uniforms['iPrevMouse'].value as THREE.Vector2[];
       for (let i = 0; i < N; i++) {
         const srcIdx = (headRef.current - i + N) % N;
         arr[i].copy(trailBufRef.current[srcIdx]);
       }
 
-      mat.uniforms.iOpacity.value = fadeOpacityRef.current;
-      mat.uniforms.iTime.value = t;
+      mat.uniforms['iOpacity'].value = fadeOpacityRef.current;
+      mat.uniforms['iTime'].value = t;
 
-      if (filmPassRef.current?.uniforms?.iTime) {
-        filmPassRef.current.uniforms.iTime.value = t;
+      if (filmPassRef.current?.uniforms?.['iTime']) {
+        filmPassRef.current.uniforms['iTime'].value = t;
       }
 
       comp.render();
@@ -466,7 +471,6 @@ const GhostCursor = ({
       geom.dispose();
       material.dispose();
       materialRef.current = null;
-      composer.dispose();
       composerRef.current = null;
       renderer.dispose();
       renderer.forceContextLoss();
@@ -479,7 +483,6 @@ const GhostCursor = ({
         parent.style.position = prevParentPos;
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     trailLength, inertia, grainIntensity, bloomStrength, bloomRadius,
     bloomThreshold, pixelBudget, fadeDelay, fadeDuration, isTouch,
@@ -489,25 +492,25 @@ const GhostCursor = ({
   useEffect(() => {
     if (materialRef.current) {
       const c = new THREE.Color(color);
-      materialRef.current.uniforms.iBaseColor.value.set(c.r, c.g, c.b);
+      (materialRef.current.uniforms['iBaseColor'].value as THREE.Vector3).set(c.r, c.g, c.b);
     }
   }, [color]);
 
   useEffect(() => {
     if (materialRef.current) {
-      materialRef.current.uniforms.iBrightness.value = brightness;
+      materialRef.current.uniforms['iBrightness'].value = brightness;
     }
   }, [brightness]);
 
   useEffect(() => {
     if (materialRef.current) {
-      materialRef.current.uniforms.iEdgeIntensity.value = edgeIntensity;
+      materialRef.current.uniforms['iEdgeIntensity'].value = edgeIntensity;
     }
   }, [edgeIntensity]);
 
   useEffect(() => {
-    if (filmPassRef.current?.uniforms?.intensity) {
-      filmPassRef.current.uniforms.intensity.value = grainIntensity;
+    if (filmPassRef.current?.uniforms?.['intensity']) {
+      filmPassRef.current.uniforms['intensity'].value = grainIntensity;
     }
   }, [grainIntensity]);
 

@@ -9,10 +9,10 @@ export default function SigiLibrary({ items, }: { items: any[], user: any }) {
   const navigate = useNavigate();
 
 
-  const handleSigilClick = (sigil:any) => {
-    if (action === 'charge'){
+  const handleSigilClick = (sigil: any) => {
+    if (action === 'charge') {
       navigate(`/charge-sigil?sigilId=${sigil.id}`)
-    } else if (action === 'destroy'){
+    } else if (action === 'destroy') {
       navigate(`/destroy-sigil?sigilId=${sigil.id}`)
     } else {
       navigate(`/sigil-page?sigilId=${sigil.id}`)
@@ -27,16 +27,17 @@ export default function SigiLibrary({ items, }: { items: any[], user: any }) {
 
 
 
- return (
-        <div className="sigilibrary">
-          {items.map((sigil: any) => (
-            <SigilThumb
-              key={sigil.id}
-              sigilData={sigil}
-                        onClick={() => handleSigilClick(sigil)}
-            />
-          ))}
-        </div>
+  return (
+    <div className="sigilibrary">
+      {items.map((sigil: any) => (
+        <SigilThumb
+          key={sigil.id}
+          sigilData={sigil}
+          isCharged={sigil.isCharged}
+          onClick={() => handleSigilClick(sigil)}
+        />
+      ))}
+    </div>
 
-    );
-  };
+  );
+};
