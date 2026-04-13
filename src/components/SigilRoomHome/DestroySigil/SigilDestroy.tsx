@@ -120,14 +120,14 @@ export default function DestroySigil() {
           )}
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
           {!isDestroying && (
-            <button className="navbutton" onClick={handleDestroy} disabled={!emotion || isSubmitting}>
+            <button className="navbutton" onClick={handleDestroy} style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }} disabled={!emotion || isSubmitting}>
               Destroy Sigil
             </button>
           )}
 {isDestroying && (
   <button
     className="navbutton"
-    style={{ position: 'relative', zIndex: 20 }}
+    style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}
     onClick={() => {
       setIsDestroying(false)
       setTimeout(() => navigate('/home'), 200)

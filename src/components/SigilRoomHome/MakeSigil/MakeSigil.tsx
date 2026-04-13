@@ -64,7 +64,7 @@ export default function MakeSigil() {
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
         <div className='makesigil'>
-          <h1>Make a Sigil</h1>
+          <h1 style={{fontSize: 32}}>Make a Sigil</h1>
           <Menu />
           <div className="sigilinfo">
             <p className="infotext">Current Sigils: {sigilCount}/{MAX_SIGILS}</p>

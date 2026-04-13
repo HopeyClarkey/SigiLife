@@ -32,24 +32,48 @@ export default function UserProfile() {
     const colorTheme = user.color_theme ?? 'cyber'
     const isDark = theme === 1
     const labels = {
-      'cyber-light': 'You have theme: Cyber · Setting: Light',
-      'cyber-dark': 'You have theme: Cyber · Setting: Dark',
-      'foliage-light': 'You have theme: Foliage · Setting: Light',
-      'foliage-dark': 'You have theme: Foliage · Setting: Dark',
-    }
-    const swatches = {
-      'cyber-light': ['#c8d8f0', '#a0bcee', '#1a4fc4', '#4d9fff'],
-      'cyber-dark': ['#0a0f2e', '#0d1a4a', '#4d9fff', '#00d4ff'],
-      'foliage-light': ['#d4ebd0', '#b2d9a8', '#2d7a3a', '#66bb6a'],
-      'foliage-dark': ['#0a1f0d', '#122b14', '#66bb6a', '#a5d6a7'],
-    }
+  'cyber-light': 'You have theme: Cyber · Setting: Light',
+  'cyber-dark': 'You have theme: Cyber · Setting: Dark',
+  'foliage-light': 'You have theme: Foliage · Setting: Light',
+  'foliage-dark': 'You have theme: Foliage · Setting: Dark',
+}
+
+const swatches = {
+  'cyber-light': [
+    '#e9edf5', // --theme-bg-1 (light base)
+    '#d8e0ef', // --theme-bg-2
+    '#4b5563', // --theme-accent (UI neutral layer)
+    '#00d4ff', // --theme-glow / cyber accent
+  ],
+
+  'cyber-dark': [
+    '#0f1117', // --theme-bg-1 (dark base)
+    '#1a1d26', // --theme-bg-2
+    '#9ca3af', // muted accent
+    '#00d4ff', // neon glow
+  ],
+
+  'foliage-light': [
+    '#e4efe0', // --theme-bg-1
+    '#cfe3c8', // --theme-bg-2
+    '#4f6f52', // --theme-accent
+    '#66bb6a', // --theme-glow
+  ],
+
+  'foliage-dark': [
+    '#081c0c', // --theme-bg-1
+    '#0f2a14', // --theme-bg-2
+    '#66bb6a', // accent
+    '#a5d6a7', // glow highlight
+  ],
+}
     const key = `${colorTheme}-${isDark ? 'dark' : 'light'}` as keyof typeof swatches
     return (
       <div className="themebox">
         {labels[key]}
         <div className="flex gap-2 mt-2">
           {swatches[key].map((color, i) => (
-            <div key={i} style={{ backgroundColor: color, width: 32, height: 32, borderRadius: 6 }} />
+            <div key={i} style={{ backgroundColor: color, width: 32, height: 32, borderRadius: 6, borderColor: "black" }} />
           ))}
         </div>
       </div>

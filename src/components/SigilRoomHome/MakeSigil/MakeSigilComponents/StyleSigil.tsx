@@ -114,7 +114,7 @@ return (
   <div className='maincontainer'>
     <div className="scrollcontainer" ref={scrollCallbackRef}>
       <div className='stylesigilcontainer'>
-        <h1 style={{fontSize: 32, color: "#e0e0e0"}}>Review & Save Your Sigil</h1>
+        <h1 style={{fontSize: 32, backgroundColor: "#e0e0e0", borderRadius: "12px"}}>Review & Save Your Sigil</h1>
 
         <div className="stylesigilcontainerbox">
           <h3>Name: {sigilData.name}</h3>

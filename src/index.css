@@ -355,6 +355,16 @@ avatarchoicebox,
   object-fit: contain;
 }
 
+.changeemotion {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: fit-content;
+  background-color: #6d8b00;
+  border-radius: 12px;
+  position: relative;
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Destroy Sigil*/
 
 .destroysigil {
@@ -544,7 +554,6 @@ sigilpage,
   align-items: center;
   justify-content: space-evenly;
   overflow: visible;
-  color: rgb(0, 0, 0);
   font-family: 'New Rocker', system-ui;
   justify-content: flex-start;
   padding-top: 20px;
@@ -555,6 +564,7 @@ sigilpage,
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-self: center;
 }
 
 .sigilbuttonstack {
@@ -571,12 +581,22 @@ sigildetailslocation,
   flex-direction: column;
   align-items: center;
 }
-
 sigilbox,
 .sigilbox {
   height: 35%;
   display: flex;
   position: relative;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  opacity: .5;
+}
+
+.sigilpagesigilbox {
+  height: 50%;
+  display: flex;
+  position: relative;
+  background-color: #e0e0e0;
+  border-radius: 12px;
 }
 
 sigilpageaddlocation,

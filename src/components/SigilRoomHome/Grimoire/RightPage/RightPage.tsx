@@ -30,7 +30,7 @@ export default function RightPage() {
         <div className="rightpage">
           <Menu />
           <SigiLibrary items={sigils} user={user} />
-          <Link className="navbutton" to="/make-sigil">🪶 MakeSigil</Link>
+          <Link style={{backgroundColor: "#e0e0e0"}}className="navbutton" to="/make-sigil">🪶 MakeSigil</Link>
         </div>
       </div>
     </div>
