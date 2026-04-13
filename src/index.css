@@ -68,6 +68,7 @@ mainContainer,
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   text-align: center;
+  
 }
 
 maincontainer::-webkit-scrollbar,
@@ -129,6 +130,7 @@ scrollcontainer,
   scroll-snap-type: x mandatory;
   width: 100vw;
   height: 100vh;
+
 }
 
 noscroll,
@@ -246,43 +248,44 @@ homeroom,
   flex-direction: column;
   background-image: url('./assets/InsideLino.svg');
   background-size: cover;
-  width: 1024px;
+  min-width: 1024px;
   height: 100vh;
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
+  background-size: 1024px 100vh
 }
 
 destroybutton,
 .destroybutton img {
   position: absolute;
-  top: 18px;
+  top: 59px;
   left: 6px;
-  height: 475px;
+  height: 412px;
 }
 
 chargebutton,
 .chargebutton img {
   position: absolute;
-  left: 393px;
-  top: 254px;
-  height: 169px;
+  left: 340px;
+  top: 264px;
+  height: 148px;
 }
 
 grimoirebutton,
 .grimoirebutton img {
   position: absolute;
-  right: -105px;
-  top: 0px;
-  height: 409px;
+  right: 51px;
+  top: 48px;
+ height: 351px
 }
 
 makesigilbutton,
 .makesigilbutton img {
   position: absolute;
-  left: 552px;
-  top: 372px;
-  height: 318px;
+  left: 475px;
+  top: 367px;
+  height: 275px;
 }
 
 destroybutton,
