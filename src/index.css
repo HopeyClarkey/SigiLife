@@ -818,6 +818,19 @@ profilepagename,
   background-color: #e0e0e0;
   border-radius: 12px;
   position: relative;
+  border-color: black;
+  border-width: 2px;
+
+}
+profilebox,
+.profilebox {
+    border-radius: 12px;
+  position: relative;
+  border-color: black;
+  border-width: 2px;
+  height:30vh;
+
+    width: 100%;
 }
 
 avatar,
@@ -838,6 +851,9 @@ userfriends,
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+    border-radius: 12px;
+  position: relative;
+
 }
 
 userfriendsbox,
@@ -846,6 +862,7 @@ userfriendsbox,
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  
 }
 
 friendcontainer,
@@ -853,6 +870,8 @@ friendcontainer,
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 95vw;
+  
 }
 
 avatarandtheme,
@@ -861,11 +880,13 @@ avatarandtheme,
   flex-direction: row;
   align-items: center;
   position: absolute;
-  width: 35.7%;
+  width: 35%;
   padding: 5px;
   bottom: 15px;
   background-color: #e0e0e0;
   border-radius: 12px;
+    border-color: black;
+  border-width: 2px;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sigil Art */

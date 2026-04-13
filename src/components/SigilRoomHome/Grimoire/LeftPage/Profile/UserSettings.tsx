@@ -113,23 +113,19 @@ export default function UserSettings() {
           {colorTheme === 'foliage' ? "Foliage" : "Cyber"}
         </label>
         <br />
-        
+
         <div className="flex flex-col gap-4 items-center">
-          <button 
-            className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95" 
+          <button
+            className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95"
             onClick={handleReplayTutorial}
           >
             Replay Tutorial
           </button>
-          
-          <button className="navbutton" onClick={handleLogout}>
+          <button className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95" onClick={handleLogout}>
             Log Out
           </button>
+          <Link className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95" to="/profile">Go to Profile </Link>
         </div>
-
-
-        <Link className="navbutton" to="/profile">Go to Profile </Link>
-
       </div>
     </div>
   )

@@ -73,7 +73,7 @@ const swatches = {
         {labels[key]}
         <div className="flex gap-2 mt-2">
           {swatches[key].map((color, i) => (
-            <div key={i} style={{ backgroundColor: color, width: 32, height: 32, borderRadius: 6, borderColor: "black" }} />
+            <div key={i} style={{ backgroundColor: color, width: 32, height: 32, borderRadius: 6, borderWidth: "2px", borderColor: "black", alignSelf: "center"}} />
           ))}
         </div>
       </div>
