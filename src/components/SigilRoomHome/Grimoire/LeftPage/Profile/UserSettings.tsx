@@ -84,7 +84,7 @@ export default function UserSettings() {
   return (
     <div className="maincontainer">
       <div className="usersettings">
-        <h1>User Settings</h1>
+        <h1 style={{fontSize: 32}}>User Settings</h1>
         <br />
         <AvatarSelector avatarId={avatarId} onSelect={handleAvatarChange} />
         <br />

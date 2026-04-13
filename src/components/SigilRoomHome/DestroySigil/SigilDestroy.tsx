@@ -113,7 +113,7 @@ export default function DestroySigil() {
           )
           }
 
-          <h1>Destroy Sigil</h1>
+          <h1 style={{fontSize: 32,borderRadius:'12px', position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0"}}>Destroy Sigil</h1>
 
           {sigilData.imageData && (
             <img className="sigilbox" src={sigilData.imageData} alt={sigilData.name} />
