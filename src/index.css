@@ -839,7 +839,7 @@ profilebox,
   border-color: black;
   border-width: 2px;
   height:100%;
-  width: 100%;
+  width: 29vw;
   text-align: center;
   position: relative;
 }
@@ -872,11 +872,12 @@ userfriendsbox,
   flex-direction: column;
   align-items: center;
   height: 100%;
+  justify-content: space-evenly;
 }
 usercard,
 .usercard {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 5px;
   width: 30%;
   position: relative;
@@ -890,6 +891,7 @@ friendcontainer,
   align-items: center;
   width: 95vw;
   height: 50vh;
+  justify-content: space-around;
 }
 
 avatarandtheme,

@@ -484,7 +484,7 @@ export default function DrawSigil() {
               <button className="navbutton" onClick={handleDeleteSelected} >
                 🗑️ Delete Selected
               </button>
-            
+
             {/* Undo/Redo */}
             <div className='rowbox'>
               <button className="navbutton" onClick={undo} disabled={!canUndo} style={{ opacity: canUndo ? 1 : 0.5 }}>↶ Undo</button>
@@ -505,7 +505,7 @@ export default function DrawSigil() {
                 </button>
               </div>
             ) : (
-              <div style={{ marginTop: '1rem', display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <div style={{ marginTop: '1rem', display: 'flex', gap: '10px', alignItems: 'center',  }}>
                 <button className="navbutton" onClick={() => setStep('draw')} style={{ background: '#6c757d', color: '#fff', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', border: 'none' }}>
                   ⬅ Back to Draw
                 </button>

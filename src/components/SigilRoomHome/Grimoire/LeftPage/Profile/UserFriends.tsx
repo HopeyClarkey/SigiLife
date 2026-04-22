@@ -2,14 +2,14 @@
 import { useUser } from '@/context/UserContext'
 import { useEffect, useState } from 'react'
 
-const UserCard = ({ user, action, actionLabel }: { user: any, action?: () => void, actionLabel?: string }) => {
+const UserCard = ({ user, action,}: { user: any, action?: () => void, actionLabel?: string }) => {
   return (
     <div className="usercard">
       <img src={`Avatar${parseInt(user.avatar) + 1}face.png`} className="avatar" style={{width: "20px", height: "20px", borderRadius: "12px"}}/>
       <span>{user.username}</span>
       {action && (
-        <button onClick={action} className="ml-auto text-sm px-3 py-1 rounded-md bg-purple-500 text-white hover:bg-purple-600">
-          {actionLabel}
+        <button style={{borderRadius: "50%"}} onClick={action} className="ml-auto text-xsm px-2 py-1 rounded-md bg-purple-500 text-white hover:bg-purple-600">
+          x
         </button>
       )}
     </div>
@@ -95,7 +95,7 @@ export default function UserFriends() {
             placeholder="Search by username..."
             className="border rounded-md px-3 py-1 text-sm flex-1"
           />
-          <button onClick={handleSearch} className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95">
+          <button style={{borderRadius: "12px"}} onClick={handleSearch} className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95">
             🔍
           </button>
         </div>
