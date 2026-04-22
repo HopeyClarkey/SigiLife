@@ -82,10 +82,10 @@ export default function UserFriends() {
   return (
     <div className='userfriendsbox'>
       <br />
-      <h1 style={{fontSize: 32}}> UserFriends </h1>
+      <h1 style={{fontSize: 32}}> SigilLites </h1>
 
       <div className="userfriends">
-        <h1>Find SigiLites to SigilFollow</h1>
+        <h1>Find Friends to Follow</h1>
         <div >
           <input
             type="text"
@@ -96,7 +96,7 @@ export default function UserFriends() {
             className="border rounded-md px-3 py-1 text-sm flex-1"
           />
           <button onClick={handleSearch} className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95">
-            Search
+            🔍
           </button>
         </div>
 

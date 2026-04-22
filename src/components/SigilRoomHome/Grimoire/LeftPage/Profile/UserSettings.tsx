@@ -18,6 +18,63 @@ const AvatarSelector = ({ avatarId, onSelect }: { avatarId: string, onSelect: (i
     </div>
   )
 }
+
+const Themebox = () => {
+  const { user } = useUser()
+  if (!user) { return null }
+  const theme = user.theme;
+  const colorTheme = user.color_theme ?? 'cyber'
+  const isDark = theme === 1
+  const labels = {
+    'cyber-light': 'You have theme: Cyber · Setting: Light',
+    'cyber-dark': 'You have theme: Cyber · Setting: Dark',
+    'foliage-light': 'You have theme: Foliage · Setting: Light',
+    'foliage-dark': 'You have theme: Foliage · Setting: Dark',
+  }
+
+  const swatches = {
+    'cyber-light': [
+      '#e9edf5', // --theme-bg-1 (light base)
+      '#d8e0ef', // --theme-bg-2
+      '#4b5563', // --theme-accent (UI neutral layer)
+      '#00d4ff', // --theme-glow / cyber accent
+    ],
+
+    'cyber-dark': [
+      '#0f1117', // --theme-bg-1 (dark base)
+      '#1a1d26', // --theme-bg-2
+      '#9ca3af', // muted accent
+      '#00d4ff', // neon glow
+    ],
+
+    'foliage-light': [
+      '#e4efe0', // --theme-bg-1
+      '#cfe3c8', // --theme-bg-2
+      '#4f6f52', // --theme-accent
+      '#66bb6a', // --theme-glow
+    ],
+
+    'foliage-dark': [
+      '#081c0c', // --theme-bg-1
+      '#0f2a14', // --theme-bg-2
+      '#66bb6a', // accent
+      '#a5d6a7', // glow highlight
+    ],
+  }
+  const key = `${colorTheme}-${isDark ? 'dark' : 'light'}` as keyof typeof swatches
+  return (
+    <div className="themebox">
+      {labels[key]}
+      <div className="flex gap-2 mt-2">
+        {swatches[key].map((color, i) => (
+          <div key={i} style={{ backgroundColor: color, width: 32, height: 32, borderRadius: 6, borderWidth: "2px", borderColor: "black", alignSelf: "center" }} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+
 export default function UserSettings() {
   const { user, setUser } = useUser()
   const navigate = useNavigate()
@@ -84,7 +141,7 @@ export default function UserSettings() {
   return (
     <div className="maincontainer">
       <div className="usersettings">
-        <h1 style={{fontSize: 32}}>User Settings</h1>
+        <h1 style={{ fontSize: 32 }}>User Settings</h1>
         <br />
         <AvatarSelector avatarId={avatarId} onSelect={handleAvatarChange} />
         <br />
@@ -101,7 +158,7 @@ export default function UserSettings() {
           {isDark ? "Dark" : "Light"}
         </label>
         <br />
-        <label className="flex items-center gap-2">
+        <label className="flex items-center gap-">
           Colour Theme:
           <SwitchPrimitive.Root
             checked={colorTheme === 'foliage'}
@@ -113,18 +170,22 @@ export default function UserSettings() {
           {colorTheme === 'foliage' ? "Foliage" : "Cyber"}
         </label>
         <br />
+        <div className='avatarandtheme'>
+
+          <Themebox />
+        </div>
 
         <div className="flex flex-col gap-4 items-center">
-          <button
+          <button style={{ margin: "10 px", borderRadius: "12px"}}
             className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95"
             onClick={handleReplayTutorial}
           >
             Replay Tutorial
           </button>
-          <button className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95" onClick={handleLogout}>
+          <button style={{ margin: "5px", borderRadius: "12px"}} className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95" onClick={handleLogout}>
             Log Out
           </button>
-          <Link className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95" to="/profile">Go to Profile </Link>
+          <Link style={{ margin: "5px", borderRadius: "12px"}} className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95" to="/profile">Go to Profile </Link>
         </div>
       </div>
     </div>

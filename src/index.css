@@ -824,9 +824,12 @@ profilepagename,
   margin: 50px;
   background-color: #e0e0e0;
   border-radius: 12px;
+  color: black;
   position: relative;
   border-color: black;
   border-width: 2px;
+  padding: 5px;
+  justify-content: space-around;
 
 }
 profilebox,
@@ -835,7 +838,7 @@ profilebox,
   position: absolute;
   border-color: black;
   border-width: 2px;
-  height:30vh;
+  height:100%;
   width: 100%;
   text-align: center;
   position: relative;
@@ -861,7 +864,6 @@ userfriends,
   align-items: center;
   border-radius: 12px;
   position: relative;
-
 }
 
 userfriendsbox,
@@ -869,7 +871,7 @@ userfriendsbox,
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  height: 100%;
 }
 usercard,
 .usercard {
@@ -878,6 +880,7 @@ usercard,
   padding: 5px;
   width: 30%;
   position: relative;
+  font-size:9px;
 }
 
 friendcontainer,
@@ -886,6 +889,7 @@ friendcontainer,
   flex-direction: row;
   align-items: center;
   width: 95vw;
+  height: 50vh;
 }
 
 avatarandtheme,
@@ -893,15 +897,25 @@ avatarandtheme,
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: absolute;
-  width: 35%;
+  align-self: center;
+  width: fit-content;
   padding: 5px;
   bottom: 15px;
   background-color: #e0e0e0;
   border-radius: 12px;
-    border-color: black;
+  border-color: black;
   border-width: 2px;
 }
+
+usersettings,
+.usersettings {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  justify-content: space-between;
+
+}
+
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sigil Art */
 .sigil-art {
