@@ -9,7 +9,7 @@ export default function SigilThumb({
 }) {
   return (
     <div className={`sigilthumb ${isCharged ? 'charged' : ''}`} onClick={onClick}>
-      <p>{sigilData.name}</p>
+      <p>{sigilData.name.length > 6 ? sigilData.name.slice(0, 6) + "..." : sigilData.name}</p>
 
       {sigilData.imageData ? (
         <img

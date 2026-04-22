@@ -131,7 +131,8 @@ scrollcontainer,
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
+  -webkit-overflow-scrolling: touch;
 }
 
 noscroll,
@@ -249,11 +250,13 @@ avatarchoicebox,
   background-image: url('./assets/InsideLino.svg');
   overflow: visible;
   min-width: 1024px;
-  height: 100vh;
+  height: 100dvh;
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  background-size: 1024px 100vh;
+  background-size: 1024px 100dvh;
+    flex-shrink: 0;
+  scroll-snap-align: start;
 }
 
 .homeroom nav {
