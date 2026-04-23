@@ -842,6 +842,7 @@ profilebox,
   width: 29vw;
   text-align: center;
   position: relative;
+  background:rgba(0, 0, 0, 0.5)
 }
 
 avatar,

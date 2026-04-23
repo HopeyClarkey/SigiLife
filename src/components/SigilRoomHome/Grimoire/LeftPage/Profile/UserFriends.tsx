@@ -81,9 +81,7 @@ export default function UserFriends() {
 
   return (
     <div className='userfriendsbox'>
-      <br />
-      <h1 style={{fontSize: 32}}> SigilLites </h1>
-
+      <h1 style={{fontSize: 32}}> Your SigiLites </h1>
       <div className="userfriends">
         <h1>Find Friends to Follow</h1>
         <div >
