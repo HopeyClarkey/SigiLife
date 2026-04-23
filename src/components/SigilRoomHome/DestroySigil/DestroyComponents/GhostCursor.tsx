@@ -219,7 +219,7 @@ const GhostCursor = ({
     [grainIntensity]
   );
 
-  // FIX: useMemo so UnpremultiplyPass is stable and safe in dep array
+  // FIX: useMemo so Unpremultiply Pass is stable and safe in dep array
   const UnpremultiplyPass = useMemo(
     () =>
       new ShaderPass({
