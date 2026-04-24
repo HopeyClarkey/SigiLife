@@ -1,6 +1,5 @@
 import Menu from '../../Parts/Menu'
-import { Link, useNavigate, useSearchParams } from "react-router-dom"
-
+import { useNavigate, useSearchParams } from "react-router-dom"
 import ChangeEmotion from './ChargeComponents/ChangeEmotion'
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext'
@@ -31,71 +30,73 @@ export default function ChargeSigil() {
       .catch(err => console.error(err))
   }, [sigilId])
 
-  if (!user) { return null }
-  if (!sigilData) {
-    return (
-      <p>Loading Sigil!</p>
-    )
-  }
-
   const handleSave = async () => {
     try {
       const res = await fetch(`/api/sigils/${sigilData.id}/charge`, { method: 'PATCH' });
       if (!res.ok) { throw new Error('Failed to charge sigil'); }
       const updatedSigil = await res.json();
-      navigate(`/sigil-page?sigilId=${updatedSigil.id}`)
+      setTimeout(() => navigate(`/sigil-page?sigilId=${updatedSigil.id}`), 100)
     } catch (error) {
       console.error(error);
     }
   }
 
+  if (!user) { return null }
+  if (!sigilData) { return <p>Loading Sigil!</p> }
+
   return (
     <div className='maincontainer'>
-                <Menu />
-      <div ref={scrollRef} className={`scrollcontainer ${isCharging ? 'noscroll' : ''}`}>
-        {isCharging && (
-          <SplashCursor
-            BACK_COLOR={{ r: 0, g: 0, b: 0 }}
-            TRANSPARENT={true}
-            SPLAT_RADIUS={0.2}
-            SPLAT_FORCE={6000}
-            DENSITY_DISSIPATION={3.5}
-            VELOCITY_DISSIPATION={2}
-          />
-        )}
-        <div className='chargesigil'>
+      <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll' }}>
+        <div className='chargesigil' >
           <Menu />
-          <h1>ChargeSigil</h1>
 
-
-
-          {sigilData.imageData ? (
-            <img className="sigilbox" src={sigilData.imageData} alt={sigilData.name} />
-          ) : (
-            <img className="sigilbox" src="src/assets/dummySigil.svg" alt="placeholderSigil" />
+          {isCharging && (
+            <SplashCursor
+              BACK_COLOR={{ r: 0, g: 0, b: 0 }}
+              TRANSPARENT={true}
+              SPLAT_RADIUS={0.2}
+              SPLAT_FORCE={6000}
+              DENSITY_DISSIPATION={3.5}
+              VELOCITY_DISSIPATION={2}
+            />
           )}
+
+          {sigilData.imageData && (
+            <img className="sigilbox" src={sigilData.imageData} alt={sigilData.name} />
+          )}
+
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
+
           {!isCharging && (
             <button
               className='navbutton'
+              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0"}}
               onClick={() => setIsCharging(true)}
-              disabled={!emotion}>
+              disabled={!emotion}
+            >
               Charge Sigil
             </button>
           )}
 
           {isCharging && (
-            <button className='navbutton' onClick={handleSave}>
+            <button
+              className='navbutton'
+              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}
+              onClick={handleSave}
+            >
               Save your Sigil!
             </button>
           )}
 
           {isCharging && (
-            <Link className="navbutton" to="/destroy-sigil" state={{ sigilData }}>
+            <button
+              className='navbutton'
+              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0"}}
+              onClick={() => setTimeout(() => navigate(`/destroy-sigil?sigilId=${sigilData.id}`), 100)}
+            >
               Destroy Your Charged Sigil!
-            </Link>
+            </button>
           )}
-
         </div>
       </div>
     </div>

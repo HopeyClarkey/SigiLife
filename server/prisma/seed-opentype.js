@@ -2,7 +2,7 @@ import 'dotenv/config';
 import opentype from 'opentype.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import prisma from './prisma.client.ts';
+import prisma from './prisma.client.js';;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,6 +18,7 @@ async function seed() {
 
     const fontPath = path.join(
       __dirname,
+      '..',
       '..',
       '..',
       'public',

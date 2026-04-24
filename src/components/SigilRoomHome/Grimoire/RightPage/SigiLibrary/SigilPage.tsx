@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import MapSearchBox from '../../LeftPage/Map/MapSearchBox'
 import Menu from '../../../../Parts/Menu'
+import { useUser } from '@/context/UserContext'
+
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
@@ -12,7 +14,7 @@ export default function SigilPage() {
   const sigilId = searchParams.get('sigilId')
   const [sigilData, setSigilData] = useState<any>(null);
   const [isSavingLocation, setIsSavingLocation] = useState(false);
-
+  const { user } = useUser()
   useEffect(() => {
     if (!sigilId) { return }
     fetch(`/api/sigils/${sigilId}`)
@@ -20,15 +22,14 @@ export default function SigilPage() {
       .then(data => setSigilData(data))
       .catch(err => console.error(err))
   }, [sigilId])
-  if (!sigilData) { return <p>Loading sigil...</p> }
 
+  if (!sigilData) { return <p>Loading sigil...</p> }
 
   const handleLocationRetrieve = async (res: any) => {
     if (res.features && res.features.length > 0) {
       const feature = res.features[0];
       const [lng, lat] = feature.geometry.coordinates;
       const locationName = feature.properties.name || feature.properties.full_address || "Unknown Location";
-
       setIsSavingLocation(true);
       try {
         const response = await axios.patch(`/api/sigils/${sigilData.id}/location`, {
@@ -36,7 +37,6 @@ export default function SigilPage() {
           latitude: lat,
           longitude: lng
         });
-
         setSigilData(response.data);
       } catch (error) {
         console.error("Failed to save location:", error);
@@ -53,23 +53,15 @@ export default function SigilPage() {
         <Menu />
 
         <div className="sigildetails">
-          Sigil Name : <br />
-          {sigilData.name}
-          <br />
-          was created on :
-          <br />
-          {new Date(sigilData.createdAt).toLocaleDateString()}
-          <br />
+          <p>{sigilData.name}</p>
+          <p>Created: {new Date(sigilData.createdAt).toLocaleDateString()}</p>
           {sigilData.locationName ? (
-            <div className="sigildetailslocation">
-              at:
-              <br />
-              {sigilData.locationName}</div>
+            <p>at: {sigilData.locationName}</p>
           ) : (
             <div className="sigilpageaddlocation">
               <p>Set a location for this sigil:</p>
               {isSavingLocation ? (
-                <p >Saving...</p>
+                <p>Saving...</p>
               ) : (
                 <MapSearchBox
                   accessToken={MAPBOX_TOKEN}
@@ -78,33 +70,22 @@ export default function SigilPage() {
               )}
             </div>
           )}
-          <br />
-          {sigilData.isCharged ? "Sigil is Charged" : "Sigil is not Charged"}
-          <br />
+          <p>{sigilData.isCharged ? "This Sigil has been Charged" : "This Sigil has not been Charged"}</p>
         </div>
 
-        {
-          sigilData.imageData
-            ?
-            (
-              <img className="sigilbox" src={sigilData.imageData} alt={sigilData.name} />
-            )
+        {sigilData.imageData && (
+          <img className="sigilpagesigilbox" src={sigilData.imageData} alt={sigilData.name} />
+        )}
 
-            :
-
-            (
-              <img className="sigilbox" src="src/assets/dummySigil.svg" alt="Dummy Sigil" />
-            )
-        }
-
-        <div className="rowbox">
-
-          <Link className="navbutton" to={`/charge-sigil?sigilId=${sigilData.id}`}>Charge Sigil</Link>
-
-          <Link className="navbutton" to={`/destroy-sigil?sigilId=${sigilData.id}`}>Destroy Sigil</Link>
-
-          <Link className="navbutton" to="/place-sigil-world" state={{ sigilData }} > View in AR </Link>
+        <div className="sigilbuttonstack">
+          <Link style={{backgroundColor: "#e0e0e0"}} className="navbutton" to={`/charge-sigil?sigilId=${sigilData.id}`}>Charge Sigil</Link>
+          <Link style={{backgroundColor: "#e0e0e0"}} className="navbutton" to={`/destroy-sigil?sigilId=${sigilData.id}`}>Destroy Sigil</Link>
+          {user?.isAdmin && (
+            <Link style={{backgroundColor: "#e0e0e0"}} className="navbutton" to="/place-sigil-world" state={{ sigilData }}>View in AR</Link>
+          )}
         </div>
+
       </div>
-    </div>)
-};
+    </div>
+  )
+}

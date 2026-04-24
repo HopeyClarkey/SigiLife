@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom'
 import { useUser } from '@/context/UserContext'
 import { useEffect, useRef, useState } from 'react';
 import Menu from '../Parts/Menu'
+import destroyButton from '../../assets/DestroyButton.svg'
+import chargeButton from '../../assets/AltarButton.svg'
+import grimoireButton from '../../assets/GrimoireButton.svg'
+import makesigilButton from '../../assets/WritingButton.svg'
 import TutorialOverlay from '../ui/TutorialOverlay'
 
 
 export default function HomeRoom() {
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showTutorial, setShowTutorial] = useState(false);
 
@@ -25,9 +29,8 @@ export default function HomeRoom() {
       setTimeout(() => setShowTutorial(true), 0);
     }
   }, [user]);
-
+  if (isLoading) return <div className='maincontainer'></div> 
   if (!user) { return null; }
-  console.log(user)
 
   return (
     <div className='maincontainer'>
@@ -36,10 +39,38 @@ export default function HomeRoom() {
           <Menu />
 
           <nav>
-            <Link id="destroy-btn" className='destroybutton' to="/library?action=destroy">Destroy Sigil</Link>
-            <Link id="charge-btn" className='chargebutton' to="/library?action=charge">Charge Sigil</Link>
-            <Link id="grimoire-btn" className='grimoirebutton' to="/grimoire" >Grimoire</Link>
-            <Link id="makesigil-btn" className='makesigilbutton' to="/make-sigil">Make Sigil</Link>
+            <Link
+              className='destroybutton'
+              to="/library?action=destroy"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={destroyButton} alt="Destroy Sigil" />
+            </Link>
+            <Link
+              className='chargebutton'
+              to="/library?action=charge"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={chargeButton} alt="Charge Sigil" />
+            </Link>
+            <Link
+              className='grimoirebutton'
+              to="/grimoire"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={grimoireButton} alt="Grimoire" />
+            </Link>
+            <Link
+              className='makesigilbutton'
+              to="/make-sigil"
+              onTouchStart={(e) => e.currentTarget.classList.add('touched')}
+              onTouchEnd={(e) => e.currentTarget.classList.remove('touched')}
+            >
+              <img src={makesigilButton} alt="Write Sigil" />
+            </Link>
           </nav>
 
           <div className='footer'>

@@ -118,7 +118,7 @@ export default function PlaceSigilInWorld() {
           const positions = new Float32Array(maxPoints * 3);
           pointCloudGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
           pointCloudGeom.setDrawRange(0, 0);
-          
+
           const pointMaterial = new THREE.PointsMaterial({
             color: 0x00ffcc, // Cyan dots
             size: 0.05,      // Increased to 5cm 
@@ -129,17 +129,17 @@ export default function PlaceSigilInWorld() {
           scene.add(pointCloudMesh);
 
           // On-screen debug overlay to see what SLAM is actually returning
-          const debugDiv = document.createElement('div');
-          debugDiv.id = "slam-debug-info";
-          debugDiv.style.position = 'absolute';
-          debugDiv.style.top = '100px';
-          debugDiv.style.left = '20px';
-          debugDiv.style.color = 'lime';
-          debugDiv.style.fontFamily = 'monospace';
-          debugDiv.style.zIndex = '9999';
-          debugDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
-          debugDiv.style.padding = '10px';
-          document.body.appendChild(debugDiv);
+          // const debugDiv = document.createElement('div');
+          // debugDiv.id = "slam-debug-info";
+          // debugDiv.style.position = 'absolute';
+          // debugDiv.style.top = '100px';
+          // debugDiv.style.left = '20px';
+          // debugDiv.style.color = 'lime';
+          // debugDiv.style.fontFamily = 'monospace';
+          // debugDiv.style.zIndex = '9999';
+          // debugDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
+          // debugDiv.style.padding = '10px';
+          // document.body.appendChild(debugDiv);
 
           const getOrCreateMesh = () => {
             if (!placedSigilMesh) {
@@ -179,7 +179,7 @@ export default function PlaceSigilInWorld() {
             } else {
               mesh.position.copy(planeCenter); // Absolute fallback
             }
-            
+
             // Rotate to face the camera (billboard toward viewer)
             mesh.lookAt(camPos);
             setStatus("Sigil Placed!");
@@ -262,27 +262,27 @@ export default function PlaceSigilInWorld() {
             const reality = e.processCpuResult.reality;
             // Support multiple legacy naming conventions
             const pc = reality.pointCloud || reality.worldPoints;
-            
-            const debugDiv = document.getElementById('slam-debug-info');
-            if (debugDiv) {
-               const keys = Object.keys(reality).join(', ');
-               const type = pc ? (typeof pc[0] === 'number' ? 'Float32Array' : 'ObjectArray') : 'N/A';
-               const length = pc ? pc.length : 0;
-               debugDiv.innerHTML = `
-                 Reality Keys: <br/>${keys}<br/>
-                 PC Type: ${type}<br/>
-                 PC Length: ${length}
-               `;
-            }
+
+            // const debugDiv = document.getElementById('slam-debug-info');
+            // if (debugDiv) {
+            //   const keys = Object.keys(reality).join(', ');
+            //   const type = pc ? (typeof pc[0] === 'number' ? 'Float32Array' : 'ObjectArray') : 'N/A';
+            //   const length = pc ? pc.length : 0;
+            //   debugDiv.innerHTML = `
+            //      Reality Keys: <br/>${keys}<br/>
+            //      PC Type: ${type}<br/>
+            //      PC Length: ${length}
+            //    `;
+            // }
 
             if (pc && pc.length > 0) {
               const positions = pointCloudGeom.attributes.position.array as Float32Array;
-              
+
               if (typeof pc[0] === 'number') {
                 // It's a flat Float32Array: [x,y,z, x,y,z, ...]
                 const numPoints = Math.min(Math.floor(pc.length / 3), 3000);
                 for (let i = 0; i < numPoints * 3; i++) {
-                   positions[i] = pc[i];
+                  positions[i] = pc[i];
                 }
                 pointCloudGeom.attributes.position.needsUpdate = true;
                 pointCloudGeom.setDrawRange(0, numPoints);
@@ -292,9 +292,9 @@ export default function PlaceSigilInWorld() {
                 for (let i = 0; i < count; i++) {
                   const pt = pc[i];
                   const pos = pt.position || pt;
-                  positions[i*3] = pos.x;
-                  positions[i*3+1] = pos.y;
-                  positions[i*3+2] = pos.z;
+                  positions[i * 3] = pos.x;
+                  positions[i * 3 + 1] = pos.y;
+                  positions[i * 3 + 2] = pos.z;
                 }
                 pointCloudGeom.attributes.position.needsUpdate = true;
                 pointCloudGeom.setDrawRange(0, count);
@@ -327,8 +327,8 @@ export default function PlaceSigilInWorld() {
 
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', backgroundColor: 'black' }}>
-      <canvas 
-        ref={canvasRef} 
+      <canvas
+        ref={canvasRef}
         style={{ width: '100%', height: '100%', display: 'block', position: 'absolute', top: 0, left: 0 }}
       />
 
@@ -338,7 +338,7 @@ export default function PlaceSigilInWorld() {
           {isPlaced ? 'Sigil Anchored!' : 'AR Sigil Placement'}
         </h1>
         <div style={{ color: 'white', background: 'rgba(0,0,0,0.5)', display: 'inline-block', padding: '5px 15px', borderRadius: '20px', fontSize: '0.9rem' }}>
-            Status: {status}
+          Status: {status}
         </div>
       </div>
 

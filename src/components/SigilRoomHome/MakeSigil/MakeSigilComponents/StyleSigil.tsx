@@ -110,62 +110,51 @@ export default function StyleSigil() {
 
 
 
-  return (
-    <div className='maincontainer'>
-      <div className="scrollcontainer" ref={scrollCallbackRef}>
-        <div className='stylesigilcontainer'>
-          <div className='header'></div>
+return (
+  <div className='maincontainer'>
+    <div className="scrollcontainer" ref={scrollCallbackRef}>
+      <div className='stylesigilcontainer'>
+        <h1 style={{fontSize: 32, backgroundColor: "#e0e0e0", borderRadius: "12px"}}>Review & Save Your Sigil</h1>
 
-          <h1 >Review & Save Your Sigil</h1>
-          <div className="stylesigilcontainerbox">
-            <h3>Name: {sigilData.name}</h3>
-            {sigilData.intention && <p style={{ color: '#666', marginBottom: '1rem' }}>Intention: {sigilData.intention}</p>}
+        <div className="stylesigilcontainerbox">
+          <h3>Name: {sigilData.name}</h3>
+          {sigilData.intention && <p>Intention: {sigilData.intention}</p>}
+          {sigilData.imageData && (
+            <img src={sigilData.imageData} alt={sigilData.name} style={{ maxWidth: '100%', maxHeight: '300px' }} />
+          )}
+        </div>
 
-            {sigilData.imageData && (
-              <div  style={{ marginTop: '1rem', border: '1px solid #ccc', borderRadius: '8px', padding: '1rem', display: 'inline-block', backgroundColor: 'transparent' }}>
-                <img src={sigilData.imageData} alt={sigilData.name} style={{ maxWidth: '100%', maxHeight: '300px' }} />
-              </div>
+        <div className="sharebox">
+          <h3>Clone & Share to SigilFriends</h3>
+          <p>Select users to share this sigil with. It will be added to their library if they have a slot available.</p>
+          <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
+            {friends.length === 0 ? (
+              <p>You are not following anyone yet.</p>
+            ) : (
+              friends.map(friend => (
+                <div key={friend.id} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '4px 0' }}>
+                  <input
+                    type="checkbox"
+                    id={`friend-${friend.id}`}
+                    checked={selectedFriends.includes(friend.id)}
+                    onChange={() => toggleFriend(friend.id)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <label htmlFor={`friend-${friend.id}`} style={{ cursor: 'pointer' }}>
+                    {friend.username}
+                  </label>
+                </div>
+              ))
             )}
           </div>
-
-          <div className="sharebox" style={{ marginTop: '20px', padding: '15px', border: '1px solid #ccc', borderRadius: '8px', backgroundColor: '#f9f9f9', width: '275px', maxWidth: '400px', margin: '20px auto' }}>
-            <h3 style={{ marginTop: 0 }}>Clone & Share to SigilFriends</h3>
-            <p style={{ fontSize: '0.85rem', color: '#666', marginBottom: '10px' }}>
-              Select users to share this sigil with. It will be added to their library if they have a slot available.
-            </p>
-            <div style={{ maxHeight: '150px', overflowY: 'auto', textAlign: 'left', padding: '5px' }}>
-              {friends.length === 0 ? (
-                <p style={{ fontSize: '0.85rem', color: '#888' }}>You are not following anyone yet.</p>
-              ) : (
-                friends.map(friend => (
-                  <div key={friend.id} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '4px 0' }}>
-                    <input
-                      type="checkbox"
-                      id={`friend-${friend.id}`}
-                      checked={selectedFriends.includes(friend.id)}
-                      onChange={() => toggleFriend(friend.id)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <label htmlFor={`friend-${friend.id}`} style={{ cursor: 'pointer', fontSize: '0.9rem' }}>
-                      {friend.username}
-                    </label>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-            <button
-              className="navbutton"
-              onClick={handleSave}
-              disabled={isSaving}
-            >
-              {isSaving ? "Saving..." : "Save to Account"}
-            </button>
-
         </div>
+
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <button className="navbutton" onClick={handleSave} disabled={isSaving}>
+          {isSaving ? "Saving..." : "Save to Account"}
+        </button>
       </div>
     </div>
-  )
+  </div>
+)
 }
