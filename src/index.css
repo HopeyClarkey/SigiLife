@@ -78,6 +78,7 @@ btn,
   border-radius: 12px;
   align-self: center;
   padding: 5px;
+  margin: 5px;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Main Container*/
@@ -699,7 +700,7 @@ writesigil,
 }
 writesigilbox,
 .writesigilbox{
-  
+
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Draw Sigil*/
