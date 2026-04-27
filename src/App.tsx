@@ -5,6 +5,7 @@ import { useUser } from '@/context/UserContext';
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Landing Page & Log in
 import ProtectedRoute from './components/LogInAuth/ProtectedRoute'
 import LandingPage from './components/LogInAuth/LandingPage'
+import CreateProfile from './components/LogInAuth/CreateProfile'
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ User
@@ -67,6 +68,7 @@ console.log('App render - isLoading:', isLoading, 'path:', window.location.pathn
       {/* Auth flow */}
       <Route path="/login" element={<LandingPage />} />
       <Route path="/" element={<LandingPage />} />
+      <Route path="/create-profile" element={<ProtectedRoute><CreateProfile /></ProtectedRoute>} />
 
       {/* User */}
       <Route path="/settings" element={<ProtectedRoute><UserSettings /></ProtectedRoute>} />

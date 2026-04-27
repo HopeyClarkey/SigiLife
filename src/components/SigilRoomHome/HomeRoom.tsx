@@ -40,6 +40,7 @@ export default function HomeRoom() {
 
           <nav>
             <Link
+              id='destroy-btn'
               className='destroybutton'
               to="/library?action=destroy"
               onTouchStart={(e) => e.currentTarget.classList.add('touched')}
@@ -48,6 +49,7 @@ export default function HomeRoom() {
               <img src={destroyButton} alt="Destroy Sigil" />
             </Link>
             <Link
+              id='charge-btn'
               className='chargebutton'
               to="/library?action=charge"
               onTouchStart={(e) => e.currentTarget.classList.add('touched')}
@@ -56,6 +58,7 @@ export default function HomeRoom() {
               <img src={chargeButton} alt="Charge Sigil" />
             </Link>
             <Link
+              id='grimoire-btn'
               className='grimoirebutton'
               to="/grimoire"
               onTouchStart={(e) => e.currentTarget.classList.add('touched')}
@@ -64,6 +67,7 @@ export default function HomeRoom() {
               <img src={grimoireButton} alt="Grimoire" />
             </Link>
             <Link
+              id='makesigil-btn'
               className='makesigilbutton'
               to="/make-sigil"
               onTouchStart={(e) => e.currentTarget.classList.add('touched')}
