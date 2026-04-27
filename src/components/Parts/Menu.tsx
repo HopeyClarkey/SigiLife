@@ -29,7 +29,7 @@ export default function Menu() {
 
   return (
     <div className="navmenu">
-      <button id="menu-btn" onClick={() => setMenuOpen(prev => !prev)}>
+     <button id="menu-btn" style={{ backgroundColor: '#e0e0e0', borderRadius: '8px', padding: '4px 8px' }} className="button" onClick={() => setMenuOpen(prev => !prev)}>
         {menuOpen ? '✕ Close Menu' : '☰ Menu'}
       </button>
       {menuOpen && <NavMenu />}
