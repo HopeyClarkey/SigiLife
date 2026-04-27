@@ -685,18 +685,21 @@ writesigil,
   background-image:
     url('./assets/WritingLino.svg'),
     linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
-  background-size:
-    1024px 100vh,
-    cover;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   min-width: 1024px;
-  position: relative;
-  height: 100vh;
+  height: 100dvh;
+
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
+}
+writesigilbox,
+.writesigilbox{
+  
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Draw Sigil*/

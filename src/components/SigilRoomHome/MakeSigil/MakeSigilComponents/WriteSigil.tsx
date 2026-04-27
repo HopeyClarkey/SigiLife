@@ -54,7 +54,7 @@ export default function WriteSigil() {
       return true;
     });
 
-    return {chars: uniqueChars.join(''), censored};
+    return { chars: uniqueChars.join(''), censored };
   };
 
   useEffect(() => {
@@ -63,10 +63,10 @@ export default function WriteSigil() {
       return;
     }
     getUniqueChars(intention)
-    .then(({ chars}) => {
-      setUniqueChars(chars);
-  });
-}, [intention]);
+      .then(({ chars }) => {
+        setUniqueChars(chars);
+      });
+  }, [intention]);
 
   const handleNext = async () => {
     if (!intention) return;
@@ -96,34 +96,36 @@ export default function WriteSigil() {
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="writesigil">
-          <h1 style={{ fontSize: 32, backgroundColor: "#e0e0e0", padding: "5px", borderRadius: "12px" }}>Write Your Sigil</h1>
           <Menu />
-          <p >
-            Enter your intention.
-          </p>
-          <textarea
-            className="textinput"
-            style={{ width: "30%", height: "45%", backgroundColor: "#e0e0e0", borderRadius: "12px", padding: "25px" }}
-            value={intention}
-            onChange={(e) => setIntention(e.target.value)}
-            placeholder="e.g., I am healthy and strong"
+          <div className="flex flex-col justify-evenly h-[90vh] bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-[80vw] m-6 pointer-events-auto border border-white/20 transform transition-all duration-500 animate-in fade-in zoom-in slide-in-from-bottom-8">
+            <h1>Write Your Sigil:</h1>
+            <p>
+              Enter your intention.
+            </p>
+            <textarea
+              className="textinput"
+              style={{ width: "100%", height: "100%", padding: "15px" }}
+              value={intention}
+              onChange={(e) => setIntention(e.target.value)}
+              placeholder="e.g., I am healthy and strong"
 
-          />
-          <div className="clmnbox">
-            <span style={{ color: '#666', fontSize: '14px' }}>
-              Unique characters: <br />{uniqueChars}
-            </span>
-            <button
-              className="navbutton"
-              onClick={handleNext}
-              disabled={isProcessing}
-              style={{
-                backgroundColor: isProcessing ? '#ccc' : '#9e38fd',
-                cursor: isProcessing ? 'not-allowed' : 'pointer'
-              }}
-            >
-              {isProcessing ? "Processing..." : "Next"}
-            </button>
+            />
+            <div className="clmnbox">
+              <span style={{ color: '#666', fontSize: '14px' }}>
+                Unique letters: <br />{uniqueChars}
+              </span>
+              <button
+                className="btn"
+                onClick={handleNext}
+                disabled={isProcessing}
+                style={{
+                  backgroundColor: isProcessing ? '#ccc' : '#9e38fd',
+                  cursor: isProcessing ? 'not-allowed' : 'pointer'
+                }}
+              >
+                {isProcessing ? "Processing..." : "Next"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
