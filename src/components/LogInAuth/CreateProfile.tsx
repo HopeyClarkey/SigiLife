@@ -43,13 +43,13 @@ export default function CreateProfile() {
       <div className="landingpage">
         <div className="makeprofile">
           <h1>Create Your Profile:</h1>
-          <label>Choose a SigiLife Username!
+          <label className="h3">Choose a unique SigiLife Username:
             <br />
             <input className="textinput" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
           </label>
 
           <label className='avatarchoicebox'>Choose a SigiLord:
-            <div className='avatarchoice'>
+            <div className='avatarimgbox'>
               <img className='avatar' src='Avatar1.png' alt='trench-coat-detective' onClick={() => setAvatar('0')}
                 style={{ outline: avatar === '0' ? '2px solid #2b0681' : 'none', cursor: 'pointer', height: 100, borderRadius: "20px" }} />
               <img className='avatar' src='Avatar2.png' alt='dress-detective' onClick={() => setAvatar('1')}
