@@ -141,12 +141,21 @@ export default function PlaceSigilInWorld() {
           // debugDiv.style.padding = '10px';
           // document.body.appendChild(debugDiv);
 
+          let targetPosition = new THREE.Vector3();
+          let targetQuaternion = new THREE.Quaternion();
+          let lastRefineFrame = 0;
+          const REFINE_INTERVAL_FRAMES = 60; // Refine anchor every 1s (at 60fps)
+
           const getOrCreateMesh = () => {
             if (!placedSigilMesh) {
               const geometry = new THREE.PlaneGeometry(1, 1);
               placedSigilMesh = new THREE.Mesh(geometry, sigilMaterial);
               scene.add(placedSigilMesh);
               setIsPlaced(true);
+
+              // Initialize targets to current position/rotation on first placement
+              targetPosition.copy(placedSigilMesh.position);
+              targetQuaternion.copy(placedSigilMesh.quaternion);
             }
             return placedSigilMesh;
           };
@@ -175,15 +184,18 @@ export default function PlaceSigilInWorld() {
 
             const mesh = getOrCreateMesh();
             if (intersection) {
-              mesh.position.copy(intersection);
+              targetPosition.copy(intersection);
             } else {
-              mesh.position.copy(planeCenter); // Absolute fallback
+              targetPosition.copy(planeCenter); // Absolute fallback
             }
 
             // Rotate to face the camera (billboard toward viewer)
-            mesh.lookAt(camPos);
+            const lookAtMatrix = new THREE.Matrix4();
+            lookAtMatrix.lookAt(targetPosition, camPos, new THREE.Vector3(0, 1, 0));
+            targetQuaternion.setFromRotationMatrix(lookAtMatrix);
+
             setStatus("Sigil Placed!");
-            console.log(`[AR] Placed via raycast fallback at (${mesh.position.x.toFixed(2)}, ${mesh.position.y.toFixed(2)})`);
+            console.log(`[AR] Placed via raycast fallback at (${targetPosition.x.toFixed(2)}, ${targetPosition.y.toFixed(2)})`);
           };
 
           const handleTap = (e: TouchEvent | MouseEvent) => {
@@ -211,25 +223,27 @@ export default function PlaceSigilInWorld() {
             let slamSucceeded = false;
             try {
               if (XR8.XrController && XR8.XrController.hitTest) {
+                // Prioritize DETECTED_SURFACE and ESTIMATED_SURFACE for better stability
                 const hitTestResults = XR8.XrController.hitTest(
-                  tapX, tapY, ['FEATURE_POINT', 'ESTIMATED_SURFACE', 'DETECTED_SURFACE']
+                  tapX, tapY, ['DETECTED_SURFACE', 'ESTIMATED_SURFACE', 'FEATURE_POINT']
                 );
-                console.log("[AR] hitTest results:", hitTestResults);
+                
                 if (hitTestResults && hitTestResults.length > 0) {
                   const hit = hitTestResults[0];
-                  const mesh = getOrCreateMesh();
-                  mesh.position.set(hit.position.x, hit.position.y, hit.position.z);
+                  getOrCreateMesh();
+                  
+                  targetPosition.set(hit.position.x, hit.position.y, hit.position.z);
                   if (hit.rotation) {
-                    mesh.quaternion.set(
+                    targetQuaternion.set(
                       hit.rotation.x, hit.rotation.y, hit.rotation.z, hit.rotation.w
                     );
                   } else {
-                    mesh.rotation.x = -Math.PI / 2; // default: flat on floor
+                    // Default to flat on floor (X-axis rotation)
+                    targetQuaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
                   }
+                  
                   setStatus("Sigil Anchored!");
                   slamSucceeded = true;
-                } else {
-                  console.log("[AR] hitTest returned no results, using fallback.");
                 }
               }
             } catch (err: any) {
@@ -257,23 +271,45 @@ export default function PlaceSigilInWorld() {
             }
           }
 
+          const { camera } = XR8.Threejs.xrScene();
+
+          // Apply Smoothing (Lerp/Slerp) if sigil is placed
+          if (placedSigilMesh && isPlaced) {
+            const SMOOTHING_FACTOR = 0.15; // Adjust this: lower = smoother/slower, higher = snappier/jitterier
+            placedSigilMesh.position.lerp(targetPosition, SMOOTHING_FACTOR);
+            placedSigilMesh.quaternion.slerp(targetQuaternion, SMOOTHING_FACTOR);
+
+            // Periodic Anchor Refinement:
+            // This re-runs a hit test at the sigil's screen position to "cling" to the moving points.
+            if (frameCount % REFINE_INTERVAL_FRAMES === 0 && XR8.XrController && XR8.XrController.hitTest) {
+              try {
+                // Project the current 3D position back to screen space (0 to 1)
+                const vector = targetPosition.clone();
+                vector.project(camera);
+                const screenX = (vector.x + 1) / 2;
+                const screenY = -(vector.y - 1) / 2;
+
+                // Re-run hit test at that screen coordinate
+                const results = XR8.XrController.hitTest(screenX, screenY, ['DETECTED_SURFACE', 'ESTIMATED_SURFACE']);
+                if (results && results.length > 0) {
+                  const hit = results[0];
+                  // Slowly nudge the target towards the refined surface position
+                  const refineLerp = 0.5; // Weight of the new refinement
+                  targetPosition.x = targetPosition.x * (1 - refineLerp) + hit.position.x * refineLerp;
+                  targetPosition.y = targetPosition.y * (1 - refineLerp) + hit.position.y * refineLerp;
+                  targetPosition.z = targetPosition.z * (1 - refineLerp) + hit.position.z * refineLerp;
+                }
+              } catch (err) {
+                // Silently ignore hit test failures during refinement
+              }
+            }
+          }
+
           // Update the point cloud visualization if data is available
           if (pointCloudMesh && pointCloudGeom && e.processCpuResult && e.processCpuResult.reality) {
             const reality = e.processCpuResult.reality;
             // Support multiple legacy naming conventions
             const pc = reality.pointCloud || reality.worldPoints;
-
-            // const debugDiv = document.getElementById('slam-debug-info');
-            // if (debugDiv) {
-            //   const keys = Object.keys(reality).join(', ');
-            //   const type = pc ? (typeof pc[0] === 'number' ? 'Float32Array' : 'ObjectArray') : 'N/A';
-            //   const length = pc ? pc.length : 0;
-            //   debugDiv.innerHTML = `
-            //      Reality Keys: <br/>${keys}<br/>
-            //      PC Type: ${type}<br/>
-            //      PC Length: ${length}
-            //    `;
-            // }
 
             if (pc && pc.length > 0) {
               const positions = pointCloudGeom.attributes.position.array as Float32Array;
