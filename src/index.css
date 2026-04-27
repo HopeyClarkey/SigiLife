@@ -58,15 +58,15 @@ navmenu,
 }
 
 h1,
-.h1{
+.h1 {
   font-size: 32px;
 }
 h2,
-.h2{
+.h2 {
   font-size: 24px;
 }
 h3,
-.h3{
+.h3 {
   font-size: 16px;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Main Container*/
@@ -235,7 +235,6 @@ makeprofile,
   height: 90vh;
   background-color: #e0e0e0;
   border-radius: 12px;
-
 }
 
 avatarchoicebox,
@@ -245,15 +244,12 @@ avatarchoicebox,
 }
 
 avatarimgbox,
-.avatarimgbox{
+.avatarimgbox {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-
 }
-
-
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  HomeRoom*/
 .homeroom {
@@ -267,7 +263,7 @@ avatarimgbox,
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   background-size: 1024px 100dvh;
-    flex-shrink: 0;
+  flex-shrink: 0;
   scroll-snap-align: start;
 }
 
@@ -607,7 +603,7 @@ sigilbox,
   position: relative;
   background-color: #e0e0e0;
   border-radius: 12px;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .sigilpagesigilbox {
@@ -860,7 +856,6 @@ profilepagename,
   border-width: 2px;
   padding: 5px;
   justify-content: space-around;
-
 }
 profilebox,
 .profilebox {
@@ -868,11 +863,11 @@ profilebox,
   position: absolute;
   border-color: black;
   border-width: 2px;
-  height:100%;
+  height: 100%;
   width: 29vw;
   text-align: center;
   position: relative;
-  background:rgba(0, 0, 0, 0.5)
+  background: rgba(0, 0, 0, 0.5);
 }
 
 avatar,
@@ -912,7 +907,7 @@ usercard,
   padding: 5px;
   width: 30%;
   position: relative;
-  font-size:9px;
+  font-size: 9px;
 }
 
 friendcontainer,
@@ -946,9 +941,7 @@ usersettings,
   flex-direction: column;
   padding: 25px;
   justify-content: space-between;
-
 }
-
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sigil Art */
 .sigil-art {
@@ -1022,6 +1015,7 @@ usersettings,
   --ring: #9ca3af;
 
   /* Theme identity */
+  --theme-text: #6b3fa0;
   --theme-bg-1: #e9edf5;
   --theme-bg-2: #d8e0ef;
   --theme-accent: #4b5563;
@@ -1047,6 +1041,7 @@ usersettings,
   --ring: #6b7280;
 
   /* subtle glow, not themed */
+  --theme-text: #f5f5f5;
   --theme-bg-1: #0f1117;
   --theme-bg-2: #1a1d26;
   --theme-accent: #9ca3af;
@@ -1142,5 +1137,381 @@ usersettings,
   }
   html {
     @apply font-sans;
+  }
+}
+
+@media (max-width: 768px) {
+  /* --- Scroll container --- */
+  .scrollcontainer {
+    scroll-snap-type: x mandatory;
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  /* --- Art pages: scale canvas to 768px --- */
+  .homeroom,
+  .grimoire,
+  .chargesigil,
+  .destroysigil,
+  .makesigil,
+  .writesigil,
+  .drawsigilcontainer,
+  .stylesigilcontainer,
+  .rightpage,
+  .mapbox,
+  .profilepage {
+    min-width: 768px;
+    background-size: 768px 100dvh;
+  }
+
+  /* --- Non-art pages --- */
+  .landingpage {
+    width: 100vw;
+    min-width: unset;
+  }
+
+  .makeprofile {
+    width: 100vw;
+    min-width: unset;
+    padding: 16px;
+  }
+
+  /* --- Shared UI --- */
+  .drawsigilbox {
+    width: 55%;
+  }
+
+  .stylesigilcontainerbox {
+    width: 50%;
+  }
+
+  .sigilinfo {
+    width: 40%;
+  }
+
+  .sigilibrary {
+    width: 50%;
+  }
+
+  .sharebox {
+    width: 90vw;
+  }
+
+  .profilebox {
+    width: 40vw;
+  }
+
+  .friendcontainer {
+    flex-wrap: wrap;
+    height: auto;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .usercard {
+    width: 45%;
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   MOBILE LARGE  —  430px  (iPhone Pro Max, Pixel, etc.)
+   ========================================================= */
+@media (max-width: 430px) {
+  /* --- Scroll container --- */
+  .scrollcontainer {
+    scroll-snap-type: x mandatory;
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  /* --- Art pages: scale canvas to 430px --- */
+  .homeroom,
+  .grimoire,
+  .chargesigil,
+  .destroysigil,
+  .makesigil,
+  .writesigil,
+  .drawsigilcontainer,
+  .stylesigilcontainer,
+  .rightpage,
+  .mapbox,
+  .profilepage {
+    min-width: 430px;
+    background-size: 430px 100dvh;
+  }
+
+  /* --- Headings --- */
+  h1,
+  .h1 {
+    font-size: 26px;
+  }
+  h2,
+  .h2 {
+    font-size: 20px;
+  }
+  h3,
+  .h3 {
+    font-size: 14px;
+  }
+
+  /* --- Nav menu --- */
+  .navmenu {
+    top: 6px;
+    left: 6px;
+  }
+
+  /* --- Landing page --- */
+  .landingpage {
+    width: 100vw;
+    min-width: unset;
+  }
+
+  .logo {
+    width: 92vw;
+  }
+
+  .landingrowbox {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* --- Make profile --- */
+  .makeprofile {
+    width: 100vw;
+    min-width: unset;
+    padding: 16px;
+    height: auto;
+    min-height: 90vh;
+  }
+
+  .avatarimgbox {
+    gap: 8px;
+  }
+
+  /* --- Draw sigil --- */
+  .drawsigilbox {
+    width: 85%;
+  }
+
+  /* --- Style sigil --- */
+  .stylesigilcontainerbox {
+    width: 85%;
+  }
+
+  /* --- Sigil info panel --- */
+  .sigilinfo {
+    width: 80%;
+    height: auto;
+  }
+
+  /* --- Library grid --- */
+  .sigilibrary {
+    width: 75%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* --- Sigil detail page --- */
+  .sigildetails {
+    width: 96vw;
+  }
+
+  /* --- Share box --- */
+  .sharebox {
+    width: 90vw;
+    padding: 16px;
+  }
+
+  /* --- Profile --- */
+  .profilebox {
+    width: 80vw;
+  }
+
+  .profilepagename {
+    margin: 20px;
+    flex-wrap: wrap;
+  }
+
+  .friendcontainer {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .usercard {
+    width: 80%;
+    font-size: 10px;
+  }
+
+  .avatarandtheme {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* --- Charge sigil sigilbox --- */
+  .chargesigil .sigilbox {
+    width: 85vw;
+  }
+
+  /* --- Footer --- */
+  .footer {
+    font-size: large;
+    width: 90vw;
+    text-align: center;
+  }
+}
+
+/* =========================================================
+   MOBILE SMALL  —  375px  (iPhone SE)
+   ========================================================= */
+@media (max-width: 375px) {
+  /* --- Scroll container --- */
+  .scrollcontainer {
+    scroll-snap-type: x mandatory;
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  /* --- Art pages: scale canvas to 375px --- */
+  .homeroom,
+  .grimoire,
+  .chargesigil,
+  .destroysigil,
+  .makesigil,
+  .writesigil,
+  .drawsigilcontainer,
+  .stylesigilcontainer,
+  .rightpage,
+  .mapbox,
+  .profilepage {
+    min-width: 375px;
+    background-size: 375px 100dvh;
+  }
+
+  /* --- Headings --- */
+  h1,
+  .h1 {
+    font-size: 22px;
+  }
+  h2,
+  .h2 {
+    font-size: 17px;
+  }
+  h3,
+  .h3 {
+    font-size: 13px;
+  }
+
+  /* --- Nav menu --- */
+  .navmenu {
+    top: 4px;
+    left: 4px;
+    padding: 4px;
+  }
+
+  /* --- Landing --- */
+  .landingpage {
+    width: 100vw;
+    min-width: unset;
+  }
+
+  .logo {
+    width: 95vw;
+  }
+
+  .landingrowbox {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* --- Make profile --- */
+  .makeprofile {
+    width: 100vw;
+    min-width: unset;
+    padding: 12px;
+    height: auto;
+    min-height: 90vh;
+  }
+
+  /* --- Draw sigil --- */
+  .drawsigilbox {
+    width: 92%;
+  }
+
+  /* --- Style sigil --- */
+  .stylesigilcontainerbox {
+    width: 92%;
+  }
+
+  /* --- Sigil info --- */
+  .sigilinfo {
+    width: 90%;
+    height: auto;
+  }
+
+  /* --- Library grid: single column on SE --- */
+  .sigilibrary {
+    width: 88%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* --- Sigil detail --- */
+  .sigildetails {
+    width: 98vw;
+  }
+
+  /* --- Share box --- */
+  .sharebox {
+    width: 94vw;
+    padding: 12px;
+  }
+
+  /* --- Profile --- */
+  .profilebox {
+    width: 90vw;
+  }
+
+  .profilepagename {
+    margin: 12px;
+    flex-wrap: wrap;
+  }
+
+  .friendcontainer {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .usercard {
+    width: 90%;
+    font-size: 9px;
+  }
+
+  .avatarandtheme {
+    flex-direction: column;
+    gap: 6px;
+    padding: 4px;
+  }
+
+  /* --- Charge sigil sigilbox --- */
+  .chargesigil .sigilbox {
+    width: 92vw;
+  }
+
+  /* --- Footer --- */
+  .footer {
+    font-size: medium;
+    width: 94vw;
+    text-align: center;
+  }
+
+  /* --- Slide box --- */
+  .slidebox {
+    padding: 16px;
+    font-size: 24px;
   }
 }
