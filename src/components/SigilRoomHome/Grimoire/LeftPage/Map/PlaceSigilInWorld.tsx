@@ -110,20 +110,14 @@ export default function PlaceSigilInWorld() {
 
               // Apply charge visual effect if sigil is charged
               if (sigilData.isCharged) {
-                // Gold glow effect for charged sigils
-                sigilMaterial.color.setHex(0xffd700); // Gold color
-                sigilMaterial.emissive = new THREE.Color(0xffd700); // Emissive gold glow
-                sigilMaterial.emissiveIntensity = 0.5; // Glow intensity
+                sigilMaterial.color.setHex(0x00ffcc); // Cyan color for charged sigils
               }
             });
           } else {
             sigilMaterial.color.setHex(0xc70eff);
             // Apply charge visual effect if sigil is charged (fallback)
             if (sigilData?.isCharged) {
-              // Gold glow effect for charged sigils
-              sigilMaterial.color.setHex(0xffd700); // Gold color
-              sigilMaterial.emissive = new THREE.Color(0xffd700); // Emissive gold glow
-              sigilMaterial.emissiveIntensity = 0.5; // Glow intensity
+              sigilMaterial.color.setHex(0x00ffcc); // Cyan color for charged sigils
             }
           }
 
