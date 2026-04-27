@@ -36,9 +36,9 @@ jobs:
 
       - name: Validate Secrets
         run: |
-          echo "REMOTE_HOST: ${{ secrets.REMOTE_HOST }}"
-          echo "REMOTE_USER: ${{ secrets.REMOTE_USER }}"
-          echo "SSH_KEY present: $([ -n "${{ secrets.SSH_PRIVATE_KEY }}" ] && echo 'yes' || echo 'no')"
+          if [ -z "${{ secrets.REMOTE_HOST }}" ]; then echo "Error: REMOTE_HOST secret is missing"; exit 1; fi
+          if [ -z "${{ secrets.REMOTE_USER }}" ]; then echo "Error: REMOTE_USER secret is missing"; exit 1; fi
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then echo "Error: SSH_PRIVATE_KEY secret is missing"; exit 1; fi
 
       - name: Deploy via rsync
         env:
@@ -61,7 +61,7 @@ jobs:
             --exclude 'components.json' \
             --exclude 'logs/' \
             --exclude '*.log' \
-            ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:~/SigiLife/
+            ./ $REMOTE_USER@$REMOTE_HOST:~/SigiLife/
           
       - name: Restart Application
         env:
@@ -69,7 +69,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
         run: |
-          ssh -i deploy_key.pem -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
+          ssh -i deploy_key.pem -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
             cd ~/SigiLife
             npm install
             npx prisma migrate deploy --schema=server/prisma/schema.prisma
