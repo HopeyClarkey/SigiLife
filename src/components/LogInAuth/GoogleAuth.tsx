@@ -9,19 +9,11 @@ declare global {
   }
 }
 
-export default function GoogleAuth({ formData, isNewUser = false }: { formData: any, isNewUser?: boolean }) {
+export default function GoogleAuth() {
   const { setUser } = useUser();
   const navigate = useNavigate();
   const initialized = useRef(false);
-  const formDataRef = useRef(formData);
-  const buttonId = isNewUser ? 'google-signin-button-new' : 'google-signin-button';
-
-
-
-
-  useEffect(() => {
-    formDataRef.current = formData;
-  }, [formData]);
+  const buttonId = 'google-signin-button';
 
   useEffect(() => {
     console.log('[GoogleAuth] Mounted. Checking for window.google');
@@ -31,7 +23,6 @@ export default function GoogleAuth({ formData, isNewUser = false }: { formData: 
       try {
         const payload = {
           credential: response.credential,
-          ...formDataRef.current
         };
 
         console.log('[GoogleAuth] Sending login data to backend:', { ...payload, credential: 'HIDDEN' });
@@ -50,15 +41,12 @@ export default function GoogleAuth({ formData, isNewUser = false }: { formData: 
         const data = await res.json();
         console.log('[GoogleAuth] Backend response successful:', data.success);
 
-
         setUser(data.user);
         setTimeout(() => {
           if (data.needsProfile) {
-            navigate('/login');
-          } else if (isNewUser) {
-            navigate('/make-sigil/write');
+            navigate('/create-profile');
           } else {
-            navigate('/home');
+             navigate('/home');
           }
         }, 300);
       } catch (error) {
