@@ -107,9 +107,24 @@ export default function PlaceSigilInWorld() {
             textureLoader.load(sigilData.imageData, (texture: any) => {
               sigilMaterial.map = texture;
               sigilMaterial.needsUpdate = true;
+
+              // Apply charge visual effect if sigil is charged
+              if (sigilData.isCharged) {
+                // Gold glow effect for charged sigils
+                sigilMaterial.color.setHex(0xffd700); // Gold color
+                sigilMaterial.emissive = new THREE.Color(0xffd700); // Emissive gold glow
+                sigilMaterial.emissiveIntensity = 0.5; // Glow intensity
+              }
             });
           } else {
             sigilMaterial.color.setHex(0xc70eff);
+            // Apply charge visual effect if sigil is charged (fallback)
+            if (sigilData?.isCharged) {
+              // Gold glow effect for charged sigils
+              sigilMaterial.color.setHex(0xffd700); // Gold color
+              sigilMaterial.emissive = new THREE.Color(0xffd700); // Emissive gold glow
+              sigilMaterial.emissiveIntensity = 0.5; // Glow intensity
+            }
           }
 
           // Setup Pointcloud visualizer
