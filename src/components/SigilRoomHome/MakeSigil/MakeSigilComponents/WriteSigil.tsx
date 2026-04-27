@@ -15,11 +15,13 @@ export default function WriteSigil() {
   const [intention, setIntention] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [uniqueChars, setUniqueChars] = useState('');
+
   const navigate = useNavigate();
 
 
 
-  const getUniqueChars = async (text: string): Promise<string> => {
+  const getUniqueChars = async (text: string): Promise<{ chars: string; censored: string }> => {
+    let censored = text;
     try {
       const response = await axios.post(
         'https://api.apilayer.com/bad_words',
@@ -33,39 +35,45 @@ export default function WriteSigil() {
       );
 
       if (response.data?.censored_content) {
-        text = response.data.censored_content.slice(9, -2);
+        censored = response.data.censored_content.slice(9, -2);
 
       }
     } catch (error) {
       console.error('Error checking for bad words:', (error as Error).message);
       throw error;
     }
+
     // Remove vowels, non-alphabetic characters, and duplicate characters
+
     const nonAlphaOrVowels = /[^a-zA-Z]|[aeiouAEIOU]/g;
-    const cleanText = text.replace(nonAlphaOrVowels, '').toUpperCase();
+    const cleanText = censored.replace(nonAlphaOrVowels, '').toUpperCase();
     const seen = new Set<string>();
     const uniqueChars = cleanText.split('').filter(char => {
       if (seen.has(char)) return false;
       seen.add(char);
       return true;
     });
-    console.log(uniqueChars)
-    return uniqueChars.join('');
+
+    return {chars: uniqueChars.join(''), censored};
   };
+
   useEffect(() => {
     if (!intention) {
       setUniqueChars('');
       return;
     }
-    getUniqueChars(intention).then(setUniqueChars);
-  }, [intention]);
+    getUniqueChars(intention)
+    .then(({ chars}) => {
+      setUniqueChars(chars);
+  });
+}, [intention]);
 
   const handleNext = async () => {
     if (!intention) return;
     setIsProcessing(true);
 
-    const chars = await getUniqueChars(intention);
-    localStorage.setItem('sigilIntention', intention);
+    const { chars, censored } = await getUniqueChars(intention);
+    localStorage.setItem('sigilIntention', censored);
     localStorage.setItem('sigilUniqueChars', chars);
 
     setIsProcessing(false);
@@ -88,7 +96,7 @@ export default function WriteSigil() {
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="writesigil">
-          <h1 style={{ fontSize: 32, backgroundColor: "#e0e0e0", padding: "5px", borderRadius: "12px"}}>Write Your Sigil</h1>
+          <h1 style={{ fontSize: 32, backgroundColor: "#e0e0e0", padding: "5px", borderRadius: "12px" }}>Write Your Sigil</h1>
           <Menu />
           <p >
             Enter your intention.
