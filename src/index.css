@@ -633,7 +633,7 @@ makesigil,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   min-width: 1024px;
   position: relative;
   height: 100vh;

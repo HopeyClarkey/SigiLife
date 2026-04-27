@@ -11,7 +11,7 @@ const NavMenu = function () {
       <Link className="button" to="/home">Home Room</Link>
       <Link className="button" to="/library?action=charge">Charge Sigil</Link>
       <Link className="button" to="/library?action=destroy">Destroy Sigil</Link>
-      <Link className="button" to="/make-sigil/write">Make Sigil</Link>
+      <Link className="button" to="/make-sigil">Make Sigil</Link>
       <Link className="button" to="/library">Sigil Library</Link>
       <Link className="button" to="/map">SigilMap</Link>
       <Link className="button" to="/settings">Settings</Link>

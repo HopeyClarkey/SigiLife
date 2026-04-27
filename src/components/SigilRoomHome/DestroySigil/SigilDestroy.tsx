@@ -10,6 +10,7 @@ import GhostCursor from './DestroyComponents/GhostCursor.tsx'
 export default function DestroySigil() {
   const [searchParams] = useSearchParams()
   const sigilId = searchParams.get('sigilId')
+
   const { user } = useUser()
   const [sigilData, setSigilData] = useState<any>(null)
   const [emotion, setEmotion] = useState("")
@@ -47,6 +48,12 @@ export default function DestroySigil() {
   };
 
   const handleDestroy = async () => {
+
+
+
+
+
+    
     console.log('destroy clicked, sigilData.id:', sigilData.id)
     if (isSubmitting) {
       return;
