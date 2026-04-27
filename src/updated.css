@@ -1,11 +1,46 @@
+
+
+
+/*imports, tailwind, animate, shadcn, fonts! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
+
 @import '@fontsource-variable/roboto';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
 @import '@fontsource-variable/figtree';
-/*---break---*/
+
+
+/*root! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+:root {
+  /* LIGHT (default) — soft neutral */
+  --background: #f7f7fb;
+  --foreground: #1a1a1a;
+
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+
+  --primary: #6b7280;
+  --primary-foreground: #ffffff;
+
+  --accent: #e5e7eb;
+  --accent-foreground: #1a1a1a;
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #9ca3af;
+
+  /* Theme identity */
+  --theme-text: #6b3fa0;
+  --theme-bg-1: #e9edf5;
+  --theme-bg-2: #d8e0ef;
+  --theme-accent: #4b5563;
+  --theme-glow: rgba(120, 120, 120, 0.25);
+}
+
+
+
+
+
 @custom-variant dark (&:is(.dark *));
 
 .nav-button,
@@ -30,7 +65,6 @@
   border-radius: 12px;
   border-color: #2b0681;
   border-width: 1px;
-  width: 100%;
   text-align: center;
 }
 
@@ -70,16 +104,6 @@ h3,
 .h3 {
   font-size: 16px;
 }
-
-btn,
-.btn {
-  background-color: #6915c9 ;
-  width: fit-content;
-  border-radius: 12px;
-  align-self: center;
-  padding: 5px;
-}
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Main Container*/
 mainContainer,
 .maincontainer {
@@ -95,6 +119,7 @@ mainContainer,
   overflow-x: hidden;
   scrollbar-color: #6915c9 #136d2a;
   scrollbar-width: thick;
+
   font-family: 'New Rocker', system-ui;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
@@ -196,10 +221,8 @@ makeprofile,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  background-color: white;
-  border-radius: 12px;
-  height: 90vh;
+  justify-content: center;
+  padding: 25px;
 }
 
 slidebox,
@@ -238,7 +261,16 @@ createaccountbutton,
   height: '40px';
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Make Profile*/
-
+makeprofile,
+.makeprofile {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  height: 90vh;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+}
 
 avatarchoicebox,
 .avatarchoicebox {
@@ -251,7 +283,7 @@ avatarimgbox,
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  HomeRoom*/
@@ -1174,6 +1206,7 @@ usersettings,
   }
 
   .makeprofile {
+    width: 100vw;
     min-width: unset;
     padding: 16px;
   }
@@ -1280,6 +1313,7 @@ usersettings,
 
   /* --- Make profile --- */
   .makeprofile {
+    width: 100vw;
     min-width: unset;
     padding: 16px;
     height: auto;
@@ -1429,6 +1463,7 @@ usersettings,
 
   /* --- Make profile --- */
   .makeprofile {
+    width: 100vw;
     min-width: unset;
     padding: 12px;
     height: auto;
