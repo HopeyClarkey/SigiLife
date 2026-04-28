@@ -29,10 +29,13 @@ export default function RightPage() {
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="rightpage">
           <Menu />
+          <div className='glasscard rightpage2'>
           <SigiLibrary items={sigils} user={user} />
+          </div>
           <Link className="btn" to="/make-sigil">🪶 MakeSigil</Link>
         </div>
       </div>
     </div>
+    
   )
 }

@@ -15,7 +15,7 @@ export default function SigilThumb({
         <img
           src={sigilData.imageData}
           alt={sigilData.name}
-          style={{ width: '100px', height: '100px', objectFit: 'contain', backgroundColor: "#e0e0e0", borderRadius: "12px"}}
+          style={{ width: '100%', height: '100px', objectFit: 'contain', borderRadius: "12px"}}
         />
       ) : (
         <p>{sigilData.img}</p>

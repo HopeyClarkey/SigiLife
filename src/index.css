@@ -554,15 +554,23 @@ avatarimgbox,
   overflow: visible;
 }
 
+
+.rightpage2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: visible;
+}
+
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Library*/
 .sigilibrary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 30%;
-  height: 80%;
   position: relative;
   background: transparent;
-  overflow-y: auto;
+  align-self: center;
 }
 
 .sigilthumb {
@@ -573,7 +581,7 @@ avatarimgbox,
   cursor: pointer;
   border-radius: 12px;
   font-family: 'New Rocker', system-ui;
-  padding: 15px;
+  margin: 25px;
 }
 
 .sigilthumb:hover {
@@ -777,7 +785,6 @@ drawsigilmenu,
   display: flex;
   flex-direction: column;
   align-items: center;
-
   min-width: 1024px;
   position: relative;
   height: 100vh;
