@@ -4,6 +4,10 @@ on:
   push:
     branches: [ main ]
 
+env:
+  NODE_ENV: production
+  PROD_DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
