@@ -62,6 +62,7 @@ export default function ChargeSigil() {
             <img
               src={sigilData.imageData}
               alt={sigilData.name}
+              className='glasscard'
               style={{
                 width: '60%',
                 height: '60%',
@@ -69,7 +70,7 @@ export default function ChargeSigil() {
                 borderRadius: '12px',
                 transition: 'all 800ms ease',
                 position: 'relative',
-                zIndex: 20,
+                zIndex: 25,
               }}
             />
           )}
@@ -83,7 +84,7 @@ export default function ChargeSigil() {
               VELOCITY_DISSIPATION={2}
             />
           )}
-          
+
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
 
           {!isCharging && (
