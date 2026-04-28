@@ -19,7 +19,6 @@
   padding: 5px;
   cursor: pointer;
   border: none;
-  color: rgb(15, 131, 4);
   text-decoration: none;
   display: inline-block;
   text-align: center;
@@ -820,6 +819,7 @@ mapbox,
   background-size: cover;
   background-position: center;
   align-items: center;
+  justify-content: center;
   position: relative;
   overflow: visible;
   min-width: 1024px;

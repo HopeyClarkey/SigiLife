@@ -78,10 +78,10 @@ export default function SigilPage() {
         )}
 
         <div className="sigilbuttonstack">
-          <Link style={{backgroundColor: "#e0e0e0"}} className="navbutton" to={`/charge-sigil?sigilId=${sigilData.id}`}>Charge Sigil</Link>
-          <Link style={{backgroundColor: "#e0e0e0"}} className="navbutton" to={`/destroy-sigil?sigilId=${sigilData.id}`}>Destroy Sigil</Link>
+          <Link className="btn" to={`/charge-sigil?sigilId=${sigilData.id}`}>Charge Sigil</Link>
+          <Link  className="btn" to={`/destroy-sigil?sigilId=${sigilData.id}`}>Destroy Sigil</Link>
           {user?.isAdmin && (
-            <Link style={{backgroundColor: "#e0e0e0"}} className="navbutton" to="/place-sigil-world" state={{ sigilData }}>View in AR</Link>
+            <Link  className="btn" to="/place-sigil-world" state={{ sigilData }}>View in AR</Link>
           )}
         </div>
 
