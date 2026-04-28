@@ -208,7 +208,6 @@ landingpage,
   flex-direction: column;
   align-items: center;
   background-color: #9f6bdb;
-  background-image: url('./assets/OutsideLino.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -406,7 +405,7 @@ avatarimgbox,
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-image: url('./assets/AltarLino.svg');
+
   min-width: 1024px;
   height: 100vh;
   position: relative;
@@ -439,7 +438,7 @@ avatarimgbox,
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-image: url('./assets/PyreLino.svg');
+
   overflow: visible;
   min-width: 1024px;
   height: 100vh;
@@ -483,7 +482,7 @@ avatarimgbox,
 
 .grimoire {
   display: flex;
-  background-image: url('./assets/Bookshelf.svg');
+
   overflow: visible;
   min-width: 1024px;
   height: 85vh;
@@ -553,7 +552,7 @@ avatarimgbox,
 .rightpage {
   display: flex;
   flex-direction: column;
-  background-image: url('./assets/LibraryLino.svg');
+
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   background-size: 1024px 100vh;
@@ -625,7 +624,7 @@ sigilpage,
 .sigilpage {
   display: flex;
   flex-direction: column;
-  background-image: url('./assets/LibraryLino.svg');
+
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   background-size: 1024px 100vh;
@@ -692,7 +691,7 @@ leftpage,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  MakeSigil*/
 .makesigil {
   background-image:
-    url('./assets/WritingLino.svg'),
+
     linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
   background-size:
     1024px 100vh,
@@ -740,7 +739,7 @@ leftpage,
 writesigil,
 .writesigil {
   background-image:
-    url('./assets/WritingLino.svg'),
+
     linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
 
   display: flex;
@@ -762,7 +761,7 @@ writesigilbox,
 drawsigil,
 .drawsigil {
   background-image:
-    url('./assets/WritingLino.svg'),
+
     linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
   background-size:
     1024px 100vh,
@@ -790,7 +789,7 @@ drawsigilmenu,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Style Sigil*/
 .stylesigilcontainer {
   background-image:
-    url('./assets/WritingLino.svg'),
+
     linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
   background-size:
     1024px 100vh,
@@ -841,7 +840,7 @@ mapbox,
   min-width: 1024px;
   height: 100vh;
   position: relative;
-  background-image: url('./assets/MapbookLino.svg');
+
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   background-size: 1024px 100vh;
@@ -860,7 +859,7 @@ profilepage,
   min-width: 1024px;
   height: 100vh;
   position: relative;
-  background-image: url('./assets/WritingLino.svg');
+
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   background-size: 1024px 100vh;
