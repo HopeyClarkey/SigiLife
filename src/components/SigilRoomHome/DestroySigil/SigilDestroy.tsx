@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import Menu from '../../Parts/Menu'
-import { useSearchParams,  useNavigate } from "react-router-dom"
+import { useSearchParams, useNavigate } from "react-router-dom"
 import ChangeEmotion from '../ChargeSigil/ChargeComponents/ChangeEmotion'
 import EvilEye from './DestroyComponents/EvilEye'
 import { useUser } from '@/context/UserContext'
@@ -53,7 +53,7 @@ export default function DestroySigil() {
 
 
 
-    
+
     console.log('destroy clicked, sigilData.id:', sigilData.id)
     if (isSubmitting) {
       return;
@@ -120,29 +120,29 @@ export default function DestroySigil() {
           )
           }
 
-          <h1 style={{fontSize: 32,borderRadius:'12px', position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0"}}>Destroy Sigil</h1>
+          <h1 style={{ fontSize: 32, borderRadius: '12px', position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}>Destroy Sigil</h1>
 
           {sigilData.imageData && (
-            <img className="sigilbox" src={sigilData.imageData} alt={sigilData.name} />
+            <img className="sigilbox glasscard" style={{width:"80%", height: "80%"}} src={sigilData.imageData} alt={sigilData.name} />
           )}
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
           {!isDestroying && (
-            <button className="navbutton" onClick={handleDestroy} style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }} disabled={!emotion || isSubmitting}>
+            <button className="btn" onClick={handleDestroy}  disabled={!emotion || isSubmitting}>
               Destroy Sigil
             </button>
           )}
-{isDestroying && (
-  <button
-    className="navbutton"
-    style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}
-    onClick={() => {
-      setIsDestroying(false)
-      setTimeout(() => navigate('/home'), 200)
-    }}
-  >
-    Go Home
-  </button>
-)}
+          {isDestroying && (
+            <button
+              className="btn"
+              style={{ position: 'relative', zIndex: 20 }}
+              onClick={() => {
+                setIsDestroying(false)
+                setTimeout(() => navigate('/home'), 200)
+              }}
+            >
+              Go Home
+            </button>
+          )}
         </div>
       </div>
     </div>

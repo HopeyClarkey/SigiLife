@@ -71,7 +71,8 @@ export default function MakeSigil() {
             {remainingSlots < 3 && (
 
               <p className="info-text warning">⚠️ {remainingSlots} slot(s) remaining. <br/>
-              You will have to destroy a Sigil before you can create a new sigil. <br/> Visit your Library to select and destroy Sigils.
+               {remainingSlots === 0 ? 'You will have to destroy a Sigil before you can create a new sigil. Visit your Library to select and destroy Sigils.' : ""}
+              
               </p>
           
             )}

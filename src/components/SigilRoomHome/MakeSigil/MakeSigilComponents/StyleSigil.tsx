@@ -139,15 +139,15 @@ export default function StyleSigil() {
         <div className='stylesigilcontainer'>
           <h1>Share & Save your Sigil</h1>
 
-          <div className="glasscard" style={{ height: "75dvh", display: "flex", justifyContent: "space-around" }}>
+          <div className="glasscard" style={{ minHeight: "75dvh", display: "flex", flex: 1 }}>
             <h1>Name:<br /> {sigilData.name}</h1>
             {sigilData.intention && <p>Intention: {sigilData.intention}</p>}
             {sigilData.imageData && (
-              <img src={sigilData.imageData} alt={sigilData.name} style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={sigilData.imageData} alt={sigilData.name} style={{width: '100%', height: '100%' }} />
             )}
           </div>
-          <div className="glasscard" style={{ padding: '16px' }}>
-            <h2>Location (optional)</h2>
+          <div className="glasscard" style={{ padding: '5px', minHeight: "23dvh", position: 'relative', zIndex: 20 , flex: 0, display: "flex", justifyContent: "start"}}>
+            <h2>Location</h2>
             {location ? (
               <p>
                 📍 {location.locationName}{' '}
@@ -165,7 +165,7 @@ export default function StyleSigil() {
               />
             )}
           </div>
-          <div className="glasscard" style={{ height: "25dvh" }}>
+          <div className="glasscard" style={{ minHeight: "23dvh" }}>
             <h2>Share with your SigiFriends</h2>
             <h3>Select users to share your sigil to, if they have a slot available.</h3>
             <div style={{ maxHeight: '150px', overflowY: 'auto' }}>

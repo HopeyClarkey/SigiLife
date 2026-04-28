@@ -97,6 +97,8 @@ btn,
   border: 1px solid rgba(255, 255, 255, 0.2);
   transform: translateZ(0);
   transition: all 500ms ease;
+    overflow-y: auto;
+  overflow-x: hidden;
 
   /* animate-in fade-in zoom-in slide-in-from-bottom-8 */
   animation: glass-card-in 500ms ease forwards;
@@ -236,16 +238,6 @@ logo,
   transition: all 500ms ease;
   border-radius: 12px;
 }
-makeprofile,
-.makeprofile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background-color: white;
-  border-radius: 12px;
-  height: 90vh;
-}
 
 slidebox,
 .slidebox {
@@ -284,6 +276,18 @@ createaccountbutton,
   height: '40px';
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Make Profile*/
+
+makeprofile,
+.makeprofile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  border-radius: 12px;
+  height: 90vh;
+}
+
 
 avatarchoicebox,
 .avatarchoicebox {
@@ -474,12 +478,7 @@ avatarimgbox,
   z-index: 1;
 }
 
-.sigilbox {
-  width: 60vw;
-  max-width: 600px;
-  height: auto;
-  object-fit: contain;
-}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Grimoire*/
 
 .grimoire {
@@ -570,21 +569,29 @@ avatarimgbox,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+    justify-content: flex-start;
   overflow: visible;
   flex: 1;
+    width: 80%;
+  height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Library*/
 .sigilibrary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 20vh;
   position: relative;
   background: transparent;
   align-self: center;
-  width: 100%;
-  height: 100%;
-  flex: 1;
+  height: auto; ;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 8px;
+  gap: 8px;
 }
 
 .sigilthumb {
@@ -592,12 +599,11 @@ avatarimgbox,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   gap: 6px;
+  cursor: pointer;
   border-radius: 12px;
-  margin: 8px;
   padding: 6px;
-  justify-content: center;
+  min-height: 140px; 
 }
 
 .sigilthumb:hover {
@@ -656,6 +662,7 @@ sigildetailslocation,
   flex-direction: column;
   align-items: center;
 }
+
 sigilbox,
 .sigilbox {
   height: 35%;
@@ -666,13 +673,6 @@ sigilbox,
   opacity: 0.5;
 }
 
-.sigilpagesigilbox {
-  height: 50%;
-  display: flex;
-  position: relative;
-  background-color: #e0e0e0;
-  border-radius: 12px;
-}
 
 sigilpageaddlocation,
 .sigilpageaddlocation {

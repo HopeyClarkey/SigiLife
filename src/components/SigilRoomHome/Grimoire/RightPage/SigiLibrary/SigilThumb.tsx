@@ -9,13 +9,13 @@ export default function SigilThumb({
 }) {
   return (
     <div className={`sigilthumb ${isCharged ? 'charged' : ''}`} onClick={onClick}>
-      <p style={{fontSize:36}}>{sigilData.name.length > 6 ? sigilData.name.slice(0, 6) + "..." : sigilData.name}</p>
+      <p style={{fontSize:16}}>{sigilData.name.length > 6 ? sigilData.name.slice(0, 6) + "..." : sigilData.name}</p>
 
       {sigilData.imageData ? (
         <img
           src={sigilData.imageData}
           alt={sigilData.name}
-          style={{ width: '100%', height: '100%', minHeight: '80px', objectFit: 'contain', borderRadius: "12px" }}
+
         />
       ) : (
         <p>{sigilData.img}</p>
