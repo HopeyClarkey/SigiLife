@@ -74,7 +74,7 @@ export default function SigilPage() {
         </div>
 
         {sigilData.imageData && (
-          <img className="sigilpagesigilbox" src={sigilData.imageData} alt={sigilData.name} />
+          <img className="glasscard" src={sigilData.imageData} alt={sigilData.name} />
         )}
 
         <div className="sigilbuttonstack">

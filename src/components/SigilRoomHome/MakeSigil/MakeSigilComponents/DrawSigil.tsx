@@ -375,8 +375,8 @@ export default function DrawSigil() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className="drawsigilcontainer">
-                      <Menu />
+        <div className="drawsigil">
+          <Menu />
           <div className="flex flex-col justify-evenly h-[90vh] bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-[80vw] m-6 pointer-events-auto border border-white/20 transform transition-all duration-500 animate-in fade-in zoom-in slide-in-from-bottom-8">
             <h1 style={{fontSize: 32}}>Draw Your Sigil</h1>
 
@@ -483,7 +483,7 @@ export default function DrawSigil() {
               <canvas ref={canvasRef} />
             </div>
             {!isDrawingMode && (
-              <div className='rowbox'>
+              <div className='rowbox'style={{justifyContent: "center"}}>
               <button className="btn" onClick={handleDeleteSelected} >
                 🗑️ Delete
               </button>
@@ -515,7 +515,6 @@ export default function DrawSigil() {
                 <button
                   className="btn"
                   onClick={handleNextToStyle}
-                  
                 >
                   Review
                 </button>

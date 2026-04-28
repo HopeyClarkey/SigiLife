@@ -76,7 +76,7 @@ export default function MakeSigil() {
           </div>
 
           <button
-            className="navbutton"
+            className="btn"
             onClick={handleCreateSigil}
             disabled={loading || !canCreateMore}
           >

@@ -116,15 +116,15 @@ return (
       <div className='stylesigilcontainer'>
         <h1>Share & Save your Sigil</h1>
 
-        <div className="flex flex-col justify-evenly h-[90vh] bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-[80vw] m-6 pointer-events-auto border border-white/20 transform transition-all duration-500 animate-in fade-in zoom-in slide-in-from-bottom-8">
-          <h1>Name: {sigilData.name}</h1>
+        <div className="glasscard" style={{height: "75dvh", display: "flex", justifyContent: "space-around"}}>
+          <h1>Name:<br/> {sigilData.name}</h1>
           {sigilData.intention && <p>Intention: {sigilData.intention}</p>}
           {sigilData.imageData && (
-            <img src={sigilData.imageData} alt={sigilData.name} style={{ maxWidth: '100%', maxHeight: '300px' }} />
+            <img src={sigilData.imageData} alt={sigilData.name} style={{ maxWidth: '100%', maxHeight: '100%' }} />
           )}
         </div>
 
-        <div className="flex flex-col justify-evenly h-[90vh] bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] w-[80vw] m-6 pointer-events-auto border border-white/20 transform transition-all duration-500 animate-in fade-in zoom-in slide-in-from-bottom-8">
+        <div className="glasscard"style={{height: "25dvh"}}>
           <h2>Share with your SigiFriends</h2>
           <h3>Select users to share your sigil to, if they have a slot available.</h3>
           <div style={{ maxHeight: '150px', overflowY: 'auto' }}>

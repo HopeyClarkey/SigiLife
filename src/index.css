@@ -80,6 +80,39 @@ btn,
   margin: 5px;
 }
 
+.glasscard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 90vh;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  width: 80vw;
+  margin: 1.5rem;
+  pointer-events: auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateZ(0);
+  transition: all 500ms ease;
+
+  /* animate-in fade-in zoom-in slide-in-from-bottom-8 */
+  animation: glass-card-in 500ms ease forwards;
+}
+
+@keyframes glass-card-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Main Container*/
 mainContainer,
 .maincontainer {
@@ -703,8 +736,8 @@ writesigilbox,
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Draw Sigil*/
-drawsigilcontainer,
-.drawsigilcontainer {
+drawsigil,
+.drawsigil {
   background-image:
     url('./assets/WritingLino.svg'),
     linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
@@ -721,17 +754,7 @@ drawsigilcontainer,
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
 }
-drawsigilcontainerbox,
-.drawsigilbox {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 35%;
-  padding: 5px;
-  align-items: center;
-  background-color: #e0e0e0;
-  border-radius: 12px;
-}
+
 
 drawsigilmenu,
 .drawsigilmenu {
@@ -739,36 +762,9 @@ drawsigilmenu,
   flex-direction: column;
   align-items: center;
   position: relative;
-}
-drawsigilmenutoobox,
-.drawsigilmenutoobox {
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  position: relative;
-}
-drawsigilmenutoo,
-.drawsigilmenu {
-  display: flex;
-  flex-direction: row;
-  height: fit-content;
-  position: relative;
-}
-drawsigilmenutoobox1,
-.drawsigilmenutoobox1 {
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  position: relative;
+  justify-content: center;
 }
 
-drawsigilmenutoobox2,
-.drawsigilmenutoobox2 {
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  position: relative;
-}
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Style Sigil*/
 .stylesigilcontainer {
