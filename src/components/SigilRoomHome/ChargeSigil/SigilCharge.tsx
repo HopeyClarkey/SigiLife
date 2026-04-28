@@ -47,9 +47,32 @@ export default function ChargeSigil() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll' }}>
-        <div className='chargesigil' >
+        <div
+          className='chargesigil'
+          style={{
+            backgroundColor: isCharging ? '#000000' : undefined,
+            transition: 'background-color 800ms ease',
+          }}
+        >
           <Menu />
 
+
+          <h1 style={{ fontSize: 32, borderRadius: '12px', position: 'relative', zIndex: 20 }}>Charge Sigil</h1>
+          {sigilData.imageData && (
+            <img
+              src={sigilData.imageData}
+              alt={sigilData.name}
+              style={{
+                width: '60%',
+                height: '60%',
+                objectFit: 'contain',
+                borderRadius: '12px',
+                transition: 'all 800ms ease',
+                position: 'relative',
+                zIndex: 20,
+              }}
+            />
+          )}
           {isCharging && (
             <SplashCursor
               BACK_COLOR={{ r: 0, g: 0, b: 0 }}
@@ -60,17 +83,13 @@ export default function ChargeSigil() {
               VELOCITY_DISSIPATION={2}
             />
           )}
-
-          {sigilData.imageData && (
-            <img className="sigilbox" src={sigilData.imageData} alt={sigilData.name} />
-          )}
-
+          
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
 
           {!isCharging && (
             <button
               className='navbutton'
-              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0"}}
+              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}
               onClick={() => setIsCharging(true)}
               disabled={!emotion}
             >
@@ -91,7 +110,7 @@ export default function ChargeSigil() {
           {isCharging && (
             <button
               className='navbutton'
-              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0"}}
+              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}
               onClick={() => setTimeout(() => navigate(`/destroy-sigil?sigilId=${sigilData.id}`), 100)}
             >
               Destroy Your Charged Sigil!
