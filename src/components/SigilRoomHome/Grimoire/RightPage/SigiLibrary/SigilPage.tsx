@@ -70,7 +70,7 @@ export default function SigilPage() {
               )}
             </div>
           )}
-          <p>{sigilData.isCharged ? "This Sigil has been Charged" : "This Sigil has not been Charged"}</p>
+          <p>{sigilData.isCharged ? "Charged" : ""}</p>
         </div>
 
         {sigilData.imageData && (
@@ -78,10 +78,12 @@ export default function SigilPage() {
         )}
 
         <div className="sigilbuttonstack">
-          <Link className="btn" to={`/charge-sigil?sigilId=${sigilData.id}`}>Charge Sigil</Link>
-          <Link  className="btn" to={`/destroy-sigil?sigilId=${sigilData.id}`}>Destroy Sigil</Link>
+          {!sigilData.isCharged && (
+            <Link className="btn" to={`/charge-sigil?sigilId=${sigilData.id}`}>Charge Sigil</Link>
+          )}
+          <Link className="btn" to={`/destroy-sigil?sigilId=${sigilData.id}`}>Destroy Sigil</Link>
           {user?.isAdmin && (
-            <Link  className="btn" to="/place-sigil-world" state={{ sigilData }}>View in AR</Link>
+            <Link className="btn" to="/place-sigil-world" state={{ sigilData }}>View in AR</Link>
           )}
         </div>
 
