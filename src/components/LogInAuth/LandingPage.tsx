@@ -68,12 +68,12 @@ export default function LandingPage() {
           <>
             <img src={SigiLifeLogo} className="logo" alt="Sigil-Life-Logo" />
             <div className='rowbox'>
-              <h1 className="glasscard" style={{ height: "10vh", width: "80vw", color: "white", padding: "15px", margin: "5px", borderRadius: "12px" }}>
+              <h1 className="glasscard" style={{ height: "10vh", width: "80vw", color: "white", padding: "15px", margin: "25px", borderRadius: "12px" }}>
                 SigiLife is a location-based ritual platform where users transform personal intentions into digital sigils
               </h1>
             </div>
             <div className='displaypitch '>
-              <Carousel setApi={setCarouselApi} opts={{ loop: true }} orientation="vertical" className="slidebox" style={{height: "30vh"}}>
+              <Carousel setApi={setCarouselApi} opts={{ loop: true }} orientation="vertical" className="slidebox" style={{height: "30vh", margin: "25px"}}>
                 <CarouselContent className="h-72" style={{height: "23vh"}}>
                   {slides.map((content, i) => (
                     <CarouselItem key={i} onClick={handleSlideClick} className="cursor-pointer select-none" style={{fontSize: 48}}>

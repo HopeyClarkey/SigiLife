@@ -46,7 +46,7 @@ export default function CreateProfile() {
           <h1 style={{ color: "black", fontSize: "38px" }}>Create Your Profile:</h1>
           <label className="h2">Choose a unique SigiLife Username:
             <br />
-            <input style={{color:"black"}}className="textinput" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input style={{ color: "black" }} className="textinput" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
           </label>
 
           <label className='avatarchoicebox'><h3>Choose a SigiLord:</h3>
@@ -80,7 +80,7 @@ export default function CreateProfile() {
             <br />
             {isDark ? " You prefer the shadows, stealth attacks, sewing secrets, deep corners, and the night... (or you are playing the game at night.)" : " You prefer the daylight, sparkly, splashy attacks, shimmering light, and bright sun... (or you are playing the game in daylight.)"}
           </label>
-<br />
+          <br />
           <button
             className="btn"
             disabled={!username || !homeLocation}
