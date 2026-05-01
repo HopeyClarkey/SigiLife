@@ -10,7 +10,11 @@ export default function CreateProfile() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [avatar, setAvatar] = useState('0');
-  const [homeLocation, setHomeLocation] = useState('');
+  const [homeLocation, setHomeLocation] = useState<{
+    name: string;
+    latitude: number;
+    longitude: number;
+    } | null>(null);
   const [isDark, setIsDark] = useState(false);
 
   const handleCreate = async () => {
@@ -18,13 +22,13 @@ export default function CreateProfile() {
     try {
       const res = await fetch(`/api/users/${user.id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username,
-          avatar: parseInt(avatar),
-          theme: isDark ? 1 : 0,
-          homeLocation
-        })
+        headers: { "Content-Type": "application/json" },  
+    body: JSON.stringify({
+      username,
+      avatar: parseInt(avatar),
+      theme: isDark ? 1 : 0,
+      homeLocation: homeLocation ? JSON.stringify(homeLocation) : null
+})
       });
       const updated = await res.json();
       setUser(updated);
@@ -59,14 +63,20 @@ export default function CreateProfile() {
           </label>
 
           <label>Choose your Home Sigil Location:
-            <MapSearchBox
-              accessToken={import.meta.env.VITE_MAPBOX_TOKEN || ''}
-              onRetrieve={(res) => {
-                if (res.features && res.features.length > 0) {
-                  setHomeLocation(res.features[0].properties.full_address || res.features[0].properties.name);
-                }
-              }}
-            />
+<MapSearchBox
+  accessToken={import.meta.env.VITE_MAPBOX_TOKEN || ''}
+  onRetrieve={(res) => {
+    if (res.features && res.features.length > 0) {
+      const feature = res.features[0];
+      const [lng, lat] = feature.geometry.coordinates;
+      const name = feature.properties.full_address 
+        || feature.properties.place_formatted 
+        || feature.properties.name 
+        || '';
+      setHomeLocation({ name, latitude: lat, longitude: lng });
+    }
+  }}
+/>
           </label>
 
           <label>

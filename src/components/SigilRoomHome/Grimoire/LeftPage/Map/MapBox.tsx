@@ -12,6 +12,19 @@ import Menu from '../../../../Parts/Menu';
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
+// type Sigil = {
+//   id: number;
+//   name: string;
+//   intention?: string;
+//   imageData?: string;
+//   locationName?: string;
+//   latitude?: number | string;
+//   longitude?: number | string;
+//   chargeScore: number;
+//   destroyScore: number;
+//   userVote: VoteType | null;
+// };
+
 export default function MapBox() {
   const { user } = useUser()
   const navigate = useNavigate();

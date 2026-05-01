@@ -69,6 +69,11 @@ h3,
     font-family: 'New Rocker'
 }
 
+p1,
+.p1{
+  font-family: "Pom"
+}
+
 btn,
 .btn {
   background-color: #6915c9;
@@ -169,6 +174,11 @@ btn,
   font-style: normal;
 }
 
+.pompiere-regular {
+  font-family: "Pompiere", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Main Container*/
@@ -176,8 +186,8 @@ mainContainer,
 .maincontainer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
   background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
@@ -249,15 +259,13 @@ landingpage,
 .landingpage {
   display: flex;
   flex-direction: column;
-  
   align-items: center;
   background-color: #9f6bdb;
   background-image: url('./assets/OutsideLino.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
+  height: 110dvh;
   justify-content: center;
 }
 
@@ -266,17 +274,14 @@ logo,
   display: flex;
   position: relative;
   align-self: center;
-  width: 80vw;
-  display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  padding: 2rem;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  width: 80vw;
-  margin: 1.5rem;
-  pointer-events: auto;
+  width: 95vw;
+  height: 28vh;
+  margin: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transform: translateZ(0);
   transition: all 500ms ease;
@@ -297,6 +302,7 @@ displaypitch,
 .displaypitch {
   display: flex;
   flex-direction: column;
+  width: 95vw;
   background-color: #6d8b00;
   border-radius: 12px;
 }

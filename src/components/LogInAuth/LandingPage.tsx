@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SigiLifeLogo from '../../assets/LinoSigiLogo.svg';
+import SigiLifeLogo from '../../assets/SigilifeLogo.svg';
 import GoogleAuth from './GoogleAuth';
 import { useUser } from '@/context/UserContext';
 import {
@@ -45,7 +45,8 @@ export default function LandingPage() {
   const slides = [
     <><br/>Mark your intent.<br />Leave a trace.<br /><br />Nothing disappears without a ritual.</>,
     <>SigiLife is a map of hidden intentions: <br />yours and everyone else's.<br />
-    Every sigil is a statement, a feeling,<br /> a moment made permanent…<br /> until you choose to let it go.</>,
+    Every sigil is a statement, a feeling,<br /> a moment made permanent…<br /></>,
+    <> until you choose to let it go.</>,
     <><br/><br/>How It Works:</>,
     <>You don't just write goals.<br /> You encode them.<br />Write your intention. <br />Strip it down. <br />Distill it.</>,
     <>Turn it into a Sigil:<br />something abstract, <br />something unique, <br /> something yours.</>,
@@ -66,17 +67,18 @@ export default function LandingPage() {
       <div className='maincontainer'>
         <div className="landingpage">
           <>
+
             <img src={SigiLifeLogo} className="logo" alt="Sigil-Life-Logo" />
-            <div className='rowbox'>
-              <h1 className="glasscard" style={{ height: "10vh", width: "80vw", color: "white", padding: "15px", margin: "25px", borderRadius: "12px" }}>
-                SigiLife is a location-based ritual platform where users transform personal intentions into digital sigils
-              </h1>
+            <div className="logo "style={{ height: "15vh", color: "white", padding: "5px", margin: "5px", borderRadius: "12px",}}>
+              <p >
+                SigiLife is a location-based ritual platform where you can transform personal intentions into digital sigils.
+              </p>
             </div>
             <div className='displaypitch '>
               <Carousel setApi={setCarouselApi} opts={{ loop: true }} orientation="vertical" className="slidebox" style={{height: "30vh", margin: "25px"}}>
-                <CarouselContent className="h-72" style={{height: "23vh"}}>
+                <CarouselContent style={{height: "36vh", fontSize:"22px", width: "50vw", fontFamily: "Pompiere", textAlign: "center"}}>
                   {slides.map((content, i) => (
-                    <CarouselItem key={i} onClick={handleSlideClick} className="cursor-pointer select-none" style={{fontSize: 48}}>
+                    <CarouselItem key={i} onClick={handleSlideClick} className="cursor-pointer select-none" >
                       {content}
                     </CarouselItem>
                   ))}
@@ -85,11 +87,9 @@ export default function LandingPage() {
                 <CarouselNext />
               </Carousel>
             </div>
-          </>
-
-          <div className='landingrowbox'>
             <GoogleAuth />
-          </div>
+
+          </>
         </div>
       </div>
     </>
