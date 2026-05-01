@@ -65,18 +65,19 @@ export default function LandingPage() {
   return (
     <>
       <div className='maincontainer'>
+        <div className='scrollcontainer'>
         <div className="landingpage">
           <>
 
             <img src={SigiLifeLogo} className="logo" alt="Sigil-Life-Logo" />
-            <div className="logo "style={{ height: "15vh", color: "white", padding: "5px", margin: "5px", borderRadius: "12px",}}>
+            <div className="logo "style={{ height: "fit-content", color: "white", padding: "5px", margin: "5px", borderRadius: "12px",}}>
               <p >
                 SigiLife is a location-based ritual platform where you can transform personal intentions into digital sigils.
               </p>
             </div>
             <div className='displaypitch '>
               <Carousel setApi={setCarouselApi} opts={{ loop: true }} orientation="vertical" className="slidebox" style={{height: "30vh", margin: "25px"}}>
-                <CarouselContent style={{height: "36vh", fontSize:"22px", width: "50vw", fontFamily: "Pompiere", textAlign: "center"}}>
+                <CarouselContent style={{height: "36vh", fontSize:"22px", fontFamily: "Pompiere", textAlign: "center"}}>
                   {slides.map((content, i) => (
                     <CarouselItem key={i} onClick={handleSlideClick} className="cursor-pointer select-none" >
                       {content}
@@ -90,6 +91,7 @@ export default function LandingPage() {
             <GoogleAuth />
 
           </>
+        </div>
         </div>
       </div>
     </>
