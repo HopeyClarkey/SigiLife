@@ -7,14 +7,15 @@ const NavMenu = function () {
   return (
     <nav className='menu'>
 
-      <button className="button" onClick={() => navigate(-1)}>⬅ Go Back</button>
-      <Link className="button" to="/home">Home Room</Link>
-      <Link className="button" to="/library?action=charge">Charge Sigil</Link>
-      <Link className="button" to="/library?action=destroy">Destroy Sigil</Link>
-      <Link className="button" to="/make-sigil">Make Sigil</Link>
-      <Link className="button" to="/library">Sigil Library</Link>
-      <Link className="button" to="/map">SigilMap</Link>
-      <Link className="button" to="/settings">Settings</Link>
+      <button className="pinkbutton" onClick={() => navigate(-1)}>⬅ Go Back</button>
+      <Link className="pinkbutton" to="/home">Home Room</Link>
+      <Link className="pinkbutton" to="/library?action=charge">Charge Sigil</Link>
+      <Link className="pinkbutton" to="/library?action=destroy">Destroy Sigil</Link>
+      <Link className="pinkbutton" to="/make-sigil">Make Sigil</Link>
+      <Link className="pinkbutton" to="/library">Sigil Library</Link>
+      <Link className="pinkbutton" to="/map">SigilMap</Link>
+      <Link className="pinkbutton" to="/settings">Settings</Link>
+      <Link className="pinkbutton" to="/profile">SigiLites</Link>
 
     </nav>
   )
@@ -29,8 +30,8 @@ export default function Menu() {
 
   return (
     <div className="navmenu">
-     <button id="menu-btn" className="button" onClick={() => setMenuOpen(prev => !prev)}>
-        {menuOpen ? '✕ Close Menu' : '☰ Menu'}
+     <button id="menu-btn" className="pinkbutton" onClick={() => setMenuOpen(prev => !prev)}>
+        {menuOpen ? '✕ Close' : '☰'}
       </button>
       {menuOpen && <NavMenu />}
     </div>

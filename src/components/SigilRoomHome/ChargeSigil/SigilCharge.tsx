@@ -89,8 +89,8 @@ export default function ChargeSigil() {
 
           {!isCharging && (
             <button
-              className='navbutton'
-              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}
+              className='glassbutton'
+              style={{ position: 'relative', zIndex: 20,  }}
               onClick={() => setIsCharging(true)}
               disabled={!emotion}
             >
@@ -100,8 +100,8 @@ export default function ChargeSigil() {
 
           {isCharging && (
             <button
-              className='navbutton'
-              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}
+              className='glassbutton'
+              style={{ position: 'relative', zIndex: 20,  }}
               onClick={handleSave}
             >
               Save your Sigil!
@@ -110,8 +110,8 @@ export default function ChargeSigil() {
 
           {isCharging && (
             <button
-              className='navbutton'
-              style={{ position: 'relative', zIndex: 20, backgroundColor: "#e0e0e0" }}
+              className='glassbutton'
+              style={{ position: 'relative', zIndex: 20,}}
               onClick={() => setTimeout(() => navigate(`/destroy-sigil?sigilId=${sigilData.id}`), 100)}
             >
               Destroy Your Charged Sigil!

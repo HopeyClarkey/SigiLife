@@ -416,7 +416,7 @@ export default function DrawSigil() {
                 <div >
 
                   
-                  <button className="btn" onClick={handleChangeColor} >🎨Color</button>
+                  <button className="glassbutton" onClick={handleChangeColor} >🎨Color</button>
                   <button className="btn" onClick={handleAddRing}>⭕Ring</button>
                   <button className="btn" onClick={handleAddGlow}>✨Glow</button>
               

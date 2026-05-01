@@ -141,13 +141,13 @@ export default function DestroySigil() {
 
           <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
           {!isDestroying && (
-            <button className="btn" onClick={handleDestroy} disabled={!emotion || isSubmitting}>
+            <button className="glassbutton" onClick={handleDestroy} disabled={!emotion || isSubmitting}>
               Destroy Sigil
             </button>
           )}
           {isDestroying && (
             <button
-              className="btn"
+              className="glassbutton"
               style={{ position: 'relative', zIndex: 20 }}
               onClick={() => {
                 setIsDestroying(false)

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SigiLifeLogo from '../../assets/SigilifeLogo.svg';
+import SigiLifeLogo from '../../assets/LinoSigiLogo.svg';
 import GoogleAuth from './GoogleAuth';
 import { useUser } from '@/context/UserContext';
 import {

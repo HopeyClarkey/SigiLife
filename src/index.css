@@ -1,10 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '@fontsource-variable/roboto';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
-@import '@fontsource-variable/figtree';
+
 /*---break---*/
 @custom-variant dark (&:is(.dark *));
 
@@ -59,14 +56,17 @@ navmenu,
 h1,
 .h1 {
   font-size: 32px;
+  font-family: 'New Rocker'
 }
 h2,
 .h2 {
   font-size: 24px;
+    font-family: 'New Rocker'
 }
 h3,
 .h3 {
   font-size: 16px;
+    font-family: 'New Rocker'
 }
 
 btn,
@@ -78,6 +78,55 @@ btn,
   padding: 5px;
   margin: 5px;
 }
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.pinkbutton {
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(to right, #a855f7, #ec4899);
+  color: white;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pinkbutton:hover {
+  background: linear-gradient(to right, #9333ea, #db2777);
+  transform: scale(1.05);
+}
+
+.pinkbutton:active {
+  transform: scale(0.95);
+}
+
+.glassbutton {
+  padding: 0.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glassbutton:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+  color: black;
+}
+
+.glassbutton:active {
+  transform: scale(0.95);
+}
+
+
 
 .glasscard {
   display: flex;
@@ -114,6 +163,14 @@ btn,
   }
 }
 
+.special-elite-regular {
+  font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Main Container*/
 mainContainer,
 .maincontainer {
@@ -129,7 +186,7 @@ mainContainer,
   overflow-x: hidden;
   scrollbar-color: #6915c9 #136d2a;
   scrollbar-width: thick;
-  font-family: 'New Rocker', system-ui;
+  font-family: 'Special Elite', system-ui;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   text-align: center;
@@ -157,20 +214,6 @@ maincontainer::-webkit-scrollbar-thumb:hover,
   background: #7f64be;
 }
 
-footer,
-.footer {
-  display: flex;
-  min-height: fit-content;
-  justify-content: center;
-  position: absolute;
-  bottom: 0%;
-  font-size: x-large;
-  size: fit-content;
-  color: rgb(199, 14, 255);
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
-  font-family: 'Poller One', sans-serif;
-}
 
 scrollcontainer,
 .scrollcontainer {
@@ -179,6 +222,7 @@ scrollcontainer,
   scroll-snap-type: x mandatory;
   width: 100vw;
   height: 100dvh;
+  align-self: stretch;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -205,8 +249,10 @@ landingpage,
 .landingpage {
   display: flex;
   flex-direction: column;
+  
   align-items: center;
   background-color: #9f6bdb;
+  background-image: url('./assets/OutsideLino.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -244,7 +290,7 @@ slidebox,
   padding: 30px;
   align-items: center;
   bottom: 0;
-  font-size: 32;
+  font-size: 32px;
 }
 
 displaypitch,
@@ -261,17 +307,17 @@ landingrowbox,
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  gap: '16px';
-  flex-wrap: 'wrap';
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 createaccountbutton,
 .createaccountbutton {
   border-radius: 20px;
-  background-color: 'white';
-  border-color: '#e0e0e0';
-  border-width: '1 px';
-  height: '40px';
+  background-color: white;
+  border-color: #e0e0e0;
+  border-width: 1 px;
+  height: 40px;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Make Profile*/
 
@@ -307,14 +353,15 @@ avatarimgbox,
   flex-direction: column;
   background-image: url('./assets/InsideLino.svg');
   overflow: visible;
-  min-width: 1024px;
   height: 100dvh;
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  background-size: 1024px 100dvh;
+  background-position: center;
+  background-repeat: no-repeat;
   flex-shrink: 0;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
+  aspect-ratio: 1024 / 768;
 }
 
 .homeroom nav {
@@ -328,49 +375,49 @@ avatarimgbox,
 
 .destroybutton {
   position: absolute;
-  top: 59px;
-  left: 6px;
+  top: 10;
+  left: 0;
   z-index: 10;
 }
 
 .destroybutton img {
-  height: 412px;
+  height:470px;
   display: block;
 }
 
 .chargebutton {
   position: absolute;
-  left: 340px;
-  top: 264px;
+  top: 0;
+  left: 0;
   z-index: 10;
 }
 
 .chargebutton img {
-  height: 148px;
+  height:100px;
   display: block;
 }
 
 .grimoirebutton {
   position: absolute;
-  right: 51px;
-  top: 48px;
+  top: 0;
+  left: 0;
   z-index: 10;
 }
 
 .grimoirebutton img {
-  height: 351px;
+  height:100px;
   display: block;
 }
 
 .makesigilbutton {
   position: absolute;
-  left: 475px;
-  top: 367px;
+  top: 0;
+  left: 0;
   z-index: 10;
 }
 
 .makesigilbutton img {
-  height: 275px;
+  height:100px;
   display: block;
 }
 
@@ -690,7 +737,6 @@ leftpage,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  MakeSigil*/
 .makesigil {
   background-image:
-
     linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
   background-size:
     1024px 100vh,
@@ -838,11 +884,8 @@ mapbox,
   overflow: visible;
   min-width: 1024px;
   height: 100vh;
-  position: relative;
-
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  background-size: 1024px 100vh;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Profile*/
@@ -853,7 +896,7 @@ profilepage,
   background-position: center;
   align-items: center;
   position: relative;
-  justify-content: space around;
+  justify-content: space-around;
   overflow: visible;
   min-width: 1024px;
   height: 100vh;
@@ -881,7 +924,6 @@ profilepagename,
 profilebox,
 .profilebox {
   border-radius: 12px;
-  position: absolute;
   border-color: black;
   border-width: 2px;
   height: 100%;
@@ -977,7 +1019,6 @@ usersettings,
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: 'Figtree Variable', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -1159,378 +1200,5 @@ usersettings,
   }
   html {
     @apply font-sans;
-  }
-}
-
-@media (max-width: 768px) {
-  /* --- Scroll container --- */
-  .scrollcontainer {
-    scroll-snap-type: x mandatory;
-    width: 100vw;
-    height: 100dvh;
-  }
-
-  /* --- Art pages: scale canvas to 768px --- */
-  .homeroom,
-  .grimoire,
-  .chargesigil,
-  .destroysigil,
-  .makesigil,
-  .writesigil,
-  .drawsigilcontainer,
-  .stylesigilcontainer,
-  .rightpage,
-  .mapbox,
-  .profilepage {
-    min-width: 768px;
-    background-size: 768px 100dvh;
-  }
-
-  /* --- Non-art pages --- */
-  .landingpage {
-    width: 100vw;
-    min-width: unset;
-  }
-
-  .makeprofile {
-    min-width: unset;
-    padding: 16px;
-  }
-
-  /* --- Shared UI --- */
-  .drawsigilbox {
-    width: 55%;
-  }
-
-  .stylesigilcontainerbox {
-    width: 50%;
-  }
-
-  .sigilinfo {
-    width: 40%;
-  }
-
-  .sigilibrary {
-    width: 50%;
-  }
-
-  .sharebox {
-    width: 90vw;
-  }
-
-  .profilebox {
-    width: 40vw;
-  }
-
-  .friendcontainer {
-    flex-wrap: wrap;
-    height: auto;
-    gap: 12px;
-    padding: 12px;
-  }
-
-  .usercard {
-    width: 45%;
-    font-size: 11px;
-  }
-}
-
-/* =========================================================
-   MOBILE LARGE  —  430px  (iPhone Pro Max, Pixel, etc.)
-   ========================================================= */
-@media (max-width: 430px) {
-  /* --- Scroll container --- */
-  .scrollcontainer {
-    scroll-snap-type: x mandatory;
-    width: 100vw;
-    height: 100dvh;
-  }
-
-  /* --- Art pages: scale canvas to 430px --- */
-  .homeroom,
-  .grimoire,
-  .chargesigil,
-  .destroysigil,
-  .makesigil,
-  .writesigil,
-  .drawsigilcontainer,
-  .stylesigilcontainer,
-  .rightpage,
-  .mapbox,
-  .profilepage {
-    min-width: 430px;
-    background-size: 430px 100dvh;
-  }
-
-  /* --- Headings --- */
-  h1,
-  .h1 {
-    font-size: 26px;
-  }
-  h2,
-  .h2 {
-    font-size: 20px;
-  }
-  h3,
-  .h3 {
-    font-size: 14px;
-  }
-
-  /* --- Nav menu --- */
-  .navmenu {
-    top: 6px;
-    left: 6px;
-  }
-
-  /* --- Landing page --- */
-  .landingpage {
-    width: 100vw;
-    min-width: unset;
-  }
-
-  .logo {
-    width: 92vw;
-  }
-
-  .landingrowbox {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* --- Make profile --- */
-  .makeprofile {
-    min-width: unset;
-    padding: 16px;
-    height: auto;
-    min-height: 90vh;
-  }
-
-  .avatarimgbox {
-    gap: 8px;
-  }
-
-  /* --- Draw sigil --- */
-  .drawsigilbox {
-    width: 85%;
-  }
-
-  /* --- Style sigil --- */
-  .stylesigilcontainerbox {
-    width: 85%;
-  }
-
-  /* --- Sigil info panel --- */
-  .sigilinfo {
-    width: 80%;
-    height: auto;
-  }
-
-  /* --- Library grid --- */
-  .sigilibrary {
-    width: 75%;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* --- Sigil detail page --- */
-  .sigildetails {
-    width: 96vw;
-  }
-
-  /* --- Share box --- */
-  .sharebox {
-    width: 90vw;
-    padding: 16px;
-  }
-
-  /* --- Profile --- */
-  .profilebox {
-    width: 80vw;
-  }
-
-  .profilepagename {
-    margin: 20px;
-    flex-wrap: wrap;
-  }
-
-  .friendcontainer {
-    flex-direction: column;
-    height: auto;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-  }
-
-  .usercard {
-    width: 80%;
-    font-size: 10px;
-  }
-
-  .avatarandtheme {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  /* --- Charge sigil sigilbox --- */
-  .chargesigil .sigilbox {
-    width: 85vw;
-  }
-
-  /* --- Footer --- */
-  .footer {
-    font-size: large;
-    width: 90vw;
-    text-align: center;
-  }
-}
-
-/* =========================================================
-   MOBILE SMALL  —  375px  (iPhone SE)
-   ========================================================= */
-@media (max-width: 375px) {
-  /* --- Scroll container --- */
-  .scrollcontainer {
-    scroll-snap-type: x mandatory;
-    width: 100vw;
-    height: 100dvh;
-  }
-
-  /* --- Art pages: scale canvas to 375px --- */
-  .homeroom,
-  .grimoire,
-  .chargesigil,
-  .destroysigil,
-  .makesigil,
-  .writesigil,
-  .drawsigilcontainer,
-  .stylesigilcontainer,
-  .rightpage,
-  .mapbox,
-  .profilepage {
-    min-width: 375px;
-    background-size: 375px 100dvh;
-  }
-
-  /* --- Headings --- */
-  h1,
-  .h1 {
-    font-size: 22px;
-  }
-  h2,
-  .h2 {
-    font-size: 17px;
-  }
-  h3,
-  .h3 {
-    font-size: 13px;
-  }
-
-  /* --- Nav menu --- */
-  .navmenu {
-    top: 4px;
-    left: 4px;
-    padding: 4px;
-  }
-
-  /* --- Landing --- */
-  .landingpage {
-    width: 100vw;
-    min-width: unset;
-  }
-
-  .logo {
-    width: 95vw;
-  }
-
-  .landingrowbox {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* --- Make profile --- */
-  .makeprofile {
-    min-width: unset;
-    padding: 12px;
-    height: auto;
-    min-height: 90vh;
-  }
-
-  /* --- Draw sigil --- */
-  .drawsigilbox {
-    width: 92%;
-  }
-
-  /* --- Style sigil --- */
-  .stylesigilcontainerbox {
-    width: 92%;
-  }
-
-  /* --- Sigil info --- */
-  .sigilinfo {
-    width: 90%;
-    height: auto;
-  }
-
-  /* --- Library grid: single column on SE --- */
-  .sigilibrary {
-    width: 88%;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* --- Sigil detail --- */
-  .sigildetails {
-    width: 98vw;
-  }
-
-  /* --- Share box --- */
-  .sharebox {
-    width: 94vw;
-    padding: 12px;
-  }
-
-  /* --- Profile --- */
-  .profilebox {
-    width: 90vw;
-  }
-
-  .profilepagename {
-    margin: 12px;
-    flex-wrap: wrap;
-  }
-
-  .friendcontainer {
-    flex-direction: column;
-    height: auto;
-    align-items: center;
-    gap: 8px;
-    padding: 8px;
-  }
-
-  .usercard {
-    width: 90%;
-    font-size: 9px;
-  }
-
-  .avatarandtheme {
-    flex-direction: column;
-    gap: 6px;
-    padding: 4px;
-  }
-
-  /* --- Charge sigil sigilbox --- */
-  .chargesigil .sigilbox {
-    width: 92vw;
-  }
-
-  /* --- Footer --- */
-  .footer {
-    font-size: medium;
-    width: 94vw;
-    text-align: center;
-  }
-
-  /* --- Slide box --- */
-  .slidebox {
-    padding: 16px;
-    font-size: 24px;
   }
 }
