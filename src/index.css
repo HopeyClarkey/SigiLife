@@ -27,8 +27,12 @@ textinput,
   border-radius: 12px;
   border-color: #2b0681;
   border-width: 1px;
-  width: 100%;
+  width: min(260px, 75vw);
   text-align: center;
+  font-size: clamp(14px, 4vw, 16px);
+  padding: 6px 10px;
+  display: block;
+  margin: 4px auto 0 auto; 
 }
 
 menu,
@@ -138,8 +142,10 @@ btn,
 .glasscard {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  height: 90vh;
+  justify-content: flex-start;
+  gap: 1rem;
+ height: auto;
+ max-height: 92dvh;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -169,6 +175,36 @@ btn,
     transform: scale(1) translateY(0);
   }
 }
+
+.glasscard label,
+.glasscard p {
+  font-size: clamp(16px, 5vw, 20px);
+  color: white;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.glasscard h1 {
+  font-size: clamp(26px, 7vw, 36px);
+  text-align: center;
+}
+
+.glasscard h2 {
+  font-size: clamp(20px, 6vw, 28px);
+  text-align: center;
+}
+
+.glasscard .p1 {
+  font-size: clamp(13px, 3.5vw, 16px);
+  text-align: center;
+  color: rgba(255,255,255,0.85);
+}
+
+
 
 .special-elite-regular {
   font-family: 'Special Elite', system-ui;
@@ -342,10 +378,11 @@ makeprofile,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  background-color: white;
+  justify-content: flex-start;
+  gap: 1rem;
+  background-color: transparent;
   border-radius: 12px;
-  height: 90vh;
+  height: auto;
 }
 
 avatarchoicebox,
@@ -359,7 +396,9 @@ avatarimgbox,
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 0.5rem;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  HomeRoom*/
@@ -798,20 +837,13 @@ leftpage,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Write Sigil*/
 writesigil,
 .writesigil {
-  background-image: linear-gradient(
-    160deg,
-    var(--theme-bg-1),
-    var(--theme-bg-2)
-  );
-
+  background-image: linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  min-width: 1024px;
-  height: 100dvh;
-
+  min-width: 100dvw;
+  min-height: 100dvh;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
 }

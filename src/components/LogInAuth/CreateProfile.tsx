@@ -48,11 +48,19 @@ export default function CreateProfile() {
 
       <div className='scrollcontainer'>
         <div className="landingpage">
-          <div className="glasscard" style={{ width: "95dvw", height: "95dvh", display: "flex", justifyContent: "space-between"
-           }}>
+          <div className="glasscard" style={{
+            width: "95dvw",
+          }}>
             <h1 style={{ color: "black" }}>Create Your Profile:</h1>
-            <p>Choose a unique SigiLife Username:
-              <input style={{ color: "black" }} className="textinput" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <p style={{ textAlign: "center", width: "100%" }}>
+              Choose a unique SigiLife Username:
+              <input
+                style={{ color: "black" }}
+                className="textinput"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </p>
 
             <label className='avatarchoicebox'><h2 style={{ color: "black" }}>Choose a SigiLord:</h2>
