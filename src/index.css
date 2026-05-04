@@ -56,22 +56,22 @@ navmenu,
 h1,
 .h1 {
   font-size: 32px;
-  font-family: 'New Rocker'
+  font-family: 'New Rocker';
 }
 h2,
 .h2 {
   font-size: 24px;
-    font-family: 'New Rocker'
+  font-family: 'New Rocker';
 }
 h3,
 .h3 {
   font-size: 16px;
-    font-family: 'New Rocker'
+  font-family: 'New Rocker';
 }
 
 p1,
-.p1{
-  font-family: "Pom"
+.p1 {
+  font-family: 'Pom';
 }
 
 btn,
@@ -94,7 +94,9 @@ btn,
   color: white;
   font-weight: 700;
   border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -116,7 +118,9 @@ btn,
   font-weight: 700;
   border-radius: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -130,8 +134,6 @@ btn,
 .glassbutton:active {
   transform: scale(0.95);
 }
-
-
 
 .glasscard {
   display: flex;
@@ -150,7 +152,7 @@ btn,
   border: 1px solid rgba(255, 255, 255, 0.2);
   transform: translateZ(0);
   transition: all 500ms ease;
-    overflow-y: auto;
+  overflow-y: auto;
   overflow-x: hidden;
 
   /* animate-in fade-in zoom-in slide-in-from-bottom-8 */
@@ -169,17 +171,16 @@ btn,
 }
 
 .special-elite-regular {
-  font-family: "Special Elite", system-ui;
+  font-family: 'Special Elite', system-ui;
   font-weight: 400;
   font-style: normal;
 }
 
 .pompiere-regular {
-  font-family: "Pompiere", sans-serif;
+  font-family: 'Pompiere', sans-serif;
   font-weight: 400;
   font-style: normal;
 }
-
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Main Container*/
 mainContainer,
@@ -224,7 +225,6 @@ maincontainer::-webkit-scrollbar-thumb:hover,
   background: #7f64be;
 }
 
-
 scrollcontainer,
 .scrollcontainer {
   overflow-x: scroll;
@@ -265,9 +265,12 @@ landingpage,
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100dvh;
-  width: auto;
+  min-height: 100dvh;
+  width: 100dvw;
   justify-content: center;
+  padding: 1rem;
+  gap: 1rem;
+  box-sizing: border-box;
 }
 
 logo,
@@ -281,31 +284,36 @@ logo,
   -webkit-backdrop-filter: blur(24px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
   width: 95vw;
-  height: 100%;
-  margin: 12px;
+  max-height: 35dvh;
+  margin: 0;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transform: translateZ(0);
-  transition: all 500ms ease;
   border-radius: 12px;
+  overflow: hidden;
+  object-fit: contain;
 }
 
 slidebox,
 .slidebox {
   display: flex;
   position: relative;
-  padding: 30px;
+  padding: 0;
   align-items: center;
-  bottom: 0;
-  font-size: 32px;
+  font-size: clamp(18px, 5vw, 28px);
+  align-self: center;
+  justify-self: center;
 }
 
 displaypitch,
 .displaypitch {
   display: flex;
   flex-direction: column;
-  min-width: 95dvw;
-  height: 100%;
-  background-color: #6d8b00;
+  width: 95dvw;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
 }
 
@@ -340,7 +348,6 @@ makeprofile,
   height: 90vh;
 }
 
-
 avatarchoicebox,
 .avatarchoicebox {
   display: flex;
@@ -362,6 +369,7 @@ avatarimgbox,
   background-image: url('./assets/InsideLino.svg');
   overflow: visible;
   height: 100dvh;
+  width: 100dvw;
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
@@ -369,7 +377,6 @@ avatarimgbox,
   background-repeat: no-repeat;
   flex-shrink: 0;
   scroll-snap-align: center;
-  aspect-ratio: 1024 / 768;
 }
 
 .homeroom nav {
@@ -389,7 +396,7 @@ avatarimgbox,
 }
 
 .destroybutton img {
-  height:470px;
+  height: 470px;
   display: block;
 }
 
@@ -401,7 +408,7 @@ avatarimgbox,
 }
 
 .chargebutton img {
-  height:100px;
+  height: 100px;
   display: block;
 }
 
@@ -413,7 +420,7 @@ avatarimgbox,
 }
 
 .grimoirebutton img {
-  height:100px;
+  height: 100px;
   display: block;
 }
 
@@ -425,7 +432,7 @@ avatarimgbox,
 }
 
 .makesigilbutton img {
-  height:100px;
+  height: 100px;
   display: block;
 }
 
@@ -531,7 +538,6 @@ avatarimgbox,
   z-index: 1;
 }
 
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Grimoire*/
 
 .grimoire {
@@ -622,14 +628,13 @@ avatarimgbox,
   display: flex;
   flex-direction: column;
   align-items: center;
-    justify-content: flex-start;
+  justify-content: flex-start;
   overflow: visible;
   flex: 1;
-    width: 80%;
+  width: 80%;
   height: 80%;
   overflow-y: auto;
   overflow-x: hidden;
-  
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Library*/
@@ -640,7 +645,7 @@ avatarimgbox,
   position: relative;
   background: transparent;
   align-self: center;
-  height: auto; ;
+  height: auto;
   background: transparent;
   box-sizing: border-box;
   padding: 8px;
@@ -656,7 +661,7 @@ avatarimgbox,
   cursor: pointer;
   border-radius: 12px;
   padding: 6px;
-  min-height: 140px; 
+  min-height: 140px;
 }
 
 .sigilthumb:hover {
@@ -726,7 +731,6 @@ sigilbox,
   opacity: 0.5;
 }
 
-
 sigilpageaddlocation,
 .sigilpageaddlocation {
   display: flex;
@@ -744,8 +748,11 @@ leftpage,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  MakeSigil*/
 .makesigil {
-  background-image:
-    linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-image: linear-gradient(
+    160deg,
+    var(--theme-bg-1),
+    var(--theme-bg-2)
+  );
   background-size:
     1024px 100vh,
     cover;
@@ -791,9 +798,11 @@ leftpage,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Write Sigil*/
 writesigil,
 .writesigil {
-  background-image:
-
-    linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-image: linear-gradient(
+    160deg,
+    var(--theme-bg-1),
+    var(--theme-bg-2)
+  );
 
   display: flex;
   flex-direction: column;
@@ -813,9 +822,11 @@ writesigilbox,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Draw Sigil*/
 drawsigil,
 .drawsigil {
-  background-image:
-
-    linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-image: linear-gradient(
+    160deg,
+    var(--theme-bg-1),
+    var(--theme-bg-2)
+  );
   background-size:
     1024px 100vh,
     cover;
@@ -841,9 +852,11 @@ drawsigilmenu,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Style Sigil*/
 .stylesigilcontainer {
-  background-image:
-
-    linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-image: linear-gradient(
+    160deg,
+    var(--theme-bg-1),
+    var(--theme-bg-2)
+  );
   background-size:
     1024px 100vh,
     cover;

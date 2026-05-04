@@ -82,7 +82,7 @@ export default function CreateProfile() {
             </label>
 
             <label>
-              <h2>              Dark or Light Theme:</h2>
+              <h2 style={{ color: "black" }} >Dark or Light Theme:</h2>
               <SwitchPrimitive.Root checked={isDark} onCheckedChange={handleThemeChange}
                 className="relative inline-flex h-6 w-11 items-center rounded-full bg-purple-300 data-[state=checked]:bg-purple-500">
 
