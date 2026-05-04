@@ -5,17 +5,18 @@ import { useUser } from '@/context/UserContext'
 const NavMenu = function () {
   const navigate = useNavigate()
   return (
-    <nav className='menu'>
+    <nav className='menu glasscard'>
 
-      <button className="pinkbutton" onClick={() => navigate(-1)}>⬅ Go Back</button>
-      <Link className="pinkbutton" to="/home">Home Room</Link>
-      <Link className="pinkbutton" to="/library?action=charge">Charge Sigil</Link>
-      <Link className="pinkbutton" to="/library?action=destroy">Destroy Sigil</Link>
-      <Link className="pinkbutton" to="/make-sigil">Make Sigil</Link>
-      <Link className="pinkbutton" to="/library">Sigil Library</Link>
-      <Link className="pinkbutton" to="/map">SigilMap</Link>
-      <Link className="pinkbutton" to="/settings">Settings</Link>
-      <Link className="pinkbutton" to="/profile">SigiLites</Link>
+      <button onClick={() => navigate(-1)}>⬅ Go Back</button>
+      <Link  to="/home">Home Room</Link>
+      <Link  to="/library?action=charge">Charge Sigil</Link>
+      <Link  to="/library?action=destroy">Destroy Sigil</Link>
+      <Link  to="/make-sigil">Make Sigil</Link>
+      <Link  to="/library">Sigil Library</Link>
+      <Link  to="/map">SigilMap</Link>
+      <Link  to="/profile">SigiLites</Link>
+      <Link  to="/settings">Settings</Link>
+
 
     </nav>
   )
@@ -30,7 +31,7 @@ export default function Menu() {
 
   return (
     <div className="navmenu">
-     <button id="menu-btn" className="pinkbutton" onClick={() => setMenuOpen(prev => !prev)}>
+     <button id="menu-btn"  onClick={() => setMenuOpen(prev => !prev)}>
         {menuOpen ? '✕ Close' : '☰'}
       </button>
       {menuOpen && <NavMenu />}

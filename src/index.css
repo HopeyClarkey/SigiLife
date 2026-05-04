@@ -651,15 +651,13 @@ avatarimgbox,
 .rightpage {
   display: flex;
   flex-direction: column;
-
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  background-size: 1024px 100vh;
-  min-width: 1024px;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
   position: relative;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   overflow: visible;
 }
 
@@ -668,27 +666,22 @@ avatarimgbox,
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  overflow: visible;
-  flex: 1;
-  width: 80%;
-  height: 80%;
+  width: 88dvw;
+  height: 88dvh;
   overflow-y: auto;
   overflow-x: hidden;
 }
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Library*/
 .sigilibrary {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 20vh;
-  position: relative;
-  background: transparent;
-  align-self: center;
-  height: auto;
-  background: transparent;
+  grid-template-columns: repeat(3, minmax(0, 220px));
+  justify-content: center;
+  align-content: start;
+  width: 100%;
   box-sizing: border-box;
-  padding: 8px;
-  gap: 8px;
+  padding: 16px;
+  gap: 16px;
+  background: transparent;
 }
 
 .sigilthumb {
@@ -696,12 +689,31 @@ avatarimgbox,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
   cursor: pointer;
   border-radius: 12px;
-  padding: 6px;
-  min-height: 140px;
+  padding: 4px;
+  overflow: hidden;
+  min-width: 0;
 }
+
+.sigilthumb img {
+  width: 100%;  
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.sigilthumb span,
+.sigilthumb p,
+.sigilthumb div {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: clamp(9px, 2vw, 13px);}
 
 .sigilthumb:hover {
   transform: scale(1.05);
@@ -873,23 +885,18 @@ drawsigilmenu,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Style Sigil*/
 .stylesigilcontainer {
-  background-image: linear-gradient(
-    160deg,
-    var(--theme-bg-1),
-    var(--theme-bg-2)
-  );
-  background-size:
-    1024px 100vh,
-    cover;
+  background-image: linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 1024px;
-  position: relative;
-  height: 100vh;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  overflow-y: auto;
+  overflow-y: auto; 
+  overflow-x: hidden;
+  padding: 1rem 0;
 }
 
 .stylesigilcontainerbox {

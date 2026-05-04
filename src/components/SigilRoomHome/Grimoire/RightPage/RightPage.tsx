@@ -31,9 +31,12 @@ export default function RightPage() {
           <Menu />
           <div className='glasscard rightpage2'>
             <h1>{user.username}'s Sigils </h1>
-          <SigiLibrary items={sigils} user={user} />
+          <SigiLibrary items={sigils} user={user} />          
           </div>
-          <Link className="btn" to="/make-sigil">🪶 MakeSigil</Link>
+          <Link className="btn"style={{ 
+            backgroundColor: '#9e38fd', 
+            fontSize: "clamp(13px, 2vw, 20px)", 
+            padding: "8px 20px" }} to="/make-sigil">🪶 MakeSigil</Link>
         </div>
       </div>
     </div>
