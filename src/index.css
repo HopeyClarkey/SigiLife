@@ -596,20 +596,20 @@ avatarimgbox,
 
 .grimoiremaplink {
   position: absolute;
-  top: 455px;
-  left: 566px;
+  bottom: 41.2dvh;
+  left: 41.52dvh;
   z-index: 10;
 }
 
 .grimoiremaplink img {
-  height: 25.3dvh;
+  height: 25.5dvh;
   display: block;
 }
 
 .grimoireprofilelink {
   position: absolute;
-  top: 468px;
-  right: 653px;
+  bottom: 25.5dvh;
+  left: 83.5dvh;
   z-index: 10;
 }
 
