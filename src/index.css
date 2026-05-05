@@ -652,27 +652,28 @@ avatarimgbox,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Right Page*/
 .rightpage {
-  display: flex;
-  flex-direction: column;
+
+  background-image: url('./assets/Bookshelf.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  width: 100dvw;
-  height: 100dvh;
-  position: relative;
-  align-items: center;
-  justify-content: center;
+  flex-shrink: 0;
   overflow: visible;
+  scroll-snap-align: center;
 }
 
 .rightpage2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 88dvw;
-  height: 88dvh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  background-image: url('./assets/SigiLibrary.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  background-color: var(--theme-bg-1);
+  transition: background-color 0.6s ease;
+  flex-shrink: 0;
+  overflow: visible;
+  scroll-snap-align: center;
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Library*/
 .sigilibrary {
@@ -684,7 +685,7 @@ avatarimgbox,
   box-sizing: border-box;
   padding: 16px;
   gap: 16px;
-  backgro7und: transparent;
+  background: transparent;
 }
 
 .sigilthumb {
@@ -735,19 +736,18 @@ avatarimgbox,
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Sigil Page*/
 sigilpage,
 .sigilpage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100dvw;
-  min-height: 100dvh;
+  background-image: url('./assets/SigiRightPage.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left center;
+  position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
+  flex-shrink: 0;
   overflow: visible;
-  padding: 1rem 0;
+  scroll-snap-align: center;
   font-family: 'New Rocker', system-ui;
 }
-
 .sigildetails {
   width: 90vw;
   align-items: center;
