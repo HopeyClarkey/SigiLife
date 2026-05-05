@@ -14,13 +14,30 @@ export default function ChargeSigil() {
   const [emotion, setEmotion] = useState("")
   const [isCharging, setIsCharging] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [dims, setDims] = useState({ width: 2160, height: 1260 });
+  const [showInstruction, setShowInstruction] = useState(false);
 
   useEffect(() => {
-    if (!sigilData) { return }
+    const calculate = () => {
+      const scale = window.innerHeight / 1260;
+      setDims({
+        width: Math.round(2160 * scale),
+        height: window.innerHeight,
+      });
+    };
+    calculate();
+    window.addEventListener('resize', calculate);
+    return () => window.removeEventListener('resize', calculate);
+  }, []);
+
+  useEffect(() => {
+    if (!sigilData) return;
     const el = scrollRef.current;
-    if (!el) { return; }
-    el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-  }, [sigilData])
+    if (!el) return;
+    setTimeout(() => {
+      el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+    }, 150);
+  }, [sigilData, dims]);
 
   useEffect(() => {
     if (!sigilId) { return }
@@ -47,7 +64,14 @@ export default function ChargeSigil() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll' }}>
+        {showInstruction && (
+          <div className="floatinginstruction">
+            Trace your sigil to imbue it with your chosen emotion
+          </div>
+        )}
         <div className='chargesigil' style={{
+          width: `${dims.width}px`,
+          height: `${dims.height}px`,
           backgroundColor: isCharging ? '#000000' : undefined,
           transition: 'background-color 800ms ease',
         }}>
@@ -90,6 +114,8 @@ export default function ChargeSigil() {
                   filter: isCharging ? undefined : 'drop-shadow(0 0 24px var(--theme-glow))',
                   transition: 'all 800ms ease',
                   pointerEvents: 'none',
+                  position: 'relative',
+                  zIndex: 60,
                 }}
               />
             )}
@@ -97,11 +123,14 @@ export default function ChargeSigil() {
               <div style={{ transform: 'scale(1.6)', transformOrigin: 'center', marginBottom: '1rem' }}>
                 <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
               </div>
-              {!isCharging && (
+              {!isCharging && emotion && (
                 <button className='glassbutton'
                   style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
-                  onClick={() => setIsCharging(true)}
-                  disabled={!emotion}>
+                  onClick={() => {
+                    setIsCharging(true);
+                    setShowInstruction(true);
+                    setTimeout(() => setShowInstruction(false), 4000);
+                  }}>
                   Charge Sigil
                 </button>
               )}
