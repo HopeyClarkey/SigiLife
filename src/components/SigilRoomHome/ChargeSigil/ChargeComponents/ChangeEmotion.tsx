@@ -15,9 +15,9 @@ export default function changeEmotion({ emotion, setEmotion }: { emotion: string
     <div className="changeemotion">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="btn" style={{ background: "transparent" }}> {"My Emotion"} </Button>
+          <Button className="bg-white/20 backdrop-blur-xl border border-white/20 text-white" style={{ background: "transparent"  }}> {"My Emotion"} </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent >
           <DropdownMenuItem onClick={() => { setEmotion("Hope") }}>Hopeful</DropdownMenuItem>
           <DropdownMenuItem onClick={() => { setEmotion("Joy") }} >Happy</DropdownMenuItem>
           <DropdownMenuItem onClick={() => { setEmotion("Desire") }}>Want</DropdownMenuItem>

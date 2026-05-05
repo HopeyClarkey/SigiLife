@@ -71,94 +71,112 @@ export default function DestroySigil() {
 
   if (!user) { return null } if (!sigilData) { return <p>Loading sigil...</p> }
 
-  return (
-    <div className='maincontainer'>
-      <div ref={scrollRef} className={`scrollcontainer ${isDestroying ? 'noscroll' : ''}`}>
-        <Menu />
-        <div className='destroysigil' onMouseMove={isDestroying ? handleMouseMove : undefined} style={{
+return (
+  <div className='maincontainer'>
+    <div ref={scrollRef} className={`scrollcontainer ${isDestroying ? 'noscroll' : ''}`}>
+      <div className='destroysigil'
+        onMouseMove={isDestroying ? handleMouseMove : undefined}
+        style={{
           backgroundColor: isDestroying ? '#000000' : undefined,
           transition: 'background-color 800ms ease',
         }}>
+        <Menu />
 
-          {isDestroying && (
-            <>
-
-              <div className='evileye'>
-                <EvilEye
-                  eyeColor="#2e0fa9"
-                  intensity={3.1}
-                  pupilSize={0.75}
-                  irisWidth={0.25}
-                  glowIntensity={0.65}
-                  scale={0.5}
-                  noiseScale={1}
-                  pupilFollow={1.6}
-                  flameSpeed={2.5}
-                  backgroundColor="#06000f"
-                  externalMouse={mousePos}
-                />
-              </div>
-              <GhostCursor
-                // Visuals
-                zIndex={1}
-                color="#e74040"
-                brightness={2}
-                edgeIntensity={0}
-
-                // Trail and motion
-                trailLength={50}
-                inertia={0.5}
-
-                // Post-processing
-                grainIntensity={0.05}
-                bloomStrength={0.1}
-                bloomRadius={1}
-                bloomThreshold={0.025}
-
-                // Fade-out behavior
-                fadeDelayMs={1000}
-                fadeDurationMs={1500}
+        {isDestroying && (
+          <>
+            <div className='evileye'>
+              <EvilEye
+                eyeColor="#2e0fa9"
+                intensity={3.1}
+                pupilSize={0.75}
+                irisWidth={0.25}
+                glowIntensity={0.65}
+                scale={0.5}
+                noiseScale={1}
+                pupilFollow={1.6}
+                flameSpeed={2.5}
+                backgroundColor="#06000f"
+                externalMouse={mousePos}
               />
-            </>
-          )
-          }
+            </div>
+            <GhostCursor
+              zIndex={1}
+              color="#e74040"
+              brightness={2}
+              edgeIntensity={0}
+              trailLength={50}
+              inertia={0.5}
+              grainIntensity={0.05}
+              bloomStrength={0.1}
+              bloomRadius={1}
+              bloomThreshold={0.025}
+              fadeDelayMs={1000}
+              fadeDurationMs={1500}
+            />
+          </>
+        )}
 
-          <h1 style={{ fontSize: 32, borderRadius: '12px', position: 'relative', zIndex: 20 }}>Destroy Sigil</h1>
+        <div style={{
+          position: 'relative',
+          zIndex: 55,
+          width: '88dvw',
+          height: '88dvh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '2rem',
+          borderRadius: '2rem',
+          background: 'rgba(255, 255, 255, 0.15)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+        }}>
+          <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Destroy Sigil</h1>
 
           {sigilData.imageData && (
             <img
               src={sigilData.imageData}
               alt={sigilData.name}
               style={{
-                width: "60%", height: "60%", borderRadius: isDestroying ? '12px' : undefined,
+                width: 'min(60vw, 50vh)',
+                aspectRatio: '1 / 1',
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 0 24px var(--theme-glow))',
                 transition: 'all 800ms ease',
+                pointerEvents: 'none',
                 position: 'relative',
                 zIndex: 20,
               }}
-              className={isDestroying ? '' : 'glasscard'}
             />
           )}
 
-          <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
-          {!isDestroying && (
-            <button className="glassbutton" onClick={handleDestroy} disabled={!emotion || isSubmitting}>
-              Destroy Sigil
-            </button>
-          )}
-          {isDestroying && (
-            <button
-              className="glassbutton"
-              style={{ position: 'relative', zIndex: 20 }}
-              onClick={() => {
-                setIsDestroying(false)
-                setTimeout(() => navigate('/home'), 200)
-              }}
-            >
-              Go Home
-            </button>
-          )}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
+            <div style={{ transform: 'scale(1.6)', transformOrigin: 'center', marginBottom: '1rem' }}>
+              <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
+            </div>
+            {!isDestroying && (
+              <button className="glassbutton"
+                style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
+                onClick={handleDestroy}
+                disabled={!emotion || isSubmitting}>
+                Destroy Sigil
+              </button>
+            )}
+            {isDestroying && (
+              <button className="glassbutton"
+                style={{ position: 'relative', zIndex: 20, fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
+                onClick={() => {
+                  setIsDestroying(false)
+                  setTimeout(() => navigate('/home'), 200)
+                }}>
+                Go Home
+              </button>
+            )}
+          </div>
         </div>
+
       </div>
     </div>
-  )
+  </div>
+)
 }

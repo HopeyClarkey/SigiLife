@@ -68,11 +68,13 @@ export default function SigilPage() {
               <img
                 src={sigilData.imageData}
                 alt={sigilData.name}
+                className={sigilData.isCharged ? 'sigil-charging' : ''}
                 style={{
                   width: 'min(100%, 50vh)',
                   aspectRatio: '1 / 1',
                   objectFit: 'contain',
                   borderRadius: '1rem',
+                  filter: sigilData.isCharged ? undefined : undefined,
                 }}
               />
             )}

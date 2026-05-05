@@ -47,33 +47,11 @@ export default function ChargeSigil() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll' }}>
-        <div
-          className='chargesigil'
-          style={{
-            backgroundColor: isCharging ? '#000000' : undefined,
-            transition: 'background-color 800ms ease',
-          }}
-        >
+        <div className='chargesigil' style={{
+          backgroundColor: isCharging ? '#000000' : undefined,
+          transition: 'background-color 800ms ease',
+        }}>
           <Menu />
-
-
-          <h1 style={{ fontSize: 32, borderRadius: '12px', position: 'relative', zIndex: 20 }}>Charge Sigil</h1>
-          {sigilData.imageData && (
-            <img
-              src={sigilData.imageData}
-              alt={sigilData.name}
-              className='glasscard'
-              style={{
-                width: '60%',
-                height: '60%',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                transition: 'all 800ms ease',
-                position: 'relative',
-                zIndex: 25,
-              }}
-            />
-          )}
           {isCharging && (
             <SplashCursor
               BACK_COLOR={{ r: 0, g: 0, b: 0 }}
@@ -84,39 +62,65 @@ export default function ChargeSigil() {
               VELOCITY_DISSIPATION={2}
             />
           )}
-
-          <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
-
-          {!isCharging && (
-            <button
-              className='glassbutton'
-              style={{ position: 'relative', zIndex: 20,  }}
-              onClick={() => setIsCharging(true)}
-              disabled={!emotion}
-            >
-              Charge Sigil
-            </button>
-          )}
-
-          {isCharging && (
-            <button
-              className='glassbutton'
-              style={{ position: 'relative', zIndex: 20,  }}
-              onClick={handleSave}
-            >
-              Save your Sigil!
-            </button>
-          )}
-
-          {isCharging && (
-            <button
-              className='glassbutton'
-              style={{ position: 'relative', zIndex: 20,}}
-              onClick={() => setTimeout(() => navigate(`/destroy-sigil?sigilId=${sigilData.id}`), 100)}
-            >
-              Destroy Your Charged Sigil!
-            </button>
-          )}
+          <div style={{
+            position: 'relative',
+            zIndex: 55,
+            width: '88dvw',
+            height: '88dvh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '2rem',
+            borderRadius: '2rem',
+            background: 'rgba(255, 255, 255, 0.15)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+          }}>
+            <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Charge Sigil</h1>
+            {sigilData.imageData && (
+              <img
+                src={sigilData.imageData}
+                alt={sigilData.name}
+                className={isCharging ? 'sigil-charging' : ''}
+                style={{
+                  width: 'min(60vw, 50vh)',
+                  aspectRatio: '1 / 1',
+                  objectFit: 'contain',
+                  filter: isCharging ? undefined : 'drop-shadow(0 0 24px var(--theme-glow))',
+                  transition: 'all 800ms ease',
+                  pointerEvents: 'none',
+                }}
+              />
+            )}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
+              <div style={{ transform: 'scale(1.6)', transformOrigin: 'center', marginBottom: '1rem' }}>
+                <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
+              </div>
+              {!isCharging && (
+                <button className='glassbutton'
+                  style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
+                  onClick={() => setIsCharging(true)}
+                  disabled={!emotion}>
+                  Charge Sigil
+                </button>
+              )}
+              {isCharging && (
+                <>
+                  <button className='glassbutton'
+                    style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
+                    onClick={handleSave}>
+                    Save your Sigil!
+                  </button>
+                  <button className='glassbutton'
+                    style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
+                    onClick={() => setTimeout(() => navigate(`/destroy-sigil?sigilId=${sigilData.id}`), 100)}>
+                    Destroy Your Charged Sigil!
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -9,20 +9,20 @@ import chargeButton from '../../assets/AltarButton.svg'
 import grimoireButton from '../../assets/GrimoireButton.svg'
 import makesigilButton from '../../assets/WritingButton.svg'
 import TutorialOverlay from '../ui/TutorialOverlay'
-
+import InsideLino from '../../assets/InsideLino.svg'
 
 export default function HomeRoom() {
   const { user, isLoading } = useUser();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showTutorial, setShowTutorial] = useState(false);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) {
-      return;
-    }
+useEffect(() => {
+  const el = scrollRef.current;
+  if (!el) return;
+  setTimeout(() => {
     el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-  }, []);
+  }, 100);
+}, []);
 
   useEffect(() => {
     if (user && !user.hasCompletedTutorial) {
@@ -35,7 +35,8 @@ export default function HomeRoom() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className='homeroom'>
+<div className='homeroom'>
+
           <Menu />
 
           <nav className=''>

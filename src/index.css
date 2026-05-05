@@ -269,6 +269,7 @@ scrollcontainer,
   width: 100vw;
   height: 100dvh;
   align-self: stretch;
+    isolation: auto; 
   -webkit-overflow-scrolling: touch;
 }
 
@@ -406,16 +407,17 @@ avatarimgbox,
   display: flex;
   flex-direction: column;
   background-image: url('./assets/InsideLino.svg');
-  overflow: visible;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 100dvh;
-  width: 100dvw;
+  min-width: 300dvw;        /* ← wide enough to scroll left and right */
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  background-position: center;
-  background-repeat: no-repeat;
   flex-shrink: 0;
   scroll-snap-align: center;
+  overflow: visible;
 }
 
 .homeroom nav {
@@ -504,16 +506,15 @@ avatarimgbox,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-
-  min-width: 1024px;
-  height: 100vh;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  background-size: 1024px 100vh;
   overflow: hidden;
 }
+
 .chargesigil .sigilbox {
   width: 60vw;
   max-width: 600px;
@@ -524,11 +525,26 @@ avatarimgbox,
 .changeemotion {
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: fit-content;
   width: fit-content;
-  background-color: #6d8b00;
   border-radius: 12px;
   position: relative;
+  background-color: transparent; 
+}
+
+@keyframes rainbow-pulse {
+  0%   { filter: drop-shadow(0 0 20px #ff0080) drop-shadow(0 0 40px #ff0080); }
+  16%  { filter: drop-shadow(0 0 20px #ff8000) drop-shadow(0 0 40px #ff8000); }
+  33%  { filter: drop-shadow(0 0 20px #ffff00) drop-shadow(0 0 40px #ffff00); }
+  50%  { filter: drop-shadow(0 0 20px #00ff80) drop-shadow(0 0 40px #00ff80); }
+  66%  { filter: drop-shadow(0 0 20px #0080ff) drop-shadow(0 0 40px #0080ff); }
+  83%  { filter: drop-shadow(0 0 20px #8000ff) drop-shadow(0 0 40px #8000ff); }
+  100% { filter: drop-shadow(0 0 20px #ff0080) drop-shadow(0 0 40px #ff0080); }
+}
+
+.sigil-charging {
+  animation: rainbow-pulse 4s linear infinite;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Destroy Sigil*/
@@ -537,15 +553,13 @@ avatarimgbox,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-
-  overflow: visible;
-  min-width: 1024px;
-  height: 100vh;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  background-size: 1024px 100vh;
+  overflow: hidden;
 }
 
 .destroysigil > *:not(.evileye):not(.ghost-cursor) {
@@ -720,13 +734,13 @@ avatarimgbox,
   filter: drop-shadow(0 0 6px gold);
 }
 
-.sigilthumb.charged {
-  filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 12px gold);
+.sigilthumb.charged img {
+  animation: rainbow-pulse 4s linear infinite;
 }
 
-.sigilthumb.charged:hover {
+.sigilthumb.charged:hover img {
   transform: scale(1.05);
-  filter: drop-shadow(0 0 10px gold) drop-shadow(0 0 18px gold);
+  animation: rainbow-pulse 4s linear infinite;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Sigil Page*/
@@ -795,24 +809,15 @@ leftpage,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  MakeSigil*/
 .makesigil {
-  background-image: linear-gradient(
-    160deg,
-    var(--theme-bg-1),
-    var(--theme-bg-2)
-  );
-  background-size:
-    1024px 100vh,
-    cover;
+  background-image: linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  min-width: 1024px;
-  position: relative;
-  height: 100vh;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  z-index: 1;
 }
 
 .sigilinfo {
@@ -921,16 +926,16 @@ mapbox,
 .mapbox {
   display: flex;
   flex-direction: column;
-  background-size: cover;
-  background-position: center;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: visible;
-  min-width: 1024px;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
+  gap: 0.75rem;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Profile*/

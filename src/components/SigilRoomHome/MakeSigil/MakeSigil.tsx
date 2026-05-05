@@ -60,37 +60,53 @@ export default function MakeSigil() {
   if (!user) return null
 
 
-  return (
-    <div className='maincontainer'>
-      <div ref={scrollRef} className='scrollcontainer'>
-        <div className='makesigil'>
-          <h1 style={{fontSize: 32}}>Make a Sigil</h1>
-          <Menu />
-          <div className="sigilinfo">
-            <p className="infotext">Current Sigils: {sigilCount}/{MAX_SIGILS}</p>
-            {remainingSlots < 3 && (
+return (
+  <div className='maincontainer'>
+    <div ref={scrollRef} className='scrollcontainer'>
+      <div className='makesigil'>
+        <Menu />
+        <div style={{
+          width: '88dvw',
+          height: '88dvh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '2rem',
+          borderRadius: '2rem',
+          background: 'rgba(255, 255, 255, 0.15)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+        }}>
+          <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Make a Sigil</h1>
 
-              <p className="info-text warning">⚠️ {remainingSlots} slot(s) remaining. <br/>
-               {remainingSlots === 0 ? 'You will have to destroy a Sigil before you can create a new sigil. Visit your Library to select and destroy Sigils.' : ""}
-              
+          <div className="sigilinfo" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', width: '100%' }}>
+            <p style={{ fontSize: "clamp(14px, 2.5vw, 20px)" }}>Current Sigils: {sigilCount}/{MAX_SIGILS}</p>
+            {remainingSlots < 3 && (
+              <p className="info-text warning">
+                ⚠️ {remainingSlots} slot(s) remaining.{' '}
+                {remainingSlots === 0 ? 'You will have to destroy a Sigil before you can create a new sigil. Visit your Library to select and destroy Sigils.' : ''}
               </p>
-          
             )}
             {error && <p className="info-text error">{error}</p>}
           </div>
 
-          <button
-            className="btn"
-            onClick={handleCreateSigil}
-            disabled={loading || !canCreateMore}
-          >
-            {loading ? 'Loading...' : canCreateMore ? 'Create New Sigil' : 'Max Limit Reached'}
-          </button>
-
-          <Link className="btn" to="/library">Sigil Library</Link>
-
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+            <button
+              className="btn"
+              onClick={handleCreateSigil}
+              disabled={loading || !canCreateMore}
+              style={{ backgroundColor: '#9e38fd', fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}>
+              {loading ? 'Loading...' : canCreateMore ? 'Create New Sigil' : 'Max Limit Reached'}
+            </button>
+            <Link className="btn" to="/library"
+              style={{ backgroundColor: '#9e38fd', fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}>
+              Sigil Library
+            </Link>
+          </div>
         </div>
       </div>
     </div>
-  )
+  </div>
+)
 }
