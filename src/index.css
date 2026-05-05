@@ -404,76 +404,66 @@ avatarimgbox,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  HomeRoom*/
 .homeroom {
-  display: flex;
-  flex-direction: column;
   background-image: url('./assets/InsideLino.svg');
-  background-size: cover;
-  background-position: center;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
-  height: 100dvh;
-  min-width: 300dvw;        /* ← wide enough to scroll left and right */
   position: relative;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
   flex-shrink: 0;
+  overflow: visible;
   scroll-snap-align: center;
-  overflow: visible;
 }
 
-.homeroom nav {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 10;
-  overflow: visible;
-}
-
+.destroy-btn,
 .destroybutton {
   position: absolute;
-  top: 10;
-  left: 0;
   z-index: 10;
+  top: 4dvh;
+  left: 1dvh;
 }
+
 
 .destroybutton img {
-  height: 470px;
+  height: 69dvh;
   display: block;
 }
-
+.charge-btn,
 .chargebutton {
   position: absolute;
-  top: 0;
-  left: 0;
   z-index: 10;
+  top: 38.5dvh;
+  left: 57dvh;
 }
 
 .chargebutton img {
-  height: 100px;
+  height: 24.6dvh;
   display: block;
 }
 
+.grimoire-btn,
 .grimoirebutton {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1.8dvh;
+  right: 8.1dvh;
   z-index: 10;
 }
 
 .grimoirebutton img {
-  height: 100px;
+  height: 59.2dvh;
   display: block;
 }
 
+.makesigil-btn,
 .makesigilbutton {
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: -2dvh;
+  right:15dvh;
   z-index: 10;
 }
 
 .makesigilbutton img {
-  height: 100px;
+  height: 46dvh;
   display: block;
 }
 
@@ -499,7 +489,6 @@ avatarimgbox,
   transform: scale(1.05);
   filter: drop-shadow(0 0 8px gold) drop-shadow(0 0 20px goldenrod);
 }
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Charge Sigil*/
 
 .chargesigil {
