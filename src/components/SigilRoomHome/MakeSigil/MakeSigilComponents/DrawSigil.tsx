@@ -401,7 +401,7 @@ export default function DrawSigil() {
                       cursor: 'pointer'
                     }}
                   >
-                    {isDrawingMode ? "✍️ Draw Mode" : "🖐 Manipulate Mode"}
+                    {isDrawingMode ? "🖐 Manipulate Mode" :  "✍️ Draw Mode"}
                   </button>
 
                   {user.isAdmin === true &&
