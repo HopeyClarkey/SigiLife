@@ -5,7 +5,7 @@ import { useUser } from '@/context/UserContext'
 const NavMenu = function () {
   const navigate = useNavigate()
   return (
-    <nav className='menu glasscard'>
+    <nav className='menu '>
 
       <button onClick={() => navigate(-1)}>⬅ Go Back</button>
       <Link  to="/home">Home Room</Link>
@@ -30,8 +30,8 @@ export default function Menu() {
   if (!user) { return null }
 
   return (
-    <div className="navmenu">
-     <button id="menu-btn"  onClick={() => setMenuOpen(prev => !prev)}>
+    <div className="navmenu glassbutton">
+     <button id="menu glasscard"  onClick={() => setMenuOpen(prev => !prev)}>
         {menuOpen ? '✕ Close' : '☰'}
       </button>
       {menuOpen && <NavMenu />}

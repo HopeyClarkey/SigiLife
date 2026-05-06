@@ -887,10 +887,6 @@ writesigil,
   flex-shrink: 0;
   overflow: visible;
   scroll-snap-align: center;
-  font-family: 'New Rocker', system-ui;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Draw Sigil*/
