@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as fabric from 'fabric';
@@ -7,6 +6,7 @@ import { useUser } from '@/context/UserContext'
 import Menu from '../../../Parts/Menu'
 import { usePageTutorial } from '../../../../context/TutorialContext';
 import TutorialCharacters from '../../../Tutorial/Tutorialcharacters';
+import { saveTutorialStepToSession } from '../../../Tutorial/Tutorialscript';
 
 export default function DrawSigil() {
   const { user } = useUser()
@@ -27,10 +27,21 @@ export default function DrawSigil() {
   const historyRef = useRef<string[]>([]);
   const historyIndexRef = useRef<number>(-1);
   const isRestoringHistory = useRef(false);
+  const [showStyleTip, setShowStyleTip] = useState(false);
 
   const { currentStep: tutorialStep, isActive, advance, skip } = usePageTutorial('draw');
   const showTutorialNext = isActive && tutorialStep?.advanceOn === 'next';
   const showTutorialSkip = isActive && (tutorialStep?.skippable ?? false);
+
+  const styleTipStep = {
+    id: 999,
+    page: 'draw' as const,
+    speaker: 'harper' as const,
+    harperText: "Make sure to name your new sigil, or it will default to My New Sigil. Select your element before selecting the color. You can add a ring or a glow here, and the same delete, undo, and redo are available too. When you're finished, click Review.",
+    advanceOn: 'next' as const,
+    skippable: true,
+    showOverlay: false,
+  };
 
   useEffect(() => {
     const calculate = () => {
@@ -319,22 +330,9 @@ export default function DrawSigil() {
     localStorage.setItem('sigilCanvasData', canvasData);
     localStorage.setItem('sigilImageData', imageData);
     localStorage.setItem('sigilName', sigilName);
-
-
-    if (isActive) {
-      advance();
-    }
-
     navigate('/make-sigil/style');
     window.scrollTo(0, 0);
   };
-
-  useEffect(() => {
-  if (isActive && tutorialStep?.id === 5) {
-    const t = setTimeout(() => advance(), 5000);
-    return () => clearTimeout(t);
-  }
-}, [tutorialStep?.id, isActive]);
 
   if (!user) { return null; }
 
@@ -401,7 +399,12 @@ export default function DrawSigil() {
             {step === 'draw' ? (
               <div className='rowbox' style={{ justifyContent: "center", gap: "8px", flexWrap: "wrap" }}>
                 <button className="btn" onClick={handleClear} style={{ backgroundColor: '#9e38fd', fontSize: "clamp(13px, 2vw, 20px)", padding: "8px 20px" }}>Clear All</button>
-                <button className="btn" onClick={() => { setStep('style'); setIsDrawingMode(false); }} style={{ backgroundColor: '#9e38fd', fontSize: "clamp(16px, 2.5vw, 22px)", padding: "10px 32px" }}>Next: Style Sigil</button>
+                <button className="btn" onClick={() => {
+                  setStep('style');
+                  setIsDrawingMode(false);
+                  const skipped = sessionStorage.getItem('sigilTutorialSkipped');
+                  if (!skipped) setShowStyleTip(true);
+                }} style={{ backgroundColor: '#9e38fd', fontSize: "clamp(16px, 2.5vw, 22px)", padding: "10px 32px" }}>Next: Style Sigil</button>
               </div>
             ) : (
               <div style={{ display: "flex", gap: "8px", justifyContent: "center", flexWrap: "wrap" }}>
@@ -413,14 +416,29 @@ export default function DrawSigil() {
         </div>
       </div>
 
-      {/* Tutorial characters */}
-      {isActive && tutorialStep && (
+      {isActive && tutorialStep && !showStyleTip && (
         <TutorialCharacters
           step={tutorialStep}
           onNext={advance}
           onSkip={skip}
           showNext={showTutorialNext}
           showSkip={showTutorialSkip}
+        />
+      )}
+
+      {showStyleTip && (
+        <TutorialCharacters
+          step={styleTipStep}
+          onNext={() => {
+            setShowStyleTip(false);
+            saveTutorialStepToSession(6);
+          }}
+          onSkip={() => {
+            setShowStyleTip(false);
+            sessionStorage.setItem('sigilTutorialSkipped', 'true');
+          }}
+          showNext={true}
+          showSkip={true}
         />
       )}
     </div>

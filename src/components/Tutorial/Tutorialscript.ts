@@ -53,7 +53,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     id: 4,
     page: 'draw',
     speaker: 'harper',
-    harperText: "Adjust the lettering. Bend it, tighten it, stretch it until it feels right. Make sure you resize as large as possible. Draw Mode will let you draw directly on the sigil. Use Delete, Undo, Redo at your convenience. Clear all will give you a blank canvas. ",
+    harperText: "Adjust the lettering. Bend it, tighten it, stretch it until it feels right. Make sure you resize as large as possible. Draw Mode will let you draw directly on the sigil. Use Delete, Undo, Redo at your convenience. Clear all will give you a blank canvas.",
     advanceOn: 'next',
     skippable: true,
     showOverlay: false,
@@ -62,7 +62,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     id: 5,
     page: 'draw',
     speaker: 'bennet',
-    bennetText: "These aren't decorations — they're focus. The clearer the form, the easier it is for others to read… and react. When you're ready, click Next.",
+    bennetText: "These aren't decorations — they're focus. The clearer the form, the easier it is for others to read… and react. When you're ready, click Next: Style Sigil.",
     advanceOn: 'next',
     skippable: true,
     showOverlay: false,
@@ -72,15 +72,6 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
   {
     id: 6,
     page: 'style',
-    speaker: 'harper',
-    harperText: "Make sure to name your new sigil, or it will default to My New Sigil. Select your element before selecting the color. You can add a ring or a glow here, and the same delete, undo, and redo are available too. When you're finished, click Review.",
-    advanceOn: 'next',
-    skippable: true,
-    showOverlay: false,
-  },
-  {
-    id: 7,
-    page: 'style',
     speaker: 'both',
     harperText: "Looks good.",
     bennetText: "It does. Enjoy that feeling. It doesn't last forever.",
@@ -89,7 +80,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     showOverlay: false,
   },
   {
-    id: 8,
+    id: 7,
     page: 'style',
     speaker: 'bennet',
     bennetText: "Next, choose a location. Somewhere real. Somewhere intentional. For now, you'll place it on the map. As your clearance improves, you'll be able to deploy it directly into the world — street level, exactly where it can do the most work.",
@@ -98,7 +89,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     showOverlay: false,
   },
   {
-    id: 9,
+    id: 8,
     page: 'style',
     speaker: 'harper',
     harperText: "Before you send it out, decide who sees it first. Add your SigiLites — your teammates. People you trust to reinforce your work, watch your placements, and back you up when things start to shift. A good crew doesn't just build, they defend. If you don't have any yet, don't worry. You can add them later in your Bookshelf.",
@@ -107,7 +98,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     showOverlay: false,
   },
   {
-    id: 10,
+    id: 9,
     page: 'style',
     speaker: 'bennet',
     bennetText: "Once your sigil is placed, it goes live. Other agents will find it. Some will agree with what you're pushing. Others won't. That's where pressure comes in. You'll get familiar with that on the SigiMap.",
@@ -119,7 +110,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
 
   // ── ChargeSigil ──────────────────────────────────────────────────────────────
   {
-    id: 11,
+    id: 10,
     page: 'charge',
     speaker: 'harper',
     harperText: "You can charge a sigil with emotion — focus, desire, belief. When you reinforce a mark, you're feeding it momentum. Enough charge, and it starts to lean on reality. Small shifts at first… then bigger ones.",
@@ -128,7 +119,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     showOverlay: false,
   },
   {
-    id: 12,
+    id: 11,
     page: 'charge',
     speaker: 'both',
     harperText: "On the map, that kind of pressure doesn't strengthen — it breaks things apart. Piece by piece, until the sigil collapses.",
@@ -138,7 +129,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     showOverlay: false,
   },
   {
-    id: 13,
+    id: 12,
     page: 'charge',
     speaker: 'both',
     harperText: "So place your mark carefully. Choose your people, and back them.",
@@ -148,7 +139,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     showOverlay: false,
   },
   {
-    id: 14,
+    id: 13,
     page: 'charge',
     speaker: 'both',
     harperText: "…or take it apart.",
@@ -158,7 +149,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
     showOverlay: false,
   },
   {
-    id: 15,
+    id: 14,
     page: 'charge',
     speaker: 'both',
     harperText: "Good luck.",

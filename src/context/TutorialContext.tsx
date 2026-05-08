@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import {
   TUTORIAL_STEPS,
@@ -81,10 +81,13 @@ export function useTutorial() {
 export function usePageTutorial(page: TutorialPage) {
   const { currentStep, isActive, advance, skip, initForPage } = useTutorial();
   const { user } = useUser();
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     const skipped = sessionStorage.getItem('sigilTutorialSkipped');
     if (skipped || !user || user.hasCompletedTutorial) return;
+    if (initializedRef.current) return;
+    initializedRef.current = true;
 
     const timer = setTimeout(() => initForPage(page), 150);
     return () => clearTimeout(timer);

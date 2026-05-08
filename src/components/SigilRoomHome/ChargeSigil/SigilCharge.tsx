@@ -25,7 +25,7 @@ export default function ChargeSigil() {
 
   // Step 13 is the final goodbye — shown before user saves/charges
   // Once user charges and saves, tutorial characters have already been dismissed
-  const isLastStep = tutorialStep?.id === 15;
+  const isLastStep = tutorialStep?.id === 14;
 
   useEffect(() => {
     const calculate = () => {

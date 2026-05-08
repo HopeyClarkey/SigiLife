@@ -7,15 +7,15 @@ const NavMenu = function () {
   return (
     <nav className='navmenu '>
 
-      <button onClick={() => navigate(-1)}>⬅ Go Back</button>
-      <Link  to="/home">The Office</Link>
-      <Link  to="/library?action=charge">Charge Sigil</Link>
-      <Link  to="/library?action=destroy">Destroy Sigil</Link>
-      <Link  to="/make-sigil">Make Sigil</Link>
-      <Link  to="/library">Sigil Library</Link>
-      <Link  to="/map">SigilMap</Link>
-      <Link  to="/profile">SigiLites</Link>
-      <Link  to="/settings">Settings</Link>
+      <button className='glassbutton' onClick={() => navigate(-1)}>⬅ Go Back</button>
+      <Link  className='glassbutton' to="/home">The Office</Link>
+      <Link className='glassbutton' to="/library?action=charge">Charge Sigil</Link>
+      <Link className='glassbutton' to="/library?action=destroy">Destroy Sigil</Link>
+      <Link className='glassbutton' to="/make-sigil">Make Sigil</Link>
+      <Link className='glassbutton' to="/library">Sigil Library</Link>
+      <Link className='glassbutton' to="/map">SigilMap</Link>
+      <Link className='glassbutton' to="/profile">SigiLites</Link>
+      <Link className='glassbutton' to="/settings">Settings</Link>
 
 
     </nav>

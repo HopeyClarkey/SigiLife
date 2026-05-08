@@ -75,81 +75,56 @@ function CharacterPanel({ portrait, bubble, text, side, visible, delay = 0, solo
   }, [visible, delay, stepId]);
 
 
-  useEffect(() => {
-    if (!visible) return;
-    const t = setTimeout(() => setMounted(true), delay);
-    return () => {
-      clearTimeout(t);
-      setMounted(false);
-    };
-  }, [visible, delay]);
 
   const translateX = side === 'left' ? '-120%' : '120%';
 
   return (
-    <div style={{
-      position: 'fixed',
-      bottom: 0,
-      [side]: 0,
-      width: solo ? '100vw' : '50vw',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: side === 'left' ? 'flex-start' : 'flex-end',
-      zIndex: 9000,
-      pointerEvents: 'none',
-      transform: mounted ? 'translateX(0)' : `translateX(${translateX})`,
-      transition: `transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)`,
-      willChange: 'transform',
-    }}>
-      <div style={{ position: 'relative', width: '100%' }}>
-        <img src={bubble} alt="" style={{
-          width: '100%',
-          height: 'auto',
-          display: 'block',
-          filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))',
-          marginBottom: '-8px',
-        }} />
-        <div style={{
-          position: 'absolute',
-          top: '15%',
-          left: '8%',
-          right: '8%',
-          bottom: '20%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-        }}>
-          <p style={{
-            margin: 0,
-            fontFamily: 'Pompiere, cursive',
-            fontSize: 'clamp(11px, 3vw, 15px)',
-            lineHeight: 1.35,
-            textAlign: 'center',
-            color: '#000000',
-            wordBreak: 'break-word',
-            hyphens: 'auto',
-          }}>
-            {displayed}
-            <span style={{
-              display: 'inline-block', width: '2px', height: '1em',
-              background: '#9e38fd', marginLeft: '2px', verticalAlign: 'middle',
-              animation: 'tutorialCursorBlink 0.8s step-end infinite',
-            }} />
-          </p>
-        </div>
-      </div>
-      <img src={portrait} alt="" style={{
-        width: '65%',
-        maxHeight: '45vh',
-        objectFit: 'contain',
-        display: 'block',
-        marginTop: '-80px',
-        filter: 'drop-shadow(0 -4px 20px rgba(158,56,253,0.3))',
-        alignSelf: side === 'left' ? 'flex-start' : 'flex-end',
+  <div style={{
+    position: 'fixed',
+    bottom: 0,
+    [side]: 0,
+    width: solo ? '50%' : '50%',
+    zIndex: 9000,
+    pointerEvents: 'none',
+    transform: mounted ? 'translateX(0)' : `translateX(${translateX})`,
+    transition: `transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)`,
+    willChange: 'transform',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: side === 'left' ? 'flex-start' : 'flex-end',
+  }}>
+    <div style={{ position: 'relative', width: '100%' }}>
+      <img src={bubble} alt="" style={{
+        width: '100%', height: 'auto', display: 'block',
+        filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))',
       }} />
+      <div style={{
+        position: 'absolute', top: '15%', left: '8%', right: '8%', bottom: '20%',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
+      }}>
+        <p style={{
+          margin: 0, fontFamily: 'Pompiere, cursive',
+          fontSize: 'clamp(14px, 1.8vw, 20px)',
+          lineHeight: 1.35, textAlign: 'center', color: '#000000',
+          wordBreak: 'break-word', hyphens: 'auto',
+        }}>
+          {displayed}
+          <span style={{
+            display: 'inline-block', width: '2px', height: '1em',
+            background: '#9e38fd', marginLeft: '2px', verticalAlign: 'middle',
+            animation: 'tutorialCursorBlink 0.8s step-end infinite',
+          }} />
+        </p>
+      </div>
     </div>
-  );
+    <img src={portrait} alt="" style={{
+      width: '70%', height: 'auto', display: 'block',
+      filter: 'drop-shadow(0 -4px 20px rgba(158,56,253,0.3))',
+      alignSelf: side === 'left' ? 'flex-start' : 'flex-end',
+      marginTop: '-15%',
+    }} />
+  </div>
+);
 }
 
 export default function TutorialCharacters({

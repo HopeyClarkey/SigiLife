@@ -109,11 +109,11 @@ export default function StyleSigil() {
       localStorage.removeItem('sigilImageData');
 
       // Step 8 advances on save action
-      if (isActive && tutorialStep?.id === 10) {
+      if (isActive && tutorialStep?.id === 9) {
         advance();
       }
 
-      navigate('/library');
+      navigate('/home');
     } catch (err: any) {
       setError(err.message || 'An error occurred while saving.');
     } finally {
