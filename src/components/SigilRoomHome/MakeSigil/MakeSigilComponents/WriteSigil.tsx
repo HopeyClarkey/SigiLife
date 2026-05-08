@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/context/UserContext'
 import Menu from '../../../Parts/Menu'
 import axios from 'axios';
+import { usePageTutorial } from '../../../../context/TutorialContext';
+import TutorialCharacters from '../../../Tutorial/Tutorialcharacters';
+import TutorialBlockOverlay from '../../../Tutorial/TutorialBlockOverlay';
+
 
 export default function WriteSigil() {
   const { user } = useUser();
@@ -13,6 +17,11 @@ export default function WriteSigil() {
   const [dims, setDims] = useState({ width: 2160, height: 1260 })
   const scrollRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+
+  const { currentStep, isActive, advance, skip, showOverlay } = usePageTutorial('write');
+
+  // Step 3 advances when user clicks the existing Next button — handled below
+  // Steps 1 & 2 have explicit Next buttons via TutorialCharacters
 
   useEffect(() => {
     const calculate = () => {
@@ -66,13 +75,13 @@ export default function WriteSigil() {
     return { chars: uniqueChars.join(''), censored };
   };
 
- useEffect(() => {
-  let cancelled = false;
-  getUniqueChars(intention).then(({ chars }) => {
-    if (!cancelled) setUniqueChars(intention ? chars : '');
-  });
-  return () => { cancelled = true; };
-}, [intention]);
+  useEffect(() => {
+    let cancelled = false;
+    getUniqueChars(intention).then(({ chars }) => {
+      if (!cancelled) setUniqueChars(intention ? chars : '');
+    });
+    return () => { cancelled = true; };
+  }, [intention]);
 
   const handleNext = async () => {
     if (!intention) return;
@@ -81,8 +90,18 @@ export default function WriteSigil() {
     localStorage.setItem('sigilIntention', censored);
     localStorage.setItem('sigilUniqueChars', chars);
     setIsProcessing(false);
+
+
+    if (isActive && currentStep?.id === 3) {
+      advance();
+    }
+
     navigate('/make-sigil/draw');
   };
+
+
+  const showTutorialNext = isActive && currentStep?.advanceOn === 'next';
+  const showTutorialSkip = isActive && (currentStep?.skippable ?? false);
 
   if (!user) { return null; }
 
@@ -110,6 +129,9 @@ export default function WriteSigil() {
             WebkitBackdropFilter: 'blur(24px)',
             boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
+
+            position: 'relative',
+            zIndex: showOverlay ? 1 : 'auto',
           }}>
             <h1>Write Your Sigil</h1>
             <p style={{ fontSize: "clamp(14px, 2.5vw, 22px)", marginTop: "0.5rem" }}>
@@ -123,11 +145,14 @@ export default function WriteSigil() {
                 minHeight: "120px",
                 padding: "15px",
                 resize: "none",
-                fontSize: "clamp(15px, 2vw, 18px)"
+                fontSize: "clamp(15px, 2vw, 18px)",
+                opacity: showOverlay ? 0.3 : 1,
+                transition: 'opacity 600ms ease',
               }}
               value={intention}
               onChange={(e) => setIntention(e.target.value)}
               placeholder="e.g. I am going to crush it today!"
+              disabled={showOverlay}
             />
             <div className="clmnbox">
               <span style={{ color: '#666', fontSize: 'clamp(13px, 2vw, 20px)' }}>
@@ -136,12 +161,14 @@ export default function WriteSigil() {
               <button
                 className="btn"
                 onClick={handleNext}
-                disabled={isProcessing}
+                disabled={isProcessing || showOverlay}
                 style={{
-                  backgroundColor: isProcessing ? '#ccc' : '#9e38fd',
-                  cursor: isProcessing ? 'not-allowed' : 'pointer',
+                  backgroundColor: (isProcessing || showOverlay) ? '#ccc' : '#9e38fd',
+                  cursor: (isProcessing || showOverlay) ? 'not-allowed' : 'pointer',
                   fontSize: "clamp(16px, 2.5vw, 22px)",
-                  padding: "10px 32px"
+                  padding: "10px 32px",
+                  opacity: showOverlay ? 0.3 : 1,
+                  transition: 'opacity 600ms ease',
                 }}
               >
                 {isProcessing ? "Processing..." : "Next"}
@@ -150,6 +177,16 @@ export default function WriteSigil() {
           </div>
         </div>
       </div>
+      <TutorialBlockOverlay visible={showOverlay} />
+      {isActive && currentStep && (
+        <TutorialCharacters
+          step={currentStep}
+          onNext={advance}
+          onSkip={skip}
+          showNext={showTutorialNext}
+          showSkip={showTutorialSkip}
+        />
+      )}
     </div>
   )
 }
