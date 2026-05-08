@@ -1,16 +1,15 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '@/context/UserContext'
 import MapSearchBox from '../../Grimoire/LeftPage/Map/MapSearchBox';
 import Menu from '../../../Parts/Menu'
+import { usePageTutorial } from '../../../../context/TutorialContext';
+import TutorialCharacters from '../../../Tutorial/Tutorialcharacters';
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
-
 export default function StyleSigil() {
   const { user } = useUser()
-
   const navigate = useNavigate();
   const [sigilData, setSigilData] = useState<any>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -23,6 +22,10 @@ export default function StyleSigil() {
     latitude: number;
     longitude: number;
   } | null>(null);
+
+  const { currentStep: tutorialStep, isActive, advance, skip } = usePageTutorial('style');
+  const showTutorialNext = isActive && tutorialStep?.advanceOn === 'next';
+  const showTutorialSkip = isActive && (tutorialStep?.skippable ?? false);
 
   const handleLocationRetrieve = (res: any) => {
     if (res.features && res.features.length > 0) {
@@ -43,15 +46,11 @@ export default function StyleSigil() {
     }
   };
 
-
-
   useEffect(() => {
-    // Load data from localStorage
     const name = localStorage.getItem('sigilName') || 'My New Sigil';
     const intention = localStorage.getItem('sigilIntention') || '';
     const canvasData = localStorage.getItem('sigilCanvasData') || '';
     const imageData = localStorage.getItem('sigilImageData') || '';
-
     setSigilData({ name, intention, canvasData, imageData });
   }, []);
 
@@ -70,22 +69,18 @@ export default function StyleSigil() {
     );
   };
 
-
   const handleSave = async () => {
     if (!user || !user.id) {
       setError("You must be logged in to save a sigil.");
       return;
     }
-
     setIsSaving(true);
     setError('');
 
     try {
       const response = await fetch('/api/sigils', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: sigilData.name,
           userId: user.id,
@@ -96,32 +91,28 @@ export default function StyleSigil() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to save sigil');
-      }
-
+      if (!response.ok) throw new Error('Failed to save sigil');
       const result = await response.json();
-      console.log(result)
 
       if (selectedFriends.length > 0) {
         await fetch('/api/sigils/share', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            sigilId: result.id,
-            targetUserIds: selectedFriends
-          })
+          body: JSON.stringify({ sigilId: result.id, targetUserIds: selectedFriends })
         });
       }
 
-      // Clear localStorage
       localStorage.removeItem('sigilName');
       localStorage.removeItem('sigilIntention');
       localStorage.removeItem('sigilUniqueChars');
       localStorage.removeItem('sigilCanvasData');
       localStorage.removeItem('sigilImageData');
 
-      // Navigate to library to see the newly saved sigil
+      // Step 8 advances on save action
+      if (isActive && tutorialStep?.id === 8) {
+        advance();
+      }
+
       navigate('/library');
     } catch (err: any) {
       setError(err.message || 'An error occurred while saving.');
@@ -132,32 +123,31 @@ export default function StyleSigil() {
 
   if (!sigilData) return <div>Loading...</div>;
 
+  return (
+    <div className='maincontainer'>
+      <div className="scrollcontainer" ref={scrollCallbackRef}>
+        <div className='stylesigilcontainer'>
+          <Menu />
+          <div className="flex flex-col bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] pointer-events-auto border border-white/20 transition-all duration-500 animate-in fade-in zoom-in slide-in-from-bottom-8"
+            style={{
+              width: "88dvw",
+              maxWidth: "700px",
+              height: "88dvh",
+              overflowY: "auto",
+              gap: "1rem",
+              display: "flex",
+              flexDirection: "column",
+            }}>
+            <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)", textAlign: "center" }}>
+              Share & Save your Sigil
+            </h1>
 
-
-return (
-  <div className='maincontainer'>
-    <div className="scrollcontainer" ref={scrollCallbackRef}>
-      <div className='stylesigilcontainer'>
-        <Menu/>
-        <div className="flex flex-col bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] pointer-events-auto border border-white/20 transition-all duration-500 animate-in fade-in zoom-in slide-in-from-bottom-8"
-          style={{
-            width: "88dvw",
-            maxWidth: "700px",
-            height: "88dvh",
-            overflowY: "auto",
-            gap: "1rem",
-            display: "flex",
-            flexDirection: "column",
-          }}>
-          <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)", textAlign: "center" }}>
-            Share & Save your Sigil
-          </h1>
             {/* Sigil preview */}
             <div style={{ textAlign: "center" }}>
               <h2 style={{ fontSize: "clamp(18px, 3vw, 26px)" }}>{sigilData.name}</h2>
               {sigilData.intention && (
                 <p style={{ fontSize: "clamp(13px, 2vw, 16px)", color: "#666", margin: "4px 0 8px" }}>
-                 {sigilData.intention}
+                  {sigilData.intention}
                 </p>
               )}
               {sigilData.imageData && (
@@ -167,7 +157,7 @@ return (
                   style={{
                     width: 'min(100%, 50vh)',
                     height: 'min(100%, 50vh)',
-                    aspectRatio: '1 / 1',     /* ← square, no stretch */
+                    aspectRatio: '1 / 1',
                     objectFit: 'contain',
                     margin: '0 auto',
                     display: 'block',
@@ -176,11 +166,11 @@ return (
               )}
             </div>
 
-            {/* Location — compact */}
+            {/* Location */}
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '1rem' }}>
               <h2 style={{ fontSize: "clamp(16px, 2.5vw, 22px)", marginBottom: "0.5rem" }}>📍 Location</h2>
               {location ? (
-                <p style={{ fontSize: "clamp(13px, 2vw, 16px)", display: "flex", alignItems: "center", gap: "8px", }}>
+                <p style={{ fontSize: "clamp(13px, 2vw, 16px)", display: "flex", alignItems: "center", gap: "8px" }}>
                   {location.locationName}
                   <button onClick={() => setLocation(null)}
                     style={{ cursor: 'pointer', background: 'none', border: 'none', color: 'inherit' }}>
@@ -227,6 +217,17 @@ return (
           </div>
         </div>
       </div>
+
+      {/* Tutorial characters */}
+      {isActive && tutorialStep && (
+        <TutorialCharacters
+          step={tutorialStep}
+          onNext={advance}
+          onSkip={skip}
+          showNext={showTutorialNext}
+          showSkip={showTutorialSkip}
+        />
+      )}
     </div>
-  )
+  );
 }

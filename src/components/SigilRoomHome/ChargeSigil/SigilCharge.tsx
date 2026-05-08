@@ -4,6 +4,8 @@ import ChangeEmotion from './ChargeComponents/ChangeEmotion'
 import { useState, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext'
 import SplashCursor from './ChargeComponents/SplashCursor'
+import { usePageTutorial } from '../../../context/TutorialContext';
+import TutorialCharacters from '../../Tutorial/Tutorialcharacters';
 
 export default function ChargeSigil() {
   const [searchParams] = useSearchParams()
@@ -16,6 +18,14 @@ export default function ChargeSigil() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ width: 2160, height: 1260 });
   const [showInstruction, setShowInstruction] = useState(false);
+
+  const { currentStep: tutorialStep, isActive, advance, skip } = usePageTutorial('charge');
+  const showTutorialNext = isActive && tutorialStep?.advanceOn === 'next';
+  const showTutorialSkip = isActive && (tutorialStep?.skippable ?? false);
+
+  // Step 13 is the final goodbye — shown before user saves/charges
+  // Once user charges and saves, tutorial characters have already been dismissed
+  const isLastStep = tutorialStep?.id === 13;
 
   useEffect(() => {
     const calculate = () => {
@@ -52,6 +62,12 @@ export default function ChargeSigil() {
       const res = await fetch(`/api/sigils/${sigilData.id}/charge`, { method: 'PATCH' });
       if (!res.ok) { throw new Error('Failed to charge sigil'); }
       const updatedSigil = await res.json();
+
+      // Advance tutorial past step 13 before navigating
+      if (isActive && isLastStep) {
+        advance();
+      }
+
       setTimeout(() => navigate(`/sigil-page?sigilId=${updatedSigil.id}`), 100)
     } catch (error) {
       console.error(error);
@@ -127,6 +143,10 @@ export default function ChargeSigil() {
                 <button className='glassbutton'
                   style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
                   onClick={() => {
+                    // If on last tutorial step, advance before charging starts
+                    if (isActive && isLastStep) {
+                      advance();
+                    }
                     setIsCharging(true);
                     setShowInstruction(true);
                     setTimeout(() => setShowInstruction(false), 4000);
@@ -152,6 +172,17 @@ export default function ChargeSigil() {
           </div>
         </div>
       </div>
+
+      {/* Tutorial characters — hidden once charging begins so they don't fight the SplashCursor */}
+      {isActive && tutorialStep && !isCharging && (
+        <TutorialCharacters
+          step={tutorialStep}
+          onNext={advance}
+          onSkip={skip}
+          showNext={showTutorialNext}
+          showSkip={showTutorialSkip}
+        />
+      )}
     </div>
   )
 }

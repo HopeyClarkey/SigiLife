@@ -1,10 +1,13 @@
+
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as fabric from 'fabric';
 import axios from 'axios';
 import { useUser } from '@/context/UserContext'
 import Menu from '../../../Parts/Menu'
-
+import { usePageTutorial } from '../../../../context/TutorialContext';
+import TutorialCharacters from '../../../Tutorial/Tutorialcharacters';
+ 
 export default function DrawSigil() {
   const { user } = useUser()
   const navigate = useNavigate();
@@ -24,7 +27,11 @@ export default function DrawSigil() {
   const historyRef = useRef<string[]>([]);
   const historyIndexRef = useRef<number>(-1);
   const isRestoringHistory = useRef(false);
-
+ 
+  const { currentStep: tutorialStep, isActive, advance, skip } = usePageTutorial('draw');
+  const showTutorialNext = isActive && tutorialStep?.advanceOn === 'next';
+  const showTutorialSkip = isActive && (tutorialStep?.skippable ?? false);
+ 
   useEffect(() => {
     const calculate = () => {
       const scale = window.innerHeight / 1260;
@@ -37,7 +44,7 @@ export default function DrawSigil() {
     window.addEventListener('resize', calculate);
     return () => window.removeEventListener('resize', calculate);
   }, []);
-
+ 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -45,12 +52,12 @@ export default function DrawSigil() {
       el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
     }, 50);
   }, [dims]);
-
+ 
   const updateUndoRedo = useCallback(() => {
     setCanUndo(historyIndexRef.current > 0);
     setCanRedo(historyIndexRef.current < historyRef.current.length - 1);
   }, []);
-
+ 
   const saveHistory = useCallback(() => {
     if (isRestoringHistory.current || !fabricCanvasRef.current) return;
     const json = JSON.stringify(fabricCanvasRef.current.toJSON());
@@ -62,7 +69,7 @@ export default function DrawSigil() {
     historyIndexRef.current = historyRef.current.length - 1;
     updateUndoRedo();
   }, [updateUndoRedo]);
-
+ 
   const handleDeleteSelected = useCallback(() => {
     if (!fabricCanvasRef.current) return;
     const canvas = fabricCanvasRef.current;
@@ -73,7 +80,7 @@ export default function DrawSigil() {
       saveHistory();
     }
   }, [saveHistory]);
-
+ 
   useEffect(() => {
     if (!canvasRef.current || fabricCanvasRef.current) return;
     const wrapper = wrapperRef.current;
@@ -93,7 +100,7 @@ export default function DrawSigil() {
     canvas.on('path:created', saveHistory);
     canvas.on('object:modified', saveHistory);
     canvas.on('object:removed', () => { if (!isRestoringHistory.current) saveHistory(); });
-
+ 
     const loadCharacters = async () => {
       const uniqueChars = localStorage.getItem('sigilUniqueChars');
       if (uniqueChars && fabricCanvasRef.current) {
@@ -132,9 +139,9 @@ export default function DrawSigil() {
         }
       }
     };
-
+ 
     loadCharacters();
-
+ 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Delete' || e.key === 'Backspace') {
         if (document.activeElement?.tagName === 'INPUT') return;
@@ -142,7 +149,7 @@ export default function DrawSigil() {
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-
+ 
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (fabricCanvasRef.current) {
@@ -152,9 +159,9 @@ export default function DrawSigil() {
         }
       }
     });
-
+ 
     if (wrapperRef.current) resizeObserver.observe(wrapperRef.current);
-
+ 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       resizeObserver.disconnect();
@@ -164,7 +171,7 @@ export default function DrawSigil() {
       }
     };
   }, [saveHistory, handleDeleteSelected]);
-
+ 
   useEffect(() => {
     if (fabricCanvasRef.current) {
       fabricCanvasRef.current.isDrawingMode = isDrawingMode;
@@ -174,14 +181,14 @@ export default function DrawSigil() {
       }
     }
   }, [isDrawingMode]);
-
+ 
   useEffect(() => {
     if (fabricCanvasRef.current && fabricCanvasRef.current.freeDrawingBrush) {
       fabricCanvasRef.current.freeDrawingBrush.color = brushColor;
       fabricCanvasRef.current.freeDrawingBrush.width = brushWidth;
     }
   }, [brushColor, brushWidth]);
-
+ 
   const handleClear = () => {
     if (fabricCanvasRef.current) {
       fabricCanvasRef.current.clear();
@@ -190,7 +197,7 @@ export default function DrawSigil() {
       saveHistory();
     }
   };
-
+ 
   const undo = async () => {
     if (historyIndexRef.current > 0 && fabricCanvasRef.current) {
       isRestoringHistory.current = true;
@@ -202,7 +209,7 @@ export default function DrawSigil() {
       updateUndoRedo();
     }
   };
-
+ 
   const redo = async () => {
     if (historyIndexRef.current < historyRef.current.length - 1 && fabricCanvasRef.current) {
       isRestoringHistory.current = true;
@@ -214,7 +221,7 @@ export default function DrawSigil() {
       updateUndoRedo();
     }
   };
-
+ 
   const handleExport = () => {
     if (!fabricCanvasRef.current) return;
     const dataURL = fabricCanvasRef.current.toDataURL({ format: 'png', multiplier: 2 });
@@ -223,7 +230,7 @@ export default function DrawSigil() {
     link.href = dataURL;
     link.click();
   };
-
+ 
   const handleSVGUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -258,7 +265,7 @@ export default function DrawSigil() {
     reader.readAsText(file);
     e.target.value = '';
   };
-
+ 
   const handleAddRing = () => {
     if (!fabricCanvasRef.current) return;
     const canvas = fabricCanvasRef.current;
@@ -277,7 +284,7 @@ export default function DrawSigil() {
     canvas.renderAll();
     saveHistory();
   };
-
+ 
   const handleChangeColor = () => {
     if (!fabricCanvasRef.current) return;
     const canvas = fabricCanvasRef.current;
@@ -292,7 +299,7 @@ export default function DrawSigil() {
     canvas.renderAll();
     saveHistory();
   };
-
+ 
   const handleAddGlow = () => {
     if (!fabricCanvasRef.current) return;
     const canvas = fabricCanvasRef.current;
@@ -304,7 +311,7 @@ export default function DrawSigil() {
     canvas.renderAll();
     saveHistory();
   };
-
+ 
   const handleNextToStyle = () => {
     if (!fabricCanvasRef.current) return;
     const canvasData = JSON.stringify(fabricCanvasRef.current.toJSON());
@@ -312,12 +319,18 @@ export default function DrawSigil() {
     localStorage.setItem('sigilCanvasData', canvasData);
     localStorage.setItem('sigilImageData', imageData);
     localStorage.setItem('sigilName', sigilName);
+ 
+    // Tutorial step 4 advances when user clicks Review (advanceOn: 'action')
+    if (isActive && tutorialStep?.id === 4) {
+      advance();
+    }
+ 
     navigate('/make-sigil/style');
     window.scrollTo(0, 0);
   };
-
+ 
   if (!user) { return null; }
-
+ 
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
@@ -392,6 +405,18 @@ export default function DrawSigil() {
           </div>
         </div>
       </div>
+ 
+      {/* Tutorial characters */}
+      {isActive && tutorialStep && (
+        <TutorialCharacters
+          step={tutorialStep}
+          onNext={advance}
+          onSkip={skip}
+          showNext={showTutorialNext}
+          showSkip={showTutorialSkip}
+        />
+      )}
     </div>
   );
 }
+ 
