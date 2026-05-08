@@ -12,6 +12,7 @@ interface TutorialCharacterProps {
   onSkip?: () => void;
   showNext: boolean;
   showSkip: boolean;
+  solo?: boolean;
 }
 
 function useTypewriter(text: string, speed = 28) {
@@ -54,12 +55,25 @@ interface CharacterPanelProps {
   side: 'left' | 'right';
   visible: boolean;
   delay?: number;
+  solo?: boolean;
+  stepId: number;
 }
 
-function CharacterPanel({ portrait, bubble, text, side, visible, delay = 0 }: CharacterPanelProps) {
+function CharacterPanel({ portrait, bubble, text, side, visible, delay = 0, solo, stepId }: CharacterPanelProps) {
   const [mounted, setMounted] = useState(false);
   const textToType = visible && mounted ? text : '';
   const displayed = useTypewriter(textToType, 28);
+
+  useEffect(() => {
+    if (!visible) return;
+    const reset = setTimeout(() => setMounted(false), 0);
+    const t = setTimeout(() => setMounted(true), delay + 50);
+    return () => {
+      clearTimeout(reset);
+      clearTimeout(t);
+    };
+  }, [visible, delay, stepId]);
+
 
   useEffect(() => {
     if (!visible) return;
@@ -77,7 +91,7 @@ function CharacterPanel({ portrait, bubble, text, side, visible, delay = 0 }: Ch
       position: 'fixed',
       bottom: 0,
       [side]: 0,
-      width: '50vw',
+      width: solo ? '100vw' : '50vw',
       display: 'flex',
       flexDirection: 'column',
       alignItems: side === 'left' ? 'flex-start' : 'flex-end',
@@ -159,21 +173,25 @@ export default function TutorialCharacters({
       {showHarper && step.harperText && (
         <CharacterPanel
           portrait={HarperPortrait}
+          stepId={step.id}
           bubble={SpeechBubbleLeft}
           text={step.harperText}
           side="left"
           visible={showHarper}
           delay={0}
+          solo={step.speaker === 'harper'}
         />
       )}
       {showBennet && step.bennetText && (
         <CharacterPanel
           portrait={BennetPortrait}
+          stepId={step.id}
           bubble={SpeechBubbleRight}
           text={step.bennetText}
           side="right"
           visible={showBennet}
           delay={step.speaker === 'both' ? 3000 : 0}
+          solo={step.speaker === 'bennet'}
         />
       )}
       {step.floatingText && (
