@@ -73,7 +73,29 @@ router.get(`/:id`, async (req, res) => {
 })
 
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Content Filter
+router.post('/filter-content', async (req: Request, res: Response) => {
+  const { text } = req.body;
+  if (!text) return res.json({ censored: text });
 
+  try {
+    const response = await fetch('https://api.apilayer.com/bad_words', {
+      method: 'POST',
+      headers: {
+        'apikey': process.env.BAD_WORDS_API_KEY || '',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text }),
+    });
+    const data = await response.json() as any;
+    const censored = data?.censored_content
+      ? data.censored_content.slice(9, -2)
+      : text;
+    res.json({ censored });
+  } catch (error) {
+    res.json({ censored: text });
+  }
+});
 
 
 

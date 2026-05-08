@@ -109,7 +109,7 @@ export default function StyleSigil() {
       localStorage.removeItem('sigilImageData');
 
       // Step 8 advances on save action
-      if (isActive && tutorialStep?.id === 8) {
+      if (isActive && tutorialStep?.id === 10) {
         advance();
       }
 

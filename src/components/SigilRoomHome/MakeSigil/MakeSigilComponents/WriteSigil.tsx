@@ -47,22 +47,13 @@ export default function WriteSigil() {
   const getUniqueChars = async (text: string): Promise<{ chars: string; censored: string }> => {
     let censored = text;
     try {
-      const response = await axios.post(
-        'https://api.apilayer.com/bad_words',
-        { text },
-        {
-          headers: {
-            apikey: import.meta.env.VITE_BAD_WORDS,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      if (response.data?.censored_content) {
-        censored = response.data.censored_content.slice(9, -2);
+      const response = await axios.post('/api/sigils/filter-content', { text });
+      if (response.data?.censored) {
+        censored = response.data.censored;
       }
     } catch (error) {
-      console.error('Error checking for bad words:', (error as Error).message);
-      throw error;
+      console.error('Content filter failed, using raw text');
+      censored = text;
     }
     const nonAlphaOrVowels = /[^a-zA-Z]|[aeiouAEIOU]/g;
     const cleanText = censored.replace(nonAlphaOrVowels, '').toUpperCase();
