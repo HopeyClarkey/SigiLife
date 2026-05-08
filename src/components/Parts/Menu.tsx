@@ -5,10 +5,10 @@ import { useUser } from '@/context/UserContext'
 const NavMenu = function () {
   const navigate = useNavigate()
   return (
-    <nav className='menu '>
+    <nav className='navmenu '>
 
       <button onClick={() => navigate(-1)}>⬅ Go Back</button>
-      <Link  to="/home">Home Room</Link>
+      <Link  to="/home">The Office</Link>
       <Link  to="/library?action=charge">Charge Sigil</Link>
       <Link  to="/library?action=destroy">Destroy Sigil</Link>
       <Link  to="/make-sigil">Make Sigil</Link>
@@ -31,7 +31,7 @@ export default function Menu() {
 
   return (
     <div className="navmenu glassbutton">
-     <button id="menu glasscard"  onClick={() => setMenuOpen(prev => !prev)}>
+     <button id="navmenu"  onClick={() => setMenuOpen(prev => !prev)}>
         {menuOpen ? '✕ Close' : '☰'}
       </button>
       {menuOpen && <NavMenu />}

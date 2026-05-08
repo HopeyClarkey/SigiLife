@@ -269,8 +269,10 @@ scrollcontainer,
   width: 100vw;
   height: 100dvh;
   align-self: stretch;
-    isolation: auto; 
+  isolation: auto;
   -webkit-overflow-scrolling: touch;
+  display: flex;
+  align-items: flex-start;
 }
 
 noscroll,
@@ -289,6 +291,21 @@ rowbox,
   display: flex;
   flex-direction: row;
 }
+.homeroom,
+.chargesigil,
+.destroysigil,
+.grimoire,
+.rightpage,
+.rightpage2,
+.sigilpage,
+.makesigil,
+.writesigil,
+.drawsigil {
+
+  scroll-snap-align: center;
+}
+
+
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Landing Page*/
 
@@ -918,6 +935,9 @@ drawsigilmenu,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Style Sigil*/
 .stylesigilcontainer {
+    background-image: url('./assets/WritingLino.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   background-image: linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
   display: flex;
   flex-direction: column;
