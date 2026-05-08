@@ -73,82 +73,67 @@ function CharacterPanel({ portrait, bubble, text, side, visible, delay = 0 }: Ch
   const translateX = side === 'left' ? '-120%' : '120%';
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        [side]: 0,
-        width: 'clamp(160px, 22vw, 280px)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: side === 'left' ? 'flex-start' : 'flex-end',
-        zIndex: 9000,
-        pointerEvents: 'none',
-        transform: mounted ? 'translateX(0)' : `translateX(${translateX})`,
-        transition: `transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)`,
-        willChange: 'transform',
-      }}
-    >
-      <img
-        src={bubble}
-        alt=""
-        style={{
+    <div style={{
+      position: 'fixed',
+      bottom: 0,
+      [side]: 0,
+      width: '50vw',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: side === 'left' ? 'flex-start' : 'flex-end',
+      zIndex: 9000,
+      pointerEvents: 'none',
+      transform: mounted ? 'translateX(0)' : `translateX(${translateX})`,
+      transition: `transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)`,
+      willChange: 'transform',
+    }}>
+      <div style={{ position: 'relative', width: '100%' }}>
+        <img src={bubble} alt="" style={{
           width: '100%',
           height: 'auto',
           display: 'block',
           filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))',
-        }}
-      />
-      <div
-        style={{
+          marginBottom: '-8px',
+        }} />
+        <div style={{
           position: 'absolute',
-          top: '28%',
-          left: '12%',
-          right: '12%',
-          height: '44%',
+          top: '15%',
+          left: '8%',
+          right: '8%',
+          bottom: '20%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-        }}
-      >
-        <p
-          style={{
+        }}>
+          <p style={{
             margin: 0,
             fontFamily: 'Pompiere, cursive',
-            fontSize: 'clamp(10px, 1.4vw, 15px)',
+            fontSize: 'clamp(11px, 3vw, 15px)',
             lineHeight: 1.35,
             textAlign: 'center',
-            color: '#1a0a2e',
+            color: '#000000',
             wordBreak: 'break-word',
             hyphens: 'auto',
-          }}
-        >
-          {displayed}
-          <span
-            style={{
-              display: 'inline-block',
-              width: '2px',
-              height: '1em',
-              background: '#9e38fd',
-              marginLeft: '2px',
-              verticalAlign: 'middle',
+          }}>
+            {displayed}
+            <span style={{
+              display: 'inline-block', width: '2px', height: '1em',
+              background: '#9e38fd', marginLeft: '2px', verticalAlign: 'middle',
               animation: 'tutorialCursorBlink 0.8s step-end infinite',
-            }}
-          />
-        </p>
+            }} />
+          </p>
+        </div>
       </div>
-      <img
-        src={portrait}
-        alt=""
-        style={{
-          width: '85%',
-          height: 'auto',
-          display: 'block',
-          filter: 'drop-shadow(0 -4px 20px rgba(158,56,253,0.3))',
-          alignSelf: side === 'left' ? 'flex-start' : 'flex-end',
-        }}
-      />
+      <img src={portrait} alt="" style={{
+        width: '65%',
+        maxHeight: '45vh',
+        objectFit: 'contain',
+        display: 'block',
+        marginTop: '-80px',
+        filter: 'drop-shadow(0 -4px 20px rgba(158,56,253,0.3))',
+        alignSelf: side === 'left' ? 'flex-start' : 'flex-end',
+      }} />
     </div>
   );
 }
@@ -188,7 +173,7 @@ export default function TutorialCharacters({
           text={step.bennetText}
           side="right"
           visible={showBennet}
-          delay={step.speaker === 'both' ? 300 : 0}
+          delay={step.speaker === 'both' ? 3000 : 0}
         />
       )}
       {step.floatingText && (
