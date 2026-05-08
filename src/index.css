@@ -325,6 +325,8 @@ landingpage,
   padding: 1rem;
   gap: 1rem;
   box-sizing: border-box;
+  flex-shrink: 0;
+  scroll-snap-align: center;
 }
 
 logo,
@@ -337,7 +339,7 @@ logo,
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  width: 95vw;
+  width: min(70dvh, 88dvw) !important;
   max-height: 35dvh;
   margin: 0;
   border: 1px solid rgba(255, 255, 255, 0.2);

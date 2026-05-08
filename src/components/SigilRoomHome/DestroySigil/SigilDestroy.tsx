@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import Menu from '../../Parts/Menu'
+import Menu from '../../Parts/Menu.tsx'
 import { useSearchParams, useNavigate } from "react-router-dom"
 import ChangeEmotion from '../ChargeSigil/ChargeComponents/ChangeEmotion'
 import EvilEye from './DestroyComponents/EvilEye'
