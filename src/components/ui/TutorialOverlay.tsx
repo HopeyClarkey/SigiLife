@@ -45,8 +45,11 @@ export default function TutorialOverlay({ onComplete }: { onComplete: () => void
   const { user, setUser } = useUser();
   const [highlightStyle, setHighlightStyle] = useState<React.CSSProperties>({});
 
+
+
   useEffect(() => {
     const step = steps[currentStep];
+    if (!step) return;
     if (step.targetId) {
       const element = document.getElementById(step.targetId);
       if (element) {

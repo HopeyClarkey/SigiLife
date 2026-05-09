@@ -49,7 +49,7 @@ export default function CreateProfile() {
       <div className='scrollcontainer'>
         <div className="landingpage">
           <div className="glasscard" style={{
-            width: "95dvw",
+            width: "min(70dvh, 88dvw)"
           }}>
             <h1 style={{ color: "black" }}>Create Your Profile:</h1>
             <p style={{ textAlign: "center", width: "100%" }}>
