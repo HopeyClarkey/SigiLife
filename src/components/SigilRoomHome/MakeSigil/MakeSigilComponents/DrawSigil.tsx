@@ -9,12 +9,13 @@ import TutorialCharacters from '../../../Tutorial/Tutorialcharacters';
 import { saveTutorialStepToSession } from '../../../Tutorial/Tutorialscript';
 
 export default function DrawSigil() {
-  const { user } = useUser()
+  const { user } = useUser();
   const navigate = useNavigate();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<fabric.Canvas | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ width: 2160, height: 1260 });
   const [step, setStep] = useState<'draw' | 'style'>('draw');
   const [isDrawingMode, setIsDrawingMode] = useState(true);
@@ -37,7 +38,7 @@ export default function DrawSigil() {
     id: 999,
     page: 'draw' as const,
     speaker: 'harper' as const,
-    harperText: "Make sure to name your new sigil, or it will default to My New Sigil. Select your element before selecting the color. You can add a ring or a glow here, and the same delete, undo, and redo are available too. When you're finished, click Review.",
+    harperText: "Make sure to name your new sigil, or it will default to My New Sigil. You can add a color, ring or a glow here. When you're finished, click Review.",
     advanceOn: 'next' as const,
     skippable: true,
     showOverlay: false,
@@ -46,10 +47,7 @@ export default function DrawSigil() {
   useEffect(() => {
     const calculate = () => {
       const scale = window.innerHeight / 1260;
-      setDims({
-        width: Math.round(2160 * scale),
-        height: window.innerHeight,
-      });
+      setDims({ width: Math.round(2160 * scale), height: window.innerHeight });
     };
     calculate();
     window.addEventListener('resize', calculate);
@@ -59,9 +57,7 @@ export default function DrawSigil() {
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    setTimeout(() => {
-      el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-    }, 50);
+    setTimeout(() => { el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2; }, 50);
   }, [dims]);
 
   const updateUndoRedo = useCallback(() => {
@@ -97,10 +93,8 @@ export default function DrawSigil() {
     const wrapper = wrapperRef.current;
     const initialSize = wrapper ? Math.min(wrapper.clientWidth, wrapper.clientHeight) : 500;
     const canvas = new fabric.Canvas(canvasRef.current, {
-      width: initialSize,
-      height: initialSize,
-      backgroundColor: 'transparent',
-      isDrawingMode: true
+      width: initialSize, height: initialSize,
+      backgroundColor: 'transparent', isDrawingMode: true
     });
     const brush = new fabric.PencilBrush(canvas);
     brush.color = '#000000';
@@ -127,14 +121,10 @@ export default function DrawSigil() {
             if (objects && objects.length > 0) {
               const pathObj = objects[0] as fabric.FabricObject;
               pathObj.set({
-                fill: 'transparent',
-                stroke: 'black',
-                strokeWidth: 2,
+                fill: 'transparent', stroke: 'black', strokeWidth: 2,
                 left: canvas.width ? (canvas.width / 2) + (Math.random() * 80 - 40) : 250,
                 top: canvas.height ? (canvas.height / 2) + (Math.random() * 80 - 40) : 250,
-                originX: 'center',
-                originY: 'center',
-                selectable: true,
+                originX: 'center', originY: 'center', selectable: true,
               });
               if (pathObj.width && canvas.width && pathObj.width > canvas.width * 0.4) {
                 pathObj.scaleToWidth(canvas.width * 0.4);
@@ -170,7 +160,6 @@ export default function DrawSigil() {
         }
       }
     });
-
     if (wrapperRef.current) resizeObserver.observe(wrapperRef.current);
 
     return () => {
@@ -257,9 +246,7 @@ export default function DrawSigil() {
           obj.set({
             left: fabricCanvasRef.current.width ? fabricCanvasRef.current.width / 2 : 250,
             top: fabricCanvasRef.current.height ? fabricCanvasRef.current.height / 2 : 250,
-            originX: 'center',
-            originY: 'center',
-            selectable: true,
+            originX: 'center', originY: 'center', selectable: true,
           });
           if (obj.width && fabricCanvasRef.current.width && obj.width > fabricCanvasRef.current.width * 0.8) {
             obj.scaleToWidth(fabricCanvasRef.current.width * 0.8);
@@ -282,14 +269,10 @@ export default function DrawSigil() {
     const canvas = fabricCanvasRef.current;
     const ring = new fabric.Circle({
       radius: canvas.width ? canvas.width * 0.4 : 150,
-      fill: 'transparent',
-      stroke: styleColor,
-      strokeWidth: brushWidth,
+      fill: 'transparent', stroke: styleColor, strokeWidth: brushWidth,
       left: canvas.width ? canvas.width / 2 : 250,
       top: canvas.height ? canvas.height / 2 : 250,
-      originX: 'center',
-      originY: 'center',
-      selectable: true
+      originX: 'center', originY: 'center', selectable: true
     });
     canvas.add(ring);
     canvas.renderAll();
@@ -334,14 +317,17 @@ export default function DrawSigil() {
     window.scrollTo(0, 0);
   };
 
-  if (!user) { return null; }
+  if (!user) return null;
 
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className="drawsigil" style={{ width: `${dims.width}px`, height: `${dims.height}px`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="drawsigil" style={{
+          width: `${Math.max(dims.width, window.innerWidth)}px`, height: `${dims.height}px`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center'
+        }}>
           <Menu />
-          <div className="flex flex-col justify-evenly bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] pointer-events-auto border border-white/20 transition-all duration-500"
+          <div ref={cardRef} className="flex flex-col justify-evenly bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] pointer-events-auto border border-white/20 transition-all duration-500"
             style={{ width: 'min(55dvh, 85dvw)', height: '88dvh' }}>
             <h1 style={{ fontSize: "clamp(26px, 4vw, 42px)", textAlign: "center" }}>
               {step === 'draw' ? 'Draw Your Sigil' : 'Style Your Sigil'}
@@ -423,6 +409,7 @@ export default function DrawSigil() {
           onSkip={skip}
           showNext={showTutorialNext}
           showSkip={showTutorialSkip}
+          cardRef={cardRef}
         />
       )}
 
@@ -439,6 +426,7 @@ export default function DrawSigil() {
           }}
           showNext={true}
           showSkip={true}
+          cardRef={cardRef}
         />
       )}
     </div>

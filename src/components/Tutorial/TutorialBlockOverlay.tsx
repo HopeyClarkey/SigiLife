@@ -8,7 +8,7 @@ export default function TutorialBlockOverlay({ visible }: TutorialBlockOverlayPr
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 8999,
+        zIndex: 8400,
         background: 'rgba(5, 0, 15, 0.82)',
         backdropFilter: 'blur(2px)',
         pointerEvents: visible ? 'auto' : 'none',

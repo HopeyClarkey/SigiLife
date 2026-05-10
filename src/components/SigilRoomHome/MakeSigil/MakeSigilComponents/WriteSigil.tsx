@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/context/UserContext'
@@ -8,49 +7,39 @@ import { usePageTutorial } from '../../../../context/TutorialContext';
 import TutorialCharacters from '../../../Tutorial/Tutorialcharacters';
 import TutorialBlockOverlay from '../../../Tutorial/TutorialBlockOverlay';
 
-
 export default function WriteSigil() {
   const { user } = useUser();
   const [intention, setIntention] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [uniqueChars, setUniqueChars] = useState('');
-  const [dims, setDims] = useState({ width: 2160, height: 1260 })
+  const [dims, setDims] = useState({ width: 2160, height: 1260 });
   const scrollRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   const { currentStep, isActive, advance, skip, showOverlay } = usePageTutorial('write');
 
-  // Step 3 advances when user clicks the existing Next button — handled below
-  // Steps 1 & 2 have explicit Next buttons via TutorialCharacters
-
   useEffect(() => {
     const calculate = () => {
-      const scale = window.innerHeight / 1260
-      setDims({
-        width: Math.round(2160 * scale),
-        height: window.innerHeight,
-      })
-    }
-    calculate()
-    window.addEventListener('resize', calculate)
-    return () => window.removeEventListener('resize', calculate)
-  }, [])
+      const scale = window.innerHeight / 1260;
+      setDims({ width: Math.round(2160 * scale), height: window.innerHeight });
+    };
+    calculate();
+    window.addEventListener('resize', calculate);
+    return () => window.removeEventListener('resize', calculate);
+  }, []);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    setTimeout(() => {
-      el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-    }, 50)
-  }, [dims])
+    setTimeout(() => { el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2; }, 50);
+  }, [dims]);
 
   const getUniqueChars = async (text: string): Promise<{ chars: string; censored: string }> => {
     let censored = text;
     try {
       const response = await axios.post('/api/sigils/filter-content', { text });
-      if (response.data?.censored) {
-        censored = response.data.censored;
-      }
+      if (response.data?.censored) censored = response.data.censored;
     } catch (error) {
       console.error('Content filter failed, using raw text');
       censored = text;
@@ -81,33 +70,24 @@ export default function WriteSigil() {
     localStorage.setItem('sigilIntention', censored);
     localStorage.setItem('sigilUniqueChars', chars);
     setIsProcessing(false);
-
-
-    if (isActive && currentStep?.id === 3) {
-      advance();
-    }
-
+    if (isActive && currentStep?.id === 3) advance();
     navigate('/make-sigil/draw');
   };
-
 
   const showTutorialNext = isActive && currentStep?.advanceOn === 'next';
   const showTutorialSkip = isActive && (currentStep?.skippable ?? false);
 
-  if (!user) { return null; }
+  if (!user) return null;
 
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="writesigil" style={{
-          width: `${dims.width}px`,
-          height: `${dims.height}px`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          width: `${Math.max(dims.width, window.innerWidth)}px`, height: `${dims.height}px`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <Menu />
-          <div style={{
+          <div ref={cardRef} style={{
             width: 'min(55dvh, 85dvw)',
             height: '88dvh',
             display: 'flex',
@@ -120,25 +100,19 @@ export default function WriteSigil() {
             WebkitBackdropFilter: 'blur(24px)',
             boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
-
             position: 'relative',
             zIndex: showOverlay ? 1 : 'auto',
           }}>
             <h1>Write Your Sigil</h1>
             <p style={{ fontSize: "clamp(14px, 2.5vw, 22px)", marginTop: "0.5rem" }}>
-              Your sigil is created by writing a statement that defines your current desires:
+              Your current intention:
             </p>
             <textarea
               className="textinput"
               style={{
-                width: "100%",
-                flex: "1",
-                minHeight: "120px",
-                padding: "15px",
-                resize: "none",
-                fontSize: "clamp(15px, 2vw, 18px)",
-                opacity: showOverlay ? 0.3 : 1,
-                transition: 'opacity 600ms ease',
+                width: "100%", flex: "1", minHeight: "120px", padding: "15px", color: 'black',
+                resize: "none", fontSize: "clamp(15px, 2vw, 18px)",
+                opacity: showOverlay ? 0.3 : 1, transition: 'opacity 600ms ease',
               }}
               value={intention}
               onChange={(e) => setIntention(e.target.value)}
@@ -149,19 +123,15 @@ export default function WriteSigil() {
               <span style={{ color: '#666', fontSize: 'clamp(13px, 2vw, 20px)' }}>
                 Unique letters: {uniqueChars}
               </span>
-              <button
-                className="btn"
-                onClick={handleNext}
+              <button className="btn" onClick={handleNext}
                 disabled={isProcessing || showOverlay}
                 style={{
                   backgroundColor: (isProcessing || showOverlay) ? '#ccc' : '#9e38fd',
                   cursor: (isProcessing || showOverlay) ? 'not-allowed' : 'pointer',
-                  fontSize: "clamp(16px, 2.5vw, 22px)",
-                  padding: "10px 32px",
-                  opacity: showOverlay ? 0.3 : 1,
-                  transition: 'opacity 600ms ease',
-                }}
-              >
+                  fontSize: "clamp(16px, 2.5vw, 22px)", padding: "10px 32px",
+                  zIndex: 9999,
+                  opacity: showOverlay ? 0.3 : 1, transition: 'opacity 600ms ease',
+                }}>
                 {isProcessing ? "Processing..." : "Next"}
               </button>
             </div>
@@ -176,8 +146,9 @@ export default function WriteSigil() {
           onSkip={skip}
           showNext={showTutorialNext}
           showSkip={showTutorialSkip}
+          cardRef={cardRef}
         />
       )}
     </div>
-  )
+  );
 }

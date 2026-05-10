@@ -18,7 +18,7 @@ export default function ChargeSigil() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ width: 2160, height: 1260 });
   const [showInstruction, setShowInstruction] = useState(false);
-
+  const cardRef = useRef<HTMLDivElement>(null);
   const { currentStep: tutorialStep, isActive, advance, skip } = usePageTutorial('charge');
   const showTutorialNext = isActive && tutorialStep?.advanceOn === 'next';
   const showTutorialSkip = isActive && (tutorialStep?.skippable ?? false);
@@ -90,6 +90,7 @@ export default function ChargeSigil() {
           height: `${dims.height}px`,
           backgroundColor: isCharging ? '#000000' : undefined,
           transition: 'background-color 800ms ease',
+
         }}>
           <Menu />
           {isCharging && (
@@ -179,6 +180,7 @@ export default function ChargeSigil() {
           step={tutorialStep}
           onNext={advance}
           onSkip={skip}
+          cardRef={cardRef}
           showNext={showTutorialNext}
           showSkip={showTutorialSkip}
         />

@@ -272,7 +272,7 @@ scrollcontainer,
   isolation: auto;
   -webkit-overflow-scrolling: touch;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 noscroll,
@@ -906,6 +906,9 @@ writesigil,
   flex-shrink: 0;
   overflow: visible;
   scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Draw Sigil*/
@@ -920,7 +923,6 @@ drawsigil,
   flex-shrink: 0;
   overflow: visible;
   scroll-snap-align: center;
-  font-family: 'New Rocker', system-ui;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -936,7 +938,7 @@ drawsigilmenu,
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Style Sigil*/
-.stylesigilcontainer {
+.stylesigil {
     background-image: url('./assets/WritingLino.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -1039,7 +1041,7 @@ profilebox,
 
 avatar,
 .avatar {
-  height: 150px;
+  height: 250px;
   object-fit: cover;
 }
 
