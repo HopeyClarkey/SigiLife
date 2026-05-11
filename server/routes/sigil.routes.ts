@@ -35,14 +35,14 @@ router.get('/allsigils', async (req, res) => {
       include: { sigilGroups: true },
     });
     const userId = req.session.userId;
-    if (userId){
-      const votes = await prisima sigilVote.findMany({
-        where: {userId, sigilId: {in: sigils.map(s => s.id )}},
+    if (userId) {
+      const votes = await prisma.sigilVote.findMany({
+        where: { userId, sigilId: { in: sigils.map(s => s.id) } },
       });
       const voteMap = Object.fromEntries(votes.map(v => [v.sigilId, v.voteType]));
-      return res.json(sigils.map(s => ({ ...s, userVote: voteMap[s.id] ?? null })));    
+      return res.json(sigils.map(s => ({ ...s, userVote: voteMap[s.id] ?? null })));
     }
-    res.json(sigils.map(s => ({...s, userVote: null})));
+    res.json(sigils.map(s => ({ ...s, userVote: null })));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: (error as Error).message });
@@ -67,15 +67,15 @@ router.get('/user/:userId/sigils', async (req, res) => {
 router.get(`/:id`, async (req, res) => {
   try {
     const sigil = await prisma.sigil.findUnique({
-      where : { id: parseInt(req.params.id)}
+      where: { id: parseInt(req.params.id) }
     });
-    if (!sigil){
-      return res.status(404).json({message: 'sigil not found'})
+    if (!sigil) {
+      return res.status(404).json({ message: 'sigil not found' })
     }
     res.json(sigil);
-  } catch (error){
+  } catch (error) {
     console.error(error);
-    res.status(500).json({error: (error as Error).message})
+    res.status(500).json({ error: (error as Error).message })
   }
 })
 
