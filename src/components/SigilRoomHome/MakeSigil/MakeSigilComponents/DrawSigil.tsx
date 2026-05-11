@@ -348,7 +348,7 @@ export default function DrawSigil() {
               ) : (
                 <div>
                   <label htmlFor="sigilName">Name Your Sigil:</label>
-                  <input type="text" className='textinput' id="sigilName" value={sigilName} onChange={(e) => setSigilName(e.target.value)} />
+                  <input type="text" style={{color: "black"}}className='textinput' id="sigilName" value={sigilName} onChange={(e) => setSigilName(e.target.value)} />
                   <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: "8px", flexWrap: "wrap" }}>
                     <p>select <br />color:</p>
                     <input type="color" value={styleColor} onChange={(e) => setStyleColor(e.target.value)} style={{ cursor: 'pointer', width: '80px', height: '80px', alignSelf: "center" }} />

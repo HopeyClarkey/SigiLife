@@ -32,7 +32,7 @@ textinput,
   font-size: clamp(14px, 4vw, 16px);
   padding: 6px 10px;
   display: block;
-  margin: 4px auto 0 auto; 
+  margin: 4px auto 0 auto;
 }
 
 menu,
@@ -144,8 +144,8 @@ btn,
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
- height: auto;
- max-height: 92dvh;
+  height: auto;
+  max-height: 92dvh;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -201,10 +201,8 @@ btn,
 .glasscard .p1 {
   font-size: clamp(13px, 3.5vw, 16px);
   text-align: center;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
-
-
 
 .special-elite-regular {
   font-family: 'Special Elite', system-ui;
@@ -273,6 +271,8 @@ scrollcontainer,
   -webkit-overflow-scrolling: touch;
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 noscroll,
@@ -301,11 +301,8 @@ rowbox,
 .makesigil,
 .writesigil,
 .drawsigil {
-
   scroll-snap-align: center;
 }
-
-
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Landing Page*/
 
@@ -442,7 +439,6 @@ avatarimgbox,
   left: 1dvh;
 }
 
-
 .destroybutton img {
   height: 69dvh;
   display: block;
@@ -477,7 +473,7 @@ avatarimgbox,
 .makesigilbutton {
   position: absolute;
   bottom: -2dvh;
-  right:15dvh;
+  right: 15dvh;
   z-index: 10;
 }
 
@@ -542,17 +538,31 @@ avatarimgbox,
   width: fit-content;
   border-radius: 12px;
   position: relative;
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 @keyframes rainbow-pulse {
-  0%   { filter: drop-shadow(0 0 20px #ff0080) drop-shadow(0 0 40px #ff0080); }
-  16%  { filter: drop-shadow(0 0 20px #ff8000) drop-shadow(0 0 40px #ff8000); }
-  33%  { filter: drop-shadow(0 0 20px #ffff00) drop-shadow(0 0 40px #ffff00); }
-  50%  { filter: drop-shadow(0 0 20px #00ff80) drop-shadow(0 0 40px #00ff80); }
-  66%  { filter: drop-shadow(0 0 20px #0080ff) drop-shadow(0 0 40px #0080ff); }
-  83%  { filter: drop-shadow(0 0 20px #8000ff) drop-shadow(0 0 40px #8000ff); }
-  100% { filter: drop-shadow(0 0 20px #ff0080) drop-shadow(0 0 40px #ff0080); }
+  0% {
+    filter: drop-shadow(0 0 20px #ff0080) drop-shadow(0 0 40px #ff0080);
+  }
+  16% {
+    filter: drop-shadow(0 0 20px #ff8000) drop-shadow(0 0 40px #ff8000);
+  }
+  33% {
+    filter: drop-shadow(0 0 20px #ffff00) drop-shadow(0 0 40px #ffff00);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #00ff80) drop-shadow(0 0 40px #00ff80);
+  }
+  66% {
+    filter: drop-shadow(0 0 20px #0080ff) drop-shadow(0 0 40px #0080ff);
+  }
+  83% {
+    filter: drop-shadow(0 0 20px #8000ff) drop-shadow(0 0 40px #8000ff);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px #ff0080) drop-shadow(0 0 40px #ff0080);
+  }
 }
 
 .sigil-charging {
@@ -560,10 +570,22 @@ avatarimgbox,
 }
 
 @keyframes float-up-pause {
-  0%   { opacity: 0; transform: translateX(-50%) translateY(60px); }
-  15%  { opacity: 1; transform: translateX(-50%) translateY(0px); }
-  70%  { opacity: 1; transform: translateX(-50%) translateY(0px); }
-  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(60px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
 }
 
 .floating-instruction {
@@ -575,16 +597,13 @@ avatarimgbox,
   font-family: 'New Rocker', system-ui;
   font-size: clamp(16px, 3dvh, 26px);
   color: white;
-  text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(160,100,255,0.6);
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.8),
+    0 0 40px rgba(160, 100, 255, 0.6);
   pointer-events: none;
   animation: float-up-pause 4s ease forwards;
   width: 80dvw;
 }
-
-
-
-
-
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Destroy Sigil*/
 
@@ -674,7 +693,7 @@ avatarimgbox,
 
 .grimoireliblink {
   position: absolute;
-  bottom:  4dvh;
+  bottom: 4dvh;
   left: 44.5dvh;
   z-index: 10;
 }
@@ -706,7 +725,6 @@ avatarimgbox,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Right Page*/
 .rightpage {
-
   background-image: url('./assets/Bookshelf.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -756,7 +774,7 @@ avatarimgbox,
 }
 
 .sigilthumb img {
-  width: 100%;  
+  width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;
   object-fit: contain;
@@ -771,7 +789,8 @@ avatarimgbox,
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: clamp(9px, 2vw, 13px);}
+  font-size: clamp(9px, 2vw, 13px);
+}
 
 .sigilthumb:hover {
   transform: scale(1.05);
@@ -939,10 +958,14 @@ drawsigilmenu,
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Style Sigil*/
 .stylesigil {
-    background-image: url('./assets/WritingLino.svg');
+  background-image: url('./assets/WritingLino.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-image: linear-gradient(160deg, var(--theme-bg-1), var(--theme-bg-2));
+  background-image: linear-gradient(
+    160deg,
+    var(--theme-bg-1),
+    var(--theme-bg-2)
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -951,7 +974,7 @@ drawsigilmenu,
   height: 100dvh;
   background-color: var(--theme-bg-1);
   transition: background-color 0.6s ease;
-  overflow-y: auto; 
+  overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem 0;
 }
