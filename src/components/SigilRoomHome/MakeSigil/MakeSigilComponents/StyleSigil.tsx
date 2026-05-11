@@ -132,7 +132,7 @@ export default function StyleSigil() {
   };
 
   if (!sigilData) return <div>Loading...</div>;
-
+ console.log(JSON.stringify(sessionStorage))
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
@@ -221,7 +221,7 @@ export default function StyleSigil() {
         </div>
       </div>
 
-      {isActive && tutorialStep && (
+      {isActive && tutorialStep && !user?.hasCompletedTutorial && (
         <TutorialCharacters
           step={tutorialStep}
           onNext={advance}
