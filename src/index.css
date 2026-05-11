@@ -2,7 +2,7 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-/*---break---*/
+
 @custom-variant dark (&:is(.dark *));
 
 .nav-button,
@@ -55,6 +55,9 @@ navmenu,
   left: 10px;
   border-radius: 12px;
   padding: 5px;
+  width: fit-content;
+
+
 }
 
 h1,
@@ -118,7 +121,6 @@ btn,
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: white;
   font-weight: 700;
   border-radius: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.3);

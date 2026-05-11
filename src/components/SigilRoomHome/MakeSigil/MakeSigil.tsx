@@ -1,3 +1,4 @@
+
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
@@ -71,13 +72,10 @@ export default function MakeSigil() {
 
   return (
     <div className='maincontainer'>
-      <div ref={scrollRef} className='scrollcontainer'>
+      <div ref={scrollRef} className='scrollcontainer' style={{ alignItems: 'center' }}>
         <div className='makesigil' style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
           <Menu />
           <div style={{
-            position: 'absolute',
-            top: '5dvh',
-            left: '50dvh',
             width: '55dvh',
             height: '88dvh',
             display: 'flex',
