@@ -71,7 +71,7 @@ export const TUTORIAL_STEPS: TutorialStep[] = [
   // ── StyleSigil ───────────────────────────────────────────────────────────────
   {
     id: 6,
-    page: 'draw',
+    page: 'style',
     speaker: 'both',
     harperText: "Looks good.",
     bennetText: "It does. Enjoy that feeling. It doesn't last forever.",

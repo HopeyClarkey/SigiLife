@@ -1066,6 +1066,22 @@ profilepage,
   transition: background-color 0.6s ease;
 }
 
+.profilepage {
+  background-image: none;
+}
+
+.profilepage::before {
+  background-image: url('./assets/ScryeLino.svg');
+}
+
+.usersettings-page {
+  background-image: none;
+}
+
+.usersettings-page::before {
+  background-image: url('./assets/ScryeLino.svg');
+}
+
 profilepagename,
 .profilepagename {
   display: flex;

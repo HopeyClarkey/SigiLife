@@ -53,7 +53,9 @@ export default function MapBox() {
   const [popupInfo, setPopupInfo] = useState<Sigil | null>(null);
   const [filterMode, setFilterMode] = useState<"all" | "mine">("all");
   const [voting, setVoting] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const [dims, setDims] = useState({ width: 2160, height: 1260 })
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   // Initialize from user's home sigil location, fall back to US center
   const [viewState, setViewState] = useState(() => getInitialViewState(user));
@@ -66,10 +68,20 @@ export default function MapBox() {
   }, [user?.id]); // only re-center when user identity changes, not on every render
 
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
-  }, []);
+    const calculate = () => {
+      const scale = window.innerHeight / 1260
+      setDims({ width: Math.round(2160 * scale), height: window.innerHeight })
+    }
+    calculate()
+    window.addEventListener('resize', calculate)
+    return () => window.removeEventListener('resize', calculate)
+  }, [])
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    setTimeout(() => { el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2 }, 50)
+  }, [dims])
 
   useEffect(() => {
     if (!user) return;
@@ -111,7 +123,8 @@ export default function MapBox() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className="mapbox art-page-base">
+        <div className="mapbox art-page-base"
+          style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
           <Menu />
           <div style={{
             width: '88dvw',

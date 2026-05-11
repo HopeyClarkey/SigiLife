@@ -418,7 +418,7 @@ export default function DrawSigil() {
           step={styleTipStep}
           onNext={() => {
             setShowStyleTip(false);
-            saveTutorialStepToSession(6);
+            saveTutorialStepToSession(7);
           }}
           onSkip={() => {
             setShowStyleTip(false);

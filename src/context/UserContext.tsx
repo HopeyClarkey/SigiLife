@@ -49,6 +49,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
       .finally(() => { setIsLoading(false); });
   }, []);
 
+  useEffect(() => {
+    if (user) applyThemeClasses(user.theme, user.color_theme);
+  }, [user]);
+
   return (
     <UserContext.Provider value={{ user, setUser, isLoading }}>
       {children}

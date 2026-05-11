@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { useUser } from '@/context/UserContext'
 import { useNavigate, Link } from 'react-router-dom'
@@ -80,9 +80,6 @@ const Themebox = ({ colorTheme, isDark }: { colorTheme: string, isDark: boolean 
       gap: '0.5rem',
       padding: '1rem',
       borderRadius: '12px',
-      background: 'rgba(255,255,255,0.08)',
-      border: '1px solid rgba(255,255,255,0.15)',
-      backdropFilter: 'blur(12px)',
       minWidth: '200px',
     }}>
       <span style={{ fontFamily: 'New Rocker, system-ui', fontSize: 'clamp(14px,2vw,18px)', color: 'var(--theme-text)' }}>
@@ -115,6 +112,24 @@ export default function UserSettings() {
   const [isDark, setIsDark] = useState(user!.theme === 1)
   const [avatarId, setAvatarId] = useState(String(user?.avatar ?? 0))
   const [colorTheme, setColorTheme] = useState(user?.color_theme ?? 'cyber')
+  const [dims, setDims] = useState({ width: 2160, height: 1260 })
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const calculate = () => {
+      const scale = window.innerHeight / 1260
+      setDims({ width: Math.round(2160 * scale), height: window.innerHeight })
+    }
+    calculate()
+    window.addEventListener('resize', calculate)
+    return () => window.removeEventListener('resize', calculate)
+  }, [])
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    setTimeout(() => { el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2 }, 50)
+  }, [dims])
 
   const handleThemeChange = (checked: boolean) => {
     setIsDark(checked)
@@ -173,50 +188,73 @@ export default function UserSettings() {
 
   return (
     <div className="maincontainer">
-      <div className="usersettings art-page-base">
-        <Menu />
-        <h1>User Settings</h1>
+      <div ref={scrollRef} className="scrollcontainer">
+        <div
+          className="usersettings-page art-page-base"
+          style={{ width: `${dims.width}px`, height: `${dims.height}px`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Menu />
+          <div style={{
+            position: 'relative',
+            zIndex: 10,
+            width: 'min(55dvh, 85dvw)',
+            height: '88dvh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+            borderRadius: '2rem',
+            background: 'rgba(255, 255, 255, 0.15)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+            overflowY: 'auto',
+            gap: '1rem',
+          }}>
+            <h1>User Settings</h1>
 
-        <AvatarSelector avatarId={avatarId} onSelect={handleAvatarChange} />
+            <AvatarSelector avatarId={avatarId} onSelect={handleAvatarChange} />
 
-        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          Theme:
-          <SwitchPrimitive.Root
-            checked={isDark}
-            onCheckedChange={handleThemeChange}
-            className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 data-[state=checked]:bg-purple-500"
-          >
-            <SwitchPrimitive.Thumb className="block h-4 w-4 translate-x-1 rounded-full bg-white transition-transform data-[state=checked]:translate-x-6" />
-          </SwitchPrimitive.Root>
-          {isDark ? "Dark" : "Light"}
-        </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              Theme:
+              <SwitchPrimitive.Root
+                checked={isDark}
+                onCheckedChange={handleThemeChange}
+                className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 data-[state=checked]:bg-purple-500"
+              >
+                <SwitchPrimitive.Thumb className="block h-4 w-4 translate-x-1 rounded-full bg-white transition-transform data-[state=checked]:translate-x-6" />
+              </SwitchPrimitive.Root>
+              {isDark ? "Dark" : "Light"}
+            </label>
 
-        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          Colour Theme:
-          <SwitchPrimitive.Root
-            checked={colorTheme === 'foliage'}
-            onCheckedChange={handleColorThemeChange}
-            className="relative inline-flex h-6 w-11 items-center rounded-full bg-blue-400 data-[state=checked]:bg-green-500"
-          >
-            <SwitchPrimitive.Thumb className="block h-4 w-4 translate-x-1 rounded-full bg-white transition-transform data-[state=checked]:translate-x-6" />
-          </SwitchPrimitive.Root>
-          {colorTheme === 'foliage' ? "Verdant" : "Glacial"}
-        </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              Colour Theme:
+              <SwitchPrimitive.Root
+                checked={colorTheme === 'foliage'}
+                onCheckedChange={handleColorThemeChange}
+                className="relative inline-flex h-6 w-11 items-center rounded-full bg-blue-400 data-[state=checked]:bg-green-500"
+              >
+                <SwitchPrimitive.Thumb className="block h-4 w-4 translate-x-1 rounded-full bg-white transition-transform data-[state=checked]:translate-x-6" />
+              </SwitchPrimitive.Root>
+              {colorTheme === 'foliage' ? "Verdant" : "Glacial"}
+            </label>
 
-        <div className="avatarandtheme">
-          <Themebox colorTheme={colorTheme} isDark={isDark} />
-        </div>
+            <div className="avatarandtheme">
+              <Themebox colorTheme={colorTheme} isDark={isDark} />
+            </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>
-          <button className="btn" onClick={handleReplayTutorial}>
-            Replay Tutorial
-          </button>
-          <button className="btn" onClick={handleLogout}>
-            Log Out
-          </button>
-          <Link className="btn" to="/profile">
-            Go to Profile
-          </Link>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>
+              <button className="btn" onClick={handleReplayTutorial}>
+                Replay Tutorial
+              </button>
+              <button className="btn" onClick={handleLogout}>
+                Log Out
+              </button>
+              <Link className="btn" to="/profile">
+                Go to Profile
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
