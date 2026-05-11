@@ -23,8 +23,6 @@ function NavMenu({ onClose }: { onClose: () => void }) {
       <Link className="glassbutton" style={{border: '0px', backgroundColor: 'transparent'}} to="/home" onClick={onClose}>The Office</Link>
       <Link className="glassbutton" style={{border: '0px', backgroundColor: 'transparent'}} to="/library?action=charge" onClick={onClose}>Charge Sigil</Link>
       <Link className="glassbutton" style={{border: '0px', backgroundColor: 'transparent'}} to="/library?action=destroy" onClick={onClose}>Destroy Sigil</Link>
-      <Link className="glassbutton" style={{border: '0px', backgroundColor: 'transparent'}} to="/make-sigil" onClick={onClose}>Make Sigil</Link>
-      <Link className="glassbutton" style={{border: '0px', backgroundColor: 'transparent'}} to="/library" onClick={onClose}>Sigil Library</Link>
       <Link className="glassbutton" style={{border: '0px', backgroundColor: 'transparent'}} to="/map" onClick={onClose}>SigilMap</Link>
       <Link className="glassbutton" style={{border: '0px', backgroundColor: 'transparent'}} to="/profile" onClick={onClose}>SigiLites</Link>
       <Link className="glassbutton" style={{border: '0px', backgroundColor: 'transparent'}} to="/settings" onClick={onClose}>Settings</Link>

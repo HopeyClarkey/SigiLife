@@ -55,16 +55,15 @@ export default function RightPage() {
           }}>
             <h1>{user.username}'s Sigils</h1>
             <SigiLibrary items={sigils} user={user} />
-          </div>
           <Link className="btn" style={{
             position: 'absolute',
             bottom: '3dvh',
-            left: '50%',
+            left: '47%',
             transform: 'translateX(-50%)',
             backgroundColor: '#9e38fd',
             fontSize: "clamp(13px, 2vw, 20px)",
             padding: "8px 20px"
-          }} to="/make-sigil">🪶 MakeSigil</Link>
+          }} to="/make-sigil">🪶 MakeSigil</Link></div>
         </div>
       </div>
     </div>

@@ -178,15 +178,7 @@ export default function MapBox() {
                     style={{ borderRadius: "16px" }}
                   >
                     {/* Popup inner — override Mapbox's default white/tiny style */}
-                    <div style={{
-                      width: '300px',
-                      padding: '16px',
-                      background: 'linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 100%)',
-                      borderRadius: '12px',
-                      border: '1px solid rgba(168, 85, 247, 0.4)',
-                      color: '#fff',
-                      fontFamily: 'inherit',
-                    }}>
+
                       {/* Header */}
                       <h3 style={{
                         margin: '0 0 4px',
@@ -304,7 +296,7 @@ export default function MapBox() {
                       >
                         View in Real World →
                       </button>
-                    </div>
+                    
                   </Popup>
                 )}
 

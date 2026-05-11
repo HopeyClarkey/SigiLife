@@ -35,6 +35,15 @@ export function TutorialProvider({ children }: { children: ReactNode }) {
     const sessionStep = getTutorialStepFromSession();
     const pageSteps = TUTORIAL_STEPS.filter(s => s.page === page);
     if (pageSteps.length === 0) return;
+    if (sessionStep) {
+      const savedStep = TUTORIAL_STEPS.find(s => s.id === sessionStep);
+      if (savedStep && savedStep.page !== page) {
+        const firstPageStepIndex = TUTORIAL_STEPS.findIndex(s => s.page === page);
+        const savedStepIndex = TUTORIAL_STEPS.findIndex(s => s.id === sessionStep);
+        if (savedStepIndex > firstPageStepIndex) return;
+      }
+    }
+
     const resumeStep = pageSteps.find(s => s.id === sessionStep);
     const startStep = resumeStep ?? pageSteps[0];
 
@@ -45,18 +54,33 @@ export function TutorialProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
+
   const advance = useCallback(() => {
     if (!currentStepId) return;
-    const nextIndex = TUTORIAL_STEPS.findIndex(s => s.id === currentStepId) + 1;
+    const currentIndex = TUTORIAL_STEPS.findIndex(s => s.id === currentStepId);
+    const nextIndex = currentIndex + 1;
 
-    if (nextIndex < TUTORIAL_STEPS.length) {
-      const nextStep = TUTORIAL_STEPS[nextIndex];
-      if (nextStep) {
-        setCurrentStepId(nextStep.id);
-        saveTutorialStepToSession(nextStep.id);
-      }
+    if (nextIndex >= TUTORIAL_STEPS.length) {
+      setIsActive(false);
+      setCurrentStepId(null);
+      return;
     }
+
+    const currentPage = TUTORIAL_STEPS[currentIndex]?.page;
+    const nextStep = TUTORIAL_STEPS[nextIndex];
+    if (!nextStep) return;
+
+    if (nextStep.page !== currentPage) {
+      setIsActive(false);
+      setCurrentStepId(null);
+      saveTutorialStepToSession(nextStep.id);
+      return;
+    }
+
+    setCurrentStepId(nextStep.id);
+    saveTutorialStepToSession(nextStep.id);
   }, [currentStepId]);
+
 
   const skip = useCallback(async () => {
     if (!user) return;

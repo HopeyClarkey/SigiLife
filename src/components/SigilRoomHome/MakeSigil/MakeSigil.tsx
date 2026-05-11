@@ -84,12 +84,12 @@ export default function MakeSigil() {
             justifyContent: 'space-between',
             padding: '2rem',
             borderRadius: '2rem',
-            background: 'rgba(255, 255, 255, 0.05)',
+            background: 'rgba(255, 255, 255, 0.25)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
           }}>
-            <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Make a Sigil</h1>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', width: '100%' }}>
+              <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Make a Sigil</h1>
               <p style={{ fontSize: "clamp(14px, 2.5vw, 20px)" }}>Current Sigils: {sigilCount}/{MAX_SIGILS}</p>
               {remainingSlots < 3 && (
                 <p className="info-text warning">
