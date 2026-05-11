@@ -43,7 +43,7 @@ export default function RightPage() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className="rightpage2" style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
+        <div className="rightpage2 art-page-base" style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
           <Menu />
           <div className='glasscard' style={{
             position: 'absolute',

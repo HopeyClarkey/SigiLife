@@ -7,6 +7,7 @@ import SplashCursor from './ChargeComponents/SplashCursor'
 import { usePageTutorial } from '../../../context/TutorialContext';
 import TutorialCharacters from '../../Tutorial/Tutorialcharacters';
 
+
 export default function ChargeSigil() {
   const [searchParams] = useSearchParams()
   const sigilId = searchParams.get('sigilId')
@@ -22,9 +23,6 @@ export default function ChargeSigil() {
   const { currentStep: tutorialStep, isActive, advance, skip } = usePageTutorial('charge');
   const showTutorialNext = isActive && tutorialStep?.advanceOn === 'next';
   const showTutorialSkip = isActive && (tutorialStep?.skippable ?? false);
-
-  // Step 13 is the final goodbye — shown before user saves/charges
-  // Once user charges and saves, tutorial characters have already been dismissed
   const isLastStep = tutorialStep?.id === 14;
 
   useEffect(() => {
@@ -62,12 +60,7 @@ export default function ChargeSigil() {
       const res = await fetch(`/api/sigils/${sigilData.id}/charge`, { method: 'PATCH' });
       if (!res.ok) { throw new Error('Failed to charge sigil'); }
       const updatedSigil = await res.json();
-
-      // Advance tutorial past step 13 before navigating
-      if (isActive && isLastStep) {
-        advance();
-      }
-
+      if (isActive && isLastStep) advance();
       setTimeout(() => navigate(`/sigil-page?sigilId=${updatedSigil.id}`), 100)
     } catch (error) {
       console.error(error);
@@ -81,16 +74,18 @@ export default function ChargeSigil() {
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll' }}>
         {showInstruction && (
-          <div className="floatinginstruction">
+          <div className="floating-instruction">
             Trace your sigil to imbue it with your chosen emotion
           </div>
         )}
-        <div className='chargesigil' style={{
+        <div className='chargesigil art-page-base' style={{
           width: `${dims.width}px`,
           height: `${dims.height}px`,
           backgroundColor: isCharging ? '#000000' : undefined,
           transition: 'background-color 800ms ease',
-
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}>
           <Menu />
           {isCharging && (
@@ -103,12 +98,13 @@ export default function ChargeSigil() {
               VELOCITY_DISSIPATION={2}
             />
           )}
-          <div style={{
+          <div ref={cardRef} style={{
             position: 'relative',
-            zIndex: 55,
+            zIndex: 10,
             width: '88dvw',
             height: '88dvh',
             display: 'flex',
+            margin: '0 auto',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -118,7 +114,7 @@ export default function ChargeSigil() {
             border: '1px solid rgba(255, 255, 255, 0.2)',
             boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
           }}>
-            <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)", color: "purple", backgroundColor: '#e0e0e0', borderRadius: "12px", padding: '5px' }}>Charge Sigil</h1>
+            <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Charge Sigil</h1>
             {sigilData.imageData && (
               <img
                 src={sigilData.imageData}
@@ -136,18 +132,29 @@ export default function ChargeSigil() {
                 }}
               />
             )}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
-              <div style={{ transform: 'scale(1.6)', transformOrigin: 'center', marginBottom: '1rem' }}>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '0.75rem',
+              width: '100%',
+              overflow: 'hidden',
+            }}>
+              <div style={{
+                transform: 'scale(1.6)',
+                transformOrigin: 'center top',
+                marginBottom: '1rem',
+                width: '60%',
+                display: 'flex',
+                justifyContent:'center',
+              }}>
                 <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
               </div>
               {!isCharging && emotion && (
                 <button className='glassbutton'
                   style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
                   onClick={() => {
-                    // If on last tutorial step, advance before charging starts
-                    if (isActive && isLastStep) {
-                      advance();
-                    }
+                    if (isActive && isLastStep) advance();
                     setIsCharging(true);
                     setShowInstruction(true);
                     setTimeout(() => setShowInstruction(false), 4000);
@@ -174,7 +181,6 @@ export default function ChargeSigil() {
         </div>
       </div>
 
-      {/* Tutorial characters — hidden once charging begins so they don't fight the SplashCursor */}
       {isActive && tutorialStep && !isCharging && (
         <TutorialCharacters
           step={tutorialStep}

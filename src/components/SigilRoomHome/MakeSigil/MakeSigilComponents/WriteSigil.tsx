@@ -82,7 +82,7 @@ export default function WriteSigil() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className="writesigil" style={{
+        <div className="writesigil art-page-base" style={{
           width: `${Math.max(dims.width, window.innerWidth)}px`, height: `${dims.height}px`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>

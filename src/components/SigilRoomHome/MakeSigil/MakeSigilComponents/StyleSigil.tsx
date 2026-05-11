@@ -136,7 +136,7 @@ export default function StyleSigil() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className='writesigil' style={{
+        <div className='writesigil art-page-base' style={{
           width: `${dims.width}px`,
           height: `${dims.height}px`,
           display: 'flex',
@@ -162,7 +162,7 @@ export default function StyleSigil() {
               <h2 style={{ fontSize: "clamp(18px, 3vw, 26px)" }}>{sigilData.name}</h2>
               {sigilData.intention && (
                 <p style={{ fontSize: "clamp(13px, 2vw, 16px)", color: "#666", margin: "4px 0 8px" }}>
-                  {sigilData.intention}
+                  Intention: {sigilData.intention}
                 </p>
               )}
               {sigilData.imageData && (

@@ -85,13 +85,17 @@ export default function DestroySigil() {
         </div>
       )}
       <div ref={scrollRef} className={`scrollcontainer ${isDestroying ? 'noscroll' : ''}`}>
-        <div className='destroysigil'
+        <div
+          className='destroysigil art-page-base'
           onMouseMove={isDestroying ? handleMouseMove : undefined}
           style={{
             width: `${dims.width}px`,
             height: `${dims.height}px`,
             backgroundColor: isDestroying ? '#000000' : undefined,
             transition: 'background-color 800ms ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
           <Menu />
 
@@ -163,6 +167,7 @@ export default function DestroySigil() {
             background: 'rgba(255, 255, 255, 0.15)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
             boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+            margin: '0 auto',
           }}>
             <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Destroy Sigil</h1>
 

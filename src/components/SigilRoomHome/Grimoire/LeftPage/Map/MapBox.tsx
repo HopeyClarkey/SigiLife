@@ -111,7 +111,7 @@ export default function MapBox() {
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className="mapbox">
+        <div className="mapbox art-page-base">
           <Menu />
           <div style={{
             width: '88dvw',
@@ -179,124 +179,124 @@ export default function MapBox() {
                   >
                     {/* Popup inner — override Mapbox's default white/tiny style */}
 
-                      {/* Header */}
-                      <h3 style={{
-                        margin: '0 0 4px',
-                        fontSize: '1.1rem',
-                        fontWeight: 700,
-                        color: '#d8b4fe',
-                        textAlign: 'center',
-                      }}>
-                        {popupInfo.name}
-                      </h3>
+                    {/* Header */}
+                    <h3 style={{
+                      margin: '0 0 4px',
+                      fontSize: '1.1rem',
+                      fontWeight: 700,
+                      color: '#d8b4fe',
+                      textAlign: 'center',
+                    }}>
+                      {popupInfo.name}
+                    </h3>
 
-                      {popupInfo.locationName && (
-                        <p style={{ margin: '0 0 10px', fontSize: '0.75rem', color: '#a78bfa', textAlign: 'center' }}>
-                          📍 {popupInfo.locationName}
-                        </p>
-                      )}
-
-                      {/* Sigil image */}
-                      {popupInfo.imageData && (
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: '0 0 10px' }}>
-                          <img
-                            src={popupInfo.imageData}
-                            alt="Sigil"
-                            style={{
-                              width: '120px',
-                              height: '120px',
-                              objectFit: 'cover',
-                              borderRadius: '10px',
-                              border: '2px solid rgba(168, 85, 247, 0.6)',
-                            }}
-                          />
-                        </div>
-                      )}
-
-                      {/* Intention */}
-                      <p style={{
-                        margin: '0 0 14px',
-                        fontSize: '0.85rem',
-                        fontStyle: 'italic',
-                        color: '#e9d5ff',
-                        textAlign: 'center',
-                        lineHeight: '1.4',
-                      }}>
-                        "{popupInfo.intention || 'A mysterious sigil...'}"
+                    {popupInfo.locationName && (
+                      <p style={{ margin: '0 0 10px', fontSize: '0.75rem', color: '#a78bfa', textAlign: 'center' }}>
+                        📍 {popupInfo.locationName}
                       </p>
+                    )}
 
-                      {/* Charge / Destroy vote buttons */}
-                      <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-                        <button
-                          onClick={() => handleVote("charge")}
-                          disabled={voting}
+                    {/* Sigil image */}
+                    {popupInfo.imageData && (
+                      <div style={{ display: 'flex', justifyContent: 'center', margin: '0 0 10px' }}>
+                        <img
+                          src={popupInfo.imageData}
+                          alt="Sigil"
                           style={{
-                            flex: 1,
-                            padding: '8px 0',
-                            borderRadius: '8px',
-                            border: popupInfo.userVote === "charge"
-                              ? '2px solid #a855f7'
-                              : '2px solid rgba(168, 85, 247, 0.3)',
-                            background: popupInfo.userVote === "charge"
-                              ? 'rgba(168, 85, 247, 0.35)'
-                              : 'rgba(168, 85, 247, 0.1)',
-                            color: popupInfo.userVote === "charge" ? '#e9d5ff' : '#c4b5fd',
-                            fontWeight: 600,
-                            fontSize: '0.85rem',
-                            cursor: voting ? 'not-allowed' : 'pointer',
-                            transition: 'all 0.15s ease',
-                            opacity: voting ? 0.6 : 1,
+                            width: '120px',
+                            height: '120px',
+                            objectFit: 'cover',
+                            borderRadius: '10px',
+                            border: '2px solid rgba(168, 85, 247, 0.6)',
                           }}
-                          title={popupInfo.userVote === "charge" ? "Remove charge vote" : "Charge this sigil"}
-                        >
-                          ✨ Charge&nbsp;&nbsp;{popupInfo.chargeScore}
-                        </button>
-
-                        <button
-                          onClick={() => handleVote("destroy")}
-                          disabled={voting}
-                          style={{
-                            flex: 1,
-                            padding: '8px 0',
-                            borderRadius: '8px',
-                            border: popupInfo.userVote === "destroy"
-                              ? '2px solid #ef4444'
-                              : '2px solid rgba(239, 68, 68, 0.3)',
-                            background: popupInfo.userVote === "destroy"
-                              ? 'rgba(239, 68, 68, 0.25)'
-                              : 'rgba(239, 68, 68, 0.08)',
-                            color: popupInfo.userVote === "destroy" ? '#fca5a5' : '#f87171',
-                            fontWeight: 600,
-                            fontSize: '0.85rem',
-                            cursor: voting ? 'not-allowed' : 'pointer',
-                            transition: 'all 0.15s ease',
-                            opacity: voting ? 0.6 : 1,
-                          }}
-                          title={popupInfo.userVote === "destroy" ? "Remove destroy vote" : "Destroy this sigil"}
-                        >
-                          🔥 Destroy&nbsp;&nbsp;{popupInfo.destroyScore}
-                        </button>
+                        />
                       </div>
+                    )}
 
-                      {/* View in Real World */}
+                    {/* Intention */}
+                    <p style={{
+                      margin: '0 0 14px',
+                      fontSize: '0.85rem',
+                      fontStyle: 'italic',
+                      color: '#e9d5ff',
+                      textAlign: 'center',
+                      lineHeight: '1.4',
+                    }}>
+                      "{popupInfo.intention || 'A mysterious sigil...'}"
+                    </p>
+
+                    {/* Charge / Destroy vote buttons */}
+                    <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
                       <button
+                        onClick={() => handleVote("charge")}
+                        disabled={voting}
                         style={{
-                          width: '100%',
-                          padding: '9px 0',
+                          flex: 1,
+                          padding: '8px 0',
                           borderRadius: '8px',
-                          background: 'linear-gradient(135deg, #7c3aed, #9333ea)',
-                          color: '#fff',
-                          fontWeight: 700,
+                          border: popupInfo.userVote === "charge"
+                            ? '2px solid #a855f7'
+                            : '2px solid rgba(168, 85, 247, 0.3)',
+                          background: popupInfo.userVote === "charge"
+                            ? 'rgba(168, 85, 247, 0.35)'
+                            : 'rgba(168, 85, 247, 0.1)',
+                          color: popupInfo.userVote === "charge" ? '#e9d5ff' : '#c4b5fd',
+                          fontWeight: 600,
                           fontSize: '0.85rem',
-                          border: 'none',
-                          cursor: 'pointer',
-                          letterSpacing: '0.02em',
+                          cursor: voting ? 'not-allowed' : 'pointer',
+                          transition: 'all 0.15s ease',
+                          opacity: voting ? 0.6 : 1,
                         }}
-                        onClick={() => navigate('/place-sigil-world', { state: { sigilData: popupInfo } })}
+                        title={popupInfo.userVote === "charge" ? "Remove charge vote" : "Charge this sigil"}
                       >
-                        View in Real World →
+                        ✨ Charge&nbsp;&nbsp;{popupInfo.chargeScore}
                       </button>
-                    
+
+                      <button
+                        onClick={() => handleVote("destroy")}
+                        disabled={voting}
+                        style={{
+                          flex: 1,
+                          padding: '8px 0',
+                          borderRadius: '8px',
+                          border: popupInfo.userVote === "destroy"
+                            ? '2px solid #ef4444'
+                            : '2px solid rgba(239, 68, 68, 0.3)',
+                          background: popupInfo.userVote === "destroy"
+                            ? 'rgba(239, 68, 68, 0.25)'
+                            : 'rgba(239, 68, 68, 0.08)',
+                          color: popupInfo.userVote === "destroy" ? '#fca5a5' : '#f87171',
+                          fontWeight: 600,
+                          fontSize: '0.85rem',
+                          cursor: voting ? 'not-allowed' : 'pointer',
+                          transition: 'all 0.15s ease',
+                          opacity: voting ? 0.6 : 1,
+                        }}
+                        title={popupInfo.userVote === "destroy" ? "Remove destroy vote" : "Destroy this sigil"}
+                      >
+                        🔥 Destroy&nbsp;&nbsp;{popupInfo.destroyScore}
+                      </button>
+                    </div>
+
+                    {/* View in Real World */}
+                    <button
+                      style={{
+                        width: '100%',
+                        padding: '9px 0',
+                        borderRadius: '8px',
+                        background: 'linear-gradient(135deg, #7c3aed, #9333ea)',
+                        color: '#fff',
+                        fontWeight: 700,
+                        fontSize: '0.85rem',
+                        border: 'none',
+                        cursor: 'pointer',
+                        letterSpacing: '0.02em',
+                      }}
+                      onClick={() => navigate('/place-sigil-world', { state: { sigilData: popupInfo } })}
+                    >
+                      View in Real World →
+                    </button>
+
                   </Popup>
                 )}
 

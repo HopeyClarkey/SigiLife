@@ -173,7 +173,7 @@ export default function UserSettings() {
 
   return (
     <div className="maincontainer">
-      <div className="usersettings">
+      <div className="usersettings art-page-base">
         <Menu />
         <h1>User Settings</h1>
 
