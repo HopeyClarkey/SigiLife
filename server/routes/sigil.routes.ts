@@ -34,8 +34,15 @@ router.get('/allsigils', async (req, res) => {
       orderBy: { createdAt: 'desc' },
       include: { sigilGroups: true },
     });
-    res.json(sigils);
-
+    const userId = req.session.userId;
+    if (userId){
+      const votes = await prisima sigilVote.findMany({
+        where: {userId, sigilId: {in: sigils.map(s => s.id )}},
+      });
+      const voteMap = Object.fromEntries(votes.map(v => [v.sigilId, v.voteType]));
+      return res.json(sigils.map(s => ({ ...s, userVote: voteMap[s.id] ?? null })));    
+    }
+    res.json(sigils.map(s => ({...s, userVote: null})));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: (error as Error).message });
