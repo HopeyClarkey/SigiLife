@@ -2,10 +2,16 @@ import { Router } from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import prisma from '../prisma/prisma.client.js';
 import 'express-session';
-import { DESTRUCTION } from 'dns';
+
 
 const router = Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+// const narrativeIds = [
+//   process.env.MORGANA_USER_ID,
+//   process.env.HARPER_USER_ID,
+//   process.env.BENNET_USER_ID,
+// ].filter(Boolean).map(Number);
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Checks if User
 
@@ -23,7 +29,7 @@ router.get('/me', async (req, res) => {
     res.json({ user: null });
     return;
   }
-const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation
+  const needsProfile = !user.username || user.avatar === null || user.theme === null || !user.homeLocation
 
 
   res.json({ user, needsProfile });
@@ -32,7 +38,7 @@ const needsProfile = !user.username || user.avatar === null || user.theme === nu
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sends to Google/ Returns token
 router.post('/google', async (req, res) => {
   try {
-const { credential, username, avatar, theme, color_theme, homeLocation, sigilCount, destroyCount } = req.body;
+    const { credential, username, avatar, theme, color_theme, homeLocation, sigilCount, destroyCount } = req.body;
 
     const ticket = await client.verifyIdToken({
       idToken: credential,
@@ -67,6 +73,27 @@ const { credential, username, avatar, theme, color_theme, homeLocation, sigilCou
         },
 
       });
+
+
+      // const alwaysFollow = [
+      //   process.env.HARPER_USER_ID,
+      //   process.env.BENNET_USER_ID,
+      // ].filter(Boolean).map(Number);
+
+      // const teamFollow = avatar === 0
+      //   ? [process.env.ALISTAR_USER_ID].filter(Boolean).map(Number)
+      //   : [process.env.MORGANA_USER_ID].filter(Boolean).map(Number);
+
+      // const narrativeIds = [...new Set([...alwaysFollow, ...teamFollow])];
+
+      // if (narrativeIds.length > 0) {
+      //   await prisma.follow.createMany({
+      //     data: narrativeIds.flatMap(id => ([
+      //       { followerId: user.id, followingId: id },
+      //       { followerId: id, followingId: user.id }
+      //     ]))
+      //   });
+      // }
       // await prisma.sigil.createMany({
       //   data: Array.from({ length: 12 }, (_, i) => ({
       //     name: `sigil-${user!.id}-${i + 1}`,

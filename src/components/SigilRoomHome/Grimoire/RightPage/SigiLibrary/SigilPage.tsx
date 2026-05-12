@@ -100,7 +100,7 @@ export default function SigilPage() {
               position: 'absolute',
               top: '5dvh',
               left: '58dvh',
-              width: '55dvh',
+              width: '70dvh',
               height: '88dvh',
               gap: '0.75rem',
               display: 'flex',
@@ -115,7 +115,7 @@ export default function SigilPage() {
                 alt={sigilData.name}
                 className={sigilData.isCharged ? 'sigil-charging' : ''}
                 style={{
-                  width: 'min(100%, 25dvh)',
+                  width: 'min(100%, 50dvh)',
                   aspectRatio: '1 / 1',
                   objectFit: 'contain',
                   borderRadius: '1rem',
@@ -126,17 +126,17 @@ export default function SigilPage() {
             <h1 style={{ fontSize: "clamp(16px, 3dvh, 28px)", textAlign: "center" }}>
               {sigilData.name}
             </h1>
-            <p style={{ fontSize: "clamp(11px, 1.5dvh, 15px)", opacity: 0.7 }}>
+            <p style={{ fontSize: "clamp(16px, 2.5dvh, 24px)", opacity: 0.7 }}>
               Created: {new Date(sigilData.createdAt).toLocaleDateString()}
             </p>
             {sigilData.isCharged && (
-              <p style={{ color: "gold", fontSize: "clamp(12px, 1.8dvh, 16px)" }}>⚡ Charged</p>
+              <p style={{ color: "gold", fontSize: "clamp(16px, 2.5dvh, 24px)" }}>⚡ Charged</p>
             )}
 
             {sigilData.sigilGroups && sigilData.sigilGroups.length > 0 && (
               <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '0.5rem', width: '100%', textAlign: 'center' }}>
-                <h3 style={{ fontSize: "clamp(12px, 1.8dvh, 16px)" }}>Group</h3>
-                <p style={{ fontSize: "clamp(11px, 1.5dvh, 14px)", opacity: 0.8 }}>
+                <h3 style={{ fontSize: "clamp(16px, 2.5dvh, 24px)" }}>Group</h3>
+                <p style={{ fontSize: "clamp(16px, 2.5dvh, 24px)", opacity: 0.8 }}>
                   {sigilData.sigilGroups.map((g: any) => g.groupMember?.join(', ')).join(' · ')}
                 </p>
               </div>
@@ -144,10 +144,10 @@ export default function SigilPage() {
 
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '0.5rem', width: '100%', textAlign: 'center' }}>
               {sigilData.locationName ? (
-                <p style={{ fontSize: "clamp(11px, 1.5dvh, 14px)" }}>📍 {sigilData.locationName}</p>
+                <p style={{ fontSize:  "clamp(16px, 2.5dvh, 24px)" }}>📍 {sigilData.locationName}</p>
               ) : (
                 <div>
-                  <p style={{ fontSize: "clamp(11px, 1.5dvh, 14px)", marginBottom: "0.5rem" }}>Set a location:</p>
+                  <p style={{ fontSize:  "clamp(16px, 2.5dvh, 24px)", marginBottom: "0.5rem" }}>Set a location:</p>
                   {isSavingLocation ? <p>Saving...</p> : (
                     <div style={{ maxWidth: "100%", margin: "0 auto" }}>
                       <MapSearchBox accessToken={MAPBOX_TOKEN} onRetrieve={handleLocationRetrieve} />
@@ -163,10 +163,10 @@ export default function SigilPage() {
               paddingTop: '0.75rem',
               width: '100%',
             }}>
-              <p style={{ fontSize: "clamp(11px, 1.5dvh, 13px)", opacity: 0.6, textAlign: 'center', marginBottom: '0.5rem' }}>
+              <p style={{ fontSize:  "clamp(16px, 2.5dvh, 24px)", opacity: 0.6, textAlign: 'center', marginBottom: '0.5rem' }}>
                 Community Energy
               </p>
-              <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+              <div style={{ display: 'flex', gap: '2rem', width: '100%' }}>
                 <button
                   onClick={() => handleVote("charge")}
                   disabled={voting}
@@ -182,7 +182,7 @@ export default function SigilPage() {
                       : 'rgba(168, 85, 247, 0.1)',
                     color: sigilData.userVote === "charge" ? '#e9d5ff' : '#c4b5fd',
                     fontWeight: 600,
-                    fontSize: 'clamp(11px, 1.5dvh, 14px)',
+                    fontSize: 'clamp(18px, 2dvh, 34px)',
                     cursor: voting ? 'not-allowed' : 'pointer',
                     opacity: voting ? 0.6 : 1,
                     transition: 'all 0.15s ease',
@@ -206,7 +206,7 @@ export default function SigilPage() {
                       : 'rgba(239, 68, 68, 0.08)',
                     color: sigilData.userVote === "destroy" ? '#fca5a5' : '#f87171',
                     fontWeight: 600,
-                    fontSize: 'clamp(11px, 1.5dvh, 14px)',
+                    fontSize: 'clamp(18px, 2dvh, 34px)',
                     cursor: voting ? 'not-allowed' : 'pointer',
                     opacity: voting ? 0.6 : 1,
                     transition: 'all 0.15s ease',
