@@ -205,11 +205,30 @@ export default function SigilPage() {
             )}
 
             {sigilData.sigilGroups && sigilData.sigilGroups.length > 0 && (
-              <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '0.5rem', width: '100%', textAlign: 'center' }}>
-                <h3 style={{ fontSize: "clamp(16px, 2.5dvh, 24px)" }}>Group</h3>
-                <p style={{ fontSize: "clamp(16px, 2.5dvh, 24px)", opacity: 0.8 }}>
-                  {sigilData.sigilGroups.map((g: any) => g.groupMember?.join(', ')).join(' · ')}
-                </p>
+              <div style={{
+                borderTop: '1px solid rgba(255,255,255,0.2)',
+                paddingTop: '0.5rem',
+                width: '100%',
+                textAlign: 'center',
+              }}>
+                <h3 style={{ fontSize: "clamp(16px, 2.5dvh, 24px)", marginBottom: '0.5rem' }}>Group</h3>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
+                  {sigilData.sigilGroups.map((g: any) => (
+                    <span
+                      key={g.id}
+                      style={{
+                        background: 'rgba(168, 85, 247, 0.2)',
+                        border: '1px solid rgba(168, 85, 247, 0.4)',
+                        borderRadius: '999px',
+                        padding: '2px 12px',
+                        fontSize: 'clamp(13px, 2dvh, 18px)',
+                        color: '#c4b5fd',
+                      }}
+                    >
+                      {g.groupMember}
+                    </span>
+                  ))}
+                </div>
               </div>
             )}
 

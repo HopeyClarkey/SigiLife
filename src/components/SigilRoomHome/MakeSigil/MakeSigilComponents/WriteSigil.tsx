@@ -87,20 +87,13 @@ export default function WriteSigil() {
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <Menu />
-          <div ref={cardRef} style={{
+          <div className= 'glasscard' ref={cardRef} style={{
             width: 'min(55dvh, 85dvw)',
             height: '88dvh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-evenly',
             padding: '2rem',
-            borderRadius: '2rem',
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(24px)',
-            WebkitBackdropFilter: 'blur(24px)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            position: 'relative',
             zIndex: showOverlay ? 1 : 'auto',
           }}>
             <h1>Write Your Sigil</h1>

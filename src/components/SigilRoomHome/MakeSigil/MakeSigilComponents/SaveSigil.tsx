@@ -81,61 +81,67 @@ export default function SaveSigil() {
   };
 
   const handleSave = async () => {
-    if (!user || !user.id) {
-      setError("You must be logged in to save a sigil.");
-      return;
-    }
-    setIsSaving(true);
-    setError('');
+  if (!user || !user.id) {
+    setError("You must be logged in to save a sigil.");
+    return;
+  }
+  setIsSaving(true);
+  setError('');
 
-    try {
-      const response = await fetch('/api/sigils', {
+  const groupMembers = [
+    user.username,
+    ...friends.filter(f => selectedFriends.includes(f.id)).map(f => f.username),
+  ];
+
+  try {
+    const response = await fetch('/api/sigils', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: sigilData.name,
+        userId: user.id,
+        intention: sigilData.intention,
+        canvasData: sigilData.canvasData,
+        imageData: sigilData.imageData,
+        groupMembers,
+        ...(location ?? {}),
+      }),
+    });
+
+    if (!response.ok) throw new Error('Failed to save sigil');
+    const result = await response.json();
+
+    if (selectedFriends.length > 0) {
+      await fetch('/api/sigils/share', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: sigilData.name,
-          userId: user.id,
-          intention: sigilData.intention,
-          canvasData: sigilData.canvasData,
-          imageData: sigilData.imageData,
-          ...(location ?? {}),
-        }),
+        body: JSON.stringify({ sigilId: result.id, targetUserIds: selectedFriends })
       });
-
-      if (!response.ok) throw new Error('Failed to save sigil');
-      const result = await response.json();
-
-      if (selectedFriends.length > 0) {
-        await fetch('/api/sigils/share', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sigilId: result.id, targetUserIds: selectedFriends })
-        });
-      }
-
-      await fetch(`/api/users/${user.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sigilCount: (user.sigilCount ?? 0) + 1 })
-      });
-
-      localStorage.removeItem('sigilName');
-      localStorage.removeItem('sigilIntention');
-      localStorage.removeItem('sigilUniqueChars');
-      localStorage.removeItem('sigilCanvasData');
-      localStorage.removeItem('sigilImageData');
-      console.log('isActive:', isActive)
-      if (isActive) {
-        navigate(`/charge-sigil?sigilId=${result.id}`);
-      } else {
-        navigate('/home');
-      }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while saving.');
-    } finally {
-      setIsSaving(false);
     }
-  };
+
+    await fetch(`/api/users/${user.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sigilCount: (user.sigilCount ?? 0) + 1 })
+    });
+
+    localStorage.removeItem('sigilName');
+    localStorage.removeItem('sigilIntention');
+    localStorage.removeItem('sigilUniqueChars');
+    localStorage.removeItem('sigilCanvasData');
+    localStorage.removeItem('sigilImageData');
+
+    if (isActive) {
+      navigate(`/charge-sigil?sigilId=${result.id}`);
+    } else {
+      navigate('/home');
+    }
+  } catch (err: any) {
+    setError(err.message || 'An error occurred while saving.');
+  } finally {
+    setIsSaving(false);
+  }
+};
 
   if (!sigilData) return <div>Loading...</div>;
   console.log(JSON.stringify(sessionStorage))
@@ -201,7 +207,7 @@ export default function SaveSigil() {
               </p>
               <div style={{ maxHeight: '120px', overflowY: 'auto' }}>
                 {friends.length === 0 ? (
-                  <p style={{ fontSize: "clamp(12px, 2.5vw, 36px)" }}>You are not following anyone yet.</p>
+                  <p style={{ fontSize: "clamp(14px, 2.5vw, 36px)" }}>You are not following anyone yet.</p>
                 ) : (
                   friends.map(friend => (
                     <div key={friend.id} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '4px 0' }}>
@@ -209,7 +215,7 @@ export default function SaveSigil() {
                         checked={selectedFriends.includes(friend.id)}
                         onChange={() => toggleFriend(friend.id)}
                         style={{ cursor: 'pointer' }} />
-                      <label htmlFor={`friend-${friend.id}`} style={{ cursor: 'pointer', fontSize: "clamp(13px, 2vw, 16px)" }}>
+                      <label htmlFor={`friend-${friend.id}`} style={{ cursor: 'pointer', fontSize: "clamp(14px, 2vw, 36px)" }}>
                         {friend.username}
                       </label>
                     </div>

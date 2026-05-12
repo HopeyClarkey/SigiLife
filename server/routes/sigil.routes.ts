@@ -175,13 +175,44 @@ router.post('/:sigilId/vote', async (req: Request, res: Response) => {
     res.status(500).json({ error: (error as Error).message });
   }
 });
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Patch One Sigil
+router.patch('/:id', async (req, res) => {
+  try {
+    const { name } = req.body;
+    const sigil = await prisma.sigil.update({
+      where: { id: parseInt(req.params.id) },
+      data: { ...(name && { name }) },
+    });
+    res.json(sigil);
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Get Vote Status
+router.get('/:id/vote-status', async (req, res) => {
+  try {
+    const userId = (req.session as any).userId;
+    if (!userId) return res.json({ userVote: null });
+
+    const vote = await prisma.sigilVote.findUnique({
+      where: { sigilId_userId: { sigilId: parseInt(req.params.id), userId } },
+    });
+
+    res.json({ userVote: vote?.voteType ?? null });
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Get One Sigil
 // NOTE: this wildcard must stay AFTER all specific routes above
 router.get(`/:id`, async (req, res) => {
   try {
     const sigil = await prisma.sigil.findUnique({
-      where: { id: parseInt(req.params.id) }
+      where: { id: parseInt(req.params.id) },
+      include: { sigilGroups: true },
     });
     if (!sigil) {
       return res.status(404).json({ message: 'sigil not found' })
@@ -194,15 +225,16 @@ router.get(`/:id`, async (req, res) => {
 });
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Save Sigil
-router.post('/', async (req: Request, res: Response) => {
-  try {
-    const { name, intention, canvasData, imageData, locationName, latitude, longitude } = req.body;
-    const userId = (req.session as any).userId;
 
-    if (!userId) {
-      return res.status(401).json({ error: 'User not authenticated. Please log in to save sigils.' });
+router.post('/', async (req, res) => {
+  try {
+    const { name, userId, intention, canvasData, imageData, locationName, latitude, longitude, groupMembers } = req.body;
+
+    const userId_ = req.session.userId;
+    if (!userId_) {
+      return res.status(401).json({ error: 'Please log in to save sigils.' });
     }
-    const sigilCount = await prisma.sigil.count({ where: { userId } });
+    const sigilCount = await prisma.sigil.count({ where: { userId: userId_ } });
     if (sigilCount >= 12) {
       return res.status(403).json({ error: 'Sigil limit reached. Destroy an existing sigil before creating a new one.' });
     }
@@ -217,6 +249,11 @@ router.post('/', async (req: Request, res: Response) => {
         locationName,
         latitude,
         longitude,
+        ...(groupMembers?.length > 0 && {
+          sigilGroups: {
+            create: groupMembers.map((username: string) => ({ groupMember: username })),
+          },
+        }),
       },
     });
 
