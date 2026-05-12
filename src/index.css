@@ -218,13 +218,13 @@ btn,
 }
 
 
-.special-elite-regular {
+.specialeliteregular {
   font-family: 'Special Elite', system-ui;
   font-weight: 400;
   font-style: normal;
 }
 
-.pompiere-regular {
+.pompiereregular {
   font-family: 'Pompiere', sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -1125,8 +1125,8 @@ usercard,
 .usercard {
   display: flex;
   flex-direction: row;
-  padding: 5px;
-  width: 30%;
+  padding: 7px;
+  width: 100%;
   position: relative;
   font-family: 'Special Elite', system-ui;
   font-size: clamp(12px, 1.5vw, 16px);
