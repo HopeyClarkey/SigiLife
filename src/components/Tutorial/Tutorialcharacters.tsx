@@ -48,9 +48,10 @@ interface PortraitProps {
   xPos: number;
   width: number;
   height: number;
+  slideIn?: boolean;
 }
 
-function Portrait({ src, side, visible, stepId, delay = 0, xPos, width, height }: PortraitProps) {
+function Portrait({ src, side, visible, stepId, delay = 0, xPos, width, height, slideIn = true }: PortraitProps) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     if (!visible) return;
@@ -70,8 +71,8 @@ function Portrait({ src, side, visible, stepId, delay = 0, xPos, width, height }
       height,
       zIndex: 8500,
       pointerEvents: 'none',
-      transform: mounted ? 'translateX(0)' : `translateX(${translateX})`,
-      transition: 'transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transform: (slideIn && !mounted) ? `translateX(${translateX})` : 'translateX(0)',
+      transition: slideIn ? 'transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none',
       willChange: 'transform',
     }}>
       <img src={src} alt="" style={{
@@ -223,7 +224,6 @@ export default function TutorialCharacters({
           height={portraitHeight}
         />
       )}
-
       {showBennet && (
         <Portrait
           src={BennetPortrait}
@@ -234,6 +234,7 @@ export default function TutorialCharacters({
           xPos={bennetX}
           width={portraitWidth}
           height={portraitHeight}
+          slideIn={step.id === 2}
         />
       )}
 
