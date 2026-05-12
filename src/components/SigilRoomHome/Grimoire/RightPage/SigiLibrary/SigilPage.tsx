@@ -251,7 +251,7 @@ export default function SigilPage() {
                     background: sigilData.userVote === "charge"
                       ? 'rgba(168, 85, 247, 0.35)'
                       : 'rgba(168, 85, 247, 0.1)',
-                    color: sigilData.userVote === "charge" ? '#e9d5ff' : '#c4b5fd',
+                    color: sigilData.userVote === "charge" ? 'black' : '#c4b5fd',
                     fontWeight: 600,
                     fontSize: 'clamp(18px, 2dvh, 34px)',
                     cursor: voting ? 'not-allowed' : 'pointer',
@@ -275,7 +275,7 @@ export default function SigilPage() {
                     background: sigilData.userVote === "destroy"
                       ? 'rgba(239, 68, 68, 0.25)'
                       : 'rgba(239, 68, 68, 0.08)',
-                    color: sigilData.userVote === "destroy" ? '#fca5a5' : '#f87171',
+                    color: sigilData.userVote === "destroy" ? 'black' : '#f87171',
                     fontWeight: 600,
                     fontSize: 'clamp(18px, 2dvh, 34px)',
                     cursor: voting ? 'not-allowed' : 'pointer',
