@@ -23,6 +23,7 @@ model User {
   homeLocation          String?      @db.VarChar(500)
   hasCompletedTutorial  Boolean      @default(false)
   sigilCount            Int          @default(0)
+  destroyCount          Int          @default(0)
   sigils                Sigil[]
   sigilVotes            SigilVote[]
   following             Follow[]     @relation("follower")
