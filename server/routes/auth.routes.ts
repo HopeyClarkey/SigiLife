@@ -31,7 +31,7 @@ const needsProfile = !user.username || user.avatar === null || user.theme === nu
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sends to Google/ Returns token
 router.post('/google', async (req, res) => {
   try {
-const { credential, username, avatar, theme, color_theme, homeLocation } = req.body;
+const { credential, username, avatar, theme, color_theme, homeLocation, sigilCount } = req.body;
 
     const ticket = await client.verifyIdToken({
       idToken: credential,
@@ -81,6 +81,7 @@ const { credential, username, avatar, theme, color_theme, homeLocation } = req.b
           ...(theme != null && { theme: parseInt(theme) }),
           ...(color_theme != null && { color_theme }),
           homeLocation: homeLocation || user.homeLocation,
+          sigilCount: sigilCount || user.sigilCount,
         }
       });
     }

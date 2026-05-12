@@ -14,6 +14,7 @@ interface User {
   homeLocation: string | null;
   isAdmin: boolean;
   hasCompletedTutorial: boolean;
+  sigilCount: number;
 }
 
 interface UserContextType {

@@ -113,6 +113,12 @@ export default function SaveSigil() {
         });
       }
 
+      await fetch(`/api/users/${user.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sigilCount: (user.sigilCount ?? 0) + 1 })
+      });
+
       localStorage.removeItem('sigilName');
       localStorage.removeItem('sigilIntention');
       localStorage.removeItem('sigilUniqueChars');
@@ -132,7 +138,7 @@ export default function SaveSigil() {
   };
 
   if (!sigilData) return <div>Loading...</div>;
- console.log(JSON.stringify(sessionStorage))
+  console.log(JSON.stringify(sessionStorage))
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
