@@ -1017,6 +1017,17 @@ drawsigilmenu,
   z-index: 1;
 }
 
+.mapboxgl-popup-content {
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+
+.mapboxgl-popup-tip {
+  display: none !important;
+}
+
 profilepage,
 .profilepage {
   display: flex;
@@ -1024,7 +1035,7 @@ profilepage,
   background-position: center;
   align-items: center;
   position: relative;
-  justify-content: space-around;
+  justify-content: space-evenly;
   overflow: visible;
   width: 100dvw;
   min-height: 100dvh;
@@ -1153,7 +1164,7 @@ usersettings,
   display: flex;
   flex-direction: column;
   padding: 25px;
-  justify-content: space-between;
+  justify-content: space-evenly;
   gap: 1rem;
   font-family: 'Special Elite', system-ui;
   color: var(--theme-text);

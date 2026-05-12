@@ -27,25 +27,41 @@ export default function UserProfile() {
 
   if (!user) return;
 
-  const AvatarFace = () =>
-  (
+  const AvatarFace = () => (
     <div className="avatarfacebox">
       <img className="avatarface" src={`Avatar${user.avatar + 1}face.png`} />
     </div>
   )
 
-
+  const themeLabel = user.color_theme === 'foliage' ? '🌿 Verdant' : '❄️ Glacial'
+  const lightLabel = user.theme === 1 ? '🌑 Dark' : '☀️ Light'
 
   return (
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
-        <div className="profilepage usersettings-page art-page-base"
+        <div className="profilepage art-page-base"
           style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
           <Menu />
           <h1 className='profilepagename'>
-            <AvatarFace /> {user.username}</h1>
-          <UserFriends />
+            <AvatarFace /> {user.username}
+          </h1>
 
+          <div className='glasscard'
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '1.5rem',
+              justifyContent: 'center',
+              width: 'fit-content',
+              fontSize: 'clamp(13px, 2vw, 18px)',
+            }}>
+            <span>✨ {user.sigilCount ?? 0} Sigils Created</span>
+            <span>💀 {user.destroyCount ?? 0} Sigils Destroyed</span>
+            <span>{themeLabel}</span>
+            <span>{lightLabel}</span>
+          </div>
+
+          <UserFriends />
         </div>
       </div>
     </div>

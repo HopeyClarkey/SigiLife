@@ -29,7 +29,7 @@ router.get('/allsigils', async (req, res) => {
   try {
     const sigils = await prisma.sigil.findMany({
       orderBy: { createdAt: 'desc' },
-      include: { sigilGroups: true },
+      include: { sigilGroups: true, user: { select: { username: true } } },
     });
     const userId = (req.session as any).userId;
     if (userId) {
@@ -37,9 +37,17 @@ router.get('/allsigils', async (req, res) => {
         where: { userId, sigilId: { in: sigils.map(s => s.id) } },
       });
       const voteMap = Object.fromEntries(votes.map(v => [v.sigilId, v.voteType]));
-      return res.json(sigils.map(s => ({ ...s, userVote: voteMap[s.id] ?? null })));
+      return res.json(sigils.map(s => ({
+        ...s,
+        userVote: voteMap[s.id] ?? null,
+        creatorUsername: s.user?.username ?? null,
+      })));
     }
-    res.json(sigils.map(s => ({ ...s, userVote: null })));
+    res.json(sigils.map(s => ({
+      ...s,
+      userVote: null,
+      creatorUsername: s.user?.username ?? null,
+    })));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: (error as Error).message });
