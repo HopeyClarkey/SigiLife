@@ -113,7 +113,7 @@ router.patch('/:id', async (req, res) => {
     if (req.session.userId !== parseInt(req.params.id)) {
       return res.status(403).json({ error: 'Cannot edit another user' });
     }
-    const { username, avatar, theme, homeLocation, hasCompletedTutorial, color_theme } = req.body;
+    const { username, avatar, theme, homeLocation, hasCompletedTutorial, color_theme, sigilCount } = req.body;
     const user = await prisma.user.update({
       where: { id: parseInt(req.params.id) },
       data: {
@@ -123,6 +123,7 @@ router.patch('/:id', async (req, res) => {
         ...(homeLocation !== undefined && { homeLocation }),
         ...(hasCompletedTutorial !== undefined && { hasCompletedTutorial: Boolean(hasCompletedTutorial) }),
         ...(color_theme !== undefined && { color_theme }),
+        ...(sigilCount !== undefined && { sigilCount: parseInt(sigilCount) })
       },
     });
     res.json(user)

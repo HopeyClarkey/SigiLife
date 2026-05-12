@@ -103,7 +103,7 @@ export default function CreateProfile() {
               </label></label>
             <br />
             <button
-              className="btn"
+              className="pinkbutton"
               disabled={!username || !homeLocation}
               onClick={handleCreate}
             >

@@ -27,11 +27,11 @@ export default function UserProfile() {
 
   if (!user) return;
 
-  const AvatarFace = () => 
-    (
-  <div className="avatarfacebox">
-    <img className="avatarface" src={`Avatar${user.avatar + 1}face.png`} />
-  </div>
+  const AvatarFace = () =>
+  (
+    <div className="avatarfacebox">
+      <img className="avatarface" src={`Avatar${user.avatar + 1}face.png`} />
+    </div>
   )
 
 
