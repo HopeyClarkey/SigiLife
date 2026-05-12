@@ -65,6 +65,13 @@ export default function DestroySigil() {
     try {
       const res = await fetch(`/api/sigils/${sigilData.id}`, { method: 'DELETE' })
       if (!res.ok) { throw new Error('Failed to destroy sigil') }
+      if (!user) return;
+      await fetch(`/api/users/${user.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ destroyCount: (user.destroyCount ?? 0) + 1 })
+      });
+
       setIsDestroying(true)
       setShowInstruction(true)
       setTimeout(() => setShowInstruction(false), 6000)

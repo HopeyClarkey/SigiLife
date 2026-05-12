@@ -15,6 +15,7 @@ interface User {
   isAdmin: boolean;
   hasCompletedTutorial: boolean;
   sigilCount: number;
+  destroyCount: number;
 }
 
 interface UserContextType {

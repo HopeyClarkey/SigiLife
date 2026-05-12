@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import prisma from '../prisma/prisma.client.js';
 import 'express-session';
+import { DESTRUCTION } from 'dns';
 
 const router = Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -31,7 +32,7 @@ const needsProfile = !user.username || user.avatar === null || user.theme === nu
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Sends to Google/ Returns token
 router.post('/google', async (req, res) => {
   try {
-const { credential, username, avatar, theme, color_theme, homeLocation, sigilCount } = req.body;
+const { credential, username, avatar, theme, color_theme, homeLocation, sigilCount, destroyCount } = req.body;
 
     const ticket = await client.verifyIdToken({
       idToken: credential,
@@ -82,6 +83,7 @@ const { credential, username, avatar, theme, color_theme, homeLocation, sigilCou
           ...(color_theme != null && { color_theme }),
           homeLocation: homeLocation || user.homeLocation,
           sigilCount: sigilCount || user.sigilCount,
+          destroyCount: destroyCount || user.destroyCount,
         }
       });
     }
