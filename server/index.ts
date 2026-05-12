@@ -1,3 +1,4 @@
+import './types/session';
 import dotenv from 'dotenv';
 dotenv.config();
 
