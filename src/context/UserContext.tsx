@@ -11,6 +11,7 @@ interface User {
   avatar: number;
   theme: number;
   color_theme: string;
+  homeTeam: string;
   homeLocation: string | null;
   isAdmin: boolean;
   hasCompletedTutorial: boolean;

@@ -13,13 +13,14 @@ export default function MapSearchBox({ onRetrieve, accessToken }: { onRetrieve: 
         theme={{
           variables: {
             fontFamily: '"New Rocker", system-ui',
-            unit: '14px',
+            unit: '22px',
             borderRadius: '12px',
             colorPrimary: '#9e38fd',
             colorBackground: 'rgba(255, 255, 255, 0.95)', // Nearly white for max visibility
             colorText: '#000000',
           }
         }}
+        
       />
     </div>
   )

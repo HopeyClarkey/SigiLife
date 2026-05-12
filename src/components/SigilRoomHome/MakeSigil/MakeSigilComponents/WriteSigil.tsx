@@ -120,7 +120,7 @@ export default function WriteSigil() {
               disabled={showOverlay}
             />
             <div className="clmnbox">
-              <span style={{ color: '#666', fontSize: 'clamp(13px, 3.5vw, 26px)' }}>
+              <span style={{ color: 'black', fontSize: 'clamp(10px, 1.8vw, 26px)' }}>
                 Unique letters: {uniqueChars}
               </span>
               <button className="pinkbutton" onClick={handleNext}

@@ -182,7 +182,7 @@ export default function SaveSigil() {
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '1rem' }}>
               <h2 style={{ fontSize: "clamp(16px, 2.5vw, 22px)", marginBottom: "0.5rem" }}>📍 Location</h2>
               {location ? (
-                <p style={{ fontSize: "clamp(13px, 2vw, 16px)", display: "flex", alignItems: "center", gap: "8px" }}>
+                <p style={{ fontSize: "clamp(16px, 23.5vw, 36px)", display: "flex", textAlign: "center", gap: "8px" }}>
                   {location.locationName}
                   <button onClick={() => setLocation(null)}
                     style={{ cursor: 'pointer', background: 'none', border: 'none', color: 'inherit' }}>✕</button>

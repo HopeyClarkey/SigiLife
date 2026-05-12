@@ -25,7 +25,7 @@
 textinput,
 .textinput {
   font-family: 'Pompiere', sans-serif;
-  font-size: clamp(14px, 3vw, 136px);
+  font-size: clamp(14px, 3vw, 56px);
   background-color: #f1f1f1;
   border-radius: 12px;
   border-color: #2b0681;
