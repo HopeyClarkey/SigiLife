@@ -310,18 +310,22 @@ export default function SigilPage() {
             <div className="sigilbuttonstack" style={{ width: '100%' }}>
               {!sigilData.isCharged && (
                 <Link className="btn" to={`/charge-sigil?sigilId=${sigilData.id}`}
-                  style={{ backgroundColor: '#9e38fd', fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
+                  style={{ fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
                   ⚡ Charge Sigil
                 </Link>
               )}
               <Link className="btn" to={`/destroy-sigil?sigilId=${sigilData.id}`}
-                style={{ backgroundColor: '#9e38fd', fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
+                style={{  fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
                 💀 Destroy Sigil
+              </Link>
+              <Link className="btn" to={`/library`}
+                style={{  fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
+                📚 To the Library
               </Link>
               {user?.isAdmin && (
                 <Link className="btn" to="/place-sigil-world" state={{ sigilData }}
-                  style={{ backgroundColor: '#9e38fd', fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
-                  🌍 View in AR
+                  style={{ fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
+                  🌍 Place in World
                 </Link>
               )}
             </div>
