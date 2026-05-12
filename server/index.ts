@@ -1,4 +1,11 @@
-import './types/session';
+import 'express-session';
+
+declare module 'express-session' {
+  interface SessionData {
+    userId: number;
+  }
+}
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -15,7 +22,7 @@ import sigilRouter from './routes/sigil.routes.js';
 import userRouter from './routes/user.routes.js';
 import vectorRouter from './routes/vector.routes.js';
 import { sessionStore } from './sessionStore.js';
-import prisma from './prisma/prisma.client.js';
+//import prisma from './prisma/prisma.client.js';
 
 
 
