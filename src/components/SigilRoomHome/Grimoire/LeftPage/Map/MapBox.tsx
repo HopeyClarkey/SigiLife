@@ -59,8 +59,9 @@ export default function MapBox() {
   const [followingIds, setFollowingIds] = useState<Set<number>>(new Set());
   const [following, setFollowing] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [characterPopup, setCharacterPopup] = useState<{ label: string; longitude: number; latitude: number } | null>(null);
 
-  const allowPublicFollows = true; 
+  const allowPublicFollows = true;
 
   const [viewState, setViewState] = useState(() => getInitialViewState(user));
 
@@ -151,7 +152,7 @@ export default function MapBox() {
         <div className="mapbox art-page-base"
           style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
           <Menu />
-          <Link className="pinkbutton " style={{ border: '0px',  width: '5%', textAlign: 'center',fontFamily: 'Pompiere', borderRadius: '12px' }} to="/make-sigil">Create Sigil</Link>
+          <Link className="pinkbutton " style={{ border: '0px', width: '5%', textAlign: 'center', fontFamily: 'Pompiere', borderRadius: '12px' }} to="/make-sigil">Create Sigil</Link>
           <div style={{
             width: '88dvw',
             height: '88dvh',
@@ -176,6 +177,29 @@ export default function MapBox() {
                 mapboxAccessToken={MAPBOX_TOKEN}
                 style={{ width: '100%', height: '100%' }}
               >
+                <Marker
+                  longitude={-90.08537}
+                  latitude={29.92879}
+                  anchor="bottom"
+                  onClick={e => {
+                    e.originalEvent.stopPropagation();
+                    setCharacterPopup({ label: "Harper's Home Location", longitude: -90.08537, latitude: 29.92879 });
+                  }}
+                >
+                  <div style={{ fontSize: '1.5rem', cursor: 'pointer' }}>🏡</div>
+                </Marker>
+
+                <Marker
+                  longitude={-90.0639}
+                  latitude={29.9574}
+                  anchor="bottom"
+                  onClick={e => {
+                    e.originalEvent.stopPropagation();
+                    setCharacterPopup({ label: "Bennet's Home Location", longitude: -90.0639, latitude: 29.9574 });
+                  }}
+                >
+                  <div style={{ fontSize: '1.5rem', cursor: 'pointer' }}>⛪︎</div>
+                </Marker>
                 {sigils.map((sigil) => {
                   if (sigil.longitude && sigil.latitude) {
                     return (
@@ -228,7 +252,25 @@ export default function MapBox() {
                   }
                   return null;
                 })}
-
+                {characterPopup && (
+                  <Popup
+                    anchor="top"
+                    longitude={characterPopup.longitude}
+                    latitude={characterPopup.latitude}
+                    onClose={() => setCharacterPopup(null)}
+                    maxWidth="200px"
+                  >
+                    <div style={{
+                      padding: '10px 14px',
+                      fontFamily: 'Pompiere, sans-serif',
+                      fontSize: '14px',
+                      color: 'var(--theme-text)',
+                      textAlign: 'center',
+                    }}>
+                      {characterPopup.label}
+                    </div>
+                  </Popup>
+                )}
                 {popupInfo && (
                   <Popup
                     anchor="top"
