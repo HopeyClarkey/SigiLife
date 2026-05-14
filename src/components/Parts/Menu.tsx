@@ -21,27 +21,25 @@ function NavMenu({ onClose }: { onClose: () => void }) {
       }}
     >
       <button
-        className="glassbutton"
-        style={{ padding: '0.25rem 0.75rem', border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }}
+        className="pinkbutton"
+        style={{ border: '0px',  width: '100%', textAlign: 'left', fontFamily: 'Pompiere' }}
         onClick={onClose}
       >
         ✕ Close
       </button>
       <button
-        className="glassbutton"
-        style={{ textAlign: 'left', border: '0px', backgroundColor: 'transparent', width: '100%' }}
+        className="pinkbutton"
+        style={{ border: '0px',  width: '100%', textAlign: 'left',fontFamily: 'Pompiere' }}
         onClick={() => { navigate(-1); onClose() }}
       >
         ← Go Back
       </button>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/home" onClick={onClose}>The Office</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/make-sigil" onClick={onClose}>Write Sigil</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/library?action=charge" onClick={onClose}>Charge Sigil</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/library?action=destroy" onClick={onClose}>Destroy Sigil</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/library" onClick={onClose}>SigiLibrary</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/map" onClick={onClose}>SigilMap</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/profile" onClick={onClose}>SigiLites</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/settings" onClick={onClose}>Settings</Link>
+      <Link className="pinkbutton " style={{ border: '0px',  width: '100%', textAlign: 'left', fontFamily: 'Pompiere' }} to="/home" onClick={onClose}>The Office</Link>
+      <Link className="pinkbutton " style={{ border: '0px',  width: '100%', textAlign: 'left',fontFamily: 'Pompiere' }} to="/make-sigil" onClick={onClose}>Write Sigil</Link>
+      <Link className="pinkbutton " style={{ border: '0px',  width: '100%', textAlign: 'left',fontFamily: 'Pompiere' }} to="/library?action=charge" onClick={onClose}>Charge Sigil</Link>
+      <Link className="pinkbutton " style={{ border: '0px',   width: '100%', textAlign: 'left',fontFamily: 'Pompiere' }} to="/library?action=destroy" onClick={onClose}>Destroy Sigil</Link>
+      <Link className="pinkbutton " style={{ border: '0px',  width: '100%', textAlign: 'left',fontFamily: 'Pompiere' }} to="/grimoire" onClick={onClose}>Bookshelf</Link>
+      <Link className="pinkbutton " style={{ border: '0px',   width: '100%', textAlign: 'left',fontFamily: 'Pompiere' }} to="/settings" onClick={onClose}>Settings</Link>
     </div>
   )
 }
