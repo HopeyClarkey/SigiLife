@@ -39,6 +39,8 @@ function NavMenu({ onClose }: { onClose: () => void }) {
       <Link className="pinkbutton " style={{ border: '0px',  width: '100%', textAlign: 'left',fontFamily: 'Pompiere', borderRadius: '0' }} to="/library?action=charge" onClick={onClose}>Charge Sigil</Link>
       <Link className="pinkbutton " style={{ border: '0px',   width: '100%', textAlign: 'left',fontFamily: 'Pompiere', borderRadius: '0' }} to="/library?action=destroy" onClick={onClose}>Destroy Sigil</Link>
       <Link className="pinkbutton " style={{ border: '0px',  width: '100%', textAlign: 'left',fontFamily: 'Pompiere', borderRadius: '0' }} to="/grimoire" onClick={onClose}>Bookshelf</Link>
+      <Link className="pinkbutton " style={{ border: '0px',  width: '100%', textAlign: 'left',fontFamily: 'Pompiere', borderRadius: '0' }} to="/map" onClick={onClose}>SigilMap</Link>
+      <Link className="pinkbutton " style={{ border: '0px',  width: '100%', textAlign: 'left',fontFamily: 'Pompiere', borderRadius: '0' }} to="/profile" onClick={onClose}>SigilLites</Link>
       <Link className="pinkbutton " style={{ border: '0px',   width: '100%', textAlign: 'left',fontFamily: 'Pompiere', borderRadius: '0' }} to="/settings" onClick={onClose}>Settings</Link>
     </div>
   )

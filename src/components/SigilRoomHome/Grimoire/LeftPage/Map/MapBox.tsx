@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Map, { NavigationControl, Marker, Popup } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from 'axios';
@@ -60,7 +60,7 @@ export default function MapBox() {
   const [following, setFollowing] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const allowPublicFollows = true; // TODO: replace with user/creator setting
+  const allowPublicFollows = true; 
 
   const [viewState, setViewState] = useState(() => getInitialViewState(user));
 
@@ -151,6 +151,7 @@ export default function MapBox() {
         <div className="mapbox art-page-base"
           style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
           <Menu />
+          <Link className="pinkbutton " style={{ border: '0px',  width: '5%', textAlign: 'center',fontFamily: 'Pompiere', borderRadius: '12px' }} to="/make-sigil">Create Sigil</Link>
           <div style={{
             width: '88dvw',
             height: '88dvh',

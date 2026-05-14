@@ -234,8 +234,9 @@ export default function SigilPage() {
             )}
 
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '0.5rem', width: '100%', textAlign: 'center' }}>
-              {sigilData.locationName ? (
+              {sigilData.locationName ? (<div>
                 <p style={{ fontSize: "clamp(16px, 2.5dvh, 24px)" }}>🗺️{sigilData.locationName}</p>
+                <Link className="pinkbutton " style={{ border: '0px', width: '100%', textAlign: 'left', fontFamily: 'Pompiere', borderRadius: '12px'}} to="/map">SigilMap</Link></div>
               ) : (
                 <div>
                   <p style={{ fontSize: "clamp(16px, 2.5dvh, 24px)", marginBottom: "0.5rem" }}>Set a location:</p>
@@ -316,11 +317,11 @@ export default function SigilPage() {
                 </Link>
               )}
               <Link className="btn" to={`/destroy-sigil?sigilId=${sigilData.id}`}
-                style={{  fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
+                style={{ fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
                 💀 Destroy Sigil
               </Link>
               <Link className="btn" to={`/library`}
-                style={{  fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
+                style={{ fontSize: "clamp(12px, 1.8dvh, 18px)", padding: "8px 20px", textAlign: 'center' }}>
                 📚 To the Library
               </Link>
               {user?.isAdmin && (

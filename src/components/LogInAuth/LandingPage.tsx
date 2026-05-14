@@ -43,25 +43,43 @@ export default function LandingPage() {
     return () => clearInterval(interval)
   }, [carouselApi]);
 
-  const slides = [
-    <><br />Mark your intent.<br />Leave a trace.<br /><br />Nothing disappears without a ritual.</>,
-    <>SigiLife is a map of hidden intentions: <br />yours and everyone else's.<br />
-      Every sigil is a statement, a feeling,<br /> a moment made permanent…<br /></>,
-    <> until you choose to let it go.</>,
-    <><br /><br />How It Works:</>,
-    <>You don't just write goals.<br /> You encode them.<br />Write your intention. <br />Strip it down. <br />Distill it.</>,
-    <>Turn it into a Sigil:<br />something abstract, <br />something unique, <br /> something yours.</>,
-    <>Then, choose how it feels: <br /> Hope. Anger. Obsession. Relief.<br />Emotion becomes the Charge.</>,
-    <>Place it somewhere real:<br />A street corner.<br />Your bedroom.<br />A bar you shouldn't go back to.</>,
-    <>Use SigiLife to:<br />Let go of things you <br />can't carry anymore...<br />Anchor moments you <br /> don't want to forget.</>,
-    <>Track personal transformations...<br />Leave something behind <br /> for someone else to find </>,
-    <><br />Or just see what's <br /> hidden in the world <br />around you </>,
-    <> </>,
-    <>Nothing lasts forever.<br />When you are ready,<br /> you can destroy your sigil.<br />Not delete—destroy.</>,
-    <>The intention dissolves.<br />The charge breaks.<br />The mark is gone.<br /><br />And that matters.</>,
-    <>Right now, you can see and use what your friends make.<br />Soon, you'll be able to do much more.</>,
-    <><br />Every moment can leave a trace.<br /> SigiLife lets you decide what remains.</>,
-  ];
+const slides = [
+  <><br />You ever feel something<br />in a place that doesn’t belong to you?<br /><br />A strange sadness.<br />A sudden certainty.<br />A memory that isn’t yours.</>,
+
+  <>For decades, The Office<br />has documented emotional imprints<br />appearing across the world.<br /><br />Symbols tied to human intention<br />that somehow remain behind.</>,
+
+  <>They’re called Sigils.<br /><br />And if you’re here now,<br />it means you noticed one.</>,
+
+  <><br /><br />SigiLife is a map of hidden intentions.<br />Yours.<br />And everyone else’s.</>,
+
+  <>Every sigil begins with a statement.<br />A want.<br />A fear.<br />A promise.<br />A thing you cannot let go of.</>,
+
+  <>You do not simply write it down.<br />You reduce it.<br />Distill it.<br />Strip it to its meaning.</>,
+
+  <>Then the system transforms it<br />into something symbolic.<br />Abstract.<br />Unique.<br />Entirely yours.</>,
+
+  <>Next comes the Charge.<br /><br />Hope.<br />Grief.<br />Obsession.<br />Relief.<br />Anger.<br />Longing.</>,
+
+  <>Emotion leaves residue.<br />That residue gives the sigil weight.</>,
+
+  <>Then you place it somewhere real.<br /><br />A street corner.<br />Your apartment.<br />A graveyard.<br />A bar you should not return to.</>,
+
+  <>Some people use sigils to manifest.<br />Some use them to remember.<br />Others use them to bury things.</>,
+
+  <>Over time, the world fills with traces.<br />Invisible layers of human intention<br />hidden beneath ordinary places.</>,
+
+  <>You can discover sigils left by others.<br />Strengthen your own.<br />Or simply observe what lingers.</>,
+
+  <>Nothing lasts forever.</>,
+
+  <>When the time comes,<br />you may destroy your sigil.<br /><br />Not delete.<br />Destroy.</>,
+
+  <>The charge breaks.<br />The symbol collapses.<br />The intention dissolves.<br /><br />And that matters.</>,
+
+  <>Right now, sigils can be shared<br />between trusted contacts.<br />Soon, The Office will expand access.</>,
+
+  <><br />The world is already full<br />of invisible meaning.<br /><br />SigiLife just makes it visible.</>,
+];
 
   return (
     <>
@@ -80,8 +98,8 @@ export default function LandingPage() {
                 width: "min(70dvh, 88dvw)",
                 textWrap: "wrap",
                 minWidth: "300px"
-              }}><p>
-                  SigiLife is a location-based ritual platform where you can transform personal intentions into digital sigils.
+              }}><p style={{color: "black"}}>
+                  SigiLife is an augmented reality, location-based, social, ritualized lifestyle game where emotional intention becomes digitally visible.
                 </p>
               </div>
               <div className='displaypitch' style={{ height: "30vh", margin: "0", width: "min(70dvh, 88dvw)", paddingTop: ".3rem" }}>
@@ -109,7 +127,6 @@ export default function LandingPage() {
                 </Carousel>
               </div>
               <GoogleAuth />
-
             </>
           </div>
         </div>

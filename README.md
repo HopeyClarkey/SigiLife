@@ -36,6 +36,9 @@ An app for creating and sharing magically imbued sigils.
 
 
 ## 🤝 Contributing
+This Game was made by Alex 'Bernie' Bern and Hope Clarke, while in Operation Spark's coding program. 
+SigiLife will be managed in collaboration with MallowBunnyLabs🐇, May 2026.
+
 
 ### Naming Conventions
 
