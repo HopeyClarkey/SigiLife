@@ -14,7 +14,7 @@ interface TutorialCharactersProps {
   cardRef: React.RefObject<HTMLDivElement | null>;
 }
 
-function useTypewriter(text: string, speed = 28) {
+function useTypewriter(text: string, speed = 69) {
   const [displayed, setDisplayed] = useState('');
   useEffect(() => {
     if (!text) return;
@@ -172,7 +172,7 @@ export default function TutorialCharacters({
     const reset = setTimeout(() => setActiveSpeaker('harper'), 0);
     if (step.speaker === 'both' && step.bennetText) {
       const harperLen = step.harperText?.length ?? 0;
-      const switchDelay = Math.max(3000, harperLen * 30 + 1000);
+      const switchDelay = Math.max(3000, harperLen * 60 + 5000);
       const t = setTimeout(() => setActiveSpeaker('bennet'), switchDelay);
       return () => { clearTimeout(reset); clearTimeout(t); };
     }

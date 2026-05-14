@@ -25,6 +25,7 @@ type Sigil = {
   userVote: VoteType | null;
   isCharged?: boolean;
   creatorUsername?: string;
+  creatorId?: number;
 };
 
 const DEFAULT_VIEW = { longitude: -95.7129, latitude: 37.0902, zoom: 6 };
@@ -55,7 +56,11 @@ export default function MapBox() {
   const [filterMode, setFilterMode] = useState<"all" | "mine">("all");
   const [voting, setVoting] = useState(false);
   const [dims, setDims] = useState({ width: 2160, height: 1260 });
+  const [followingIds, setFollowingIds] = useState<Set<number>>(new Set());
+  const [following, setFollowing] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const allowPublicFollows = true; // TODO: replace with user/creator setting
 
   const [viewState, setViewState] = useState(() => getInitialViewState(user));
 
@@ -92,6 +97,14 @@ export default function MapBox() {
       .catch(err => console.error("Error fetching sigils for map:", err));
   }, [user?.id, filterMode]);
 
+  useEffect(() => {
+    if (!user) return;
+    fetch(`/api/users/${user.id}/following`)
+      .then(res => res.json())
+      .then(data => setFollowingIds(new Set(data.map((u: any) => u.id))))
+      .catch(err => console.error("Error fetching following:", err));
+  }, [user?.id]);
+
   const handleVote = async (voteType: VoteType) => {
     if (!popupInfo || !user || voting) return;
     setVoting(true);
@@ -110,6 +123,23 @@ export default function MapBox() {
       console.error("Vote failed:", err);
     } finally {
       setVoting(false);
+    }
+  };
+
+  const handleFollow = async (targetId: number) => {
+    if (!user || following) return;
+    setFollowing(true);
+    try {
+      await fetch(`/api/users/follow`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ followerId: user.id, followingId: targetId })
+      });
+      setFollowingIds(prev => new Set(prev).add(targetId));
+    } catch (err) {
+      console.error("Follow failed:", err);
+    } finally {
+      setFollowing(false);
     }
   };
 
@@ -270,15 +300,45 @@ export default function MapBox() {
                       </p>
 
                       {popupInfo.creatorUsername && (
-                        <p style={{
-                          margin: '0 0 14px',
-                          fontSize: 'clamp(11px, 1.5vw, 14px)',
-                          color: 'var(--theme-btn)',
-                          textAlign: 'center',
-                          fontFamily: 'Pompiere, sans-serif',
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px',
+                          marginBottom: '14px',
                         }}>
-                          ✦ by {popupInfo.creatorUsername}
-                        </p>
+                          <p style={{
+                            margin: 0,
+                            fontSize: 'clamp(11px, 1.5vw, 14px)',
+                            color: 'var(--theme-btn)',
+                            fontFamily: 'Pompiere, sans-serif',
+                          }}>
+                            ✦ by {popupInfo.creatorUsername}
+                          </p>
+                          {allowPublicFollows &&
+                            popupInfo.creatorId &&
+                            popupInfo.creatorId !== user.id &&
+                            !followingIds.has(popupInfo.creatorId) && (
+                            <button
+                              onClick={() => handleFollow(popupInfo.creatorId!)}
+                              disabled={following}
+                              style={{
+                                padding: '2px 10px',
+                                borderRadius: '8px',
+                                border: '1px solid var(--theme-btn)',
+                                background: 'transparent',
+                                color: 'var(--theme-btn)',
+                                fontFamily: 'Special Elite, system-ui',
+                                fontSize: 'clamp(10px, 1.4vw, 12px)',
+                                cursor: following ? 'not-allowed' : 'pointer',
+                                opacity: following ? 0.6 : 1,
+                                transition: 'all 0.15s ease',
+                              }}
+                            >
+                              + Follow
+                            </button>
+                          )}
+                        </div>
                       )}
 
                       <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>

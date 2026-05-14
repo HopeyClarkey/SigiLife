@@ -128,6 +128,7 @@ export default function SigilPage() {
               height: '88dvh',
               gap: '0.75rem',
               display: 'flex',
+              opacity: '.20',
               flexDirection: 'column',
               alignItems: 'center',
               overflowY: 'auto',
