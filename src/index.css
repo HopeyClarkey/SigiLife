@@ -189,7 +189,7 @@ btn,
   gap: 1rem;
   height: auto;
   max-height: 92dvh;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   padding: 2rem;
@@ -728,7 +728,7 @@ drawsigil,
 
 @keyframes title-red-black-pulse {
   0%   { color: #af0000; }
-  50%  { color: #1a0000; }
+  50%  { color: #ffffff; }
   100% { color: #5b0101; }
 }
 

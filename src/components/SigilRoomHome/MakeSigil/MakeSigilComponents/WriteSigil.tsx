@@ -12,12 +12,15 @@ export default function WriteSigil() {
   const [intention, setIntention] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [uniqueChars, setUniqueChars] = useState('');
+  const [charactersVisible, setCharactersVisible] = useState(true);
   const [dims, setDims] = useState({ width: 2160, height: 1260 });
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   const { currentStep, isActive, advance, skip, showOverlay } = usePageTutorial('write');
+
+
 
   useEffect(() => {
     const calculate = () => {
@@ -129,13 +132,13 @@ export default function WriteSigil() {
           backgroundColor: (isProcessing || !intention) ? '#ccc' : '#9e38fd',
           cursor: (isProcessing || !intention) ? 'not-allowed' : 'pointer',
           fontSize: "clamp(16px, 2.5vw, 22px)", padding: "10px 32px",
-          zIndex: 999999,
+          zIndex: 8000,
           alignSelf: 'center',
         }}>
         {isProcessing ? "Processing..." : "Next"}
       </button>
       <TutorialBlockOverlay visible={showOverlay} />
-      {isActive && currentStep && (
+      {isActive && currentStep && charactersVisible && (
         <TutorialCharacters
           step={currentStep}
           onNext={advance}
@@ -143,6 +146,11 @@ export default function WriteSigil() {
           showNext={showTutorialNext}
           showSkip={showTutorialSkip}
           cardRef={cardRef}
+          onBennetFinished={() => {
+            if (currentStep?.id === 3) {
+              setTimeout(() => setCharactersVisible(false), 5000);
+            }
+          }}
         />
       )}
     </div>

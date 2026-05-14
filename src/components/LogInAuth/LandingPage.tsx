@@ -11,6 +11,12 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel"
+import WriteSigil from '../../assets/SSWriteSigil.svg';
+import SigilFriends from '../../assets/SSSigilFriends.svg';
+import SigilCharge from '../../assets/SSSigilCharge.svg';
+import SigilDestroy from '../../assets/SSSigilDestroy.svg';
+import TheOffice from '../../assets/SSTheOffice.svg'
+import SigilMap from '../../assets/SSSigilMap.svg'
 
 
 export default function LandingPage() {
@@ -43,43 +49,63 @@ export default function LandingPage() {
     return () => clearInterval(interval)
   }, [carouselApi]);
 
-const slides = [
-  <><br />You ever feel something<br />in a place that doesn’t belong to you?<br /><br />A strange sadness.<br />A sudden certainty.<br />A memory that isn’t yours.</>,
+  const slides = [
+    <></>,
 
-  <>For decades, The Office<br />has documented emotional imprints<br />appearing across the world.<br /><br />Symbols tied to human intention<br />that somehow remain behind.</>,
+    <>You ever feel something<br />in a place that doesn’t belong to you? <br/> A strange sadness,<br /> sudden certainty, <br /> or a memory that isn’t yours?</>,
 
-  <>They’re called Sigils.<br /><br />And if you’re here now,<br />it means you noticed one.</>,
+    <>For decades, The Office<br />has documented emotional imprints<br />appearing across the world.<br /><br />Symbols from intention that remain behind.</>,
 
-  <><br /><br />SigiLife is a map of hidden intentions.<br />Yours.<br />And everyone else’s.</>,
+    <>They’re called Sigils.<br /><br />And if you’re here now,<br />it means you noticed one.</>,
 
-  <>Every sigil begins with a statement.<br />A want.<br />A fear.<br />A promise.<br />A thing you cannot let go of.</>,
+    <>SigiLife is a map of hidden intentions.<br />Yours,<br /> & everyone else’s.</>,
 
-  <>You do not simply write it down.<br />You reduce it.<br />Distill it.<br />Strip it to its meaning.</>,
+    <>Every sigil begins with a statement.<br />A want.<br />A fear.<br />A promise.<br />A thing you cannot let go of.</>,
 
-  <>Then the system transforms it<br />into something symbolic.<br />Abstract.<br />Unique.<br />Entirely yours.</>,
+    <>You do not simply write it down.<br />You reduce it.<br />Distill it.<br />Strip it to its meaning.</>,
+    <img src={WriteSigil} alt="Write Sigil" style={{ objectFit: "contain", width: "100%", height: "25vh", borderRadius: '12px' }} />,
 
-  <>Next comes the Charge.<br /><br />Hope.<br />Grief.<br />Obsession.<br />Relief.<br />Anger.<br />Longing.</>,
+    <>Then SigiLife transforms it into something symbolic.<br /> Abstract, Unique, Tangible. <br /> & Entirely Yours- </>,
+    <><h1 style={{fontFamily: 'Pompiere'}}>A Sigil.</h1></>,
+    <img src={SigilMap} alt="Sigil Map" style={{ width: "100%", height: "25vh", objectFit: "contain", borderRadius: '12px' }} />,
 
-  <>Emotion leaves residue.<br />That residue gives the sigil weight.</>,
+    <>Then, place it somewhere real.<br /> A street corner, or a park.<br /> A graveyard.<br /> A bar you should not return to.</>,
 
-  <>Then you place it somewhere real.<br /><br />A street corner.<br />Your apartment.<br />A graveyard.<br />A bar you should not return to.</>,
+    <>Choose whether to <br />share with others <br /> or keep it totally private.</>,
 
-  <>Some people use sigils to manifest.<br />Some use them to remember.<br />Others use them to bury things.</>,
+    <img src={SigilFriends} alt="Sigil Friends" style={{ width: "100%", height: "25vh", objectFit: "contain", borderRadius: '12px' }} />,
 
-  <>Over time, the world fills with traces.<br />Invisible layers of human intention<br />hidden beneath ordinary places.</>,
+    <>Next comes the emotional Charge.<br /><br />Hope.<br />Grief.<br />Relief.<br />Joy.</>,
 
-  <>You can discover sigils left by others.<br />Strengthen your own.<br />Or simply observe what lingers.</>,
+    <>Emotion leaves residue.<br />That residue gives the Sigil weight.</>,
+    <img src={SigilCharge} alt="Sigil Charge" style={{ width: "100%", height: "25vh", objectFit: "contain", borderRadius: '12px' }} />,
 
-  <>Nothing lasts forever.</>,
+    <>Some people use Sigils to manifest.<br />Some use them to remember.<br />Others use them to bury things.</>,
 
-  <>When the time comes,<br />you may destroy your sigil.<br /><br />Not delete.<br />Destroy.</>,
+    <>Over time, the world fills with traces.<br />Invisible layers of human intention<br />hidden beneath ordinary places.</>,
 
-  <>The charge breaks.<br />The symbol collapses.<br />The intention dissolves.<br /><br />And that matters.</>,
+    <>You can build or destroy Sigils left by others.<br />Strengthen your own.<br />Or simply observe what lingers.</>,
 
-  <>Right now, sigils can be shared<br />between trusted contacts.<br />Soon, The Office will expand access.</>,
+    <>Nothing lasts forever.</>,
 
-  <><br />The world is already full<br />of invisible meaning.<br /><br />SigiLife just makes it visible.</>,
-];
+    <>When the time comes,<br />you may destroy your sigil.<br /><br />Not delete.<br />Destroy.</>,
+
+    <>The charge breaks.<br />The symbol collapses.<br />The intention dissolves.<br /><br />And that matters.</>,
+    <img src={SigilDestroy} alt="Sigil Destroy" style={{ width: "100%", height: "25vh", objectFit: "contain", borderRadius: '12px' }} />,
+
+    <>Right now, sigils can be shared<br />between  just your trusted contacts.<br />Soon, The Office may expand access.</>,
+    <img src={TheOffice} alt="The Office" style={{ width: "100%", height: "25vh", objectFit: "contain", borderRadius: '12px' }} />,
+    <></>,
+    <><br />The world is already full<br />of invisible meaning.<br /><br />SigiLife just makes it visible.</>,
+    <></>
+
+
+
+
+
+
+
+  ];
 
   return (
     <>
@@ -98,7 +124,7 @@ const slides = [
                 width: "min(70dvh, 88dvw)",
                 textWrap: "wrap",
                 minWidth: "300px"
-              }}><p style={{color: "black"}}>
+              }}><p style={{ color: "white" }}>
                   SigiLife is an augmented reality, location-based, social, ritualized lifestyle game where emotional intention becomes digitally visible.
                 </p>
               </div>
@@ -107,7 +133,7 @@ const slides = [
                   opts={{ loop: true }}
                   orientation="vertical"
                   className="slidebox"
-                  style={{ height: "28vh", margin: "0", width: "min(70dvh, 88dvw)" }}>
+                  style={{ height: "29.5vh", margin: "0", width: "min(70dvh, 88dvw)" }}>
                   <CarouselContent style={{
                     height: "25vh",
                     fontSize: "clamp(18px, 5vw, 42px)",
