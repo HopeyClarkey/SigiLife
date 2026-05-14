@@ -91,7 +91,7 @@ const handleDestroy = async () => {
     <div className='maincontainer'>
       {showInstruction && (
         <div className="floating-instruction">
-          Trace your sigil to imbue it with your chosen emotion
+           Hold down and lightly trace your sigil to Destroy!
         </div>
       )}
       <div ref={scrollRef} className={`scrollcontainer ${isDestroying ? 'noscroll' : ''}`}>

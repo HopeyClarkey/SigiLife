@@ -304,7 +304,7 @@ export default function MapBox() {
                             opacity: voting ? 0.6 : 1,
                           }}
                         >
-                          ✨ Charge {popupInfo.chargeScore}
+                          ✨ Votes to Charge {popupInfo.chargeScore}
                         </button>
 
                         <button
@@ -329,7 +329,7 @@ export default function MapBox() {
                             opacity: voting ? 0.6 : 1,
                           }}
                         >
-                          🔥 Destroy {popupInfo.destroyScore}
+                          🔥 Votes to Destroy {popupInfo.destroyScore}
                         </button>
                       </div>
 

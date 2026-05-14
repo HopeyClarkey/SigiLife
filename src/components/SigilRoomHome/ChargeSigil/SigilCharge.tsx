@@ -75,9 +75,10 @@ export default function ChargeSigil() {
       <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll' }}>
         {showInstruction && (
           <div className="floating-instruction">
-            Trace your sigil to imbue it with your chosen emotion
+            Hold down and lightly trace your sigil to Charge!
           </div>
         )}
+
         <div className='chargesigil art-page-base' style={{
           width: `${dims.width}px`,
           height: `${dims.height}px`,
