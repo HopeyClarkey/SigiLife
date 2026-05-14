@@ -161,13 +161,12 @@ export default function MapBox() {
             zIndex: 2,
           }}>
             <div style={{
-              width: '100%',
-              flex: '3',
-              borderRadius: '14px',
-              overflow: 'hidden',
+              position: 'absolute',
+              inset: 0,
+              zIndex: 2,
               border: '2px solid var(--theme-btn)',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.4)',
-              minHeight: 0,
+              borderRadius: '12px',
+              overflow: 'hidden',
             }}>
               <Map
                 {...viewState}
@@ -319,25 +318,25 @@ export default function MapBox() {
                             popupInfo.creatorId &&
                             popupInfo.creatorId !== user.id &&
                             !followingIds.has(popupInfo.creatorId) && (
-                            <button
-                              onClick={() => handleFollow(popupInfo.creatorId!)}
-                              disabled={following}
-                              style={{
-                                padding: '2px 10px',
-                                borderRadius: '8px',
-                                border: '1px solid var(--theme-btn)',
-                                background: 'transparent',
-                                color: 'var(--theme-btn)',
-                                fontFamily: 'Special Elite, system-ui',
-                                fontSize: 'clamp(10px, 1.4vw, 12px)',
-                                cursor: following ? 'not-allowed' : 'pointer',
-                                opacity: following ? 0.6 : 1,
-                                transition: 'all 0.15s ease',
-                              }}
-                            >
-                              + Follow
-                            </button>
-                          )}
+                              <button
+                                onClick={() => handleFollow(popupInfo.creatorId!)}
+                                disabled={following}
+                                style={{
+                                  padding: '2px 10px',
+                                  borderRadius: '8px',
+                                  border: '1px solid var(--theme-btn)',
+                                  background: 'transparent',
+                                  color: 'var(--theme-btn)',
+                                  fontFamily: 'Special Elite, system-ui',
+                                  fontSize: 'clamp(10px, 1.4vw, 12px)',
+                                  cursor: following ? 'not-allowed' : 'pointer',
+                                  opacity: following ? 0.6 : 1,
+                                  transition: 'all 0.15s ease',
+                                }}
+                              >
+                                + Follow
+                              </button>
+                            )}
                         </div>
                       )}
 
@@ -420,7 +419,7 @@ export default function MapBox() {
               </Map>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ position: 'absolute', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0.5rem', alignItems: 'center', zIndex: 10 }}>
               <MapSearchBox
                 accessToken={MAPBOX_TOKEN}
                 onRetrieve={(res) => {
@@ -430,27 +429,15 @@ export default function MapBox() {
                   }
                 }}
               />
-              <button
-                className="btn"
-                onClick={() => setFilterMode("all")}
-                style={{ opacity: filterMode === "all" ? 1 : 0.5 }}
-              >
-                All Sigils
-              </button>
-              <button
-                className="btn"
-                onClick={() => setFilterMode("mine")}
-                style={{ opacity: filterMode === "mine" ? 1 : 0.5 }}
-              >
-                My Sigils
-              </button>
-            </div>
-
-            <div className="glasscard" style={{ flex: '1', minHeight: 0, overflowY: 'auto', width: '100%', margin: 0 }}>
+              <button className="btn" onClick={() => setFilterMode("all")} style={{ opacity: filterMode === "all" ? 1 : 0.5 }}>All Sigils</button>
+              <button className="btn" onClick={() => setFilterMode("mine")} style={{ opacity: filterMode === "mine" ? 1 : 0.5 }}>My Sigils</button>
             </div>
           </div>
+
+
         </div>
       </div>
     </div>
+
   );
 }

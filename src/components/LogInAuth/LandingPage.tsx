@@ -80,9 +80,9 @@ export default function LandingPage() {
                 width: "min(70dvh, 88dvw)",
                 textWrap: "wrap",
                 minWidth: "300px"
-              }}>
+              }}><p>
                   SigiLife is a location-based ritual platform where you can transform personal intentions into digital sigils.
-
+                </p>
               </div>
               <div className='displaypitch' style={{ height: "30vh", margin: "0", width: "min(70dvh, 88dvw)", paddingTop: ".3rem" }}>
                 <Carousel setApi={setCarouselApi}

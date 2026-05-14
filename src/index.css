@@ -189,7 +189,7 @@ btn,
   gap: 1rem;
   height: auto;
   max-height: 92dvh;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   padding: 2rem;
@@ -344,7 +344,7 @@ logo,
   position: relative;
   align-self: center;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
@@ -375,7 +375,7 @@ displaypitch,
   flex-direction: column;
   width: 95dvw;
   height: 98%;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
@@ -727,9 +727,9 @@ drawsigil,
 }
 
 @keyframes title-red-black-pulse {
-  0%   { color: #ff0000; }
+  0%   { color: #af0000; }
   50%  { color: #1a0000; }
-  100% { color: #ff0000; }
+  100% { color: #5b0101; }
 }
 
 .title-charging {
@@ -1005,7 +1005,7 @@ drawsigilmenu,
   align-items: center;
   position: relative;
   width: 30%;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -1019,7 +1019,7 @@ drawsigilmenu,
   flex-direction: column;
   padding: 25px;
   position: relative;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -1183,7 +1183,7 @@ avatarandtheme,
   align-self: center;
   width: fit-content;
   padding: 5px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 12px;
