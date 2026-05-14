@@ -105,10 +105,10 @@ const handleDestroy = async () => {
             transition: 'background-color 800ms ease',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            
           }}>
           <Menu />
-
+            <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Destroy Sigil</h1>
           {sigilData.imageData && (
             <img
               src={sigilData.imageData}
@@ -134,7 +134,7 @@ const handleDestroy = async () => {
               <div className='evileye' ref={eyeContainerRef}>
                 <EvilEye
                   eyeColor="#2e0fa9"
-                  intensity={3.1}
+                  intensity={5.1}
                   pupilSize={0.75}
                   irisWidth={0.25}
                   glowIntensity={0.65}
@@ -179,12 +179,13 @@ const handleDestroy = async () => {
             boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
             margin: '0 auto',
           }}>
-            <h1 style={{ fontSize: "clamp(22px, 4vw, 36px)" }}>Destroy Sigil</h1>
+                <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
+
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
-              <div style={{ transform: 'scale(1.6)', transformOrigin: 'center', marginBottom: '1rem', position: 'relative', zIndex: 300 }}>
-                <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
-              </div>
+
+
+
               {!isDestroying && emotion && (
                 <button className="glassbutton"
                   style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}

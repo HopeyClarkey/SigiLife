@@ -35,10 +35,10 @@ function NavMenu({ onClose }: { onClose: () => void }) {
         ← Go Back
       </button>
       <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/home" onClick={onClose}>The Office</Link>
+      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/make-sigil" onClick={onClose}>Write Sigil</Link>
       <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/library?action=charge" onClick={onClose}>Charge Sigil</Link>
       <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/library?action=destroy" onClick={onClose}>Destroy Sigil</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/make-sigil" onClick={onClose}>Make Sigil</Link>
-      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/library" onClick={onClose}>Sigil Library</Link>
+      <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/library" onClick={onClose}>SigiLibrary</Link>
       <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/map" onClick={onClose}>SigilMap</Link>
       <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/profile" onClick={onClose}>SigiLites</Link>
       <Link className="glassbutton" style={{ border: '0px', backgroundColor: 'transparent', width: '100%', textAlign: 'left' }} to="/settings" onClick={onClose}>Settings</Link>
