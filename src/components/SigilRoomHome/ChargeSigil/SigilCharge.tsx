@@ -75,7 +75,7 @@ export default function ChargeSigil() {
       <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll' }}>
         {showInstruction && (
           <div className="floating-instruction">
-            Hold down and lightly trace your sigil to Charge!
+            Hold down and lightly trace your sigil to harge!
           </div>
         )}
 
@@ -89,6 +89,8 @@ export default function ChargeSigil() {
           justifyContent: 'center',
         }}>
           <Menu />
+                      <h1 style={{ fontSize: "clamp(22px, 4vw, 56px)" }}>Charge Sigil</h1>
+
           {isCharging && (
             <SplashCursor
               BACK_COLOR={{ r: 0, g: 0, b: 0 }}
@@ -115,7 +117,7 @@ export default function ChargeSigil() {
             border: '1px solid rgba(255, 255, 255, 0.2)',
             boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
           }}>
-            <h1 style={{ fontSize: "clamp(22px, 4vw, 56px)", color: "black", backgroundColor: '#e0e0e0', borderRadius: '12px', padding: '10px' }}>Charge Sigil</h1>
+                            <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
             {sigilData.imageData && (
               <img
                 src={sigilData.imageData}
@@ -141,16 +143,9 @@ export default function ChargeSigil() {
               width: '100%',
               overflow: 'hidden',
             }}>
-              <div style={{
-                transform: 'scale(1.6)',
-                transformOrigin: 'center top',
-                marginBottom: '1rem',
-                width: '60%',
-                display: 'flex',
-                justifyContent:'center',
-              }}>
-                <ChangeEmotion emotion={emotion} setEmotion={setEmotion} />
-              </div>
+
+
+            
               {!isCharging && emotion && (
                 <button className='glassbutton'
                   style={{ fontSize: "clamp(15px, 2.5vw, 20px)", padding: "10px 32px" }}
