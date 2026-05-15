@@ -272,7 +272,8 @@ router.post('/share', async (req, res) => {
     const { sigilId, targetUserIds } = req.body;
 
     const sourceSigil = await prisma.sigil.findUnique({
-      where: { id: parseInt(sigilId) }
+      where: { id: parseInt(sigilId) },
+      include: { sigilGroups: true }
     });
 
     if (!sourceSigil) {
@@ -301,6 +302,9 @@ router.post('/share', async (req, res) => {
           canvasData: sourceSigil.canvasData,
           imageData: sourceSigil.imageData,
           isCharged: false,
+          sigilGroups: {
+            create: sourceSigil.sigilGroups.map(g => ({ groupMember: g.groupMember })),
+          },
         }
       });
       results.push({ targetId: parsedTargetId, status: 'success' });
