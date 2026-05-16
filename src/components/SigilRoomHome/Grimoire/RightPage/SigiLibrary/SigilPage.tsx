@@ -233,7 +233,7 @@ export default function SigilPage() {
               </div>
             )}
 
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '0.5rem', width: '100%', textAlign: 'center' }}>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '0.5rem', width: '100%', textAlign: 'center', alignContent:'center', }}>
               {sigilData.locationName ? (<div>
                 <p style={{ fontSize: "clamp(16px, 2.5dvh, 24px)" }}>🗺️{sigilData.locationName}</p>
                 <Link className="pinkbutton " style={{ border: '0px', width: '100%', textAlign: 'left', fontFamily: 'Pompiere', borderRadius: '12px'}} to="/map">SigilMap</Link></div>
@@ -241,7 +241,7 @@ export default function SigilPage() {
                 <div>
                   <p style={{ fontSize: "clamp(16px, 2.5dvh, 24px)", marginBottom: "0.5rem" }}>Set a location:</p>
                   {isSavingLocation ? <p>Saving...</p> : (
-                    <div style={{ maxWidth: "100%", margin: "0 auto" }}>
+                    <div style={{ width: "100%", margin: "0 auto", alignContent: 'center' }}>
                       <MapSearchBox accessToken={MAPBOX_TOKEN} onRetrieve={handleLocationRetrieve} />
                     </div>
                   )}

@@ -80,7 +80,7 @@ export default function ChargeSigil() {
 
   return (
     <div className='maincontainer'>
-      <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll' }}>
+      <div ref={scrollRef} className='scrollcontainer' style={{ overflowX: isCharging ? 'hidden' : 'scroll', overflowY: isCharging ? 'hidden' : 'auto' }}>
         {showInstruction && (
           <div className="floating-instruction">
             Hold down and lightly trace your sigil to charge!

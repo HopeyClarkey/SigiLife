@@ -11,11 +11,12 @@ const __dirname = path.dirname(__filename)
 
 const router = Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-// const narrativeIds = [
-//   process.env.MORGANA_USER_ID,
-//   process.env.HARPER_USER_ID,
-//   process.env.BENNET_USER_ID,
-// ].filter(Boolean).map(Number);
+const narrativeIds = [
+  process.env.MORGANA_USER_ID,
+  process.env.HARPER_USER_ID,
+  process.env.BENNET_USER_ID,
+  process.env.ALISTAR_USER_ID
+].filter(Boolean).map(Number);
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Checks if User
@@ -80,31 +81,33 @@ router.post('/google', async (req, res) => {
       });
 
 
-      // const alwaysFollow = [
-      //   process.env.HARPER_USER_ID,
-      //   process.env.BENNET_USER_ID,
-      // ].filter(Boolean).map(Number);
+      const alwaysFollow = [
+        process.env.HARPER_USER_ID,
+        process.env.BENNET_USER_ID,
+      ].filter(Boolean).map(Number);
 
-      // const teamFollow = avatar === 0
-      //   ? [process.env.ALISTAR_USER_ID].filter(Boolean).map(Number)
-      //   : [process.env.MORGANA_USER_ID].filter(Boolean).map(Number);
+      const teamFollow = avatar === 0
+        ? [process.env.ALISTAR_USER_ID].filter(Boolean).map(Number)
+        : [process.env.MORGANA_USER_ID].filter(Boolean).map(Number);
 
-      // const narrativeIds = [...new Set([...alwaysFollow, ...teamFollow])];
+      const narrativeIds = [...new Set([...alwaysFollow, ...teamFollow])];
 
-      // if (narrativeIds.length > 0) {
-      //   await prisma.follow.createMany({
-      //     data: narrativeIds.flatMap(id => ([
-      //       { followerId: user.id, followingId: id },
-      //       { followerId: id, followingId: user.id }
-      //     ]))
-      //   });
-      // }
-      // await prisma.sigil.createMany({
-      //   data: Array.from({ length: 12 }, (_, i) => ({
-      //     name: `sigil-${user!.id}-${i + 1}`,
-      //     userId: user!.id,
-      //   })),
-      // });
+      const newUserId = user.id as number;
+
+      if (narrativeIds.length > 0) {
+        await prisma.follow.createMany({
+          data: narrativeIds.flatMap(id => ([
+            { followerId: newUserId, followingId: id },
+            { followerId: id, followingId: newUserId }
+          ]))
+        });
+      }
+      await prisma.sigil.createMany({
+        data: Array.from({ length: 12 }, (_, i) => ({
+          name: `sigil-${newUserId}-${i + 1}`,
+          userId: newUserId,
+        })),
+      });
     } else if (username || homeLocation) {
       user = await prisma.user.update({
         where: { id: user.id },
