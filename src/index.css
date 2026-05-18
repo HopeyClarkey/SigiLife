@@ -293,6 +293,16 @@ noscroll,
   overflow-x: hidden;
 }
 
+scrollx,
+.scrollx{
+  overflow-x: scroll;
+}
+
+scrolly,
+.scrolly{
+  overflow-y: scroll;
+}
+
 clmnbox,
 .clmnbox {
   display: flex;
