@@ -705,6 +705,100 @@ drawsigil,
   }
 }
 
+@keyframes build-pulse {
+   0% {
+    filter: drop-shadow(0 0 20px #fd47a2) drop-shadow(0 0 40px #fd47a2);
+  }
+  16% {
+    filter: drop-shadow(0 0 20px #ffb56b) drop-shadow(0 0 40px #ffb56b);
+  }
+  33% {
+    filter: drop-shadow(0 0 20px #ffff74) drop-shadow(0 0 40px #ffff74);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #5cffad) drop-shadow(0 0 40px #5cffad);
+  }
+  66% {
+    filter: drop-shadow(0 0 20px #6fb4f9) drop-shadow(0 0 40px #6fb4f9);
+  }
+  83% {
+    filter: drop-shadow(0 0 20px #b872ff) drop-shadow(0 0 40px #b872ff);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px #fd47a2) drop-shadow(0 0 40px #fd47a2);
+  }
+}
+@keyframes attack-pulse {
+  0% {
+    filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000);
+  }
+  16% {
+    filter: drop-shadow(0 0 20px #ff2600) drop-shadow(0 0 40px #ff2600);
+  }
+  33% {
+    filter: drop-shadow(0 0 20px #ff8800) drop-shadow(0 0 40px #ff8800);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #ffff07) drop-shadow(0 0 40px #ffff07);
+  }
+  66% {
+    filter: drop-shadow(0 0 20px #ff6200) drop-shadow(0 0 40px #ff6200);
+  }
+  83% {
+    filter: drop-shadow(0 0 20px #ff4d00) drop-shadow(0 0 40px #ff4d00);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000);
+  }
+}
+
+@keyframes anoint-green-pulse {
+  0% {
+    filter: drop-shadow(0 0 20px #4c9d00) drop-shadow(0 0 40px #4c9d00);
+  }
+  16% {
+    filter: drop-shadow(0 0 20px #0d742f) drop-shadow(0 0 40px #0d742f);
+  }
+  33% {
+    filter: drop-shadow(0 0 20px #0c603f) drop-shadow(0 0 40px #0c603f);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #a2ff0c) drop-shadow(0 0 40px #a2ff0c);
+  }
+  66% {
+    filter: drop-shadow(0 0 20px #ffd000) drop-shadow(0 0 40px #ffd000);
+  }
+  83% {
+    filter: drop-shadow(0 0 20px #078043) drop-shadow(0 0 40px #078043);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px #4c9d00) drop-shadow(0 0 40px #4c9d00);
+  }
+}
+@keyframes anoint-blue-pulse {
+  0% {
+    filter: drop-shadow(0 0 20px #0051ff) drop-shadow(0 0 40px #0051ff);
+  }
+  16% {
+    filter: drop-shadow(0 0 20px #00bfff) drop-shadow(0 0 40px #00bfff);
+  }
+  33% {
+    filter: drop-shadow(0 0 20px #38edfd) drop-shadow(0 0 40px #38edfd);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #014284) drop-shadow(0 0 40px #014284);
+  }
+  66% {
+    filter: drop-shadow(0 0 20px #ffd000) drop-shadow(0 0 40px #ffd000);
+  }
+  83% {
+    filter: drop-shadow(0 0 20px #137ed6) drop-shadow(0 0 40px #137ed6);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px #0051ff) drop-shadow(0 0 40px #0051ff);
+  }
+}
+
 .sigil-charging {
   animation: rainbow-pulse 4s linear infinite;
 }
@@ -751,8 +845,6 @@ drawsigil,
 .title-destroying {
   animation: title-red-black-pulse 1.5s ease-in-out infinite;
 }
-
-
 
 
 .floating-instruction {
