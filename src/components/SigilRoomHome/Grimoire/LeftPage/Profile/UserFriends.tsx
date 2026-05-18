@@ -37,7 +37,7 @@ export default function UserFriends() {
     {action && (
       <button onClick={action} className="pinkbutton ml-auto pompiereregular"
         style={{ fontSize: "clamp(12px, 1.5vw, 18px)", padding: "4px clamp(4px, 1vw, 12px)", flexShrink: 0 }}>
-        {isNarrow ? '👥' : (actionLabel ?? '✕')}
+        {isNarrow ? '👥' : (actionLabel ?? 'follow')}
       </button>
     )}
   </div>
@@ -133,21 +133,21 @@ export default function UserFriends() {
       <div className='friendcontainer'>
         <div className="profilebox">
           <h3 style={{ fontSize: 'clamp(12px, 2vw, 22px)' }}>Followers</h3>
-          <div className='scrollx'>
+          <div className='scrolly'>
           {onlyFollowers.length === 0
             ? <p className="text-sm text-gray-400">No followers</p>
             : onlyFollowers.map(u => <UserCard key={u.id} user={u} showAvatar={false} />)}
         </div></div>
         <div className="profilebox">
           <h3 style={{ fontSize: 'clamp(12px, 2vw, 22px)' }}>SigilFriends</h3>
-          <div className='scrollx'>
+          <div className='scrolly'>
           {mutual.length === 0
             ? <p className="text-sm text-gray-400">No SigilFriends</p>
             : mutual.map(u => <UserCard key={u.id} user={u} showAvatar={false} action={() => handleUnfollow(u.id)} actionLabel="Unfollow" />)}
         </div></div>
         <div className="profilebox">
           <h3 style={{ fontSize: 'clamp(12px, 2vw, 22px)' }}>Following</h3>
-          <div className='scrollx'>
+          <div className='scrolly'>
           {onlyFollowing.length === 0
             ? <p className="text-sm text-gray-400">No following</p>
             : onlyFollowing.map(u => <UserCard key={u.id} user={u} showAvatar={false} action={() => handleUnfollow(u.id)} actionLabel="Unfollow" />)}
