@@ -44,19 +44,18 @@ export default function RightPage() {
     <div className='maincontainer'>
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="rightpage2 art-page-base" style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
-          <Menu /><br/>
-          <div></div>
+          <Menu />
+          <br/>
+
           <div className='glasscard' style={{
-            position: 'absolute',
-            top: '5dvh',
-            left: '58dvh',
-            width: '55dvh',
-            height: '88dvh',
-            overflowY: 'auto',
+            position: 'relative',
+            top:'-5dvh',
+            left: '67dvh',
+            width: '42dvh',
+            height: '95dvh',
           }}>
-            <h1>{user.username}'s Sigils</h1>
-
-
+          <div className='rowbox'><h2>{user.username}'s Sigils</h2>
+          </div>
             <SigiLibrary items={sigils} user={user} /></div>
         </div>
       </div>
