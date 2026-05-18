@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Map, { NavigationControl, Marker, Popup } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from 'axios';
@@ -151,8 +151,9 @@ export default function MapBox() {
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="mapbox art-page-base"
           style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
-          <Menu />
-          <Link className="pinkbutton " style={{ border: '0px', width: '5%', textAlign: 'center', fontFamily: 'Pompiere', borderRadius: '12px' }} to="/make-sigil">Create Sigil</Link>
+          <Menu /><div className='rowbox'>
+                        <button className="btn" onClick={() => setFilterMode("all")} style={{ opacity: filterMode === "all" ? 1 : 0.5 }}>All Sigils</button>
+              <button className="btn" onClick={() => setFilterMode("mine")} style={{ opacity: filterMode === "mine" ? 1 : 0.5 }}>My Sigils</button></div>
           <div style={{
             width: '88dvw',
             height: '88dvh',
@@ -472,8 +473,7 @@ export default function MapBox() {
                   }
                 }}
               />
-              <button className="btn" onClick={() => setFilterMode("all")} style={{ opacity: filterMode === "all" ? 1 : 0.5 }}>All Sigils</button>
-              <button className="btn" onClick={() => setFilterMode("mine")} style={{ opacity: filterMode === "mine" ? 1 : 0.5 }}>My Sigils</button>
+
             </div>
           </div>
 
