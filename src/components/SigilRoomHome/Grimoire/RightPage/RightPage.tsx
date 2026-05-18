@@ -49,10 +49,14 @@ export default function RightPage() {
 
           <div className='glasscard' style={{
             position: 'relative',
-            top:'-5dvh',
-            left: '67dvh',
-            width: '42dvh',
-            height: '95dvh',
+            flex: '1',
+            top:'0dvh',
+            left: '69dvh',
+            minWidth: '100px',
+            width: '40dvh',
+            maxWidth: '800px',
+            height: '87dvh',
+            margin: "5px"
           }}>
           <div className='rowbox'><h2>{user.username}'s Sigils</h2>
           </div>

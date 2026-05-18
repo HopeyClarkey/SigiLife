@@ -54,7 +54,7 @@ export default function Menu() {
 
   const AvatarFace = () => (
     <div className="avatarfacebox">
-      <img className="avatarface" src={`Avatar${user.avatar + 1}face.png`} style={{ height: '40px' }} />
+      <img className="avatarface" src={`/Avatar${user.avatar + 1}face.png`} style={{ height: '40px' }} />
     </div>
   )
 
@@ -64,8 +64,8 @@ export default function Menu() {
       id='menu-btn'
       style={{
         position: 'fixed',
-        top: '10px',
-        left: '10px',
+        top: '5px',
+        left: '5px',
         zIndex: 10000,
         alignItems: 'flex-start',
         display: 'flex',

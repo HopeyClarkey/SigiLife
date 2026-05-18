@@ -91,9 +91,12 @@ export default function WriteSigil() {
         }}>
           <Menu />
           <div className='glasscard' ref={cardRef} style={{
-            width: 'min(55dvh, 85dvw)',
-            height: '88dvh',
             display: 'flex',
+            position: 'relative',
+            top: '0dvh',
+            left: '4dvh',
+            width: '42dvh',
+            height: '95dvh',
             flexDirection: 'column',
             justifyContent: 'space-evenly',
             padding: '2rem',
@@ -119,24 +122,21 @@ export default function WriteSigil() {
               <span style={{ color: 'black', fontSize: 'clamp(10px, 1.8vw, 26px)' }}>
                 Unique letters: {uniqueChars}
               </span>
+
             </div>
+            <button className="pinkbutton" onClick={handleNext}
+              disabled={isProcessing || !intention}
+              style={{
+                backgroundColor: (isProcessing || !intention) ? '#ccc' : '#9e38fd',
+                cursor: (isProcessing || !intention) ? 'not-allowed' : 'pointer',
+              }}>
+              {isProcessing ? "Processing..." : "Next"}
+            </button>
           </div>
         </div>
+
       </div>
-      <button className="pinkbutton" onClick={handleNext}
-        disabled={isProcessing || !intention}
-        style={{
-          position: 'relative',
-          bottom: '1.5rem',
-          right: '2rem',
-          backgroundColor: (isProcessing || !intention) ? '#ccc' : '#9e38fd',
-          cursor: (isProcessing || !intention) ? 'not-allowed' : 'pointer',
-          fontSize: "clamp(16px, 2.5vw, 22px)", padding: "10px 32px",
-          zIndex: 8000,
-          alignSelf: 'center',
-        }}>
-        {isProcessing ? "Processing..." : "Next"}
-      </button>
+
       <TutorialBlockOverlay visible={showOverlay} />
       {isActive && currentStep && charactersVisible && (
         <TutorialCharacters

@@ -280,7 +280,7 @@ export default function SigilPage() {
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  ✨ Votes to Charge&nbsp; {sigilData.chargeScore ?? 0}
+                  ✨ Building Sigil &nbsp; {sigilData.chargeScore ?? 0}
                 </button>
 
                 <button
@@ -304,7 +304,7 @@ export default function SigilPage() {
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  🔥 Votes to Destroy&nbsp; {sigilData.destroyScore ?? 0}
+                  🔥 Attacking Sigil &nbsp; {sigilData.destroyScore ?? 0}
                 </button>
               </div>
             </div>
