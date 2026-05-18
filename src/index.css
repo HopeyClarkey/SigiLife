@@ -919,7 +919,20 @@ drawsigil,
   display: block;
 }
 
+.grimoirefriendslink {
+  position: absolute;
+  bottom: 10.2dvh;
+  right: 15.52dvh;
+  z-index: 10;
+}
+
+.grimoirefriendslink img {
+  height: 34.62dvh;
+  display: block;
+}
+
 .grimoiremaplink img,
+.grimoirefriendslink img,
 .grimoireprofilelink img,
 .grimoireliblink img {
   cursor: pointer;
@@ -927,6 +940,8 @@ drawsigil,
   display: block;
 }
 
+.grimoirefriendslink:hover img,
+.grimoirefriendslink.touched img,
 .grimoiremaplink:hover img,
 .grimoiremaplink.touched img,
 .grimoireprofilelink:hover img,
