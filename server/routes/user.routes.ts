@@ -82,7 +82,27 @@ router.get('/:id/following', async (req, res) => {
   }
 });
 
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Get Friends
+router.get('/:id/friends', async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const following = await prisma.follow.findMany({
+      where: { followerId: id },
+      select: { followingId: true }
+    });
+    const followingIds = following.map((f: any) => f.followingId);
+    const friends = await prisma.follow.findMany({
+      where: {
+        followerId: { in: followingIds },
+        followingId: id
+      },
+      include: { follower: { select: { id: true, username: true, avatar: true } } }
+    });
+    res.json(friends.map((f: any) => f.follower));
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
 
 
 

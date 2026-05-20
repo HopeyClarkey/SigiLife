@@ -67,7 +67,7 @@ export default function SaveSigil() {
 
   useEffect(() => {
     if (user?.id) {
-      fetch(`/api/users/${user.id}/following`)
+      fetch(`/api/users/${user.id}/friends`)
         .then(res => res.json())
         .then(data => setFriends(data))
         .catch(err => console.error("Error fetching friends:", err));
