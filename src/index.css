@@ -375,7 +375,7 @@ slidebox,
   position: relative;
   padding: 0;
   align-items: center;
-  font-size: clamp(16px, 4vw, 26px);
+  font-size: clamp(12px, 2.5vw, 24px);
   font-family: 'Special Elite', system-ui;
   align-self: center;
   justify-self: center;
@@ -1231,7 +1231,8 @@ profilepagename,
 profilebox,
 .profilebox {
   display: flex;
-
+  overflow-x: hidden;
+  overflow-y: scroll;
   flex-direction: column;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.15);

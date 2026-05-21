@@ -121,7 +121,7 @@ export default function DestroySigil() {
               src={sigilData.imageData}
               alt={sigilData.name}
               style={{
-                position: 'absolute',
+                position: 'fixed',
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
