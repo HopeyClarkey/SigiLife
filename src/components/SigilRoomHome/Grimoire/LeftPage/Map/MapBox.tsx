@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Map, { NavigationControl, Marker, Popup } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import axios from 'axios';
 import MapSearchBox from "./MapSearchBox"
 import { useUser } from "@/context/UserContext"
 import Menu from '../../../../Parts/Menu';
+import UserFeed from './UserFeed';
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
@@ -152,11 +153,13 @@ export default function MapBox() {
         <div className="mapbox art-page-base"
           style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
           <Menu /><div className='rowbox'>
-                        <button className="btn" onClick={() => setFilterMode("all")} style={{ opacity: filterMode === "all" ? 1 : 0.5 }}>All Sigils</button>
-              <button className="btn" onClick={() => setFilterMode("mine")} style={{ opacity: filterMode === "mine" ? 1 : 0.5 }}>My Sigils</button></div>
+            <button className="btn" onClick={() => setFilterMode("all")} style={{ opacity: filterMode === "all" ? 1 : 0.5 }}>All Sigils</button>
+            <button className="btn" onClick={() => setFilterMode("mine")} style={{ opacity: filterMode === "mine" ? 1 : 0.5 }}>My Sigils</button>
+            <Link className="btn" to={'/make-sigil'}>Create Sigil</Link>
+          </div>
           <div style={{
             width: '88dvw',
-            height: '88dvh',
+            height: '60dvh',
             display: 'flex',
             flexDirection: 'column',
             gap: '0.75rem',
@@ -477,7 +480,7 @@ export default function MapBox() {
             </div>
           </div>
 
-
+          <UserFeed />
         </div>
       </div>
     </div>
