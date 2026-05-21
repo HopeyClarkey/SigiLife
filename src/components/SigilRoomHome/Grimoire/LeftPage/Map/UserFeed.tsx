@@ -90,7 +90,7 @@ export default function UserFeed() {
       padding: '0.75rem 1rem',
       gap: '0.5rem',
     }}>
-      <h1> Recent Map Activity </h1>
+      <h4> Recent Map Activity </h4>
       {allItems.map(item => (
         <div key={item.id} style={{
           display: 'flex',

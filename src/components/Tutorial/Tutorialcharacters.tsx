@@ -159,10 +159,17 @@ export default function TutorialCharacters({
   step, onNext, onSkip, showNext, showSkip, cardRef, onBennetFinished,
 }: TutorialCharactersProps) {
   const [cardRect, setCardRect] = useState<DOMRect | null>(null);
+  const [portraitSize, setPortraitSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const update = () => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
       if (cardRef?.current) setCardRect(cardRef.current.getBoundingClientRect());
+      setPortraitSize({
+        width: vw * 0.80,
+        height: vh * 0.50,
+      });
     };
     update();
     window.addEventListener('resize', update);
@@ -196,17 +203,13 @@ export default function TutorialCharacters({
   );
 
   const vw = window.innerWidth;
-  const vh = window.innerHeight;
-
-  const portraitWidth = vw < 500 ? vw * 0.42 : vw < 900 ? vw * 0.28 : vw * 0.20;
-  const portraitHeight = vh * 0.55;
 
   const cardCenterX = cardRect
     ? cardRect.left + cardRect.width / 2
     : vw / 2;
 
-  const harperX = cardCenterX - portraitWidth;
-  const bennetX = cardCenterX;
+  const harperX = cardCenterX - portraitSize.width;
+  const bennetX = cardCenterX - 50;
 
   return (
     <>
@@ -225,8 +228,8 @@ export default function TutorialCharacters({
           stepId={step.id}
           delay={0}
           xPos={harperX}
-          width={portraitWidth}
-          height={portraitHeight}
+          width={portraitSize.width}
+          height={portraitSize.height}
         />
       )}
       {showBennet && (
@@ -237,8 +240,8 @@ export default function TutorialCharacters({
           stepId={step.id}
           delay={step.speaker === 'both' ? 400 : 0}
           xPos={bennetX}
-          width={portraitWidth}
-          height={portraitHeight}
+          width={portraitSize.width}
+          height={portraitSize.height}
           slideIn={step.id === 2}
         />
       )}
@@ -289,7 +292,7 @@ export default function TutorialCharacters({
               onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.9)')}
               onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
             >
-             {step.id === 14 ? 'End tutorial' : 'Skip tutorial'}
+              {step.id === 14 ? 'End tutorial' : 'Skip tutorial'}
             </button>
           )}
           {showNext && (

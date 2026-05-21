@@ -77,11 +77,10 @@ export default function MakeSigil() {
           <div className='glasscard' style={{
             position: 'relative',
             zIndex: 2,
-
             top:'0dvh',
-            left: '6dvh',
-            width: '42dvh',
-            height: '95dvh',
+            left: '0dvh',
+            width: '55dvh',
+            height: '88dvh',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

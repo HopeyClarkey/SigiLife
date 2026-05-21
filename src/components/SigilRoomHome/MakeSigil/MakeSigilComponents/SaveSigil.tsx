@@ -161,7 +161,7 @@ if (isActive) {
           <div ref={cardRef}
             className="flex flex-col bg-white/10 backdrop-blur-xl p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] pointer-events-auto border border-white/20"
             style={{
-              width: 'min(55dvh, 85dvw)',
+              width: '55dvh',
               height: '88dvh',
               overflowY: 'auto',
               gap: '1rem',

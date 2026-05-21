@@ -18,6 +18,7 @@ export default function WriteSigil() {
   const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
+
   const { currentStep, isActive, advance, skip, showOverlay } = usePageTutorial('write');
 
 
@@ -94,9 +95,9 @@ export default function WriteSigil() {
             display: 'flex',
             position: 'relative',
             top: '0dvh',
-            left: '4dvh',
-            width: '42dvh',
-            height: '95dvh',
+            left: '0dvh',
+            width: '55dvh',
+            height: '88dvh',
             flexDirection: 'column',
             justifyContent: 'space-evenly',
             padding: '2rem',
@@ -130,7 +131,7 @@ export default function WriteSigil() {
                 backgroundColor: (isProcessing || !intention) ? '#ccc' : '#9e38fd',
                 cursor: (isProcessing || !intention) ? 'not-allowed' : 'pointer',
               }}>
-              {isProcessing ? "Processing..." : "Next"}
+              {isProcessing ? "Processing..." : "Draw Sigil"}
             </button>
           </div>
         </div>
