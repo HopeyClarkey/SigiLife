@@ -131,12 +131,14 @@ function SpeechBubblePanel({ text, side, stepId, onComplete }: SpeechBubbleProps
           filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.9))',
         }} />
         <div style={{
-          position: 'absolute', top: '15%', left: '10%', right: '10%', bottom: '22%',
+          position: 'absolute', top: '12%', left: '12%', right: '12%', bottom: '28%',
           display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
         }}>
           <p style={{
-            margin: 0, fontFamily: 'Pompiere, cursive',
-            fontSize: 'clamp(15px, 3.5vw, 36px)', lineHeight: 1.4,
+            margin: 0,
+            fontFamily: 'Pompiere, cursive',
+            fontSize: 'clamp(14px, 2.8vw, 24px)',
+            lineHeight: 1.4,
             textAlign: 'center', color: '#1a0a2e',
             wordBreak: 'break-word', hyphens: 'auto',
           }}>
@@ -287,7 +289,7 @@ export default function TutorialCharacters({
               onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.9)')}
               onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
             >
-              Skip tutorial
+             {step.id === 14 ? 'End tutorial' : 'Skip tutorial'}
             </button>
           )}
           {showNext && (
