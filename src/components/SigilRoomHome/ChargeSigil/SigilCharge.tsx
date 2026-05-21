@@ -112,7 +112,7 @@ export default function ChargeSigil() {
           <div ref={cardRef} style={{
             position: 'relative',
             zIndex: 10,
-            width: '88dvw',
+            width: '55dvw',
             height: '88dvh',
             display: 'flex',
             margin: '0 auto',

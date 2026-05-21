@@ -51,13 +51,10 @@ export default function RightPage() {
             position: 'relative',
             flex: '1',
             top:'0dvh',
-            left: '69dvh',
-            minWidth: '100px',
-            width: '40dvh',
-            maxWidth: '800px',
-            height: '87dvh',
-            margin: "5px"
-          }}>
+            left: '55dvh',
+            width: '55dvh',
+            height: '88dvh',
+         }}>
           <div className='rowbox'><h2>{user.username}'s Sigils</h2>
           </div>
             <SigiLibrary items={sigils} user={user} /></div>

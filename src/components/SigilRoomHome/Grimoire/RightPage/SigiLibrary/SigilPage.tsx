@@ -123,8 +123,8 @@ export default function SigilPage() {
             style={{
               position: 'relative',
               top: '5dvh',
-              left: '58dvh',
-              width: '50dvh',
+              left: '55dvh',
+              width: '55dvh',
               height: '88dvh',
               gap: '0.75rem',
               display: 'flex',

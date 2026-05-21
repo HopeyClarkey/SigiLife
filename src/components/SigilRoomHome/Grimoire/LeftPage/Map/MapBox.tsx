@@ -152,7 +152,8 @@ export default function MapBox() {
       <div ref={scrollRef} className='scrollcontainer'>
         <div className="mapbox art-page-base"
           style={{ width: `${dims.width}px`, height: `${dims.height}px` }}>
-          <Menu /><div className='rowbox'>
+          <Menu />
+          <div className='rowbox' style={{width: '5dvh', right: '10dvh'}}>
             <button className="btn" onClick={() => setFilterMode("all")} style={{ opacity: filterMode === "all" ? 1 : 0.5 }}>All Sigils</button>
             <button className="btn" onClick={() => setFilterMode("mine")} style={{ opacity: filterMode === "mine" ? 1 : 0.5 }}>My Sigils</button>
             <Link className="btn" to={'/make-sigil'}>Create Sigil</Link>
@@ -262,7 +263,7 @@ export default function MapBox() {
                     longitude={characterPopup.longitude}
                     latitude={characterPopup.latitude}
                     onClose={() => setCharacterPopup(null)}
-                    maxWidth="200px"
+                    maxWidth="500px"
                   >
                     <div style={{
                       padding: '10px 14px',
@@ -281,7 +282,7 @@ export default function MapBox() {
                     longitude={Number(popupInfo.longitude)}
                     latitude={Number(popupInfo.latitude)}
                     onClose={() => setPopupInfo(null)}
-                    maxWidth="320px"
+                    maxWidth="500px"
                     style={{ borderRadius: "16px" }}
                   >
                     <div style={{
@@ -375,13 +376,13 @@ export default function MapBox() {
                                   background: 'transparent',
                                   color: 'var(--theme-btn)',
                                   fontFamily: 'Special Elite, system-ui',
-                                  fontSize: 'clamp(10px, 1.4vw, 12px)',
+                                  fontSize: 'clamp(12px, 1.6vw, 16px)',
                                   cursor: following ? 'not-allowed' : 'pointer',
                                   opacity: following ? 0.6 : 1,
                                   transition: 'all 0.15s ease',
                                 }}
                               >
-                                + Follow
+                                + Follow Agent
                               </button>
                             )}
                         </div>

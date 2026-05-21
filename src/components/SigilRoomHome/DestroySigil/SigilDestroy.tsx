@@ -173,7 +173,7 @@ export default function DestroySigil() {
           <div style={{
             position: 'relative',
             zIndex: 10,
-            width: '88dvw',
+            width: '55dvw',
             height: '88dvh',
             display: 'flex',
             flexDirection: 'column',
