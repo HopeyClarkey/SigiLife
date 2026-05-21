@@ -55,8 +55,7 @@ export default function RightPage() {
             width: '55dvh',
             height: '88dvh',
          }}>
-          <div className='rowbox'><h2>{user.username}'s Sigils</h2>
-          </div>
+          <h2>{user.username}'s Sigils</h2>
             <SigiLibrary items={sigils} user={user} /></div>
         </div>
       </div>
