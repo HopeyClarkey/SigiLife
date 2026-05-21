@@ -3,6 +3,7 @@ import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { useUser } from '@/context/UserContext'
 import { useNavigate, Link } from 'react-router-dom'
 import Menu from '../../../../Parts/Menu'
+import { clearTutorialSession } from '@/components/Tutorial/Tutorialscript'
 
 function applyThemeClasses(theme: number, colorTheme: string) {
   const html = document.documentElement;
@@ -177,16 +178,18 @@ export default function UserSettings() {
     navigate('/')
   }
 
-  const handleReplayTutorial = async () => {
-    const res = await fetch(`/api/users/${user!.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ hasCompletedTutorial: false })
-    })
-    const updated = await res.json()
-    setUser(updated)
-    navigate('/home')
-  }
+const handleReplayTutorial = async () => {
+  const res = await fetch(`/api/users/${user!.id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ hasCompletedTutorial: false })
+  })
+  const updated = await res.json()
+  setUser(updated)
+  clearTutorialSession()
+  sessionStorage.removeItem('sigilTutorialSkipped')
+  navigate('/make-sigil')
+}
 
   const handleSwitchUser = async (targetUserId: number) => {
     const res = await fetch('/api/auth/switch-user', {
