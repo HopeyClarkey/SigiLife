@@ -115,6 +115,9 @@ export default function UserSettings() {
   const [colorTheme, setColorTheme] = useState(user?.color_theme ?? 'cyber')
   const [dims, setDims] = useState({ width: 2160, height: 1260 })
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [selectedCharacter, setSelectedCharacter] = useState<number | ''>('');
+  const narrativeIds = [4, 9, 16];
+
 
   useEffect(() => {
     const calculate = () => {
@@ -185,8 +188,31 @@ export default function UserSettings() {
     navigate('/home')
   }
 
-  if (!user) return null
+  const handleSwitchUser = async (targetUserId: number) => {
+    const res = await fetch('/api/auth/switch-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ targetUserId })
+    });
+    const data = await res.json();
+    if (data.success) {
+      setUser(data.user);
+      navigate('/home');
+    }
+  };
 
+  const handleSwitchBack = async () => {
+    const res = await fetch('/api/auth/switch-back', { method: 'POST' });
+    const data = await res.json();
+    if (data.success) {
+      setUser(data.user);
+      navigate('/home');
+    }
+  };
+
+
+  if (!user) return null
+  const isPlayingAsCharacter = narrativeIds.includes(user.id);
   return (
     <div className="maincontainer">
       <div ref={scrollRef} className="scrollcontainer">
@@ -256,10 +282,37 @@ export default function UserSettings() {
                 Go to Profile
               </Link>
 
-              {user.isAdmin === true && (
-                <Link className="btn" to="/presentation">
-                  Presentation
-                </Link>
+              {user.isAdmin && !isPlayingAsCharacter && (
+                <>
+                  <Link className="btn" to="/presentation">Presentation</Link>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                    <p>Play As:</p>
+                    <select
+                      value={selectedCharacter}
+                      onChange={e => setSelectedCharacter(e.target.value === '' ? '' : parseInt(e.target.value))}
+                      className="btn"
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <option value=''>Select a character...</option>
+                      <option value={4}>Harper Crowe</option>
+                      <option value={9}>Morgan Lafayette</option>
+                      <option value={16}>Bennet Voss</option>
+                    </select>
+                    <button
+                      className="btn"
+                      disabled={selectedCharacter === ''}
+                      onClick={() => selectedCharacter !== '' && handleSwitchUser(selectedCharacter)}
+                    >
+                      Switch
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {isPlayingAsCharacter && (
+                <button className="btn" onClick={handleSwitchBack}>
+                  Switch Back to My Account
+                </button>
               )}
             </div>
           </div>

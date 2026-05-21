@@ -3,6 +3,16 @@ import prisma from '../prisma/prisma.client.js';
 
 const router = Router();
 
+const narrativeIds = [
+  process.env.MORGANA_USER_ID,
+  process.env.HARPER_USER_ID,
+  process.env.BENNET_USER_ID,
+  process.env.ALISTAIR_USER_ID
+].filter(Boolean).map(Number);
+
+
+
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Get Sigil Count
 router.get('/user/:userId/count', async (req, res) => {
   try {
@@ -11,12 +21,13 @@ router.get('/user/:userId/count', async (req, res) => {
       where: { userId }
     });
 
+    const isNarrative = narrativeIds.includes(userId);
     res.json({
       userId,
       count: sigilCount,
-      maxSigils: 12,
-      canCreateMore: sigilCount < 12,
-      remainingSlots: 12 - sigilCount,
+      maxSigils: isNarrative ? null : 12,
+      canCreateMore: isNarrative ? true : sigilCount < 12,
+      remainingSlots: isNarrative ? Infinity : 12 - sigilCount,
     });
   } catch (error) {
     console.error(error);
@@ -237,7 +248,8 @@ router.post('/', async (req, res) => {
       return res.status(401).json({ error: 'Please log in to save sigils.' });
     }
     const sigilCount = await prisma.sigil.count({ where: { userId: userId_ } });
-    if (sigilCount >= 12) {
+    const isNarrative = narrativeIds.includes(userId_);
+    if (!isNarrative && sigilCount >= 12) {
       return res.status(403).json({ error: 'Sigil limit reached. Destroy an existing sigil before creating a new one.' });
     }
 
@@ -289,7 +301,8 @@ router.post('/share', async (req, res) => {
         where: { userId: parsedTargetId }
       });
 
-      if (count >= 12) {
+      const isNarrative = narrativeIds.includes(parsedTargetId);
+      if (!isNarrative && count >= 12) {
         results.push({ targetId: parsedTargetId, status: 'failed', reason: 'Library full' });
         continue;
       }

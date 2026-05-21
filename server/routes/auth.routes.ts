@@ -15,7 +15,7 @@ const narrativeIds = [
   process.env.MORGANA_USER_ID,
   process.env.HARPER_USER_ID,
   process.env.BENNET_USER_ID,
-  process.env.ALISTAR_USER_ID
+  process.env.ALISTAIR_USER_ID
 ].filter(Boolean).map(Number);
 
 
@@ -87,7 +87,7 @@ router.post('/google', async (req, res) => {
       ].filter(Boolean).map(Number);
 
       const teamFollow = avatar === 0
-        ? [process.env.ALISTAR_USER_ID].filter(Boolean).map(Number)
+        ? [process.env.ALISTAIR_USER_ID].filter(Boolean).map(Number)
         : [process.env.MORGANA_USER_ID].filter(Boolean).map(Number);
 
       const narrativeIds = [...new Set([...alwaysFollow, ...teamFollow])];
@@ -159,5 +159,55 @@ router.get('/email-signup/download', (req, res) => {
   if (!fs.existsSync(filePath)) return res.status(404).json({ error: 'No signups yet' })
   res.download(filePath, 'signups.csv')
 })
+
+
+router.post('/switch-user', async (req, res) => {
+  const allowedIds = [
+    process.env.MORGANA_USER_ID,
+    process.env.HARPER_USER_ID,
+    process.env.BENNET_USER_ID,
+    process.env.ALISTAIR_USER_ID
+  ].filter(Boolean).map(Number);
+
+  const adminId = req.session.userId;
+  if (!adminId) return res.status(401).json({ error: 'Not authenticated' });
+
+  const admin = await prisma.user.findUnique({ where: { id: adminId } });
+  if (!admin?.isAdmin) return res.status(403).json({ error: 'Not authorized' });
+
+  const { targetUserId } = req.body;
+  const parsed = parseInt(targetUserId);
+  if (!allowedIds.includes(parsed)) return res.status(403).json({ error: 'Invalid target user' });
+
+  const target = await prisma.user.findUnique({ where: { id: parsed } });
+  if (!target) return res.status(404).json({ error: 'Target user not found' });
+
+  req.session.adminId = adminId;
+  req.session.userId = parsed;
+
+  await new Promise<void>((resolve, reject) => {
+    req.session.save(err => err ? reject(err) : resolve());
+  });
+
+  res.json({ success: true, user: target });
+});
+
+router.post('/switch-back', async (req, res) => {
+  const adminId = req.session.adminId;
+  if (!adminId) return res.status(400).json({ error: 'No admin session to restore' });
+
+  const admin = await prisma.user.findUnique({ where: { id: adminId } });
+  if (!admin) return res.status(404).json({ error: 'Admin user not found' });
+
+  req.session.userId = adminId;
+  delete req.session.adminId;
+
+  await new Promise<void>((resolve, reject) => {
+    req.session.save(err => err ? reject(err) : resolve());
+  });
+
+  res.json({ success: true, user: admin });
+});
+
 
 export default router;
