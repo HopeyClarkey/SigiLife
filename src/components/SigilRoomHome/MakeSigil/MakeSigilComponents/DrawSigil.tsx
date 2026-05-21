@@ -389,7 +389,7 @@ export default function DrawSigil() {
                   setIsDrawingMode(false);
                   const skipped = sessionStorage.getItem('sigilTutorialSkipped');
                   if (!skipped && !user.hasCompletedTutorial) setShowStyleTip(true);
-                }} style={{ fontSize: "clamp(16px, 2.5vw, 22px)", padding: "10px 32px" }}>Next: Style Sigil</button>
+                }} style={{ fontSize: "clamp(16px, 2.5vw, 22px)", padding: "10px 32px" }}> Style Sigil</button>
               </div>
             ) : (
               <div style={{ display: "flex", gap: "8px", justifyContent: "center", flexWrap: "wrap" }}>
