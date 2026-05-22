@@ -175,6 +175,7 @@ export default function DestroySigil() {
             zIndex: 10,
             width: '55dvw',
             height: '88dvh',
+            minWidth: '350px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

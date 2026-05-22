@@ -113,6 +113,7 @@ export default function ChargeSigil() {
             position: 'relative',
             zIndex: 10,
             width: '55dvw',
+            minWidth: '350px',
             height: '88dvh',
             display: 'flex',
             margin: '0 auto',
@@ -138,7 +139,7 @@ export default function ChargeSigil() {
                   filter: isCharging ? undefined : 'drop-shadow(0 0 24px var(--theme-glow))',
                   transition: 'all 800ms ease',
                   pointerEvents: 'none',
-                  position: 'relative',
+                  position: 'absolute',
                   zIndex: 60,
                 }}
               />
